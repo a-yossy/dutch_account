@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
   version: "1.0.0"
   title: "dutch-account-app"
@@ -10,20 +10,22 @@ paths:
     get:
       tags:
       - "user"
-      summary: "ユーザ情報取得API"
+      summary: "全ユーザ情報取得API"
       description: "全てのユーザ情報を取得する"
       responses:
         200:
           description: "成功時のレスポンス"
-          schema:
-            type: "array"
-            items:
-              type: "object"
-              properties:
-                id:
-                  type: "integer"
-                  format: "int64"
-                  example: 1
-                name:
-                  type: "string"
-                  example: "太郎"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      type: "integer"
+                      format: "int64"
+                      example: 1
+                    name:
+                      type: "string"
+                      example: "太郎"

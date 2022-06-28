@@ -36,6 +36,8 @@ components:
           type: integer
           format: int64
           example: 1
+          description: ユーザID
         name:
           type: string
           example: 太郎
+          description: ユーザ名

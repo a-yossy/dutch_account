@@ -3,6 +3,8 @@ info:
   version: 1.0.0
   title: dutch-account-app
   description: 割り勘計算アプリ
+servers:
+  - url: http://localhost3000/api
 tags:
 - name: user
 paths:
@@ -24,11 +26,20 @@ paths:
                   required:
                     - id
                     - name
+                    - type
                   properties:
-                    id:
-                      type: integer
-                      format: int64
-                      example: 1
-                    name:
-                      type: string
-                      example: 太郎
+                    $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: 太郎

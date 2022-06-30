@@ -24,6 +24,24 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+    post:
+      tags:
+        - user
+      summary: ユーザ作成API
+      description: ユーザを作成する
+      requestBody:
+        description: 追加するユーザ情報
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: 成功時のレスポンス
+          content: {}
+        400:
+          description: リクエストパラメーターに不備がある時のレスポンス
+          content: {}
 components:
   schemas:
     User:

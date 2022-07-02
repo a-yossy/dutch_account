@@ -39,7 +39,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
         400:
-          description: リクエストパラメーターに不備がある時のレスポンス
           $ref: "#/components/responses/BadRequest"
 components:
   responses:

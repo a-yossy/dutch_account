@@ -40,13 +40,7 @@ paths:
                 $ref: "#/components/schemas/User"
         400:
           description: リクエストパラメーターに不備がある時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/responses/BadRequest"
-              example:
-                code: 400
-                message: リクエストパラメーターに不備があリます
+          $ref: "#/components/responses/BadRequest"
 components:
   responses:
     BadRequest:
@@ -57,6 +51,7 @@ components:
             $ref: "#/components/schemas/Error"
   schemas:
     Error:
+      description: エラー情報
       type: object
       required:
         - code
@@ -64,9 +59,11 @@ components:
       properties:
         code:
           type: string
+          example: XXX
           description: HTTPステータスコード
         message:
           type: string
+          example: エラーが発生しました
           description: エラーメッセージ
     User:
       description: ユーザ情報

@@ -80,6 +80,7 @@ components:
           type: string
           description: エラーメッセージ
     User:
+      description: ユーザ情報
       type: object
       required:
         - id
@@ -94,3 +95,17 @@ components:
           type: string
           example: 太郎
           description: ユーザ名
+  requestBodies:
+    UserPayload:
+      description: リクエストユーザ情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                example: 太郎
+                description: ユーザ名

@@ -43,9 +43,12 @@ paths:
                   example: 太郎
                   description: ユーザ名
       responses:
-        200:
+        201:
           description: 成功時のレスポンス
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
         400:
           description: リクエストパラメーターに不備がある時のレスポンス
           content: {}

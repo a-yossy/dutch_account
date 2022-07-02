@@ -44,7 +44,7 @@ paths:
                   description: ユーザ名
       responses:
         201:
-          description: 成功時のレスポンス
+          description: 追加されたユーザ情報
           content:
             application/json:
               schema:

@@ -30,18 +30,7 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       requestBody:
-        description: 追加するユーザ情報
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-              properties:
-                name:
-                  type: string
-                  example: 太郎
-                  description: ユーザ名
+        $ref: "#/components/requestBodies/UserPayload"
       responses:
         201:
           description: 追加されたユーザ情報

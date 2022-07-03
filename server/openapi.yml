@@ -24,6 +24,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        401:
+          $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
     post:
@@ -42,6 +44,8 @@ paths:
                 $ref: "#/components/schemas/User"
         400:
           $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
 components:
@@ -55,6 +59,15 @@ components:
           example:
             code: 400
             message: リクエストパラメーターに不備があります
+    Unauthorized:
+      description: 認証がされていない時のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 401
+            message: アクセス権限がありません
     InternalServerError:
       description: サーバー側でエラーが発生している時のレスポンス
       content:

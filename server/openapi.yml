@@ -48,6 +48,9 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
+          example:
+            code: 400
+            message: リクエストパラメーターに不備があります
   schemas:
     Error:
       description: エラー情報
@@ -58,11 +61,9 @@ components:
       properties:
         code:
           type: string
-          example: XXX
           description: HTTPステータスコード
         message:
           type: string
-          example: エラーが発生しました
           description: エラーメッセージ
     User:
       description: ユーザ情報

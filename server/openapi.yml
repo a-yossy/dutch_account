@@ -24,6 +24,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+        500:
+          $ref: "#/components/responses/InternalServerError"
     post:
       tags:
         - user
@@ -40,6 +42,8 @@ paths:
                 $ref: "#/components/schemas/User"
         400:
           $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     BadRequest:
@@ -51,6 +55,15 @@ components:
           example:
             code: 400
             message: リクエストパラメーターに不備があります
+    InternalServerError:
+      description: サーバー側でエラーが発生している時のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 500
+            message: サーバーでエラーが発生しています
   schemas:
     Error:
       description: エラー情報

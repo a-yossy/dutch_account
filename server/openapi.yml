@@ -51,9 +51,9 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /users/{user_id}:
-    get:
-      parameters:
+    parameters:
         - $ref: "#/components/parameters/UserId"
+    get:
       tags:
         - user
       summary: ユーザ情報取得API

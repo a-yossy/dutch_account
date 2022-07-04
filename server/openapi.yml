@@ -55,13 +55,7 @@ paths:
       summary: ユーザ情報取得API
       description: ユーザIDでユーザ情報を取得する
       parameters:
-        - name: user_id
-          in: path
-          description: ユーザID
-          required: true
-          schema:
-            type: integer
-            format: int64
+        - $ref: "#/components/parameters/UserId"
       responses:
         201:
           description: ユーザ情報
@@ -157,3 +151,12 @@ components:
                 type: string
                 example: 太郎
                 description: ユーザ名
+  parameters:
+    UserId:
+      name: user_id
+      in: path
+      description: ユーザID
+      required: true
+      schema:
+        type: integer
+        format: int64

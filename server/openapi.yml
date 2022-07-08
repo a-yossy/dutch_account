@@ -72,6 +72,27 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+    put:
+      tags:
+        - user
+      summary: ユーザ更新API
+      description: ユーザIDでユーザ情報を更新する
+      operationId: updateUserByUserId
+      requestBody:
+        $ref: "#/components/requestBodies/UserBody"
+      responses:
+        200:
+          description: ユーザ情報
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     BadRequest:

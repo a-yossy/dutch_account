@@ -4,7 +4,6 @@ WORKDIR /server
 COPY ./server/Gemfile /server/Gemfile
 COPY ./server/Gemfile.lock /server/Gemfile.lock
 RUN bundle install
-COPY ./server/ /server/
 
 # Add a script to be executed every time the container starts.
 COPY ./docker/server/entrypoint.sh /usr/bin/

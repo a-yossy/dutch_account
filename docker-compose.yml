@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   server:
-    container_name: dutch-account-server
+    container_name: dutch_account_server
     build:
       dockerfile: docker/server/Dockerfile
       context: .
@@ -12,13 +12,20 @@ services:
     depends_on:
       - db
   db:
-    container_name: dutch-account-db
+    container_name: dutch_account_db
     build:
       dockerfile: docker/db/Dockerfile
       context: .
+    volumes:
+      - type: volume
+        source: dutch_account_db_store
+        target: /var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       TZ: 'Asia/Tokyo'
+
+volumes:
+  dutch_account_db_store:

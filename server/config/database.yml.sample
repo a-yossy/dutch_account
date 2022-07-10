@@ -1,0 +1,19 @@
+development:
+  adapter:  mysql2
+  host:     localhost
+  encoding: utf8mb4
+  database: dutch_account_development
+  pool:     5
+  username:
+  password:
+  socket:
+
+test:
+  adapter:  mysql2
+  host:     localhost
+  encoding: utf8mb4
+  database: dutch_account_test
+  pool:     5
+  username:
+  password:
+  socket:

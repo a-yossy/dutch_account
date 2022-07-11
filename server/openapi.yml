@@ -93,6 +93,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - user
+      summary: ユーザ削除API
+      description: ユーザIDでユーザ情報を削除する
+      operationId: deleteUserByUserId
+      responses:
+        204:
+          description: 削除が成功した時のレスポンス
+          content:
+            {}
 components:
   responses:
     BadRequest:

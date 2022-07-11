@@ -101,9 +101,7 @@ paths:
       operationId: deleteUserByUserId
       responses:
         204:
-          description: 削除が成功した時のレスポンス
-          content:
-            {}
+          $ref: "#/components/responses/NoContent"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -112,6 +110,10 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   responses:
+    NoContent:
+      description: 削除が成功した時のレスポンス
+      content:
+        {}
     BadRequest:
       description: リクエストパラメーターに不備がある時のレスポンス
       content:

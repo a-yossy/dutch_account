@@ -25,7 +25,7 @@ services:
         source: dutch-account-db-store
         target: /var/lib/mysql
     env_file:
-      - db-variables.env
+      - ./docker/db/db-variables.env
 
 volumes:
   dutch-account-db-store:

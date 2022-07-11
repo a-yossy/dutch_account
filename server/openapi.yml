@@ -18,7 +18,7 @@ paths:
       operationId: getUsers
       responses:
         200:
-          description: 全てのユーザー情報
+          description: 取得が成功した時のレスポンス
           content:
             application/json:
               schema:
@@ -39,7 +39,7 @@ paths:
         $ref: "#/components/requestBodies/UserBody"
       responses:
         201:
-          description: 追加されたユーザ情報
+          description: 作成が成功した時のレスポンス
           content:
             application/json:
               schema:
@@ -61,7 +61,7 @@ paths:
       operationId: getUserByUserId
       responses:
         201:
-          description: ユーザ情報
+          description: 取得が成功した時のレスポンス
           content:
             application/json:
               schema:
@@ -82,7 +82,7 @@ paths:
         $ref: "#/components/requestBodies/UserBody"
       responses:
         200:
-          description: ユーザ情報
+          description: 更新が成功した時のレスポンス
           content:
             application/json:
               schema:

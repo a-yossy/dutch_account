@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  server:
+    container_name: dutch-account-server
+    build:
+      dockerfile: docker/server/Dockerfile
+      context: .
+    ports:
+      - '8000:8000'
+    volumes:
+      - type: bind
+        source: server
+        target: /server
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    depends_on:
+      - db
+  db:
+    container_name: dutch-account-db
+    build:
+      dockerfile: docker/db/Dockerfile
+      context: .
+    volumes:
+      - type: volume
+        source: dutch-account-db-store
+        target: /var/lib/mysql
+    env_file:
+      - docker/db/.env
+
+volumes:
+  dutch-account-db-store:

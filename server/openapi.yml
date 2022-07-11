@@ -104,6 +104,12 @@ paths:
           description: 削除が成功した時のレスポンス
           content:
             {}
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     BadRequest:

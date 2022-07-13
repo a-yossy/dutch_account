@@ -110,8 +110,6 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups:
-    parameters:
-      - $ref: "#/components/parameters/AdminId"
     get:
       tags:
         - paymentGroup
@@ -238,15 +236,6 @@ components:
       name: user_id
       in: path
       description: ユーザID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    AdminId:
-      name: admin_id
-      in: path
-      description: 管理者ID
       required: true
       schema:
         type: integer

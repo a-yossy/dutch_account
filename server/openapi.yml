@@ -61,7 +61,7 @@ paths:
       description: ユーザIDでユーザ情報を取得する
       operationId: getUserByUserId
       responses:
-        201:
+        200:
           description: 取得が成功した時のレスポンス
           content:
             application/json:
@@ -110,6 +110,8 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/AdminId"
     get:
       tags:
         - paymentGroup
@@ -240,3 +242,13 @@ components:
       schema:
         type: integer
         format: int64
+        example: 1
+    AdminId:
+      name: admin_id
+      in: path
+      description: 管理者ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1

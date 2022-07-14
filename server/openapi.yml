@@ -61,7 +61,7 @@ paths:
       description: ユーザIDでユーザ情報を取得する
       operationId: getUserByUserId
       responses:
-        201:
+        200:
           description: 取得が成功した時のレスポンス
           content:
             application/json:
@@ -132,7 +132,7 @@ paths:
 components:
   responses:
     NoContent:
-      description: 削除が成功した時のレスポンス
+      description: リクエストが成功し、返すリソースがない時のレスポンス
       content:
         {}
     BadRequest:
@@ -145,7 +145,7 @@ components:
             code: 400
             message: リクエストパラメーターに不備があります
     Unauthorized:
-      description: 認証がされていない時のレスポンス
+      description: 認証されていない時のレスポンス
       content:
         application/json:
           schema:
@@ -163,7 +163,7 @@ components:
             code: 404
             message: ページが見つかりません
     InternalServerError:
-      description: サーバー側でエラーが発生している時のレスポンス
+      description: サーバーでエラーが発生している時のレスポンス
       content:
         application/json:
           schema:
@@ -240,3 +240,4 @@ components:
       schema:
         type: integer
         format: int64
+        example: 1

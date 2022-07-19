@@ -9,6 +9,7 @@ servers:
 tags:
   - name: user
   - name: paymentGroup
+  - name: admin
 paths:
   /users:
     get:
@@ -129,6 +130,22 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /sign_up:
+    post:
+      tags:
+        - admin
+      summary: 管理者作成API
+      description: 管理者を作成する
+      operationId: signUp
+      requestBody:
+        $ref: "#/components/requestBodies/AdminBody"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     NoContent:
@@ -231,6 +248,25 @@ components:
                 type: string
                 example: 太郎
                 description: ユーザ名
+    AdminBody:
+      description: リクエスト管理者情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - password
+            properties:
+              name:
+                type: string
+                example: 一郎
+                description: 管理者名
+              password:
+                type: string
+                format: password
+                example: password
+                description: パスワード
   parameters:
     UserId:
       name: user_id

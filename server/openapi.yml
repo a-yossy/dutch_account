@@ -277,7 +277,7 @@ components:
                 example: 太郎
                 description: ユーザ名
     SignUpBody:
-      description: 管理者サインアップ情報
+      description: サインアップ情報
       content:
         application/json:
           schema:
@@ -302,7 +302,7 @@ components:
                 example: password
                 description: パスワード
     LogInBody:
-      description: 管理者ログイン情報
+      description: ログイン情報
       content:
         application/json:
           schema:

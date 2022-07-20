@@ -146,6 +146,22 @@ paths:
           $ref: "#/components/responses/BadRequest"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /log_in:
+    post:
+      tags:
+        - admin
+      summary: 管理者ログインAPI
+      description: 管理者としてログインする
+      operationId: logIn
+      requestBody:
+        $ref: "#/components/requestBodies/AdminBody"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     NoContent:
@@ -255,13 +271,14 @@ components:
           schema:
             type: object
             required:
-              - name
+              - email
               - password
             properties:
               name:
                 type: string
-                example: 一郎
-                description: 管理者名
+                format: email
+                example: email@example.com
+                description: メールアドレス
               password:
                 type: string
                 format: password

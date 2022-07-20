@@ -274,7 +274,7 @@ components:
               - email
               - password
             properties:
-              name:
+              email:
                 type: string
                 format: email
                 example: email@example.com

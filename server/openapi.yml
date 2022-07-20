@@ -240,12 +240,12 @@ components:
         id:
           type: integer
           format: int64
-          example: 1
           description: ユーザID
+          example: 1
         name:
           type: string
-          example: 太郎
           description: ユーザ名
+          example: 太郎
     PaymentGroup:
       description: 支払グループ情報
       type: object
@@ -256,12 +256,12 @@ components:
         id:
           type: integer
           format: int64
-          example: 1
           description: 支払グループID
+          example: 1
         name:
           type: string
-          example: 家族
           description: 支払グループ名
+          example: 家族
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -274,8 +274,8 @@ components:
             properties:
               name:
                 type: string
-                example: 太郎
                 description: ユーザ名
+                example: 太郎
     SignUpBody:
       description: サインアップ情報
       content:
@@ -289,18 +289,18 @@ components:
             properties:
               name:
                 type: string
-                example: 太郎
                 description: 管理者名
+                example: 太郎
               email:
                 type: string
                 format: email
-                example: email@example.com
                 description: メールアドレス
+                example: email@example.com
               password:
                 type: string
                 format: password
-                example: password
                 description: パスワード
+                example: password
     LogInBody:
       description: ログイン情報
       content:
@@ -314,13 +314,13 @@ components:
               email:
                 type: string
                 format: email
-                example: email@example.com
                 description: メールアドレス
+                example: email@example.com
               password:
                 type: string
                 format: password
-                example: password
                 description: パスワード
+                example: password
   parameters:
     UserId:
       name: user_id

@@ -134,16 +134,44 @@ paths:
     post:
       tags:
         - admin
-      summary: 管理者作成API
-      description: 管理者を作成する
+      summary: サインアップAPI
+      description: サインアップする
       operationId: signUp
       requestBody:
-        $ref: "#/components/requestBodies/AdminBody"
+        $ref: "#/components/requestBodies/SignUpBody"
       responses:
         204:
           $ref: "#/components/responses/NoContent"
         400:
           $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /log_in:
+    post:
+      tags:
+        - admin
+      summary: ログインAPI
+      description: ログインする
+      operationId: logIn
+      requestBody:
+        $ref: "#/components/requestBodies/LogInBody"
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /log_out:
+    post:
+      tags:
+        - admin
+      summary: ログアウトAPI
+      description: ログアウトする
+      operationId: logOut
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
         500:
           $ref: "#/components/responses/InternalServerError"
 components:
@@ -212,12 +240,12 @@ components:
         id:
           type: integer
           format: int64
-          example: 1
           description: ユーザID
+          example: 1
         name:
           type: string
-          example: 太郎
           description: ユーザ名
+          example: 太郎
     PaymentGroup:
       description: 支払グループ情報
       type: object
@@ -228,12 +256,12 @@ components:
         id:
           type: integer
           format: int64
-          example: 1
           description: 支払グループID
+          example: 1
         name:
           type: string
-          example: 家族
           description: 支払グループ名
+          example: 家族
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -246,27 +274,53 @@ components:
             properties:
               name:
                 type: string
-                example: 太郎
                 description: ユーザ名
-    AdminBody:
-      description: リクエスト管理者情報
+                example: 太郎
+    SignUpBody:
+      description: サインアップ情報
       content:
         application/json:
           schema:
             type: object
             required:
               - name
+              - email
               - password
             properties:
               name:
                 type: string
-                example: 一郎
                 description: 管理者名
+                example: 太郎
+              email:
+                type: string
+                format: email
+                description: メールアドレス
+                example: email@example.com
               password:
                 type: string
                 format: password
-                example: password
                 description: パスワード
+                example: password
+    LogInBody:
+      description: ログイン情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+                format: email
+                description: メールアドレス
+                example: email@example.com
+              password:
+                type: string
+                format: password
+                description: パスワード
+                example: password
   parameters:
     UserId:
       name: user_id

@@ -138,7 +138,7 @@ paths:
       description: 管理者を作成する
       operationId: signUp
       requestBody:
-        $ref: "#/components/requestBodies/AdminBody"
+        $ref: "#/components/requestBodies/AdminSignUpBody"
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -154,7 +154,7 @@ paths:
       description: 管理者としてログインする
       operationId: logIn
       requestBody:
-        $ref: "#/components/requestBodies/AdminBody"
+        $ref: "#/components/requestBodies/AdminLogInBody"
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -264,8 +264,33 @@ components:
                 type: string
                 example: 太郎
                 description: ユーザ名
-    AdminBody:
-      description: リクエスト管理者情報
+    AdminSignUpBody:
+      description: 管理者サインアップ情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - email
+              - password
+            properties:
+              name:
+                type: string
+                example: 太郎
+                description: 管理者名
+              email:
+                type: string
+                format: email
+                example: email@example.com
+                description: メールアドレス
+              password:
+                type: string
+                format: password
+                example: password
+                description: パスワード
+    AdminLogInBody:
+      description: 管理者ログイン情報
       content:
         application/json:
           schema:

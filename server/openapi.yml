@@ -162,6 +162,18 @@ paths:
           $ref: "#/components/responses/BadRequest"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /log_out:
+    post:
+      tags:
+        - admin
+      summary: ログアウトAPI
+      description: ログアウトする
+      operationId: logOut
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     NoContent:

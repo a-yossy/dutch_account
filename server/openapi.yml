@@ -136,7 +136,7 @@ paths:
         - admin
       summary: 管理者サインアップAPI
       description: 管理者としてサインアップする
-      operationId: adminSignUp
+      operationId: signUp
       requestBody:
         $ref: "#/components/requestBodies/AdminSignUpBody"
       responses:
@@ -152,7 +152,7 @@ paths:
         - admin
       summary: 管理者ログインAPI
       description: 管理者としてログインする
-      operationId: adminLogIn
+      operationId: logIn
       requestBody:
         $ref: "#/components/requestBodies/AdminLogInBody"
       responses:

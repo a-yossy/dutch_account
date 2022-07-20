@@ -134,11 +134,11 @@ paths:
     post:
       tags:
         - admin
-      summary: 管理者サインアップAPI
-      description: 管理者としてサインアップする
+      summary: サインアップAPI
+      description: サインアップする
       operationId: signUp
       requestBody:
-        $ref: "#/components/requestBodies/AdminSignUpBody"
+        $ref: "#/components/requestBodies/SignUpBody"
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -150,11 +150,11 @@ paths:
     post:
       tags:
         - admin
-      summary: 管理者ログインAPI
-      description: 管理者としてログインする
+      summary: ログインAPI
+      description: ログインする
       operationId: logIn
       requestBody:
-        $ref: "#/components/requestBodies/AdminLogInBody"
+        $ref: "#/components/requestBodies/LogInBody"
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -264,7 +264,7 @@ components:
                 type: string
                 example: 太郎
                 description: ユーザ名
-    AdminSignUpBody:
+    SignUpBody:
       description: 管理者サインアップ情報
       content:
         application/json:
@@ -289,7 +289,7 @@ components:
                 format: password
                 example: password
                 description: パスワード
-    AdminLogInBody:
+    LogInBody:
       description: 管理者ログイン情報
       content:
         application/json:

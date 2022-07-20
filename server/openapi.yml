@@ -134,8 +134,8 @@ paths:
     post:
       tags:
         - admin
-      summary: 管理者作成API
-      description: 管理者を作成する
+      summary: 管理者サインアップAPI
+      description: 管理者としてサインアップする
       operationId: signUp
       requestBody:
         $ref: "#/components/requestBodies/AdminSignUpBody"

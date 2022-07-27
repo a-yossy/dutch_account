@@ -343,6 +343,15 @@ components:
         type: integer
         format: int64
         example: 1
+    AdminId:
+      name: amind_id
+      in: cookie
+      description: 管理者ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
   securitySchemes:
     cookieAuth:
       type: apiKey

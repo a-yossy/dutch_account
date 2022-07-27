@@ -18,6 +18,8 @@ paths:
       summary: 全ユーザ情報取得API
       description: 全てのユーザ情報を取得する
       operationId: getUsers
+      security:
+        - cookieAuth: []
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -37,6 +39,8 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       operationId: addUser
+      security:
+        - cookieAuth: []
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -61,6 +65,8 @@ paths:
       summary: ユーザ情報取得API
       description: ユーザIDでユーザ情報を取得する
       operationId: getUserByUserId
+      security:
+        - cookieAuth: []
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -80,6 +86,8 @@ paths:
       summary: ユーザ更新API
       description: ユーザIDでユーザ情報を更新する
       operationId: updateUserByUserId
+      security:
+        - cookieAuth: []
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -101,6 +109,8 @@ paths:
       summary: ユーザ削除API
       description: ユーザIDでユーザ情報を削除する
       operationId: deleteUserByUserId
+      security:
+        - cookieAuth: []
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -117,6 +127,8 @@ paths:
       summary: 全支払グループ情報
       description: 全ての支払グループ情報を取得する
       operationId: getPaymentGroups
+      security:
+        - cookieAuth: []
       responses:
         200:
           description: 取得が成功した時のレスポンス

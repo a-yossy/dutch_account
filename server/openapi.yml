@@ -20,6 +20,8 @@ paths:
       operationId: getUsers
       security:
         - cookieAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -41,6 +43,8 @@ paths:
       operationId: addUser
       security:
         - cookieAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -129,6 +133,8 @@ paths:
       operationId: getPaymentGroups
       security:
         - cookieAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス

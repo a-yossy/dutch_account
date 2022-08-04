@@ -67,8 +67,6 @@ paths:
       summary: ユーザ情報取得API
       description: ユーザIDでユーザ情報を取得する
       operationId: getUserByUserId
-      security:
-        - cookieAuth: []
       responses:
         200:
           description: 取得が成功した時のレスポンス

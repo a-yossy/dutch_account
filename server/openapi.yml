@@ -10,6 +10,8 @@ tags:
   - name: user
   - name: paymentGroup
   - name: admin
+security:
+  - cookieAuth: []
 paths:
   /users:
     get:
@@ -18,6 +20,8 @@ paths:
       summary: 全ユーザ情報取得API
       description: 全てのユーザ情報を取得する
       operationId: getUsers
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -37,6 +41,8 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       operationId: addUser
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -117,6 +123,8 @@ paths:
       summary: 全支払グループ情報
       description: 全ての支払グループ情報を取得する
       operationId: getPaymentGroups
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -137,6 +145,7 @@ paths:
       summary: サインアップAPI
       description: サインアップする
       operationId: signUp
+      security: []
       requestBody:
         $ref: "#/components/requestBodies/SignUpBody"
       responses:
@@ -153,6 +162,7 @@ paths:
       summary: ログインAPI
       description: ログインする
       operationId: logIn
+      security: []
       requestBody:
         $ref: "#/components/requestBodies/LogInBody"
       responses:
@@ -169,6 +179,7 @@ paths:
       summary: ログアウトAPI
       description: ログアウトする
       operationId: logOut
+      security: []
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -331,3 +342,17 @@ components:
         type: integer
         format: int64
         example: 1
+    AdminId:
+      name: admin_id
+      in: cookie
+      description: 管理者ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: ADMIN

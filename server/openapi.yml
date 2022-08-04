@@ -350,7 +350,7 @@ components:
         format: int64
         example: 1
     AdminId:
-      name: amind_id
+      name: admin_id
       in: cookie
       description: 管理者ID
       required: true

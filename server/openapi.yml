@@ -154,8 +154,6 @@ paths:
       summary: 支払グループ作成API
       description: 支払グループを作成する
       operationId: addPaymentGroup
-      security:
-        - cookieAuth: []
       parameters:
         - $ref: "#/components/parameters/AdminId"
       requestBody:
@@ -187,6 +185,28 @@ paths:
           $ref: "#/components/responses/NoContent"
         400:
           $ref: "#/components/responses/BadRequest"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+    get:
+      tags:
+        - paymentGroup
+      summary: 支払グループ情報取得API
+      description: 支払グループIDで支払グループ情報を取得する
+      operationId: getPaymentGroupByPaymentGroupId
+      responses:
+        200:
+            description: 取得が成功した時のレスポンス
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/PaymentGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
   /log_in:
@@ -305,23 +325,6 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
-    UserPaymentGroup:
-      description: ユーザと支払グループの中間テーブル情報
-      type: object
-      required:
-        - user_id
-        - payment_ratio
-      properties:
-        user_id:
-          type: integer
-          format: int64
-          description: ユーザID
-          example: 1
-        payment_ratio:
-          type: number
-          format: float
-          description: 支払割合
-          example: 0.4
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -404,6 +407,15 @@ components:
       name: user_id
       in: path
       description: ユーザID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    PaymentGroupId:
+      name: payment_group_id
+      in: path
+      description: 支払グループID
       required: true
       schema:
         type: integer

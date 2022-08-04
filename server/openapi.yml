@@ -148,6 +148,31 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - paymentGroup
+      summary: 支払グループ作成API
+      description: 支払グループを作成する
+      operationId: addPaymentGroup
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: "#/components/parameters/AdminId"
+      requestBody:
+        $ref: "#/components/requestBodies/PaymentGroupBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentGroup"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -280,6 +305,23 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
+    UserPaymentGroup:
+      description: ユーザと支払グループの中間テーブル情報
+      type: object
+      required:
+        - user_id
+        - payment_ratio
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          description: ユーザID
+          example: 1
+        payment_ratio:
+          type: number
+          format: float
+          description: 支払割合
+          example: 0.4
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -294,6 +336,24 @@ components:
                 type: string
                 description: ユーザ名
                 example: 太郎
+    PaymentGroupBody:
+      description: リクエスト支払グループ情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - user_payment_groups
+            properties:
+              name:
+                type: string
+                description: 支払グループ名
+                example: 家族
+              user_payment_groups:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserPaymentGroup"
     SignUpBody:
       description: サインアップ情報
       content:

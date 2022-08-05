@@ -356,7 +356,20 @@ components:
               user_payment_groups:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserPaymentGroup"
+                  type: object
+                  required:
+                    - name
+                    - payment_ratio
+                  properties:
+                    name:
+                      type: string
+                      description: ユーザ名
+                      example: 太郎
+                    payment_ratio:
+                      type: number
+                      format: float
+                      description: 支払割合
+                      example: 0.4
     SignUpBody:
       description: サインアップ情報
       content:

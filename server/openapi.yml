@@ -10,6 +10,8 @@ tags:
   - name: user
   - name: paymentGroup
   - name: admin
+security:
+  - cookieAuth: []
 paths:
   /users:
     get:
@@ -18,8 +20,6 @@ paths:
       summary: 全ユーザ情報取得API
       description: 全てのユーザ情報を取得する
       operationId: getUsers
-      security:
-        - cookieAuth: []
       parameters:
         - $ref: "#/components/parameters/AdminId"
       responses:
@@ -41,8 +41,6 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       operationId: addUser
-      security:
-        - cookieAuth: []
       parameters:
         - $ref: "#/components/parameters/AdminId"
       requestBody:
@@ -69,8 +67,6 @@ paths:
       summary: ユーザ情報取得API
       description: ユーザIDでユーザ情報を取得する
       operationId: getUserByUserId
-      security:
-        - cookieAuth: []
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -90,8 +86,6 @@ paths:
       summary: ユーザ更新API
       description: ユーザIDでユーザ情報を更新する
       operationId: updateUserByUserId
-      security:
-        - cookieAuth: []
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -113,8 +107,6 @@ paths:
       summary: ユーザ削除API
       description: ユーザIDでユーザ情報を削除する
       operationId: deleteUserByUserId
-      security:
-        - cookieAuth: []
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -131,8 +123,6 @@ paths:
       summary: 全支払グループ情報
       description: 全ての支払グループ情報を取得する
       operationId: getPaymentGroups
-      security:
-        - cookieAuth: []
       parameters:
         - $ref: "#/components/parameters/AdminId"
       responses:
@@ -200,6 +190,7 @@ paths:
       summary: サインアップAPI
       description: サインアップする
       operationId: signUp
+      security: []
       requestBody:
         $ref: "#/components/requestBodies/SignUpBody"
       responses:
@@ -216,6 +207,7 @@ paths:
       summary: ログインAPI
       description: ログインする
       operationId: logIn
+      security: []
       requestBody:
         $ref: "#/components/requestBodies/LogInBody"
       responses:
@@ -232,6 +224,7 @@ paths:
       summary: ログアウトAPI
       description: ログアウトする
       operationId: logOut
+      security: []
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -438,7 +431,7 @@ components:
         format: int64
         example: 1
     AdminId:
-      name: amind_id
+      name: admin_id
       in: cookie
       description: 管理者ID
       required: true

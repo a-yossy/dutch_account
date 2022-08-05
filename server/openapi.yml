@@ -182,36 +182,11 @@ paths:
       operationId: getPaymentGroupByPaymentGroupId
       responses:
         200:
-            description: 取得が成功した時のレスポンス
-            content:
-              application/json:
-                schema:
-                  type: object
-                  required:
-                    - name
-                    - user_payment_groups
-                  properties:
-                    name:
-                      type: string
-                      description: 支払グループ名
-                      example: 家族
-                    user_payment_groups:
-                      type: array
-                      items:
-                        type: object
-                        required:
-                          - name
-                          - payment_ratio
-                        properties:
-                          name:
-                            type: string
-                            description: ユーザ名
-                            example: 太郎
-                          payment_ratio:
-                            type: number
-                            format: float
-                            description: 支払割合
-                            example: 0.4
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPaymentGroup"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

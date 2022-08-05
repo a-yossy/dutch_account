@@ -171,6 +171,53 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+    get:
+      tags:
+        - paymentGroup
+      summary: 支払グループ情報取得API
+      description: 支払グループIDで支払グループ情報を取得する
+      operationId: getPaymentGroupByPaymentGroupId
+      responses:
+        200:
+            description: 取得が成功した時のレスポンス
+            content:
+              application/json:
+                schema:
+                  type: object
+                  required:
+                    - name
+                    - user_payment_groups
+                  properties:
+                    name:
+                      type: string
+                      description: 支払グループ名
+                      example: 家族
+                    user_payment_groups:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                          - name
+                          - payment_ratio
+                        properties:
+                          name:
+                            type: string
+                            description: ユーザ名
+                            example: 太郎
+                          payment_ratio:
+                            type: number
+                            format: float
+                            description: 支払割合
+                            example: 0.4
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -187,28 +234,7 @@ paths:
           $ref: "#/components/responses/BadRequest"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}:
-    parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
-    get:
-      tags:
-        - paymentGroup
-      summary: 支払グループ情報取得API
-      description: 支払グループIDで支払グループ情報を取得する
-      operationId: getPaymentGroupByPaymentGroupId
-      responses:
-        200:
-            description: 取得が成功した時のレスポンス
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/PaymentGroup"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+
   /log_in:
     post:
       tags:

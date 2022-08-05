@@ -350,6 +350,34 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
+    UserPaymentGroup:
+      description: ユーザと支払グループ情報
+      type: object
+      required:
+        - name
+        - user_payment_groups
+      properties:
+        name:
+          type: string
+          description: 支払グループ名
+          example: 家族
+        user_payment_groups:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - payment_ratio
+            properties:
+              name:
+                type: string
+                description: ユーザ名
+                example: 太郎
+              payment_ratio:
+                type: number
+                format: float
+                description: 支払割合
+                example: 0.4
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -369,32 +397,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - name
-              - user_payment_groups
-            properties:
-              name:
-                type: string
-                description: 支払グループ名
-                example: 家族
-              user_payment_groups:
-                type: array
-                items:
-                  type: object
-                  required:
-                    - name
-                    - payment_ratio
-                  properties:
-                    name:
-                      type: string
-                      description: ユーザ名
-                      example: 太郎
-                    payment_ratio:
-                      type: number
-                      format: float
-                      description: 支払割合
-                      example: 0.4
+            $ref: "#/components/schemas/UserPaymentGroup"
     SignUpBody:
       description: サインアップ情報
       content:

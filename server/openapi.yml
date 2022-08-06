@@ -597,7 +597,7 @@ components:
         purchased_on:
           type: string
           format: date
-          description: 購入日付
+          description: 購入日
           example: "2022-01-01"
         description:
           type: string
@@ -677,7 +677,7 @@ components:
               purchased_on:
                 type: string
                 format: date
-                description: 購入日付
+                description: 購入日
                 example: "2022-01-01"
               description:
                 type: string

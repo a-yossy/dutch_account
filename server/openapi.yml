@@ -229,8 +229,8 @@ paths:
       tags:
         - userPaymentGroup
       summary: 全ユーザ支払グループ情報取得API
-      description: 全てのユーザ支払グループ情報を取得する
-      operationId: getUserPaymentGroups
+      description: 支払グループIDで全てのユーザ支払グループ情報を取得する
+      operationId: getUserPaymentGroupsByPaymentGroupId
       parameters:
         - $ref: "#/components/parameters/PaymentGroupId"
       responses:

@@ -331,8 +331,8 @@ paths:
       tags:
         - purchaseRecord
       summary: 購入履歴作成API
-      description: 購入履歴を作成する
-      operationId: addPurchaseRecords
+      description: 支払グループIDで購入履歴を作成する
+      operationId: addPurchaseRecordsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PurchaseRecordsBody"
       responses:
@@ -379,8 +379,8 @@ paths:
       tags:
         - purchaseRecord
       summary: 購入履歴更新API
-      description: 購入履歴を更新する
-      operationId: updatePurchaseRecord
+      description: 購入履歴IDで購入履歴を更新する
+      operationId: updatePurchaseRecordByPurchaseRecordId
       requestBody:
         $ref: "#/components/requestBodies/PurchaseRecordBody"
       responses:
@@ -392,6 +392,21 @@ paths:
                 $ref: "#/components/schemas/PurchaseRecord"
         400:
           $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - purchaseRecord
+      summary: 購入履歴削除API
+      description: 購入履歴IDで購入履歴を削除する
+      operationId: deletePurchaseRecordByPurchaseRecordId
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

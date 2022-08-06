@@ -226,7 +226,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/user_payment_groups:
     parameters:
-          - $ref: "#/components/parameters/PaymentGroupId"
+      - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - userPaymentGroup

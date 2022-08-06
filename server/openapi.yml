@@ -438,6 +438,29 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - remittanceRecord
+      summary: 送金履歴作成API
+      description: 支払グループIDで送金履歴を作成する
+      operationId: addRemittanceRecordByPaymentGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/RemittanceRecordBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemittanceRecord"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -774,6 +797,38 @@ components:
                   type: string
                   description: 購入説明
                   example: 食材
+    RemittanceRecordBody:
+      description: リクエスト送金履歴情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - from_user_payment_group_id
+              - to_user_payment_group_id
+              - amount_of_money
+              - transferred_on
+            properties:
+              from_user_payment_group_id:
+                type: integer
+                format: int64
+                description: 送金ユーザID
+                example: 1
+              to_user_payment_group_id:
+                type: integer
+                format: int64
+                description: 着金ユーザID
+                example: 2
+              amount_of_money:
+                type: integer
+                format: int32
+                description: 送金金額
+                example: 3000
+              transferred_on:
+                type: string
+                format: date
+                description: 送金日
+                example: "2022-01-01"
     SignUpBody:
       description: サインアップ情報
       content:

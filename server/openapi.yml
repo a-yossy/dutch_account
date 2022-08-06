@@ -513,11 +513,17 @@ components:
       description: 購入履歴情報
       type: object
       required:
+        - id
         - name
         - amount_of_money
         - purchased_on
         - description
       properties:
+        id:
+          type: integer
+          format: int64
+          description: 購入履歴ID
+          example: 1
         name:
           type: string
           description: ユーザ名

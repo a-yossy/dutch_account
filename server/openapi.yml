@@ -684,7 +684,7 @@ components:
                 description: 購入説明
                 example: 食材
     PurchaseRecordsBody:
-      description: リクエスト購入履歴情報
+      description: リクエスト複数購入履歴情報
       content:
         application/json:
           schema:

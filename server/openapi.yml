@@ -9,6 +9,7 @@ servers:
 tags:
   - name: user
   - name: paymentGroup
+  - name: userPaymentGroup
   - name: admin
 security:
   - cookieAuth: []
@@ -223,6 +224,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups:
+    get:
+      tags:
+        - userPaymentGroup
+      summary: 全ユーザ支払グループ情報取得API
+      description: 全てのユーザ支払グループ情報を取得する
+      operationId: getUserPaymentGroups
+      parameters:
+        - $ref: "#/components/parameters/PaymentGroupId"
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserPaymentGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -358,6 +381,28 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
+    UserPaymentGroup:
+      description: ユーザ支払グループ情報
+      type: object
+      required:
+        - user_id
+        - name
+        - payment_ratio
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          description: ユーザID
+          example: 1
+        name:
+          type: string
+          description: ユーザ名
+          example: 太郎
+        payment_ratio:
+          type: number
+          format: float
+          description: 支払割合
+          example: 0.4
   requestBodies:
     UserBody:
       description: リクエストユーザ情報

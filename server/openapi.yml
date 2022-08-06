@@ -334,7 +334,7 @@ paths:
       description: 購入履歴を作成する
       operationId: addPurchaseRecords
       requestBody:
-        $ref: "#/components/requestBodies/PurchaseRecordBody"
+        $ref: "#/components/requestBodies/PurchaseRecordsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -344,6 +344,33 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PurchaseRecord"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/purchase_records/{purchase_record_id}:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+      - $ref: "#/components/parameters/PurchaseRecordId"
+    put:
+      tags:
+        - purchaseRecord
+      summary: 購入履歴更新API
+      description: 購入履歴を更新する
+      operationId: updatePurchaseRecord
+      requestBody:
+        $ref: "#/components/requestBodies/PurchaseRecordBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurchaseRecord"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -596,6 +623,37 @@ components:
       content:
         application/json:
           schema:
+            type: object
+            required:
+              - user_payment_group_id
+              - amount_of_money
+              - purchased_on
+              - description
+            properties:
+              user_payment_group_id:
+                type: integer
+                format: int64
+                description: ユーザ支払グループID
+                example: 1
+              amount_of_money:
+                type: integer
+                format: int32
+                description: 購入金額
+                example: 3000
+              purchased_on:
+                type: string
+                format: date
+                description: 購入日付
+                example: "2022-01-01"
+              description:
+                type: string
+                description: 購入説明
+                example: 食材
+    PurchaseRecordsBody:
+      description: リクエスト購入履歴情報
+      content:
+        application/json:
+          schema:
             type: array
             items:
               type: object
@@ -683,6 +741,15 @@ components:
       name: payment_group_id
       in: path
       description: 支払グループID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    PurchaseRecordId:
+      name: purchase_record_id
+      in: path
+      description: 購入履歴ID
       required: true
       schema:
         type: integer

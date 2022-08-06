@@ -252,8 +252,8 @@ paths:
       tags:
         - userPaymentGroup
       summary: ユーザ支払グループ作成API
-      description: ユーザ支払グループを作成する
-      operationId: addUserPaymentGroups
+      description: 支払グループIDでユーザ支払グループを作成する
+      operationId: addUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupBody"
       responses:
@@ -277,8 +277,8 @@ paths:
       tags:
         - userPaymentGroup
       summary: ユーザ支払グループ更新API
-      description: ユーザ支払グループを更新する
-      operationId: updateUserPaymentGroups
+      description: 支払グループIDでユーザ支払グループを更新する
+      operationId: updateUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupBody"
       responses:

@@ -348,6 +348,25 @@ paths:
   /purchase_records/{purchase_record_id}:
     parameters:
       - $ref: "#/components/parameters/PurchaseRecordId"
+    get:
+      tags:
+        - purchaseRecord
+      summary: 購入履歴取得API
+      description: 購入履歴IDで購入履歴を取得する
+      operationId: getPurchaseRecordByPurchaseRecordId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurchaseRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
     put:
       tags:
         - purchaseRecord
@@ -380,29 +399,6 @@ paths:
       responses:
         204:
           $ref: "#/components/responses/NoContent"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/purchase_records/{purchase_record_id}:
-    parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
-      - $ref: "#/components/parameters/PurchaseRecordId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: 購入履歴取得API
-      description: 購入履歴IDで購入履歴を取得する
-      operationId: getPurchaseRecordByPurchaseRecordId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PurchaseRecord"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

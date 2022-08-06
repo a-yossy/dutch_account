@@ -22,8 +22,6 @@ paths:
       summary: 全ユーザ情報取得API
       description: 全てのユーザ情報を取得する
       operationId: getUsers
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -43,8 +41,6 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       operationId: addUser
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -127,8 +123,6 @@ paths:
       summary: 全支払グループ情報
       description: 全ての支払グループ情報を取得する
       operationId: getPaymentGroups
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -148,8 +142,6 @@ paths:
       summary: 支払グループ作成API
       description: 支払グループを作成する
       operationId: addPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
       responses:
@@ -784,15 +776,6 @@ components:
       name: purchase_record_id
       in: path
       description: 購入履歴ID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    AdminId:
-      name: admin_id
-      in: cookie
-      description: 管理者ID
       required: true
       schema:
         type: integer

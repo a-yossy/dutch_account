@@ -9,6 +9,7 @@ servers:
 tags:
   - name: user
   - name: paymentGroup
+  - name: userPaymentGroup
   - name: admin
 security:
   - cookieAuth: []
@@ -223,6 +224,80 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+    get:
+      tags:
+        - userPaymentGroup
+      summary: 全ユーザ支払グループ情報取得API
+      description: 支払グループIDで全てのユーザ支払グループ情報を取得する
+      operationId: getUserPaymentGroupsByPaymentGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserPaymentGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - userPaymentGroup
+      summary: ユーザ支払グループ作成API
+      description: 支払グループIDでユーザ支払グループを作成する
+      operationId: addUserPaymentGroupsByPaymentGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserPaymentGroup"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    put:
+      tags:
+        - userPaymentGroup
+      summary: ユーザ支払グループ更新API
+      description: 支払グループIDでユーザ支払グループを更新する
+      operationId: updateUserPaymentGroupsByPaymentGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserPaymentGroup"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -358,6 +433,28 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
+    UserPaymentGroup:
+      description: ユーザ支払グループ情報
+      type: object
+      required:
+        - user_id
+        - name
+        - payment_ratio
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          description: ユーザID
+          example: 1
+        name:
+          type: string
+          description: ユーザ名
+          example: 太郎
+        payment_ratio:
+          type: number
+          format: float
+          description: 支払割合
+          example: 0.4
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -385,6 +482,28 @@ components:
                 type: string
                 description: 支払グループ名
                 example: 家族
+    UserPaymentGroupBody:
+      description: リクエストユーザ支払グループ情報
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - user_id
+                - payment_ratio
+              properties:
+                user_id:
+                  type: integer
+                  format: int64
+                  description: ユーザID
+                  example: 1
+                payment_ratio:
+                  type: number
+                  format: float
+                  description: 支払割合
+                  example: 0.4
     SignUpBody:
       description: サインアップ情報
       content:

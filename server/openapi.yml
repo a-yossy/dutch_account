@@ -10,6 +10,7 @@ tags:
   - name: user
   - name: paymentGroup
   - name: userPaymentGroup
+  - name: purchaseRecord
   - name: admin
 security:
   - cookieAuth: []
@@ -302,6 +303,30 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/purchase_records:
+    get:
+      tags:
+        - purchaseRecord
+      summary: 全購入履歴情報取得API
+      description: 支払グループIDで全ての購入履歴情報を取得する
+      operationId: getPurchaseRecordsByPaymentGroupId
+      parameters:
+        - $ref: "#/components/parameters/PaymentGroupId"
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PurchaseRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -459,6 +484,33 @@ components:
           format: float
           description: 支払割合
           example: 0.4
+    PurchaseRecord:
+      description: 購入履歴情報
+      type: object
+      required:
+        - name
+        - amount_of_money
+        - purchased_on
+        - description
+      properties:
+        name:
+          type: string
+          description: ユーザ名
+          example: 太郎
+        amount_of_money:
+          type: integer
+          format: int32
+          description: 購入金額
+          example: 3000
+        purchased_on:
+          type: string
+          format: date
+          description: 購入日付
+          example: "2022-01-01"
+        description:
+          type: string
+          description: 購入説明
+          example: 食材
   requestBodies:
     UserBody:
       description: リクエストユーザ情報

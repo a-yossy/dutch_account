@@ -301,7 +301,7 @@ paths:
     get:
       tags:
         - purchaseRecord
-      summary: 全購入履歴情報取得API
+      summary: 支払グループに紐づく全購入履歴情報取得API
       description: 支払グループIDで全ての購入履歴情報を取得する
       operationId: getPurchaseRecordsByPaymentGroupId
       responses:

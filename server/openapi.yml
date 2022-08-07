@@ -645,10 +645,16 @@ components:
           schema:
             type: object
             required:
+              - user_payment_group_id
               - amount_of_money
               - purchased_on
               - description
             properties:
+              user_payment_group_id:
+                  type: integer
+                  format: int64
+                  description: ユーザ支払グループID
+                  example: 1
               amount_of_money:
                 type: integer
                 format: int32

@@ -241,6 +241,9 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups/bulk_insert:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
         - userPaymentGroup
@@ -266,6 +269,9 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups/bulk_update:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
         - userPaymentGroup
@@ -315,7 +321,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/purchase_records:
+  /user_payment_groups/purchase_records/bulk_insert:
     post:
       tags:
         - purchaseRecord

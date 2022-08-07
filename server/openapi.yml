@@ -361,25 +361,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - purchaseRecord
-      summary: 購入履歴削除API
-      description: 購入履歴IDで購入履歴を削除する
-      operationId: deletePurchaseRecordByPurchaseRecordId
-      responses:
-        204:
-          $ref: "#/components/responses/NoContent"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/{user_payment_group_id}/purchase_records/{purchase_record_id}:
-    parameters:
-      - $ref: "#/components/parameters/UserPaymentGroupId"
-      - $ref: "#/components/parameters/PurchaseRecordId"
     put:
       tags:
         - purchaseRecord
@@ -397,6 +378,21 @@ paths:
                 $ref: "#/components/schemas/PurchaseRecord"
         400:
           $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - purchaseRecord
+      summary: 購入履歴削除API
+      description: 購入履歴IDで購入履歴を削除する
+      operationId: deletePurchaseRecordByPurchaseRecordId
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

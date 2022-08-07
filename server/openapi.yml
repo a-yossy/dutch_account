@@ -221,7 +221,7 @@ paths:
     get:
       tags:
         - userPaymentGroup
-      summary: 全ユーザ支払グループ情報取得API
+      summary: 支払グループに紐づく全ユーザ支払グループ情報取得API
       description: 支払グループIDで全てのユーザ支払グループ情報を取得する
       operationId: getUserPaymentGroupsByPaymentGroupId
       parameters:
@@ -244,13 +244,13 @@ paths:
     post:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ作成API
-      description: ユーザ支払グループを作成する
+      summary: ユーザ支払グループ複数作成API
+      description: ユーザ支払グループを複数作成する
       operationId: addUserPaymentGroup
       parameters:
         - $ref: "#/components/parameters/PaymentGroupId"
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -271,13 +271,13 @@ paths:
     put:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ更新API
-      description: ユーザ支払グループを更新する
+      summary: ユーザ支払グループ複数更新API
+      description: ユーザ支払グループを複数更新する
       operationId: updateUserPaymentGroup
       parameters:
         - $ref: "#/components/parameters/PaymentGroupId"
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:
         200:
           description: 更新が成功した時のレスポンス
@@ -624,8 +624,8 @@ components:
                 type: string
                 description: 支払グループ名
                 example: 家族
-    UserPaymentGroupBody:
-      description: リクエストユーザ支払グループ情報
+    UserPaymentGroupsBody:
+      description: リクエスト複数ユーザ支払グループ情報
       content:
         application/json:
           schema:

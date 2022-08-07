@@ -218,14 +218,14 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/user_payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - userPaymentGroup
       summary: 支払グループに紐づく全ユーザ支払グループ情報取得API
       description: 支払グループIDで全てのユーザ支払グループ情報を取得する
       operationId: getUserPaymentGroupsByPaymentGroupId
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -245,10 +245,8 @@ paths:
       tags:
         - userPaymentGroup
       summary: ユーザ支払グループ複数作成API
-      description: ユーザ支払グループを複数作成する
-      operationId: addUserPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
+      description: 支払グループIDでユーザ支払グループを複数作成する
+      operationId: addUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:
@@ -272,10 +270,8 @@ paths:
       tags:
         - userPaymentGroup
       summary: ユーザ支払グループ複数更新API
-      description: ユーザ支払グループを複数更新する
-      operationId: updateUserPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
+      description: 支払グループIDでユーザ支払グループを複数更新する
+      operationId: updateUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:

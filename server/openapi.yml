@@ -589,6 +589,34 @@ components:
           type: string
           description: 購入説明
           example: 食材
+    PurchaseRecordRequestBody:
+      description: 購入履歴のリクエスト内容
+      type: object
+      required:
+        - user_payment_group_id
+        - amount_of_money
+        - purchased_on
+        - description
+      properties:
+        user_payment_group_id:
+            type: integer
+            format: int64
+            description: ユーザ支払グループID
+            example: 1
+        amount_of_money:
+          type: integer
+          format: int32
+          description: 購入金額
+          example: 3000
+        purchased_on:
+          type: string
+          format: date
+          description: 購入日
+          example: "2022-01-01"
+        description:
+          type: string
+          description: 購入説明
+          example: 食材
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -643,32 +671,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - user_payment_group_id
-              - amount_of_money
-              - purchased_on
-              - description
-            properties:
-              user_payment_group_id:
-                  type: integer
-                  format: int64
-                  description: ユーザ支払グループID
-                  example: 1
-              amount_of_money:
-                type: integer
-                format: int32
-                description: 購入金額
-                example: 3000
-              purchased_on:
-                type: string
-                format: date
-                description: 購入日
-                example: "2022-01-01"
-              description:
-                type: string
-                description: 購入説明
-                example: 食材
+            $ref: "#/components/schemas/PurchaseRecordRequestBody"
     PurchaseRecordsBody:
       description: リクエスト複数購入履歴情報
       content:
@@ -676,32 +679,7 @@ components:
           schema:
             type: array
             items:
-              type: object
-              required:
-                - user_payment_group_id
-                - amount_of_money
-                - purchased_on
-                - description
-              properties:
-                user_payment_group_id:
-                  type: integer
-                  format: int64
-                  description: ユーザ支払グループID
-                  example: 1
-                amount_of_money:
-                  type: integer
-                  format: int32
-                  description: 購入金額
-                  example: 3000
-                purchased_on:
-                  type: string
-                  format: date
-                  description: 購入日付
-                  example: "2022-01-01"
-                description:
-                  type: string
-                  description: 購入説明
-                  example: 食材
+              $ref: "#/components/schemas/PurchaseRecordRequestBody"
     SignUpBody:
       description: サインアップ情報
       content:

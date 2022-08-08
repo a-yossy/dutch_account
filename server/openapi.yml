@@ -322,6 +322,30 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /users/{user_id}/purchase_records:
+    parameters:
+      - $ref: "#/components/parameters/UserId"
+    get:
+      tags:
+        - purchaseRecord
+      summary: ユーザに紐づく全購入履歴情報取得API
+      description: ユーザIDで全ての購入履歴情報を取得する
+      operationId: getPurchaseRecordsByUserId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PurchaseRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /user_payment_groups/purchase_records/bulk_insert:
     post:
       tags:

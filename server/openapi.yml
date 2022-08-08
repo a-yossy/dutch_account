@@ -11,6 +11,7 @@ tags:
   - name: paymentGroup
   - name: userPaymentGroup
   - name: purchaseRecord
+  - name: remittanceRecord
   - name: admin
 security:
   - cookieAuth: []
@@ -405,6 +406,112 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/remittance_records:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+    get:
+      tags:
+        - remittanceRecord
+      summary: 支払グループに紐づく全送金履歴取得API
+      description: 支払グループIDで全ての送金履歴情報を取得する
+      operationId: getRemittanceRecordsByPaymentGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RemittanceRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/remittance_records:
+    post:
+      tags:
+        - remittanceRecord
+      summary: 送金履歴作成API
+      description: 送金履歴を作成する
+      operationId: addRemittanceRecord
+      requestBody:
+        $ref: "#/components/requestBodies/RemittanceRecordBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemittanceRecord"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /remittance_records/{remittance_record_id}:
+    parameters:
+      - $ref: "#/components/parameters/RemittanceRecordId"
+    get:
+      tags:
+        - remittanceRecord
+      summary: 送金履歴取得API
+      description: 送金履歴IDで送金履歴を取得する
+      operationId: getRemittanceRecordByRemittanceRecordId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemittanceRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    put:
+      tags:
+        - remittanceRecord
+      summary: 送金履歴更新API
+      description: 送金履歴IDで送金履歴を更新する
+      operationId: updateRemittanceRecordByRemittanceRecordId
+      requestBody:
+        $ref: "#/components/requestBodies/RemittanceRecordBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemittanceRecord"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - remittanceRecord
+      summary: 送金履歴削除API
+      description: 送金履歴IDで送金履歴を削除する
+      operationId: deleteRemittanceRecordByRemittanceRecordId
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -623,6 +730,39 @@ components:
           type: string
           description: 購入説明
           example: 食材
+    RemittanceRecord:
+      description: 送金履歴情報
+      type: object
+      required:
+        - id
+        - from_user_name
+        - to_user_name
+        - amount_of_money
+        - transferred_on
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 送金履歴ID
+          example: 1
+        from_user_name:
+          type: string
+          description: 送金ユーザ名
+          example: 太郎
+        to_user_name:
+          type: string
+          description: 着金ユーザ名
+          example: 次郎
+        amount_of_money:
+          type: integer
+          format: int32
+          description: 送金金額
+          example: 3000
+        transferred_on:
+          type: string
+          format: date
+          description: 送金日
+          example: "2022-01-01"
   requestBodies:
     UserBody:
       description: リクエストユーザ情報
@@ -686,6 +826,38 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/PurchaseRecordRequestBody"
+    RemittanceRecordBody:
+      description: リクエスト送金履歴情報
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - from_user_payment_group_id
+              - to_user_payment_group_id
+              - amount_of_money
+              - transferred_on
+            properties:
+              from_user_payment_group_id:
+                type: integer
+                format: int64
+                description: 送金ユーザID
+                example: 1
+              to_user_payment_group_id:
+                type: integer
+                format: int64
+                description: 着金ユーザID
+                example: 2
+              amount_of_money:
+                type: integer
+                format: int32
+                description: 送金金額
+                example: 3000
+              transferred_on:
+                type: string
+                format: date
+                description: 送金日
+                example: "2022-01-01"
     SignUpBody:
       description: サインアップ情報
       content:
@@ -754,6 +926,15 @@ components:
       name: user_payment_group_id
       in: path
       description: ユーザ支払グループID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    RemittanceRecordId:
+      name: remittance_record_id
+      in: path
+      description: 送金履歴ID
       required: true
       schema:
         type: integer

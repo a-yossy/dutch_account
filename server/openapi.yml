@@ -438,6 +438,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/remittance_records:
     post:
       tags:
         - remittanceRecord

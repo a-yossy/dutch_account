@@ -420,7 +420,7 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 全送金履歴取得API
+      summary: 支払グループに紐づく全送金履歴取得API
       description: 支払グループIDで全ての送金履歴情報を取得する
       operationId: getRemittanceRecordsByPaymentGroupId
       responses:

@@ -23,8 +23,6 @@ paths:
       summary: 全ユーザ情報取得API
       description: 全てのユーザ情報を取得する
       operationId: getUsers
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -44,8 +42,6 @@ paths:
       summary: ユーザ作成API
       description: ユーザを作成する
       operationId: addUser
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
       responses:
@@ -128,8 +124,6 @@ paths:
       summary: 全支払グループ情報
       description: 全ての支払グループ情報を取得する
       operationId: getPaymentGroups
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -149,8 +143,6 @@ paths:
       summary: 支払グループ作成API
       description: 支払グループを作成する
       operationId: addPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/AdminId"
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
       responses:
@@ -227,14 +219,14 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/user_payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - userPaymentGroup
-      summary: 全ユーザ支払グループ情報取得API
+      summary: 支払グループに紐づく全ユーザ支払グループ情報取得API
       description: 支払グループIDで全てのユーザ支払グループ情報を取得する
       operationId: getUserPaymentGroupsByPaymentGroupId
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -250,16 +242,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups/bulk_insert:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ作成API
-      description: ユーザ支払グループを作成する
-      operationId: addUserPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
+      summary: ユーザ支払グループ複数作成API
+      description: 支払グループIDでユーザ支払グループを複数作成する
+      operationId: addUserPaymentGroupsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -277,16 +270,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/user_payment_groups/bulk_update:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ更新API
-      description: ユーザ支払グループを更新する
-      operationId: updateUserPaymentGroup
-      parameters:
-        - $ref: "#/components/parameters/PaymentGroupId"
+      summary: ユーザ支払グループ複数更新API
+      description: 支払グループIDでユーザ支払グループを複数更新する
+      operationId: updateUserPaymentGroupsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupBody"
+        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
       responses:
         200:
           description: 更新が成功した時のレスポンス
@@ -310,7 +304,7 @@ paths:
     get:
       tags:
         - purchaseRecord
-      summary: 全購入履歴情報取得API
+      summary: 支払グループに紐づく全購入履歴情報取得API
       description: 支払グループIDで全ての購入履歴情報を取得する
       operationId: getPurchaseRecordsByPaymentGroupId
       responses:
@@ -328,12 +322,13 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/purchase_records/bulk_insert:
     post:
       tags:
         - purchaseRecord
-      summary: 購入履歴作成API
-      description: 支払グループIDで購入履歴を作成する
-      operationId: addPurchaseRecordsByPaymentGroupId
+      summary: 購入履歴複数作成API
+      description: 購入履歴を複数作成する
+      operationId: addPurchaseRecords
       requestBody:
         $ref: "#/components/requestBodies/PurchaseRecordsBody"
       responses:
@@ -349,13 +344,10 @@ paths:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/purchase_records/{purchase_record_id}:
+  /purchase_records/{purchase_record_id}:
     parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
       - $ref: "#/components/parameters/PurchaseRecordId"
     get:
       tags:
@@ -704,7 +696,35 @@ components:
         purchased_on:
           type: string
           format: date
-          description: 購入日付
+          description: 購入日
+          example: "2022-01-01"
+        description:
+          type: string
+          description: 購入説明
+          example: 食材
+    PurchaseRecordRequestBody:
+      description: 購入履歴のリクエスト内容
+      type: object
+      required:
+        - user_payment_group_id
+        - amount_of_money
+        - purchased_on
+        - description
+      properties:
+        user_payment_group_id:
+            type: integer
+            format: int64
+            description: ユーザ支払グループID
+            example: 1
+        amount_of_money:
+          type: integer
+          format: int32
+          description: 購入金額
+          example: 3000
+        purchased_on:
+          type: string
+          format: date
+          description: 購入日
           example: "2022-01-01"
         description:
           type: string
@@ -770,8 +790,8 @@ components:
                 type: string
                 description: 支払グループ名
                 example: 家族
-    UserPaymentGroupBody:
-      description: リクエストユーザ支払グループ情報
+    UserPaymentGroupsBody:
+      description: リクエスト複数ユーザ支払グループ情報
       content:
         application/json:
           schema:
@@ -797,65 +817,15 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - user_payment_group_id
-              - amount_of_money
-              - purchased_on
-              - description
-            properties:
-              user_payment_group_id:
-                type: integer
-                format: int64
-                description: ユーザ支払グループID
-                example: 1
-              amount_of_money:
-                type: integer
-                format: int32
-                description: 購入金額
-                example: 3000
-              purchased_on:
-                type: string
-                format: date
-                description: 購入日付
-                example: "2022-01-01"
-              description:
-                type: string
-                description: 購入説明
-                example: 食材
+            $ref: "#/components/schemas/PurchaseRecordRequestBody"
     PurchaseRecordsBody:
-      description: リクエスト購入履歴情報
+      description: リクエスト複数購入履歴情報
       content:
         application/json:
           schema:
             type: array
             items:
-              type: object
-              required:
-                - user_payment_group_id
-                - amount_of_money
-                - purchased_on
-                - description
-              properties:
-                user_payment_group_id:
-                  type: integer
-                  format: int64
-                  description: ユーザ支払グループID
-                  example: 1
-                amount_of_money:
-                  type: integer
-                  format: int32
-                  description: 購入金額
-                  example: 3000
-                purchased_on:
-                  type: string
-                  format: date
-                  description: 購入日付
-                  example: "2022-01-01"
-                description:
-                  type: string
-                  description: 購入説明
-                  example: 食材
+              $ref: "#/components/schemas/PurchaseRecordRequestBody"
     RemittanceRecordBody:
       description: リクエスト送金履歴情報
       content:
@@ -952,10 +922,10 @@ components:
         type: integer
         format: int64
         example: 1
-    PurchaseRecordId:
-      name: purchase_record_id
+    UserPaymentGroupId:
+      name: user_payment_group_id
       in: path
-      description: 購入履歴ID
+      description: ユーザ支払グループID
       required: true
       schema:
         type: integer
@@ -970,10 +940,10 @@ components:
         type: integer
         format: int64
         example: 1
-    AdminId:
-      name: admin_id
-      in: cookie
-      description: 管理者ID
+    PurchaseRecordId:
+      name: purchase_record_id
+      in: path
+      description: 購入履歴ID
       required: true
       schema:
         type: integer

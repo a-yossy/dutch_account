@@ -441,8 +441,8 @@ paths:
       tags:
         - remittanceRecord
       summary: 送金履歴作成API
-      description: 支払グループIDで送金履歴を作成する
-      operationId: addRemittanceRecordByPaymentGroupId
+      description: 送金履歴を作成する
+      operationId: addRemittanceRecord
       requestBody:
         $ref: "#/components/requestBodies/RemittanceRecordBody"
       responses:

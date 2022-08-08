@@ -462,9 +462,8 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/remittance_records/{remittance_record_id}:
+  /remittance_records/{remittance_record_id}:
     parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
       - $ref: "#/components/parameters/RemittanceRecordId"
     get:
       tags:

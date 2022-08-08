@@ -349,8 +349,6 @@ paths:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/purchase_records/{purchase_record_id}:

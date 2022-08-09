@@ -460,9 +460,9 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 送金ユーザに紐づく全送金履歴情報取得API
-      description: 送金ユーザIDで全ての送金履歴情報を取得する
-      operationId: getRemittanceRecordsByFromUserId
+      summary: 送金ユーザに紐づく全着金ユーザ送金履歴情報取得API
+      description: 送金ユーザIDで全ての着金ユーザ送金履歴情報を取得する
+      operationId: getToRemittanceRecordsByFromUserId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -484,9 +484,9 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 着金ユーザに紐づく全送金履歴情報取得API
-      description: 着金ユーザIDで全ての送金履歴情報を取得する
-      operationId: getRemittanceRecordsByToUserId
+      summary: 着金ユーザに紐づく全送金ユーザ送金履歴情報取得API
+      description: 着金ユーザIDで全ての送金ユーザ送金履歴情報を取得する
+      operationId: getFromRemittanceRecordsByToUserId
       responses:
         200:
           description: 取得が成功した時のレスポンス

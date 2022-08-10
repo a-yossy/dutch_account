@@ -436,8 +436,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 支払グループに紐づく全送金履歴取得API
-      description: 支払グループIDで全ての送金履歴情報を取得する
+      summary: 支払グループに紐づく全送金着金履歴取得API
+      description: 支払グループIDで全ての送金着金履歴情報を取得する
       operationId: getRemittanceRecordsByPaymentGroupId
       responses:
         200:
@@ -460,8 +460,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 送金ユーザに紐づく全着金ユーザ送金履歴情報取得API
-      description: 送金ユーザIDで全ての着金ユーザ送金履歴情報を取得する
+      summary: 送金ユーザに紐づく全着金履歴取得API
+      description: 送金ユーザIDで全ての着金履歴情報を取得する
       operationId: getToRemittanceRecordsByFromUserId
       responses:
         200:
@@ -484,8 +484,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 着金ユーザに紐づく全送金ユーザ送金履歴情報取得API
-      description: 着金ユーザIDで全ての送金ユーザ送金履歴情報を取得する
+      summary: 着金ユーザに紐づく全送金履歴取得API
+      description: 着金ユーザIDで全ての送金履歴を取得する
       operationId: getFromRemittanceRecordsByToUserId
       responses:
         200:
@@ -803,7 +803,7 @@ components:
           description: 購入説明
           example: 食材
     RemittanceRecord:
-      description: 送金履歴情報
+      description: 送金着金履歴情報
       type: object
       required:
         - id
@@ -836,7 +836,7 @@ components:
           description: 送金日
           example: "2022-01-01"
     FromRemittanceRecord:
-      description: 送金ユーザ送金履歴情報
+      description: 送金履歴情報
       type: object
       required:
         - id
@@ -864,7 +864,7 @@ components:
           description: 送金日
           example: "2022-01-01"
     ToRemittanceRecord:
-      description: 着金ユーザ送金履歴情報
+      description: 着金履歴情報
       type: object
       required:
         - id

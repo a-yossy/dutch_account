@@ -485,7 +485,7 @@ paths:
       tags:
         - remittanceRecord
       summary: 着金ユーザに紐づく全送金履歴取得API
-      description: 着金ユーザIDで全ての送金履歴を取得する
+      description: 着金ユーザIDで全ての送金履歴情報を取得する
       operationId: getFromRemittanceRecordsByToUserId
       responses:
         200:

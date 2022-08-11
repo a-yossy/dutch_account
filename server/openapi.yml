@@ -526,6 +526,30 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/{from_user_payment_group_id}/remittance_records:
+    parameters:
+      - $ref: "#/components/parameters/FromUserPaymentGroupId"
+    get:
+      tags:
+        - remittanceRecord
+      summary: 送金ユーザー支払グループに紐づく全着金履歴取得
+      description: 送金ユーザー支払グループIDで全ての着金履歴を取得する
+      operationId: getToRemittanceRecordsByFromUserPaymentGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ToRemittanceRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /user_payment_groups/remittance_records:
     post:
       tags:
@@ -1078,6 +1102,15 @@ components:
       name: to_user_id
       in: path
       description: 着金ユーザーID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    FromUserPaymentGroupId:
+      name: from_user_payment_group_id
+      in: path
+      description: 送金ユーザー支払グループID
       required: true
       schema:
         type: integer

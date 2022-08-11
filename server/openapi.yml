@@ -724,7 +724,6 @@ components:
       type: object
       required:
         - id
-        - user_id
         - name
         - payment_ratio
       properties:
@@ -732,11 +731,6 @@ components:
           type: integer
           format: int64
           description: ユーザー支払グループID
-          example: 1
-        user_id:
-          type: integer
-          format: int64
-          description: ユーザーID
           example: 1
         name:
           type: string

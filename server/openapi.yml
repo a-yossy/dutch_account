@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: dutch-account-app
-  description: 割り勘計算アプリ
+  title: dutch_account_app
+  description: 割り勘アプリ
 servers:
   - url: http://localhost:3000/api
     description: 開発環境
@@ -20,8 +20,8 @@ paths:
     get:
       tags:
         - user
-      summary: 全ユーザ情報取得API
-      description: 全てのユーザ情報を取得する
+      summary: 全ユーザー取得
+      description: 全てのユーザーを取得する
       operationId: getUsers
       responses:
         200:
@@ -39,8 +39,8 @@ paths:
     post:
       tags:
         - user
-      summary: ユーザ作成API
-      description: ユーザを作成する
+      summary: ユーザー作成
+      description: ユーザーを作成する
       operationId: addUser
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
@@ -63,8 +63,8 @@ paths:
     get:
       tags:
         - user
-      summary: ユーザ情報取得API
-      description: ユーザIDでユーザ情報を取得する
+      summary: ユーザー取得
+      description: ユーザーIDでユーザーを取得する
       operationId: getUserByUserId
       responses:
         200:
@@ -82,8 +82,8 @@ paths:
     put:
       tags:
         - user
-      summary: ユーザ更新API
-      description: ユーザIDでユーザ情報を更新する
+      summary: ユーザー更新
+      description: ユーザーIDでユーザーを更新する
       operationId: updateUserByUserId
       requestBody:
         $ref: "#/components/requestBodies/UserBody"
@@ -105,8 +105,8 @@ paths:
     delete:
       tags:
         - user
-      summary: ユーザ削除API
-      description: ユーザIDでユーザ情報を削除する
+      summary: ユーザー削除
+      description: ユーザーIDでユーザーを削除する
       operationId: deleteUserByUserId
       responses:
         204:
@@ -121,8 +121,8 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 全支払グループ情報
-      description: 全ての支払グループ情報を取得する
+      summary: 全支払グループ取得
+      description: 全ての支払グループを取得する
       operationId: getPaymentGroups
       responses:
         200:
@@ -140,7 +140,7 @@ paths:
     post:
       tags:
         - paymentGroup
-      summary: 支払グループ作成API
+      summary: 支払グループ作成
       description: 支払グループを作成する
       operationId: addPaymentGroup
       requestBody:
@@ -164,8 +164,8 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 支払グループ情報取得API
-      description: 支払グループIDで支払グループ情報を取得する
+      summary: 支払グループ取得
+      description: 支払グループIDで支払グループを取得する
       operationId: getPaymentGroupByPaymentGroupId
       responses:
         200:
@@ -183,8 +183,8 @@ paths:
     put:
       tags:
         - paymentGroup
-      summary: 支払グループ更新API
-      description: 支払グループIDで支払グループ情報を更新する
+      summary: 支払グループ更新
+      description: 支払グループIDで支払グループを更新する
       operationId: updatePaymentGroupByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
@@ -206,8 +206,8 @@ paths:
     delete:
       tags:
         - paymentGroup
-      summary: 支払グループ削除API
-      description: 支払グループIDで支払グループ情報を削除する
+      summary: 支払グループ削除
+      description: 支払グループIDで支払グループを削除する
       operationId: deletePaymentGroupByPaymentGroupId
       responses:
         204:
@@ -224,8 +224,8 @@ paths:
     get:
       tags:
         - userPaymentGroup
-      summary: 支払グループに紐づく全ユーザ支払グループ情報取得API
-      description: 支払グループIDで全てのユーザ支払グループ情報を取得する
+      summary: 支払グループに紐づく全ユーザー支払グループ取得
+      description: 支払グループIDで全てのユーザー支払グループを取得する
       operationId: getUserPaymentGroupsByPaymentGroupId
       responses:
         200:
@@ -248,8 +248,8 @@ paths:
     post:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ複数作成API
-      description: 支払グループIDでユーザ支払グループを複数作成する
+      summary: ユーザー支払グループ複数作成
+      description: 支払グループIDでユーザー支払グループを複数作成する
       operationId: addUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupsBody"
@@ -276,8 +276,8 @@ paths:
     put:
       tags:
         - userPaymentGroup
-      summary: ユーザ支払グループ複数更新API
-      description: 支払グループIDでユーザ支払グループを複数更新する
+      summary: ユーザー支払グループ複数更新
+      description: 支払グループIDでユーザー支払グループを複数更新する
       operationId: updateUserPaymentGroupsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/UserPaymentGroupsBody"
@@ -304,8 +304,8 @@ paths:
     get:
       tags:
         - purchaseRecord
-      summary: 支払グループに紐づく全購入履歴情報取得API
-      description: 支払グループIDで全ての購入履歴情報を取得する
+      summary: 支払グループに紐づく全購入履歴取得
+      description: 支払グループIDで全ての購入履歴を取得する
       operationId: getPurchaseRecordsByPaymentGroupId
       responses:
         200:
@@ -328,8 +328,8 @@ paths:
     get:
       tags:
         - purchaseRecord
-      summary: ユーザに紐づく全購入履歴情報取得API
-      description: ユーザIDで全ての購入履歴情報を取得する
+      summary: ユーザーに紐づく全購入履歴取得
+      description: ユーザーIDで全ての購入履歴を取得する
       operationId: getPurchaseRecordsByUserId
       responses:
         200:
@@ -350,7 +350,7 @@ paths:
     post:
       tags:
         - purchaseRecord
-      summary: 購入履歴複数作成API
+      summary: 購入履歴複数作成
       description: 購入履歴を複数作成する
       operationId: addPurchaseRecords
       requestBody:
@@ -376,7 +376,7 @@ paths:
     get:
       tags:
         - purchaseRecord
-      summary: 購入履歴取得API
+      summary: 購入履歴取得
       description: 購入履歴IDで購入履歴を取得する
       operationId: getPurchaseRecordByPurchaseRecordId
       responses:
@@ -395,7 +395,7 @@ paths:
     put:
       tags:
         - purchaseRecord
-      summary: 購入履歴更新API
+      summary: 購入履歴更新
       description: 購入履歴IDで購入履歴を更新する
       operationId: updatePurchaseRecordByPurchaseRecordId
       requestBody:
@@ -418,7 +418,7 @@ paths:
     delete:
       tags:
         - purchaseRecord
-      summary: 購入履歴削除API
+      summary: 購入履歴削除
       description: 購入履歴IDで購入履歴を削除する
       operationId: deletePurchaseRecordByPurchaseRecordId
       responses:
@@ -436,8 +436,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 支払グループに紐づく全送金着金履歴取得API
-      description: 支払グループIDで全ての送金着金履歴情報を取得する
+      summary: 支払グループに紐づく全送金着金履歴取得
+      description: 支払グループIDで全ての送金着金履歴を取得する
       operationId: getRemittanceRecordsByPaymentGroupId
       responses:
         200:
@@ -460,8 +460,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 送金ユーザに紐づく全着金履歴取得API
-      description: 送金ユーザIDで全ての着金履歴情報を取得する
+      summary: 送金ユーザーに紐づく全着金履歴取得
+      description: 送金ユーザーIDで全ての着金履歴を取得する
       operationId: getToRemittanceRecordsByFromUserId
       responses:
         200:
@@ -484,8 +484,8 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 着金ユーザに紐づく全送金履歴取得API
-      description: 着金ユーザIDで全ての送金履歴情報を取得する
+      summary: 着金ユーザーに紐づく全送金履歴取得
+      description: 着金ユーザーIDで全ての送金履歴を取得する
       operationId: getFromRemittanceRecordsByToUserId
       responses:
         200:
@@ -506,7 +506,7 @@ paths:
     post:
       tags:
         - remittanceRecord
-      summary: 送金履歴作成API
+      summary: 送金履歴作成
       description: 送金履歴を作成する
       operationId: addRemittanceRecord
       requestBody:
@@ -530,7 +530,7 @@ paths:
     get:
       tags:
         - remittanceRecord
-      summary: 送金履歴取得API
+      summary: 送金履歴取得
       description: 送金履歴IDで送金履歴を取得する
       operationId: getRemittanceRecordByRemittanceRecordId
       responses:
@@ -549,7 +549,7 @@ paths:
     put:
       tags:
         - remittanceRecord
-      summary: 送金履歴更新API
+      summary: 送金履歴更新
       description: 送金履歴IDで送金履歴を更新する
       operationId: updateRemittanceRecordByRemittanceRecordId
       requestBody:
@@ -572,7 +572,7 @@ paths:
     delete:
       tags:
         - remittanceRecord
-      summary: 送金履歴削除API
+      summary: 送金履歴削除
       description: 送金履歴IDで送金履歴を削除する
       operationId: deleteRemittanceRecordByRemittanceRecordId
       responses:
@@ -588,7 +588,7 @@ paths:
     post:
       tags:
         - admin
-      summary: サインアップAPI
+      summary: サインアップ
       description: サインアップする
       operationId: signUp
       security: []
@@ -605,7 +605,7 @@ paths:
     post:
       tags:
         - admin
-      summary: ログインAPI
+      summary: ログイン
       description: ログインする
       operationId: logIn
       security: []
@@ -622,7 +622,7 @@ paths:
     post:
       tags:
         - admin
-      summary: ログアウトAPI
+      summary: ログアウト
       description: ログアウトする
       operationId: logOut
       security: []
@@ -675,7 +675,7 @@ components:
             message: サーバーでエラーが発生しています
   schemas:
     Error:
-      description: エラー情報
+      description: エラー
       type: object
       required:
         - code
@@ -688,7 +688,7 @@ components:
           type: string
           description: エラーメッセージ
     User:
-      description: ユーザ情報
+      description: ユーザー
       type: object
       required:
         - id
@@ -697,14 +697,14 @@ components:
         id:
           type: integer
           format: int64
-          description: ユーザID
+          description: ユーザーID
           example: 1
         name:
           type: string
-          description: ユーザ名
+          description: ユーザー名
           example: 太郎
     PaymentGroup:
-      description: 支払グループ情報
+      description: 支払グループ
       type: object
       required:
         - id
@@ -720,7 +720,7 @@ components:
           description: 支払グループ名
           example: 家族
     UserPaymentGroup:
-      description: ユーザ支払グループ情報
+      description: ユーザー支払グループ
       type: object
       required:
         - user_id
@@ -730,11 +730,11 @@ components:
         user_id:
           type: integer
           format: int64
-          description: ユーザID
+          description: ユーザーID
           example: 1
         name:
           type: string
-          description: ユーザ名
+          description: ユーザー名
           example: 太郎
         payment_ratio:
           type: number
@@ -742,7 +742,7 @@ components:
           description: 支払割合
           example: 0.4
     PurchaseRecord:
-      description: 購入履歴情報
+      description: 購入履歴
       type: object
       required:
         - id
@@ -758,7 +758,7 @@ components:
           example: 1
         name:
           type: string
-          description: ユーザ名
+          description: ユーザー名
           example: 太郎
         amount_of_money:
           type: integer
@@ -775,7 +775,7 @@ components:
           description: 購入説明
           example: 食材
     PurchaseRecordRequestBody:
-      description: 購入履歴のリクエスト内容
+      description: 購入履歴のリクエスト
       type: object
       required:
         - user_payment_group_id
@@ -786,7 +786,7 @@ components:
         user_payment_group_id:
             type: integer
             format: int64
-            description: ユーザ支払グループID
+            description: ユーザー支払グループID
             example: 1
         amount_of_money:
           type: integer
@@ -803,7 +803,7 @@ components:
           description: 購入説明
           example: 食材
     RemittanceRecord:
-      description: 送金着金履歴情報
+      description: 送金着金履歴
       type: object
       required:
         - id
@@ -819,11 +819,11 @@ components:
           example: 1
         from_user_name:
           type: string
-          description: 送金ユーザ名
+          description: 送金ユーザー名
           example: 太郎
         to_user_name:
           type: string
-          description: 着金ユーザ名
+          description: 着金ユーザー名
           example: 次郎
         amount_of_money:
           type: integer
@@ -836,7 +836,7 @@ components:
           description: 送金日
           example: "2022-01-01"
     FromRemittanceRecord:
-      description: 送金履歴情報
+      description: 送金履歴
       type: object
       required:
         - id
@@ -851,7 +851,7 @@ components:
           example: 1
         from_user_name:
           type: string
-          description: 送金ユーザ名
+          description: 送金ユーザー名
           example: 太郎
         amount_of_money:
           type: integer
@@ -864,7 +864,7 @@ components:
           description: 送金日
           example: "2022-01-01"
     ToRemittanceRecord:
-      description: 着金履歴情報
+      description: 着金履歴
       type: object
       required:
         - id
@@ -879,7 +879,7 @@ components:
           example: 1
         to_user_name:
           type: string
-          description: 着金ユーザ名
+          description: 着金ユーザー名
           example: 次郎
         amount_of_money:
           type: integer
@@ -893,7 +893,7 @@ components:
           example: "2022-01-01"
   requestBodies:
     UserBody:
-      description: リクエストユーザ情報
+      description: リクエストユーザー
       content:
         application/json:
           schema:
@@ -903,10 +903,10 @@ components:
             properties:
               name:
                 type: string
-                description: ユーザ名
+                description: ユーザー名
                 example: 太郎
     PaymentGroupBody:
-      description: リクエスト支払グループ情報
+      description: リクエスト支払グループ
       content:
         application/json:
           schema:
@@ -919,7 +919,7 @@ components:
                 description: 支払グループ名
                 example: 家族
     UserPaymentGroupsBody:
-      description: リクエスト複数ユーザ支払グループ情報
+      description: リクエスト複数ユーザー支払グループ
       content:
         application/json:
           schema:
@@ -933,7 +933,7 @@ components:
                 user_id:
                   type: integer
                   format: int64
-                  description: ユーザID
+                  description: ユーザーID
                   example: 1
                 payment_ratio:
                   type: number
@@ -941,13 +941,13 @@ components:
                   description: 支払割合
                   example: 0.4
     PurchaseRecordBody:
-      description: リクエスト購入履歴情報
+      description: リクエスト購入履歴
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/PurchaseRecordRequestBody"
     PurchaseRecordsBody:
-      description: リクエスト複数購入履歴情報
+      description: リクエスト複数購入履歴
       content:
         application/json:
           schema:
@@ -955,7 +955,7 @@ components:
             items:
               $ref: "#/components/schemas/PurchaseRecordRequestBody"
     RemittanceRecordBody:
-      description: リクエスト送金履歴情報
+      description: リクエスト送金履歴
       content:
         application/json:
           schema:
@@ -969,12 +969,12 @@ components:
               from_user_payment_group_id:
                 type: integer
                 format: int64
-                description: 送金ユーザID
+                description: 送金ユーザーID
                 example: 1
               to_user_payment_group_id:
                 type: integer
                 format: int64
-                description: 着金ユーザID
+                description: 着金ユーザーID
                 example: 2
               amount_of_money:
                 type: integer
@@ -987,7 +987,7 @@ components:
                 description: 送金日
                 example: "2022-01-01"
     SignUpBody:
-      description: サインアップ情報
+      description: サインアップ
       content:
         application/json:
           schema:
@@ -1012,7 +1012,7 @@ components:
                 description: パスワード
                 example: password
     LogInBody:
-      description: ログイン情報
+      description: ログイン
       content:
         application/json:
           schema:
@@ -1035,7 +1035,7 @@ components:
     UserId:
       name: user_id
       in: path
-      description: ユーザID
+      description: ユーザーID
       required: true
       schema:
         type: integer
@@ -1044,7 +1044,7 @@ components:
     FromUserId:
       name: from_user_id
       in: path
-      description: 送金ユーザID
+      description: 送金ユーザーID
       required: true
       schema:
         type: integer
@@ -1053,7 +1053,7 @@ components:
     ToUserId:
       name: to_user_id
       in: path
-      description: 着金ユーザID
+      description: 着金ユーザーID
       required: true
       schema:
         type: integer
@@ -1071,7 +1071,7 @@ components:
     UserPaymentGroupId:
       name: user_payment_group_id
       in: path
-      description: ユーザ支払グループID
+      description: ユーザー支払グループID
       required: true
       schema:
         type: integer

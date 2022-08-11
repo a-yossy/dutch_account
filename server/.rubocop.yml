@@ -1,3 +1,8 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.1.2
   TargetRailsVersion: 7.0.3
@@ -14,3 +19,6 @@ AllCops:
     - "tmp/**/*"
     - "log/**/*"
     - "Rakefile"
+
+Rails:
+  Enabled: true

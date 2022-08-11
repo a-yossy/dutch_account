@@ -242,6 +242,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/{user_payment_group_id}:
+    parameters:
+      - $ref: "#/components/parameters/UserPaymentGroupId"
+    get:
+      tags:
+        - userPaymentGroup
+      summary: ユーザー支払グループ取得
+      description: ユーザー支払グループIDでユーザー支払グループを取得する
+      operationId: getUserPaymentGroupByUserPaymentGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPaymentGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/user_payment_groups/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"

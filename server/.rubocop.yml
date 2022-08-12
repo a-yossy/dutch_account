@@ -6,8 +6,8 @@ require:
 AllCops:
   TargetRubyVersion: 3.1.2
   TargetRailsVersion: 7.0.3
+  NewCops: enable
   Exclude:
-    - "vendor/**/*"
     - "db/schema.rb"
     - "node_modules/**/*"
     - "db/migrate/**/*"
@@ -19,6 +19,7 @@ AllCops:
     - "tmp/**/*"
     - "log/**/*"
     - "Rakefile"
-
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
 Rails:
   Enabled: true

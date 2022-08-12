@@ -195,14 +195,13 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
-  mysql2 (~> 0.5)
-  puma (~> 5.0)
-  rails (~> 7.0.3)
+  mysql2
+  puma
+  rails (= 7.0.3)
   rubocop
   rubocop-performance
   rubocop-rails
   rubocop-rspec
-  tzinfo-data
 
 RUBY VERSION
    ruby 3.1.2p20

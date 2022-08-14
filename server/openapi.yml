@@ -1105,24 +1105,6 @@ components:
         type: integer
         format: int64
         example: 1
-    FromUserPaymentGroupId:
-      name: from_user_payment_group_id
-      in: path
-      description: 送金ユーザー支払グループID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    ToUserPaymentGroupId:
-      name: to_user_payment_group_id
-      in: path
-      description: 着金ユーザー支払グループID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
     PaymentGroupId:
       name: payment_group_id
       in: path

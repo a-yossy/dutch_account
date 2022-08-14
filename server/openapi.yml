@@ -242,6 +242,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/{user_payment_group_id}:
+    parameters:
+      - $ref: "#/components/parameters/UserPaymentGroupId"
+    get:
+      tags:
+        - userPaymentGroup
+      summary: ユーザー支払グループ取得
+      description: ユーザー支払グループIDでユーザー支払グループを取得する
+      operationId: getUserPaymentGroupByUserPaymentGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPaymentGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}/user_payment_groups/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
@@ -331,6 +353,30 @@ paths:
       summary: ユーザーに紐づく全購入履歴取得
       description: ユーザーIDで全ての購入履歴を取得する
       operationId: getPurchaseRecordsByUserId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PurchaseRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /user_payment_groups/{user_payment_group_id}/purchase_records:
+    parameters:
+      - $ref: "#/components/parameters/UserPaymentGroupId"
+    get:
+      tags:
+        - purchaseRecord
+      summary: ユーザー支払グループに紐づく全購入履歴取得
+      description: ユーザー支払グループIDで全ての購入履歴を取得する
+      operationId: getPurchaseRecordsByUserPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -723,14 +769,14 @@ components:
       description: ユーザー支払グループ
       type: object
       required:
-        - user_id
+        - id
         - name
         - payment_ratio
       properties:
-        user_id:
+        id:
           type: integer
           format: int64
-          description: ユーザーID
+          description: ユーザー支払グループID
           example: 1
         name:
           type: string

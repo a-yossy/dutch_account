@@ -580,12 +580,49 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
 };
 
 /**
+ * AdminApi - interface
+ * @export
+ * @interface AdminApi
+ */
+export interface AdminApiInterface {
+    /**
+     * ログインする
+     * @summary ログイン
+     * @param {LogInRequest} [logInRequest] ログイン
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApiInterface
+     */
+    logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * ログアウトする
+     * @summary ログアウト
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApiInterface
+     */
+    logOut(options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * サインアップする
+     * @summary サインアップ
+     * @param {SignUpRequest} [signUpRequest] サインアップ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApiInterface
+     */
+    signUp(signUpRequest?: SignUpRequest, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+}
+
+/**
  * AdminApi - object-oriented interface
  * @export
  * @class AdminApi
  * @extends {BaseAPI}
  */
-export class AdminApi extends BaseAPI {
+export class AdminApi extends BaseAPI implements AdminApiInterface {
     /**
      * ログインする
      * @summary ログイン
@@ -938,12 +975,70 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
 };
 
 /**
+ * PaymentGroupApi - interface
+ * @export
+ * @interface PaymentGroupApi
+ */
+export interface PaymentGroupApiInterface {
+    /**
+     * 支払グループを作成する
+     * @summary 支払グループ作成
+     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApiInterface
+     */
+    addPaymentGroup(addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
+
+    /**
+     * 支払グループIDで支払グループを削除する
+     * @summary 支払グループ削除
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApiInterface
+     */
+    deletePaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * 支払グループIDで支払グループを取得する
+     * @summary 支払グループ取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApiInterface
+     */
+    getPaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
+
+    /**
+     * 全ての支払グループを取得する
+     * @summary 全支払グループ取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApiInterface
+     */
+    getPaymentGroups(options?: AxiosRequestConfig): AxiosPromise<Array<PaymentGroup>>;
+
+    /**
+     * 支払グループIDで支払グループを更新する
+     * @summary 支払グループ更新
+     * @param {number} paymentGroupId 支払グループID
+     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApiInterface
+     */
+    updatePaymentGroupByPaymentGroupId(paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
+
+}
+
+/**
  * PaymentGroupApi - object-oriented interface
  * @export
  * @class PaymentGroupApi
  * @extends {BaseAPI}
  */
-export class PaymentGroupApi extends BaseAPI {
+export class PaymentGroupApi extends BaseAPI implements PaymentGroupApiInterface {
     /**
      * 支払グループを作成する
      * @summary 支払グループ作成
@@ -1441,12 +1536,91 @@ export const PurchaseRecordApiFactory = function (configuration?: Configuration,
 };
 
 /**
+ * PurchaseRecordApi - interface
+ * @export
+ * @interface PurchaseRecordApi
+ */
+export interface PurchaseRecordApiInterface {
+    /**
+     * 購入履歴を複数作成する
+     * @summary 購入履歴複数作成
+     * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    addPurchaseRecords(purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
+
+    /**
+     * 購入履歴IDで購入履歴を削除する
+     * @summary 購入履歴削除
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    deletePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * 購入履歴IDで購入履歴を取得する
+     * @summary 購入履歴取得
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    getPurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): AxiosPromise<PurchaseRecord>;
+
+    /**
+     * 支払グループIDで全ての購入履歴を取得する
+     * @summary 支払グループに紐づく全購入履歴取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    getPurchaseRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
+
+    /**
+     * ユーザーIDで全ての購入履歴を取得する
+     * @summary ユーザーに紐づく全購入履歴取得
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    getPurchaseRecordsByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
+
+    /**
+     * ユーザー支払グループIDで全ての購入履歴を取得する
+     * @summary ユーザー支払グループに紐づく全購入履歴取得
+     * @param {number} userPaymentGroupId ユーザー支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
+
+    /**
+     * 購入履歴IDで購入履歴を更新する
+     * @summary 購入履歴更新
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApiInterface
+     */
+    updatePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options?: AxiosRequestConfig): AxiosPromise<PurchaseRecord>;
+
+}
+
+/**
  * PurchaseRecordApi - object-oriented interface
  * @export
  * @class PurchaseRecordApi
  * @extends {BaseAPI}
  */
-export class PurchaseRecordApi extends BaseAPI {
+export class PurchaseRecordApi extends BaseAPI implements PurchaseRecordApiInterface {
     /**
      * 購入履歴を複数作成する
      * @summary 購入履歴複数作成
@@ -1969,12 +2143,91 @@ export const RemittanceRecordApiFactory = function (configuration?: Configuratio
 };
 
 /**
+ * RemittanceRecordApi - interface
+ * @export
+ * @interface RemittanceRecordApi
+ */
+export interface RemittanceRecordApiInterface {
+    /**
+     * 送金履歴を作成する
+     * @summary 送金履歴作成
+     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    addRemittanceRecord(addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
+
+    /**
+     * 送金履歴IDで送金履歴を削除する
+     * @summary 送金履歴削除
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * 着金ユーザーIDで全ての送金履歴を取得する
+     * @summary 着金ユーザーに紐づく全送金履歴取得
+     * @param {number} toUserId 着金ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    getFromRemittanceRecordsByToUserId(toUserId: number, options?: AxiosRequestConfig): AxiosPromise<Array<FromRemittanceRecord>>;
+
+    /**
+     * 送金履歴IDで送金履歴を取得する
+     * @summary 送金履歴取得
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    getRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
+
+    /**
+     * 支払グループIDで全ての送金着金履歴を取得する
+     * @summary 支払グループに紐づく全送金着金履歴取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    getRemittanceRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<RemittanceRecord>>;
+
+    /**
+     * 送金ユーザーIDで全ての着金履歴を取得する
+     * @summary 送金ユーザーに紐づく全着金履歴取得
+     * @param {number} fromUserId 送金ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    getToRemittanceRecordsByFromUserId(fromUserId: number, options?: AxiosRequestConfig): AxiosPromise<Array<ToRemittanceRecord>>;
+
+    /**
+     * 送金履歴IDで送金履歴を更新する
+     * @summary 送金履歴更新
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApiInterface
+     */
+    updateRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
+
+}
+
+/**
  * RemittanceRecordApi - object-oriented interface
  * @export
  * @class RemittanceRecordApi
  * @extends {BaseAPI}
  */
-export class RemittanceRecordApi extends BaseAPI {
+export class RemittanceRecordApi extends BaseAPI implements RemittanceRecordApiInterface {
     /**
      * 送金履歴を作成する
      * @summary 送金履歴作成
@@ -2377,12 +2630,70 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
 };
 
 /**
+ * UserApi - interface
+ * @export
+ * @interface UserApi
+ */
+export interface UserApiInterface {
+    /**
+     * ユーザーを作成する
+     * @summary ユーザー作成
+     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    addUser(addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): AxiosPromise<User>;
+
+    /**
+     * ユーザーIDでユーザーを削除する
+     * @summary ユーザー削除
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    deleteUserByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
+     * ユーザーIDでユーザーを取得する
+     * @summary ユーザー取得
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    getUserByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<User>;
+
+    /**
+     * 全てのユーザーを取得する
+     * @summary 全ユーザー取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    getUsers(options?: AxiosRequestConfig): AxiosPromise<Array<User>>;
+
+    /**
+     * ユーザーIDでユーザーを更新する
+     * @summary ユーザー更新
+     * @param {number} userId ユーザーID
+     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
+    updateUserByUserId(userId: number, addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): AxiosPromise<User>;
+
+}
+
+/**
  * UserApi - object-oriented interface
  * @export
  * @class UserApi
  * @extends {BaseAPI}
  */
-export class UserApi extends BaseAPI {
+export class UserApi extends BaseAPI implements UserApiInterface {
     /**
      * ユーザーを作成する
      * @summary ユーザー作成
@@ -2715,12 +3026,62 @@ export const UserPaymentGroupApiFactory = function (configuration?: Configuratio
 };
 
 /**
+ * UserPaymentGroupApi - interface
+ * @export
+ * @interface UserPaymentGroupApi
+ */
+export interface UserPaymentGroupApiInterface {
+    /**
+     * 支払グループIDでユーザー支払グループを複数作成する
+     * @summary ユーザー支払グループ複数作成
+     * @param {number} paymentGroupId 支払グループID
+     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApiInterface
+     */
+    addUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
+
+    /**
+     * ユーザー支払グループIDでユーザー支払グループを取得する
+     * @summary ユーザー支払グループ取得
+     * @param {number} userPaymentGroupId ユーザー支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApiInterface
+     */
+    getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<UserPaymentGroup>;
+
+    /**
+     * 支払グループIDで全てのユーザー支払グループを取得する
+     * @summary 支払グループに紐づく全ユーザー支払グループ取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApiInterface
+     */
+    getUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
+
+    /**
+     * 支払グループIDでユーザー支払グループを複数更新する
+     * @summary ユーザー支払グループ複数更新
+     * @param {number} paymentGroupId 支払グループID
+     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApiInterface
+     */
+    updateUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
+
+}
+
+/**
  * UserPaymentGroupApi - object-oriented interface
  * @export
  * @class UserPaymentGroupApi
  * @extends {BaseAPI}
  */
-export class UserPaymentGroupApi extends BaseAPI {
+export class UserPaymentGroupApi extends BaseAPI implements UserPaymentGroupApiInterface {
     /**
      * 支払グループIDでユーザー支払グループを複数作成する
      * @summary ユーザー支払グループ複数作成

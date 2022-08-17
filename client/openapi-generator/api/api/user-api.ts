@@ -339,70 +339,12 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
 };
 
 /**
- * UserApi - interface
- * @export
- * @interface UserApi
- */
-export interface UserApiInterface {
-    /**
-     * ユーザーを作成する
-     * @summary ユーザー作成
-     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    addUser(addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): AxiosPromise<User>;
-
-    /**
-     * ユーザーIDでユーザーを削除する
-     * @summary ユーザー削除
-     * @param {number} userId ユーザーID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    deleteUserByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * ユーザーIDでユーザーを取得する
-     * @summary ユーザー取得
-     * @param {number} userId ユーザーID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    getUserByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<User>;
-
-    /**
-     * 全てのユーザーを取得する
-     * @summary 全ユーザー取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    getUsers(options?: AxiosRequestConfig): AxiosPromise<Array<User>>;
-
-    /**
-     * ユーザーIDでユーザーを更新する
-     * @summary ユーザー更新
-     * @param {number} userId ユーザーID
-     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserApiInterface
-     */
-    updateUserByUserId(userId: number, addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): AxiosPromise<User>;
-
-}
-
-/**
  * UserApi - object-oriented interface
  * @export
  * @class UserApi
  * @extends {BaseAPI}
  */
-export class UserApi extends BaseAPI implements UserApiInterface {
+export class UserApi extends BaseAPI {
     /**
      * ユーザーを作成する
      * @summary ユーザー作成

@@ -213,49 +213,12 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
 };
 
 /**
- * AdminApi - interface
- * @export
- * @interface AdminApi
- */
-export interface AdminApiInterface {
-    /**
-     * ログインする
-     * @summary ログイン
-     * @param {LogInRequest} [logInRequest] ログイン
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AdminApiInterface
-     */
-    logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * ログアウトする
-     * @summary ログアウト
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AdminApiInterface
-     */
-    logOut(options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * サインアップする
-     * @summary サインアップ
-     * @param {SignUpRequest} [signUpRequest] サインアップ
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AdminApiInterface
-     */
-    signUp(signUpRequest?: SignUpRequest, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-}
-
-/**
  * AdminApi - object-oriented interface
  * @export
  * @class AdminApi
  * @extends {BaseAPI}
  */
-export class AdminApi extends BaseAPI implements AdminApiInterface {
+export class AdminApi extends BaseAPI {
     /**
      * ログインする
      * @summary ログイン

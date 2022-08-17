@@ -339,70 +339,12 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
 };
 
 /**
- * PaymentGroupApi - interface
- * @export
- * @interface PaymentGroupApi
- */
-export interface PaymentGroupApiInterface {
-    /**
-     * 支払グループを作成する
-     * @summary 支払グループ作成
-     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApiInterface
-     */
-    addPaymentGroup(addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
-
-    /**
-     * 支払グループIDで支払グループを削除する
-     * @summary 支払グループ削除
-     * @param {number} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApiInterface
-     */
-    deletePaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 支払グループIDで支払グループを取得する
-     * @summary 支払グループ取得
-     * @param {number} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApiInterface
-     */
-    getPaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
-
-    /**
-     * 全ての支払グループを取得する
-     * @summary 全支払グループ取得
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApiInterface
-     */
-    getPaymentGroups(options?: AxiosRequestConfig): AxiosPromise<Array<PaymentGroup>>;
-
-    /**
-     * 支払グループIDで支払グループを更新する
-     * @summary 支払グループ更新
-     * @param {number} paymentGroupId 支払グループID
-     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApiInterface
-     */
-    updatePaymentGroupByPaymentGroupId(paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): AxiosPromise<PaymentGroup>;
-
-}
-
-/**
  * PaymentGroupApi - object-oriented interface
  * @export
  * @class PaymentGroupApi
  * @extends {BaseAPI}
  */
-export class PaymentGroupApi extends BaseAPI implements PaymentGroupApiInterface {
+export class PaymentGroupApi extends BaseAPI {
     /**
      * 支払グループを作成する
      * @summary 支払グループ作成

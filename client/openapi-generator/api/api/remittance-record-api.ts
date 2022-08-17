@@ -463,91 +463,12 @@ export const RemittanceRecordApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * RemittanceRecordApi - interface
- * @export
- * @interface RemittanceRecordApi
- */
-export interface RemittanceRecordApiInterface {
-    /**
-     * 送金履歴を作成する
-     * @summary 送金履歴作成
-     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    addRemittanceRecord(addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
-
-    /**
-     * 送金履歴IDで送金履歴を削除する
-     * @summary 送金履歴削除
-     * @param {number} remittanceRecordId 送金履歴ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 着金ユーザーIDで全ての送金履歴を取得する
-     * @summary 着金ユーザーに紐づく全送金履歴取得
-     * @param {number} toUserId 着金ユーザーID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    getFromRemittanceRecordsByToUserId(toUserId: number, options?: AxiosRequestConfig): AxiosPromise<Array<FromRemittanceRecord>>;
-
-    /**
-     * 送金履歴IDで送金履歴を取得する
-     * @summary 送金履歴取得
-     * @param {number} remittanceRecordId 送金履歴ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    getRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
-
-    /**
-     * 支払グループIDで全ての送金着金履歴を取得する
-     * @summary 支払グループに紐づく全送金着金履歴取得
-     * @param {number} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    getRemittanceRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<RemittanceRecord>>;
-
-    /**
-     * 送金ユーザーIDで全ての着金履歴を取得する
-     * @summary 送金ユーザーに紐づく全着金履歴取得
-     * @param {number} fromUserId 送金ユーザーID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    getToRemittanceRecordsByFromUserId(fromUserId: number, options?: AxiosRequestConfig): AxiosPromise<Array<ToRemittanceRecord>>;
-
-    /**
-     * 送金履歴IDで送金履歴を更新する
-     * @summary 送金履歴更新
-     * @param {number} remittanceRecordId 送金履歴ID
-     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RemittanceRecordApiInterface
-     */
-    updateRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): AxiosPromise<RemittanceRecord>;
-
-}
-
-/**
  * RemittanceRecordApi - object-oriented interface
  * @export
  * @class RemittanceRecordApi
  * @extends {BaseAPI}
  */
-export class RemittanceRecordApi extends BaseAPI implements RemittanceRecordApiInterface {
+export class RemittanceRecordApi extends BaseAPI {
     /**
      * 送金履歴を作成する
      * @summary 送金履歴作成

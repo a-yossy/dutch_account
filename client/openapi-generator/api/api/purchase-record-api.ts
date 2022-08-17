@@ -459,91 +459,12 @@ export const PurchaseRecordApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * PurchaseRecordApi - interface
- * @export
- * @interface PurchaseRecordApi
- */
-export interface PurchaseRecordApiInterface {
-    /**
-     * 購入履歴を複数作成する
-     * @summary 購入履歴複数作成
-     * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    addPurchaseRecords(purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
-
-    /**
-     * 購入履歴IDで購入履歴を削除する
-     * @summary 購入履歴削除
-     * @param {number} purchaseRecordId 購入履歴ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    deletePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 購入履歴IDで購入履歴を取得する
-     * @summary 購入履歴取得
-     * @param {number} purchaseRecordId 購入履歴ID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    getPurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): AxiosPromise<PurchaseRecord>;
-
-    /**
-     * 支払グループIDで全ての購入履歴を取得する
-     * @summary 支払グループに紐づく全購入履歴取得
-     * @param {number} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    getPurchaseRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
-
-    /**
-     * ユーザーIDで全ての購入履歴を取得する
-     * @summary ユーザーに紐づく全購入履歴取得
-     * @param {number} userId ユーザーID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    getPurchaseRecordsByUserId(userId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
-
-    /**
-     * ユーザー支払グループIDで全ての購入履歴を取得する
-     * @summary ユーザー支払グループに紐づく全購入履歴取得
-     * @param {number} userPaymentGroupId ユーザー支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<PurchaseRecord>>;
-
-    /**
-     * 購入履歴IDで購入履歴を更新する
-     * @summary 購入履歴更新
-     * @param {number} purchaseRecordId 購入履歴ID
-     * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PurchaseRecordApiInterface
-     */
-    updatePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options?: AxiosRequestConfig): AxiosPromise<PurchaseRecord>;
-
-}
-
-/**
  * PurchaseRecordApi - object-oriented interface
  * @export
  * @class PurchaseRecordApi
  * @extends {BaseAPI}
  */
-export class PurchaseRecordApi extends BaseAPI implements PurchaseRecordApiInterface {
+export class PurchaseRecordApi extends BaseAPI {
     /**
      * 購入履歴を複数作成する
      * @summary 購入履歴複数作成

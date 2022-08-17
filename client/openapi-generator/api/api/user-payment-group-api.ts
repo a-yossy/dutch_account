@@ -294,62 +294,12 @@ export const UserPaymentGroupApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * UserPaymentGroupApi - interface
- * @export
- * @interface UserPaymentGroupApi
- */
-export interface UserPaymentGroupApiInterface {
-    /**
-     * 支払グループIDでユーザー支払グループを複数作成する
-     * @summary ユーザー支払グループ複数作成
-     * @param {number} paymentGroupId 支払グループID
-     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserPaymentGroupApiInterface
-     */
-    addUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
-
-    /**
-     * ユーザー支払グループIDでユーザー支払グループを取得する
-     * @summary ユーザー支払グループ取得
-     * @param {number} userPaymentGroupId ユーザー支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserPaymentGroupApiInterface
-     */
-    getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<UserPaymentGroup>;
-
-    /**
-     * 支払グループIDで全てのユーザー支払グループを取得する
-     * @summary 支払グループに紐づく全ユーザー支払グループ取得
-     * @param {number} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserPaymentGroupApiInterface
-     */
-    getUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
-
-    /**
-     * 支払グループIDでユーザー支払グループを複数更新する
-     * @summary ユーザー支払グループ複数更新
-     * @param {number} paymentGroupId 支払グループID
-     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof UserPaymentGroupApiInterface
-     */
-    updateUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): AxiosPromise<Array<UserPaymentGroup>>;
-
-}
-
-/**
  * UserPaymentGroupApi - object-oriented interface
  * @export
  * @class UserPaymentGroupApi
  * @extends {BaseAPI}
  */
-export class UserPaymentGroupApi extends BaseAPI implements UserPaymentGroupApiInterface {
+export class UserPaymentGroupApi extends BaseAPI {
     /**
      * 支払グループIDでユーザー支払グループを複数作成する
      * @summary ユーザー支払グループ複数作成

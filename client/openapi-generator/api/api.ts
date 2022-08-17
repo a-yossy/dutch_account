@@ -13,11 +13,2763 @@
  */
 
 
+import { Configuration } from './configuration';
+import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+// Some imports not used depending on template conditions
+// @ts-ignore
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+// @ts-ignore
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
-export * from './api/admin-api';
-export * from './api/payment-group-api';
-export * from './api/purchase-record-api';
-export * from './api/remittance-record-api';
-export * from './api/user-api';
-export * from './api/user-payment-group-api';
+/**
+ * 
+ * @export
+ * @interface AddPaymentGroupRequest
+ */
+export interface AddPaymentGroupRequest {
+    /**
+     * 支払グループ名
+     * @type {string}
+     * @memberof AddPaymentGroupRequest
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface AddRemittanceRecordRequest
+ */
+export interface AddRemittanceRecordRequest {
+    /**
+     * 送金ユーザーID
+     * @type {number}
+     * @memberof AddRemittanceRecordRequest
+     */
+    'from_user_payment_group_id': number;
+    /**
+     * 着金ユーザーID
+     * @type {number}
+     * @memberof AddRemittanceRecordRequest
+     */
+    'to_user_payment_group_id': number;
+    /**
+     * 送金金額
+     * @type {number}
+     * @memberof AddRemittanceRecordRequest
+     */
+    'amount_of_money': number;
+    /**
+     * 送金日
+     * @type {string}
+     * @memberof AddRemittanceRecordRequest
+     */
+    'transferred_on': string;
+}
+/**
+ * 
+ * @export
+ * @interface AddUserPaymentGroupsByPaymentGroupIdRequestInner
+ */
+export interface AddUserPaymentGroupsByPaymentGroupIdRequestInner {
+    /**
+     * ユーザーID
+     * @type {number}
+     * @memberof AddUserPaymentGroupsByPaymentGroupIdRequestInner
+     */
+    'user_id': number;
+    /**
+     * 支払割合
+     * @type {number}
+     * @memberof AddUserPaymentGroupsByPaymentGroupIdRequestInner
+     */
+    'payment_ratio': number;
+}
+/**
+ * 
+ * @export
+ * @interface AddUserRequest
+ */
+export interface AddUserRequest {
+    /**
+     * ユーザー名
+     * @type {string}
+     * @memberof AddUserRequest
+     */
+    'name': string;
+}
+/**
+ * 送金履歴
+ * @export
+ * @interface FromRemittanceRecord
+ */
+export interface FromRemittanceRecord {
+    /**
+     * 送金履歴ID
+     * @type {number}
+     * @memberof FromRemittanceRecord
+     */
+    'id': number;
+    /**
+     * 送金ユーザー名
+     * @type {string}
+     * @memberof FromRemittanceRecord
+     */
+    'from_user_name': string;
+    /**
+     * 送金金額
+     * @type {number}
+     * @memberof FromRemittanceRecord
+     */
+    'amount_of_money': number;
+    /**
+     * 送金日
+     * @type {string}
+     * @memberof FromRemittanceRecord
+     */
+    'transferred_on': string;
+}
+/**
+ * 
+ * @export
+ * @interface LogInRequest
+ */
+export interface LogInRequest {
+    /**
+     * メールアドレス
+     * @type {string}
+     * @memberof LogInRequest
+     */
+    'email': string;
+    /**
+     * パスワード
+     * @type {string}
+     * @memberof LogInRequest
+     */
+    'password': string;
+}
+/**
+ * エラー
+ * @export
+ * @interface ModelError
+ */
+export interface ModelError {
+    /**
+     * HTTPステータスコード
+     * @type {string}
+     * @memberof ModelError
+     */
+    'code': string;
+    /**
+     * エラーメッセージ
+     * @type {string}
+     * @memberof ModelError
+     */
+    'message': string;
+}
+/**
+ * 支払グループ
+ * @export
+ * @interface PaymentGroup
+ */
+export interface PaymentGroup {
+    /**
+     * 支払グループID
+     * @type {number}
+     * @memberof PaymentGroup
+     */
+    'id': number;
+    /**
+     * 支払グループ名
+     * @type {string}
+     * @memberof PaymentGroup
+     */
+    'name': string;
+}
+/**
+ * 購入履歴
+ * @export
+ * @interface PurchaseRecord
+ */
+export interface PurchaseRecord {
+    /**
+     * 購入履歴ID
+     * @type {number}
+     * @memberof PurchaseRecord
+     */
+    'id': number;
+    /**
+     * ユーザー名
+     * @type {string}
+     * @memberof PurchaseRecord
+     */
+    'name': string;
+    /**
+     * 購入金額
+     * @type {number}
+     * @memberof PurchaseRecord
+     */
+    'amount_of_money': number;
+    /**
+     * 購入日
+     * @type {string}
+     * @memberof PurchaseRecord
+     */
+    'purchased_on': string;
+    /**
+     * 購入説明
+     * @type {string}
+     * @memberof PurchaseRecord
+     */
+    'description': string;
+}
+/**
+ * 購入履歴のリクエスト
+ * @export
+ * @interface PurchaseRecordRequestBody
+ */
+export interface PurchaseRecordRequestBody {
+    /**
+     * ユーザー支払グループID
+     * @type {number}
+     * @memberof PurchaseRecordRequestBody
+     */
+    'user_payment_group_id': number;
+    /**
+     * 購入金額
+     * @type {number}
+     * @memberof PurchaseRecordRequestBody
+     */
+    'amount_of_money': number;
+    /**
+     * 購入日
+     * @type {string}
+     * @memberof PurchaseRecordRequestBody
+     */
+    'purchased_on': string;
+    /**
+     * 購入説明
+     * @type {string}
+     * @memberof PurchaseRecordRequestBody
+     */
+    'description': string;
+}
+/**
+ * 送金着金履歴
+ * @export
+ * @interface RemittanceRecord
+ */
+export interface RemittanceRecord {
+    /**
+     * 送金履歴ID
+     * @type {number}
+     * @memberof RemittanceRecord
+     */
+    'id': number;
+    /**
+     * 送金ユーザー名
+     * @type {string}
+     * @memberof RemittanceRecord
+     */
+    'from_user_name': string;
+    /**
+     * 着金ユーザー名
+     * @type {string}
+     * @memberof RemittanceRecord
+     */
+    'to_user_name': string;
+    /**
+     * 送金金額
+     * @type {number}
+     * @memberof RemittanceRecord
+     */
+    'amount_of_money': number;
+    /**
+     * 送金日
+     * @type {string}
+     * @memberof RemittanceRecord
+     */
+    'transferred_on': string;
+}
+/**
+ * 
+ * @export
+ * @interface SignUpRequest
+ */
+export interface SignUpRequest {
+    /**
+     * 管理者名
+     * @type {string}
+     * @memberof SignUpRequest
+     */
+    'name': string;
+    /**
+     * メールアドレス
+     * @type {string}
+     * @memberof SignUpRequest
+     */
+    'email': string;
+    /**
+     * パスワード
+     * @type {string}
+     * @memberof SignUpRequest
+     */
+    'password': string;
+}
+/**
+ * 着金履歴
+ * @export
+ * @interface ToRemittanceRecord
+ */
+export interface ToRemittanceRecord {
+    /**
+     * 送金履歴ID
+     * @type {number}
+     * @memberof ToRemittanceRecord
+     */
+    'id': number;
+    /**
+     * 着金ユーザー名
+     * @type {string}
+     * @memberof ToRemittanceRecord
+     */
+    'to_user_name': string;
+    /**
+     * 送金金額
+     * @type {number}
+     * @memberof ToRemittanceRecord
+     */
+    'amount_of_money': number;
+    /**
+     * 送金日
+     * @type {string}
+     * @memberof ToRemittanceRecord
+     */
+    'transferred_on': string;
+}
+/**
+ * ユーザー
+ * @export
+ * @interface User
+ */
+export interface User {
+    /**
+     * ユーザーID
+     * @type {number}
+     * @memberof User
+     */
+    'id': number;
+    /**
+     * ユーザー名
+     * @type {string}
+     * @memberof User
+     */
+    'name': string;
+}
+/**
+ * ユーザー支払グループ
+ * @export
+ * @interface UserPaymentGroup
+ */
+export interface UserPaymentGroup {
+    /**
+     * ユーザー支払グループID
+     * @type {number}
+     * @memberof UserPaymentGroup
+     */
+    'id': number;
+    /**
+     * ユーザー名
+     * @type {string}
+     * @memberof UserPaymentGroup
+     */
+    'name': string;
+    /**
+     * 支払割合
+     * @type {number}
+     * @memberof UserPaymentGroup
+     */
+    'payment_ratio': number;
+}
+
+/**
+ * AdminApi - axios parameter creator
+ * @export
+ */
+export const AdminApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logIn: async (logInRequest?: LogInRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log_in`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(logInRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ログアウトする
+         * @summary ログアウト
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logOut: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log_out`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * サインアップする
+         * @summary サインアップ
+         * @param {SignUpRequest} [signUpRequest] サインアップ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUp: async (signUpRequest?: SignUpRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/sign_up`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signUpRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AdminApi - functional programming interface
+ * @export
+ */
+export const AdminApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AdminApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logIn(logInRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ログアウトする
+         * @summary ログアウト
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logOut(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logOut(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * サインアップする
+         * @summary サインアップ
+         * @param {SignUpRequest} [signUpRequest] サインアップ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async signUp(signUpRequest?: SignUpRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.signUp(signUpRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AdminApi - factory interface
+ * @export
+ */
+export const AdminApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AdminApiFp(configuration)
+    return {
+        /**
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logIn(logInRequest?: LogInRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.logIn(logInRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ログアウトする
+         * @summary ログアウト
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logOut(options?: any): AxiosPromise<void> {
+            return localVarFp.logOut(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * サインアップする
+         * @summary サインアップ
+         * @param {SignUpRequest} [signUpRequest] サインアップ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUp(signUpRequest?: SignUpRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.signUp(signUpRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AdminApi - object-oriented interface
+ * @export
+ * @class AdminApi
+ * @extends {BaseAPI}
+ */
+export class AdminApi extends BaseAPI {
+    /**
+     * ログインする
+     * @summary ログイン
+     * @param {LogInRequest} [logInRequest] ログイン
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).logIn(logInRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ログアウトする
+     * @summary ログアウト
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public logOut(options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).logOut(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * サインアップする
+     * @summary サインアップ
+     * @param {SignUpRequest} [signUpRequest] サインアップ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public signUp(signUpRequest?: SignUpRequest, options?: AxiosRequestConfig) {
+        return AdminApiFp(this.configuration).signUp(signUpRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PaymentGroupApi - axios parameter creator
+ * @export
+ */
+export const PaymentGroupApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 支払グループを作成する
+         * @summary 支払グループ作成
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPaymentGroup: async (addPaymentGroupRequest?: AddPaymentGroupRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment_groups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addPaymentGroupRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで支払グループを削除する
+         * @summary 支払グループ削除
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePaymentGroupByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('deletePaymentGroupByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで支払グループを取得する
+         * @summary 支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentGroupByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('getPaymentGroupByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 全ての支払グループを取得する
+         * @summary 全支払グループ取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentGroups: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment_groups`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで支払グループを更新する
+         * @summary 支払グループ更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePaymentGroupByPaymentGroupId: async (paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('updatePaymentGroupByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addPaymentGroupRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PaymentGroupApi - functional programming interface
+ * @export
+ */
+export const PaymentGroupApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PaymentGroupApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 支払グループを作成する
+         * @summary 支払グループ作成
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addPaymentGroup(addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPaymentGroup(addPaymentGroupRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで支払グループを削除する
+         * @summary 支払グループ削除
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deletePaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePaymentGroupByPaymentGroupId(paymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで支払グループを取得する
+         * @summary 支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentGroupByPaymentGroupId(paymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 全ての支払グループを取得する
+         * @summary 全支払グループ取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPaymentGroups(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentGroups(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで支払グループを更新する
+         * @summary 支払グループ更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePaymentGroupByPaymentGroupId(paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePaymentGroupByPaymentGroupId(paymentGroupId, addPaymentGroupRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PaymentGroupApi - factory interface
+ * @export
+ */
+export const PaymentGroupApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PaymentGroupApiFp(configuration)
+    return {
+        /**
+         * 支払グループを作成する
+         * @summary 支払グループ作成
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPaymentGroup(addPaymentGroupRequest?: AddPaymentGroupRequest, options?: any): AxiosPromise<PaymentGroup> {
+            return localVarFp.addPaymentGroup(addPaymentGroupRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで支払グループを削除する
+         * @summary 支払グループ削除
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePaymentGroupByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.deletePaymentGroupByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで支払グループを取得する
+         * @summary 支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentGroupByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<PaymentGroup> {
+            return localVarFp.getPaymentGroupByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 全ての支払グループを取得する
+         * @summary 全支払グループ取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPaymentGroups(options?: any): AxiosPromise<Array<PaymentGroup>> {
+            return localVarFp.getPaymentGroups(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで支払グループを更新する
+         * @summary 支払グループ更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePaymentGroupByPaymentGroupId(paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options?: any): AxiosPromise<PaymentGroup> {
+            return localVarFp.updatePaymentGroupByPaymentGroupId(paymentGroupId, addPaymentGroupRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PaymentGroupApi - object-oriented interface
+ * @export
+ * @class PaymentGroupApi
+ * @extends {BaseAPI}
+ */
+export class PaymentGroupApi extends BaseAPI {
+    /**
+     * 支払グループを作成する
+     * @summary 支払グループ作成
+     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApi
+     */
+    public addPaymentGroup(addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).addPaymentGroup(addPaymentGroupRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで支払グループを削除する
+     * @summary 支払グループ削除
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApi
+     */
+    public deletePaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).deletePaymentGroupByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで支払グループを取得する
+     * @summary 支払グループ取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApi
+     */
+    public getPaymentGroupByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).getPaymentGroupByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 全ての支払グループを取得する
+     * @summary 全支払グループ取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApi
+     */
+    public getPaymentGroups(options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).getPaymentGroups(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで支払グループを更新する
+     * @summary 支払グループ更新
+     * @param {number} paymentGroupId 支払グループID
+     * @param {AddPaymentGroupRequest} [addPaymentGroupRequest] リクエスト支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentGroupApi
+     */
+    public updatePaymentGroupByPaymentGroupId(paymentGroupId: number, addPaymentGroupRequest?: AddPaymentGroupRequest, options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).updatePaymentGroupByPaymentGroupId(paymentGroupId, addPaymentGroupRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PurchaseRecordApi - axios parameter creator
+ * @export
+ */
+export const PurchaseRecordApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 購入履歴を複数作成する
+         * @summary 購入履歴複数作成
+         * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPurchaseRecords: async (purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user_payment_groups/purchase_records/bulk_insert`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(purchaseRecordRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 購入履歴IDで購入履歴を削除する
+         * @summary 購入履歴削除
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePurchaseRecordByPurchaseRecordId: async (purchaseRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'purchaseRecordId' is not null or undefined
+            assertParamExists('deletePurchaseRecordByPurchaseRecordId', 'purchaseRecordId', purchaseRecordId)
+            const localVarPath = `/purchase_records/{purchase_record_id}`
+                .replace(`{${"purchase_record_id"}}`, encodeURIComponent(String(purchaseRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 購入履歴IDで購入履歴を取得する
+         * @summary 購入履歴取得
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordByPurchaseRecordId: async (purchaseRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'purchaseRecordId' is not null or undefined
+            assertParamExists('getPurchaseRecordByPurchaseRecordId', 'purchaseRecordId', purchaseRecordId)
+            const localVarPath = `/purchase_records/{purchase_record_id}`
+                .replace(`{${"purchase_record_id"}}`, encodeURIComponent(String(purchaseRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで全ての購入履歴を取得する
+         * @summary 支払グループに紐づく全購入履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('getPurchaseRecordsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}/purchase_records`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザーIDで全ての購入履歴を取得する
+         * @summary ユーザーに紐づく全購入履歴取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByUserId: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getPurchaseRecordsByUserId', 'userId', userId)
+            const localVarPath = `/users/{user_id}/purchase_records`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザー支払グループIDで全ての購入履歴を取得する
+         * @summary ユーザー支払グループに紐づく全購入履歴取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByUserPaymentGroupId: async (userPaymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userPaymentGroupId' is not null or undefined
+            assertParamExists('getPurchaseRecordsByUserPaymentGroupId', 'userPaymentGroupId', userPaymentGroupId)
+            const localVarPath = `/user_payment_groups/{user_payment_group_id}/purchase_records`
+                .replace(`{${"user_payment_group_id"}}`, encodeURIComponent(String(userPaymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 購入履歴IDで購入履歴を更新する
+         * @summary 購入履歴更新
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePurchaseRecordByPurchaseRecordId: async (purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'purchaseRecordId' is not null or undefined
+            assertParamExists('updatePurchaseRecordByPurchaseRecordId', 'purchaseRecordId', purchaseRecordId)
+            const localVarPath = `/purchase_records/{purchase_record_id}`
+                .replace(`{${"purchase_record_id"}}`, encodeURIComponent(String(purchaseRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(purchaseRecordRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PurchaseRecordApi - functional programming interface
+ * @export
+ */
+export const PurchaseRecordApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PurchaseRecordApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 購入履歴を複数作成する
+         * @summary 購入履歴複数作成
+         * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addPurchaseRecords(purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PurchaseRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPurchaseRecords(purchaseRecordRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 購入履歴IDで購入履歴を削除する
+         * @summary 購入履歴削除
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deletePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePurchaseRecordByPurchaseRecordId(purchaseRecordId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 購入履歴IDで購入履歴を取得する
+         * @summary 購入履歴取得
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PurchaseRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPurchaseRecordByPurchaseRecordId(purchaseRecordId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで全ての購入履歴を取得する
+         * @summary 支払グループに紐づく全購入履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPurchaseRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PurchaseRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPurchaseRecordsByPaymentGroupId(paymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザーIDで全ての購入履歴を取得する
+         * @summary ユーザーに紐づく全購入履歴取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPurchaseRecordsByUserId(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PurchaseRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPurchaseRecordsByUserId(userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザー支払グループIDで全ての購入履歴を取得する
+         * @summary ユーザー支払グループに紐づく全購入履歴取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PurchaseRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 購入履歴IDで購入履歴を更新する
+         * @summary 購入履歴更新
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updatePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PurchaseRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePurchaseRecordByPurchaseRecordId(purchaseRecordId, purchaseRecordRequestBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PurchaseRecordApi - factory interface
+ * @export
+ */
+export const PurchaseRecordApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PurchaseRecordApiFp(configuration)
+    return {
+        /**
+         * 購入履歴を複数作成する
+         * @summary 購入履歴複数作成
+         * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPurchaseRecords(purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options?: any): AxiosPromise<Array<PurchaseRecord>> {
+            return localVarFp.addPurchaseRecords(purchaseRecordRequestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 購入履歴IDで購入履歴を削除する
+         * @summary 購入履歴削除
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deletePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.deletePurchaseRecordByPurchaseRecordId(purchaseRecordId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 購入履歴IDで購入履歴を取得する
+         * @summary 購入履歴取得
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: any): AxiosPromise<PurchaseRecord> {
+            return localVarFp.getPurchaseRecordByPurchaseRecordId(purchaseRecordId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで全ての購入履歴を取得する
+         * @summary 支払グループに紐づく全購入履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<Array<PurchaseRecord>> {
+            return localVarFp.getPurchaseRecordsByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザーIDで全ての購入履歴を取得する
+         * @summary ユーザーに紐づく全購入履歴取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByUserId(userId: number, options?: any): AxiosPromise<Array<PurchaseRecord>> {
+            return localVarFp.getPurchaseRecordsByUserId(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザー支払グループIDで全ての購入履歴を取得する
+         * @summary ユーザー支払グループに紐づく全購入履歴取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId: number, options?: any): AxiosPromise<Array<PurchaseRecord>> {
+            return localVarFp.getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 購入履歴IDで購入履歴を更新する
+         * @summary 購入履歴更新
+         * @param {number} purchaseRecordId 購入履歴ID
+         * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updatePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options?: any): AxiosPromise<PurchaseRecord> {
+            return localVarFp.updatePurchaseRecordByPurchaseRecordId(purchaseRecordId, purchaseRecordRequestBody, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PurchaseRecordApi - object-oriented interface
+ * @export
+ * @class PurchaseRecordApi
+ * @extends {BaseAPI}
+ */
+export class PurchaseRecordApi extends BaseAPI {
+    /**
+     * 購入履歴を複数作成する
+     * @summary 購入履歴複数作成
+     * @param {Array<PurchaseRecordRequestBody>} [purchaseRecordRequestBody] リクエスト複数購入履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public addPurchaseRecords(purchaseRecordRequestBody?: Array<PurchaseRecordRequestBody>, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).addPurchaseRecords(purchaseRecordRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 購入履歴IDで購入履歴を削除する
+     * @summary 購入履歴削除
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public deletePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).deletePurchaseRecordByPurchaseRecordId(purchaseRecordId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 購入履歴IDで購入履歴を取得する
+     * @summary 購入履歴取得
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public getPurchaseRecordByPurchaseRecordId(purchaseRecordId: number, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).getPurchaseRecordByPurchaseRecordId(purchaseRecordId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで全ての購入履歴を取得する
+     * @summary 支払グループに紐づく全購入履歴取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public getPurchaseRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).getPurchaseRecordsByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザーIDで全ての購入履歴を取得する
+     * @summary ユーザーに紐づく全購入履歴取得
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public getPurchaseRecordsByUserId(userId: number, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).getPurchaseRecordsByUserId(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザー支払グループIDで全ての購入履歴を取得する
+     * @summary ユーザー支払グループに紐づく全購入履歴取得
+     * @param {number} userPaymentGroupId ユーザー支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).getPurchaseRecordsByUserPaymentGroupId(userPaymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 購入履歴IDで購入履歴を更新する
+     * @summary 購入履歴更新
+     * @param {number} purchaseRecordId 購入履歴ID
+     * @param {PurchaseRecordRequestBody} [purchaseRecordRequestBody] リクエスト購入履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseRecordApi
+     */
+    public updatePurchaseRecordByPurchaseRecordId(purchaseRecordId: number, purchaseRecordRequestBody?: PurchaseRecordRequestBody, options?: AxiosRequestConfig) {
+        return PurchaseRecordApiFp(this.configuration).updatePurchaseRecordByPurchaseRecordId(purchaseRecordId, purchaseRecordRequestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * RemittanceRecordApi - axios parameter creator
+ * @export
+ */
+export const RemittanceRecordApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 送金履歴を作成する
+         * @summary 送金履歴作成
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addRemittanceRecord: async (addRemittanceRecordRequest?: AddRemittanceRecordRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user_payment_groups/remittance_records`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addRemittanceRecordRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 送金履歴IDで送金履歴を削除する
+         * @summary 送金履歴削除
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRemittanceRecordByRemittanceRecordId: async (remittanceRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remittanceRecordId' is not null or undefined
+            assertParamExists('deleteRemittanceRecordByRemittanceRecordId', 'remittanceRecordId', remittanceRecordId)
+            const localVarPath = `/remittance_records/{remittance_record_id}`
+                .replace(`{${"remittance_record_id"}}`, encodeURIComponent(String(remittanceRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 着金ユーザーIDで全ての送金履歴を取得する
+         * @summary 着金ユーザーに紐づく全送金履歴取得
+         * @param {number} toUserId 着金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFromRemittanceRecordsByToUserId: async (toUserId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'toUserId' is not null or undefined
+            assertParamExists('getFromRemittanceRecordsByToUserId', 'toUserId', toUserId)
+            const localVarPath = `/users/{to_user_id}/remittance_records`
+                .replace(`{${"to_user_id"}}`, encodeURIComponent(String(toUserId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 送金履歴IDで送金履歴を取得する
+         * @summary 送金履歴取得
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRemittanceRecordByRemittanceRecordId: async (remittanceRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remittanceRecordId' is not null or undefined
+            assertParamExists('getRemittanceRecordByRemittanceRecordId', 'remittanceRecordId', remittanceRecordId)
+            const localVarPath = `/remittance_records/{remittance_record_id}`
+                .replace(`{${"remittance_record_id"}}`, encodeURIComponent(String(remittanceRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで全ての送金着金履歴を取得する
+         * @summary 支払グループに紐づく全送金着金履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRemittanceRecordsByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('getRemittanceRecordsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}/remittance_records`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 送金ユーザーIDで全ての着金履歴を取得する
+         * @summary 送金ユーザーに紐づく全着金履歴取得
+         * @param {number} fromUserId 送金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getToRemittanceRecordsByFromUserId: async (fromUserId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fromUserId' is not null or undefined
+            assertParamExists('getToRemittanceRecordsByFromUserId', 'fromUserId', fromUserId)
+            const localVarPath = `/users/{from_user_id}/remittance_records`
+                .replace(`{${"from_user_id"}}`, encodeURIComponent(String(fromUserId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 送金履歴IDで送金履歴を更新する
+         * @summary 送金履歴更新
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRemittanceRecordByRemittanceRecordId: async (remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remittanceRecordId' is not null or undefined
+            assertParamExists('updateRemittanceRecordByRemittanceRecordId', 'remittanceRecordId', remittanceRecordId)
+            const localVarPath = `/remittance_records/{remittance_record_id}`
+                .replace(`{${"remittance_record_id"}}`, encodeURIComponent(String(remittanceRecordId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addRemittanceRecordRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RemittanceRecordApi - functional programming interface
+ * @export
+ */
+export const RemittanceRecordApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RemittanceRecordApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 送金履歴を作成する
+         * @summary 送金履歴作成
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addRemittanceRecord(addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RemittanceRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addRemittanceRecord(addRemittanceRecordRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 送金履歴IDで送金履歴を削除する
+         * @summary 送金履歴削除
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 着金ユーザーIDで全ての送金履歴を取得する
+         * @summary 着金ユーザーに紐づく全送金履歴取得
+         * @param {number} toUserId 着金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFromRemittanceRecordsByToUserId(toUserId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FromRemittanceRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFromRemittanceRecordsByToUserId(toUserId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 送金履歴IDで送金履歴を取得する
+         * @summary 送金履歴取得
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RemittanceRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRemittanceRecordByRemittanceRecordId(remittanceRecordId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで全ての送金着金履歴を取得する
+         * @summary 支払グループに紐づく全送金着金履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRemittanceRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RemittanceRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRemittanceRecordsByPaymentGroupId(paymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 送金ユーザーIDで全ての着金履歴を取得する
+         * @summary 送金ユーザーに紐づく全着金履歴取得
+         * @param {number} fromUserId 送金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getToRemittanceRecordsByFromUserId(fromUserId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ToRemittanceRecord>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getToRemittanceRecordsByFromUserId(fromUserId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 送金履歴IDで送金履歴を更新する
+         * @summary 送金履歴更新
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RemittanceRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRemittanceRecordByRemittanceRecordId(remittanceRecordId, addRemittanceRecordRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * RemittanceRecordApi - factory interface
+ * @export
+ */
+export const RemittanceRecordApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RemittanceRecordApiFp(configuration)
+    return {
+        /**
+         * 送金履歴を作成する
+         * @summary 送金履歴作成
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addRemittanceRecord(addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: any): AxiosPromise<RemittanceRecord> {
+            return localVarFp.addRemittanceRecord(addRemittanceRecordRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 送金履歴IDで送金履歴を削除する
+         * @summary 送金履歴削除
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 着金ユーザーIDで全ての送金履歴を取得する
+         * @summary 着金ユーザーに紐づく全送金履歴取得
+         * @param {number} toUserId 着金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFromRemittanceRecordsByToUserId(toUserId: number, options?: any): AxiosPromise<Array<FromRemittanceRecord>> {
+            return localVarFp.getFromRemittanceRecordsByToUserId(toUserId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 送金履歴IDで送金履歴を取得する
+         * @summary 送金履歴取得
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: any): AxiosPromise<RemittanceRecord> {
+            return localVarFp.getRemittanceRecordByRemittanceRecordId(remittanceRecordId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで全ての送金着金履歴を取得する
+         * @summary 支払グループに紐づく全送金着金履歴取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRemittanceRecordsByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<Array<RemittanceRecord>> {
+            return localVarFp.getRemittanceRecordsByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 送金ユーザーIDで全ての着金履歴を取得する
+         * @summary 送金ユーザーに紐づく全着金履歴取得
+         * @param {number} fromUserId 送金ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getToRemittanceRecordsByFromUserId(fromUserId: number, options?: any): AxiosPromise<Array<ToRemittanceRecord>> {
+            return localVarFp.getToRemittanceRecordsByFromUserId(fromUserId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 送金履歴IDで送金履歴を更新する
+         * @summary 送金履歴更新
+         * @param {number} remittanceRecordId 送金履歴ID
+         * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: any): AxiosPromise<RemittanceRecord> {
+            return localVarFp.updateRemittanceRecordByRemittanceRecordId(remittanceRecordId, addRemittanceRecordRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RemittanceRecordApi - object-oriented interface
+ * @export
+ * @class RemittanceRecordApi
+ * @extends {BaseAPI}
+ */
+export class RemittanceRecordApi extends BaseAPI {
+    /**
+     * 送金履歴を作成する
+     * @summary 送金履歴作成
+     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public addRemittanceRecord(addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).addRemittanceRecord(addRemittanceRecordRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 送金履歴IDで送金履歴を削除する
+     * @summary 送金履歴削除
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).deleteRemittanceRecordByRemittanceRecordId(remittanceRecordId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 着金ユーザーIDで全ての送金履歴を取得する
+     * @summary 着金ユーザーに紐づく全送金履歴取得
+     * @param {number} toUserId 着金ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public getFromRemittanceRecordsByToUserId(toUserId: number, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).getFromRemittanceRecordsByToUserId(toUserId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 送金履歴IDで送金履歴を取得する
+     * @summary 送金履歴取得
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public getRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).getRemittanceRecordByRemittanceRecordId(remittanceRecordId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで全ての送金着金履歴を取得する
+     * @summary 支払グループに紐づく全送金着金履歴取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public getRemittanceRecordsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).getRemittanceRecordsByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 送金ユーザーIDで全ての着金履歴を取得する
+     * @summary 送金ユーザーに紐づく全着金履歴取得
+     * @param {number} fromUserId 送金ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public getToRemittanceRecordsByFromUserId(fromUserId: number, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).getToRemittanceRecordsByFromUserId(fromUserId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 送金履歴IDで送金履歴を更新する
+     * @summary 送金履歴更新
+     * @param {number} remittanceRecordId 送金履歴ID
+     * @param {AddRemittanceRecordRequest} [addRemittanceRecordRequest] リクエスト送金履歴
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RemittanceRecordApi
+     */
+    public updateRemittanceRecordByRemittanceRecordId(remittanceRecordId: number, addRemittanceRecordRequest?: AddRemittanceRecordRequest, options?: AxiosRequestConfig) {
+        return RemittanceRecordApiFp(this.configuration).updateRemittanceRecordByRemittanceRecordId(remittanceRecordId, addRemittanceRecordRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * UserApi - axios parameter creator
+ * @export
+ */
+export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * ユーザーを作成する
+         * @summary ユーザー作成
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addUser: async (addUserRequest?: AddUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addUserRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザーIDでユーザーを削除する
+         * @summary ユーザー削除
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUserByUserId: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('deleteUserByUserId', 'userId', userId)
+            const localVarPath = `/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザーIDでユーザーを取得する
+         * @summary ユーザー取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByUserId: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserByUserId', 'userId', userId)
+            const localVarPath = `/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 全てのユーザーを取得する
+         * @summary 全ユーザー取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザーIDでユーザーを更新する
+         * @summary ユーザー更新
+         * @param {number} userId ユーザーID
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserByUserId: async (userId: number, addUserRequest?: AddUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('updateUserByUserId', 'userId', userId)
+            const localVarPath = `/users/{user_id}`
+                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addUserRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserApi - functional programming interface
+ * @export
+ */
+export const UserApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * ユーザーを作成する
+         * @summary ユーザー作成
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addUser(addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addUser(addUserRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザーIDでユーザーを削除する
+         * @summary ユーザー削除
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteUserByUserId(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUserByUserId(userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザーIDでユーザーを取得する
+         * @summary ユーザー取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserByUserId(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByUserId(userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 全てのユーザーを取得する
+         * @summary 全ユーザー取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsers(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザーIDでユーザーを更新する
+         * @summary ユーザー更新
+         * @param {number} userId ユーザーID
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUserByUserId(userId: number, addUserRequest?: AddUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserByUserId(userId, addUserRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * UserApi - factory interface
+ * @export
+ */
+export const UserApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserApiFp(configuration)
+    return {
+        /**
+         * ユーザーを作成する
+         * @summary ユーザー作成
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addUser(addUserRequest?: AddUserRequest, options?: any): AxiosPromise<User> {
+            return localVarFp.addUser(addUserRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザーIDでユーザーを削除する
+         * @summary ユーザー削除
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteUserByUserId(userId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteUserByUserId(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザーIDでユーザーを取得する
+         * @summary ユーザー取得
+         * @param {number} userId ユーザーID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserByUserId(userId: number, options?: any): AxiosPromise<User> {
+            return localVarFp.getUserByUserId(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 全てのユーザーを取得する
+         * @summary 全ユーザー取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsers(options?: any): AxiosPromise<Array<User>> {
+            return localVarFp.getUsers(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザーIDでユーザーを更新する
+         * @summary ユーザー更新
+         * @param {number} userId ユーザーID
+         * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserByUserId(userId: number, addUserRequest?: AddUserRequest, options?: any): AxiosPromise<User> {
+            return localVarFp.updateUserByUserId(userId, addUserRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UserApi - object-oriented interface
+ * @export
+ * @class UserApi
+ * @extends {BaseAPI}
+ */
+export class UserApi extends BaseAPI {
+    /**
+     * ユーザーを作成する
+     * @summary ユーザー作成
+     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public addUser(addUserRequest?: AddUserRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).addUser(addUserRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザーIDでユーザーを削除する
+     * @summary ユーザー削除
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public deleteUserByUserId(userId: number, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).deleteUserByUserId(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザーIDでユーザーを取得する
+     * @summary ユーザー取得
+     * @param {number} userId ユーザーID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public getUserByUserId(userId: number, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getUserByUserId(userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 全てのユーザーを取得する
+     * @summary 全ユーザー取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public getUsers(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getUsers(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザーIDでユーザーを更新する
+     * @summary ユーザー更新
+     * @param {number} userId ユーザーID
+     * @param {AddUserRequest} [addUserRequest] リクエストユーザー
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public updateUserByUserId(userId: number, addUserRequest?: AddUserRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).updateUserByUserId(userId, addUserRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * UserPaymentGroupApi - axios parameter creator
+ * @export
+ */
+export const UserPaymentGroupApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 支払グループIDでユーザー支払グループを複数作成する
+         * @summary ユーザー支払グループ複数作成
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addUserPaymentGroupsByPaymentGroupId: async (paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('addUserPaymentGroupsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}/user_payment_groups/bulk_insert`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addUserPaymentGroupsByPaymentGroupIdRequestInner, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * ユーザー支払グループIDでユーザー支払グループを取得する
+         * @summary ユーザー支払グループ取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserPaymentGroupByUserPaymentGroupId: async (userPaymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userPaymentGroupId' is not null or undefined
+            assertParamExists('getUserPaymentGroupByUserPaymentGroupId', 'userPaymentGroupId', userPaymentGroupId)
+            const localVarPath = `/user_payment_groups/{user_payment_group_id}`
+                .replace(`{${"user_payment_group_id"}}`, encodeURIComponent(String(userPaymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDで全てのユーザー支払グループを取得する
+         * @summary 支払グループに紐づく全ユーザー支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserPaymentGroupsByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('getUserPaymentGroupsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}/user_payment_groups`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 支払グループIDでユーザー支払グループを複数更新する
+         * @summary ユーザー支払グループ複数更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserPaymentGroupsByPaymentGroupId: async (paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('updateUserPaymentGroupsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/payment_groups/{payment_group_id}/user_payment_groups/bulk_update`
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(addUserPaymentGroupsByPaymentGroupIdRequestInner, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserPaymentGroupApi - functional programming interface
+ * @export
+ */
+export const UserPaymentGroupApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserPaymentGroupApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 支払グループIDでユーザー支払グループを複数作成する
+         * @summary ユーザー支払グループ複数作成
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserPaymentGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * ユーザー支払グループIDでユーザー支払グループを取得する
+         * @summary ユーザー支払グループ取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserPaymentGroup>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDで全てのユーザー支払グループを取得する
+         * @summary 支払グループに紐づく全ユーザー支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserPaymentGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserPaymentGroupsByPaymentGroupId(paymentGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 支払グループIDでユーザー支払グループを複数更新する
+         * @summary ユーザー支払グループ複数更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UserPaymentGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * UserPaymentGroupApi - factory interface
+ * @export
+ */
+export const UserPaymentGroupApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserPaymentGroupApiFp(configuration)
+    return {
+        /**
+         * 支払グループIDでユーザー支払グループを複数作成する
+         * @summary ユーザー支払グループ複数作成
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<UserPaymentGroup>> {
+            return localVarFp.addUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * ユーザー支払グループIDでユーザー支払グループを取得する
+         * @summary ユーザー支払グループ取得
+         * @param {number} userPaymentGroupId ユーザー支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId: number, options?: any): AxiosPromise<UserPaymentGroup> {
+            return localVarFp.getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDで全てのユーザー支払グループを取得する
+         * @summary 支払グループに紐づく全ユーザー支払グループ取得
+         * @param {number} paymentGroupId 支払グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<Array<UserPaymentGroup>> {
+            return localVarFp.getUserPaymentGroupsByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 支払グループIDでユーザー支払グループを複数更新する
+         * @summary ユーザー支払グループ複数更新
+         * @param {number} paymentGroupId 支払グループID
+         * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<UserPaymentGroup>> {
+            return localVarFp.updateUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * UserPaymentGroupApi - object-oriented interface
+ * @export
+ * @class UserPaymentGroupApi
+ * @extends {BaseAPI}
+ */
+export class UserPaymentGroupApi extends BaseAPI {
+    /**
+     * 支払グループIDでユーザー支払グループを複数作成する
+     * @summary ユーザー支払グループ複数作成
+     * @param {number} paymentGroupId 支払グループID
+     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApi
+     */
+    public addUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
+        return UserPaymentGroupApiFp(this.configuration).addUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * ユーザー支払グループIDでユーザー支払グループを取得する
+     * @summary ユーザー支払グループ取得
+     * @param {number} userPaymentGroupId ユーザー支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApi
+     */
+    public getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId: number, options?: AxiosRequestConfig) {
+        return UserPaymentGroupApiFp(this.configuration).getUserPaymentGroupByUserPaymentGroupId(userPaymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDで全てのユーザー支払グループを取得する
+     * @summary 支払グループに紐づく全ユーザー支払グループ取得
+     * @param {number} paymentGroupId 支払グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApi
+     */
+    public getUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+        return UserPaymentGroupApiFp(this.configuration).getUserPaymentGroupsByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 支払グループIDでユーザー支払グループを複数更新する
+     * @summary ユーザー支払グループ複数更新
+     * @param {number} paymentGroupId 支払グループID
+     * @param {Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>} [addUserPaymentGroupsByPaymentGroupIdRequestInner] リクエスト複数ユーザー支払グループ
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserPaymentGroupApi
+     */
+    public updateUserPaymentGroupsByPaymentGroupId(paymentGroupId: number, addUserPaymentGroupsByPaymentGroupIdRequestInner?: Array<AddUserPaymentGroupsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
+        return UserPaymentGroupApiFp(this.configuration).updateUserPaymentGroupsByPaymentGroupId(paymentGroupId, addUserPaymentGroupsByPaymentGroupIdRequestInner, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
 

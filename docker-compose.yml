@@ -26,6 +26,13 @@ services:
         target: /var/lib/mysql
     env_file:
       - docker/db/.env
+  test-db:
+    container_name: dutch-account-test-db
+    build:
+      dockerfile: docker/db/Dockerfile
+      context: .
+    env_file:
+      - docker/db/.env
 
 volumes:
   dutch-account-db-store:

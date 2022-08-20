@@ -9,10 +9,6 @@ const Home: NextPage = () => {
         <meta name="description" content="dutch account app" />
         <link rel="icon" href="/receipt.ico" />
       </Head>
-
-      <main>
-      </main>
-
     </div>
   )
 }

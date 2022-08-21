@@ -35,7 +35,7 @@ class DeviseTokenAuthCreateAdmins < ActiveRecord::Migration[7.0]
       t.string :email, null: false
 
       ## Tokens
-      # t.text :tokens
+      t.text :tokens
 
       t.timestamps
     end

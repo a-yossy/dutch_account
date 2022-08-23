@@ -22,3 +22,9 @@ AllCops:
     - "spec/rails_helper.rb"
 Rails:
   Enabled: true
+
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "app/controllers/api/v1/*"

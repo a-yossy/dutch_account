@@ -254,6 +254,7 @@ DEPENDENCIES
   bootsnap
   bullet
   debug
+  devise
   devise_token_auth!
   factory_bot_rails
   mysql2

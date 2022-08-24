@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # devise_token_authのテストがmappingで落ちるため記載
+  devise_for :admin, skip: :all
+
   namespace :api do
     namespace :v1 do
       devise_scope :admin do

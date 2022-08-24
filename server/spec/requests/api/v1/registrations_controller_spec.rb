@@ -9,7 +9,8 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         {
           name: 'admin',
           email: 'admin@example.com',
-          password: 'password'
+          password: 'password',
+          password_confirmation: 'password'
         }
       end
 
@@ -24,7 +25,8 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         {
           name: 'admin',
           email: '',
-          password: 'password'
+          password: 'password',
+          password_confirmation: 'password'
         }
       end
 

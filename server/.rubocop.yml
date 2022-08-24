@@ -23,8 +23,17 @@ AllCops:
 Rails:
   Enabled: true
 
+#-----------------------------------------------------------------
+# style
+#-----------------------------------------------------------------
 Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   Exclude:
     - "app/controllers/api/v1/*"
+
+#-----------------------------------------------------------------
+# rspec
+#-----------------------------------------------------------------
+RSpec/MultipleExpectations:
+  Enabled: false

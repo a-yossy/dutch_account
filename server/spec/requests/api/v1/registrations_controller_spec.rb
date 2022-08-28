@@ -15,7 +15,10 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       end
 
       it 'respond with success' do
-        expect { post api_v1_sign_up_path, params: }.to change(Admin, :count).by(1)
+        expect do
+          post api_v1_sign_up_path, params:,
+                                    headers: { 'content-type': 'application/json', accept: 'application/json' }
+        end.to change(Admin, :count).by(1)
         expect(response).to have_http_status(:success)
       end
     end
@@ -31,7 +34,10 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       end
 
       it 'respond with unprocessable_entity' do
-        expect { post api_v1_sign_up_path, params: }.not_to change(Admin, :count)
+        expect do
+          post api_v1_sign_up_path, params:,
+                                    headers: { 'content-type': 'application/json', accept: 'application/json' }
+        end.not_to change(Admin, :count)
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

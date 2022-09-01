@@ -11,7 +11,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
           email: 'email@example.com',
           password: 'password',
           password_confirmation: 'password'
-        }
+        }.to_json
       end
 
       it 'respond with success' do
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
           email: '',
           password: 'password',
           password_confirmation: 'password'
-        }
+        }.to_json
       end
 
       it 'respond with unprocessable_entity' do

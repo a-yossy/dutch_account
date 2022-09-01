@@ -7,8 +7,8 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
     context 'with valid params' do
       let(:params) do
         {
-          name: 'admin',
-          email: 'admin@example.com',
+          name: 'taro',
+          email: 'email@example.com',
           password: 'password',
           password_confirmation: 'password'
         }
@@ -18,7 +18,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         expect do
           post api_v1_sign_up_path, params:,
                                     headers: { 'content-type': 'application/json', accept: 'application/json' }
-        end.to change(Admin, :count).by(1)
+        end.to change(User, :count).by(1)
         expect(response).to have_http_status(:success)
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
     context 'with invalid params' do
       let(:params) do
         {
-          name: 'admin',
+          name: 'taro',
           email: '',
           password: 'password',
           password_confirmation: 'password'
@@ -37,7 +37,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         expect do
           post api_v1_sign_up_path, params:,
                                     headers: { 'content-type': 'application/json', accept: 'application/json' }
-        end.not_to change(Admin, :count)
+        end.not_to change(User, :count)
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

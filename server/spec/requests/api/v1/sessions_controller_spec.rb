@@ -4,12 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
   describe 'sign in' do
-    before { create(:admin, email: 'admin@example.com', password: 'password') }
+    before { create(:user, email: 'email@example.com', password: 'password') }
 
     context 'with valid params' do
       let(:params) do
         {
-          email: 'admin@example.com',
+          email: 'email@example.com',
           password: 'password'
         }.to_json
       end
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     context 'with invalid params' do
       let(:params) do
         {
-          email: 'admin@example.com',
+          email: 'email@example.com',
           password: 'wrong_password'
         }.to_json
       end
@@ -49,8 +49,8 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
   describe 'sign out' do
     context 'with valid headers' do
-      let(:admin) { create(:admin) }
-      let(:auth_tokens) { sign_in(admin) }
+      let(:user) { create(:user) }
+      let(:auth_tokens) { sign_in(user) }
 
       it 'respond with success' do
         delete api_v1_sign_out_path, headers: auth_tokens

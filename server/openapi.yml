@@ -1002,7 +1002,7 @@ components:
                 description: 確認用パスワード
                 example: password
     SignInBody:
-      description: ログイン
+      description: サインイン
       content:
         application/json:
           schema:

@@ -7,116 +7,14 @@ servers:
   - url: http://localhost:3000/api
     description: 開発環境
 tags:
-  - name: user
   - name: paymentGroup
   - name: userPaymentGroup
   - name: purchaseRecord
   - name: remittanceRecord
-  - name: admin
+  - name: user
 security:
-  - cookieAuth: []
+  - DeviseTokenAuth: []
 paths:
-  /users:
-    get:
-      tags:
-        - user
-      summary: 全ユーザー取得
-      description: 全てのユーザーを取得する
-      operationId: getUsers
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - user
-      summary: ユーザー作成
-      description: ユーザーを作成する
-      operationId: addUser
-      requestBody:
-        $ref: "#/components/requestBodies/UserBody"
-      responses:
-        201:
-          description: 作成が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /users/{user_id}:
-    parameters:
-      - $ref: "#/components/parameters/UserId"
-    get:
-      tags:
-        - user
-      summary: ユーザー取得
-      description: ユーザーIDでユーザーを取得する
-      operationId: getUserByUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    put:
-      tags:
-        - user
-      summary: ユーザー更新
-      description: ユーザーIDでユーザーを更新する
-      operationId: updateUserByUserId
-      requestBody:
-        $ref: "#/components/requestBodies/UserBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - user
-      summary: ユーザー削除
-      description: ユーザーIDでユーザーを削除する
-      operationId: deleteUserByUserId
-      responses:
-        204:
-          $ref: "#/components/responses/NoContent"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
   /payment_groups:
     get:
       tags:
@@ -633,7 +531,7 @@ paths:
   /sign_up:
     post:
       tags:
-        - admin
+        - user
       summary: サインアップ
       description: サインアップする
       operationId: signUp
@@ -641,40 +539,41 @@ paths:
       requestBody:
         $ref: "#/components/requestBodies/SignUpBody"
       responses:
-        204:
+        200:
           $ref: "#/components/responses/NoContent"
-        400:
-          $ref: "#/components/responses/BadRequest"
+        422:
+          $ref: "#/components/responses/UnprocessableEntity"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /log_in:
+  /sign_in:
     post:
       tags:
-        - admin
-      summary: ログイン
-      description: ログインする
-      operationId: logIn
+        - user
+      summary: サインイン
+      description: サインインする
+      operationId: signIn
       security: []
       requestBody:
-        $ref: "#/components/requestBodies/LogInBody"
+        $ref: "#/components/requestBodies/SignInBody"
       responses:
-        204:
+        200:
           $ref: "#/components/responses/NoContent"
-        400:
-          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /log_out:
+  /sign_out:
     post:
       tags:
-        - admin
-      summary: ログアウト
-      description: ログアウトする
-      operationId: logOut
-      security: []
+        - user
+      summary: サインアウト
+      description: サインアウトする
+      operationId: signOut
       responses:
-        204:
+        200:
           $ref: "#/components/responses/NoContent"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
 components:
@@ -710,6 +609,15 @@ components:
           example:
             code: 404
             message: ページが見つかりません
+    UnprocessableEntity:
+      description: リクエストされた指示を処理できなかった時のレスポンス
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 422
+            message: このアカウントはすでに存在しています
     InternalServerError:
       description: サーバーでエラーが発生している時のレスポンス
       content:
@@ -1042,10 +950,11 @@ components:
               - name
               - email
               - password
+              - password_confirmation
             properties:
               name:
                 type: string
-                description: 管理者名
+                description: ユーザー名
                 example: 太郎
               email:
                 type: string
@@ -1057,7 +966,12 @@ components:
                 format: password
                 description: パスワード
                 example: password
-    LogInBody:
+              password_confirmation:
+                type: string
+                format: password
+                description: 確認用パスワード
+                example: password
+    SignInBody:
       description: ログイン
       content:
         application/json:
@@ -1142,7 +1056,6 @@ components:
         format: int64
         example: 1
   securitySchemes:
-    cookieAuth:
-      type: apiKey
-      in: cookie
-      name: ADMIN
+    DeviseTokenAuth:
+      type: http
+      scheme: bearer

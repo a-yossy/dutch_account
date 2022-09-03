@@ -4,7 +4,7 @@ info:
   title: dutch_account_app
   description: 割り勘アプリ
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:8000/api/v1
     description: 開発環境
 tags:
   - name: paymentGroup
@@ -541,6 +541,10 @@ paths:
       responses:
         200:
           description: サインアップに成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
           headers:
             access-token:
               schema:
@@ -554,10 +558,6 @@ paths:
               schema:
                 type: string
               description: 異なるクライアントで認証を行うために使用する
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
         422:
           $ref: "#/components/responses/UnprocessableEntity"
         500:
@@ -575,6 +575,10 @@ paths:
       responses:
         200:
           description: サインインに成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
           headers:
             access-token:
               schema:
@@ -588,10 +592,6 @@ paths:
               schema:
                 type: string
               description: 異なるクライアントで認証を行うために使用する
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
         401:
           $ref: "#/components/responses/Unauthorized"
         500:

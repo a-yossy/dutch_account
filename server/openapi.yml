@@ -549,17 +549,11 @@ paths:
                 $ref: "#/components/schemas/User"
           headers:
             access-token:
-              schema:
-                type: string
-              description: パスワードとして機能する
+              $ref: "#/components/headers/access-token"
             uid:
-              schema:
-                type: string
-              description: ユーザーを識別するために使用する
+              $ref: "#/components/headers/uid"
             client:
-              schema:
-                type: string
-              description: 異なるクライアントで認証を行うために使用する
+              $ref: "#/components/headers/client"
         422:
           $ref: "#/components/responses/UnprocessableEntity"
         500:
@@ -583,17 +577,11 @@ paths:
                 $ref: "#/components/schemas/User"
           headers:
             access-token:
-              schema:
-                type: string
-              description: パスワードとして機能する
+              $ref: "#/components/headers/access-token"
             uid:
-              schema:
-                type: string
-              description: ユーザーを識別するために使用する
+              $ref: "#/components/headers/uid"
             client:
-              schema:
-                type: string
-              description: 異なるクライアントで認証を行うために使用する
+              $ref: "#/components/headers/client"
         401:
           $ref: "#/components/responses/Unauthorized"
         500:
@@ -660,6 +648,19 @@ components:
             $ref: "#/components/schemas/Error"
           example:
             message: サーバーでエラーが発生しています
+  headers:
+    access-token:
+      description: パスワードとして機能する
+      schema:
+        type: string
+    uid:
+      description: ユーザーを識別するために使用する
+      schema:
+        type: string
+    client:
+      description: 異なるクライアントで認証を行うために使用する
+      schema:
+        type: string
   schemas:
     Error:
       description: エラー

@@ -541,6 +541,19 @@ paths:
       responses:
         200:
           description: サインアップに成功した時のレスポンス
+          headers:
+            access-token:
+              schema:
+                type: string
+              description: パスワードとして機能する
+            uid:
+              schema:
+                type: string
+              description: ユーザーを識別するために使用する
+            client:
+              schema:
+                type: string
+              description: 異なるクライアントで認証を行うために使用する
           content:
             application/json:
               schema:
@@ -562,6 +575,19 @@ paths:
       responses:
         200:
           description: サインインに成功した時のレスポンス
+          headers:
+            access-token:
+              schema:
+                type: string
+              description: パスワードとして機能する
+            uid:
+              schema:
+                type: string
+              description: ユーザーを識別するために使用する
+            client:
+              schema:
+                type: string
+              description: 異なるクライアントで認証を行うために使用する
           content:
             application/json:
               schema:

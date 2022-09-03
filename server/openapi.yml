@@ -13,7 +13,9 @@ tags:
   - name: remittanceRecord
   - name: user
 security:
-  - DeviseTokenAuth: []
+  - accessToken: []
+    uid: []
+    client: []
 paths:
   /payment_groups:
     get:
@@ -1083,6 +1085,15 @@ components:
         format: int64
         example: 1
   securitySchemes:
-    DeviseTokenAuth:
-      type: http
-      scheme: bearer
+    accessToken:
+      type: apiKey
+      in: header
+      name: access-token
+    uid:
+      type: apiKey
+      in: header
+      name: uid
+    client:
+      type: apiKey
+      in: header
+      name: client

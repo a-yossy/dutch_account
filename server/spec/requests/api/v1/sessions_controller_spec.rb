@@ -48,8 +48,9 @@ RSpec.describe Api::V1::SessionsController, type: :request do
   end
 
   describe 'sign out' do
+    let(:user) { create(:user) }
+
     context 'with valid headers' do
-      let(:user) { create(:user) }
       let(:auth_tokens) { sign_in(user) }
 
       it 'respond with success' do
@@ -59,6 +60,8 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     end
 
     context 'without valid headers' do
+      before { sign_in(user) }
+
       it 'respond with not_found' do
         delete api_v1_sign_out_path
         expect(response).to have_http_status(:not_found)

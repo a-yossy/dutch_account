@@ -554,6 +554,8 @@ paths:
               $ref: "#/components/headers/uid"
             client:
               $ref: "#/components/headers/client"
+            expiry:
+              $ref: "#/components/headers/expiry"
         422:
           $ref: "#/components/responses/UnprocessableEntity"
         500:
@@ -582,6 +584,8 @@ paths:
               $ref: "#/components/headers/uid"
             client:
               $ref: "#/components/headers/client"
+            expiry:
+              $ref: "#/components/headers/expiry"
         401:
           $ref: "#/components/responses/Unauthorized"
         500:
@@ -659,6 +663,10 @@ components:
         type: string
     client:
       description: 異なるクライアントで認証を行うために使用する
+      schema:
+        type: string
+    expiry:
+      description: セッションが期限切れとなる日付
       schema:
         type: string
   schemas:

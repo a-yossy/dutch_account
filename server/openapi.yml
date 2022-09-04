@@ -615,7 +615,7 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
           example:
-            message: リクエストパラメーターに不備があります
+            message: [リクエストパラメーターに不備があります]
     Unauthorized:
       description: 認証されていない時のレスポンス
       content:
@@ -623,7 +623,7 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
           example:
-            message: アクセス権限がありません
+            message: [アクセス権限がありません]
     NotFound:
       description: リクエストされたリソースが存在しない時のレスポンス
       content:
@@ -631,7 +631,7 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
           example:
-            message: ページが見つかりません
+            message: [ページが見つかりません]
     UnprocessableEntity:
       description: リクエストされた指示を処理できなかった時のレスポンス
       content:
@@ -639,7 +639,7 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
           example:
-            message: このアカウントはすでに存在しています
+            message: [このアカウントはすでに存在しています]
     InternalServerError:
       description: サーバーでエラーが発生している時のレスポンス
       content:
@@ -647,7 +647,7 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
           example:
-            message: サーバーでエラーが発生しています
+            message: [サーバーでエラーが発生しています]
   headers:
     access-token:
       description: パスワードとして機能する
@@ -669,8 +669,11 @@ components:
         - message
       properties:
         message:
-          type: string
+          type: array
+          items:
+            type: string
           description: エラーメッセージ
+          example: エラーが発生しました
     User:
       description: ユーザー
       type: object

@@ -9,7 +9,7 @@ servers:
 tags:
   - name: paymentGroup
   - name: affiliation
-  - name: purchaseRecord
+  - name: debtRecord
   - name: remittanceRecord
   - name: user
 security:
@@ -220,87 +220,39 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/purchase_records:
+  /debt_records:
+    get:
+      tags:
+        - debtRecord
+      summary: 全借金履歴取得
+      description: 全ての借金履歴を取得する
+      operationId: getDebtRecords
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DebtRecord"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /payment_groups/{payment_group_id}/debt_records/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: 支払グループに紐づく全購入履歴取得
-      description: 支払グループIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByPaymentGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /users/{user_id}/purchase_records:
-    parameters:
-      - $ref: "#/components/parameters/UserId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: ユーザーに紐づく全購入履歴取得
-      description: ユーザーIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /affiliations/{affiliation_id}/purchase_records:
-    parameters:
-      - $ref: "#/components/parameters/AaffiliationId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: ユーザー支払グループに紐づく全購入履歴取得
-      description: ユーザー支払グループIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByUserPaymentGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /affiliations/purchase_records/bulk_insert:
     post:
       tags:
-        - purchaseRecord
-      summary: 購入履歴複数作成
-      description: 購入履歴を複数作成する
-      operationId: addPurchaseRecords
+        - debtRecord
+      summary: 借金履歴複数作成
+      description: 支払グループIDで借金履歴を複数作成する
+      operationId: addDebtRecords
       requestBody:
-        $ref: "#/components/requestBodies/PurchaseRecordsBody"
+        $ref: "#/components/requestBodies/DebtRecordsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -309,52 +261,29 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PurchaseRecord"
+                  $ref: "#/components/schemas/DebtRecord"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /purchase_records/{purchase_record_id}:
+  /debt_records/{debt_record_id}:
     parameters:
-      - $ref: "#/components/parameters/PurchaseRecordId"
+      - $ref: "#/components/parameters/DebtRecordId"
     get:
       tags:
-        - purchaseRecord
-      summary: 購入履歴取得
-      description: 購入履歴IDで購入履歴を取得する
-      operationId: getPurchaseRecordByPurchaseRecordId
+        - debtRecord
+      summary: 借金履歴取得
+      description: 借金履歴IDで借金履歴を取得する
+      operationId: getDebtRecordByDebtRecordId
       responses:
         200:
           description: 取得が成功した時のレスポンス
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    put:
-      tags:
-        - purchaseRecord
-      summary: 購入履歴更新
-      description: 購入履歴IDで購入履歴を更新する
-      operationId: updatePurchaseRecordByPurchaseRecordId
-      requestBody:
-        $ref: "#/components/requestBodies/PurchaseRecordBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PurchaseRecord"
-        400:
-          $ref: "#/components/responses/BadRequest"
+                $ref: "#/components/schemas/DebtRecord"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -363,10 +292,10 @@ paths:
           $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
-        - purchaseRecord
-      summary: 購入履歴削除
-      description: 購入履歴IDで購入履歴を削除する
-      operationId: deletePurchaseRecordByPurchaseRecordId
+        - debtRecord
+      summary: 借金履歴削除
+      description: 借金履歴IDで借金履歴を削除する
+      operationId: deleteDebtRecordByDebtRecordId
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -728,67 +657,44 @@ components:
           format: float
           description: 支払割合
           example: 0.4
-    PurchaseRecord:
-      description: 購入履歴
+    DebtRecord:
+      description: 借金履歴
       type: object
       required:
         - id
-        - name
+        - lending_user_name
+        - borrowing_user_name
         - amount_of_money
-        - purchased_on
         - description
+        - transacted_on
       properties:
         id:
           type: integer
           format: int64
-          description: 購入履歴ID
+          description: 借金履歴ID
           example: 1
-        name:
+        lending_user_name:
           type: string
-          description: ユーザー名
+          description: 貸主名
           example: 太郎
+        borrowing_user_name:
+          type: string
+          description: 借主名
+          example: 次郎
         amount_of_money:
           type: integer
           format: int32
-          description: 購入金額
+          description: 金額
           example: 3000
-        purchased_on:
-          type: string
-          format: date
-          description: 購入日
-          example: "2022-01-01"
         description:
           type: string
-          description: 購入説明
+          description: 説明
           example: 食材
-    PurchaseRecordRequestBody:
-      description: 購入履歴のリクエスト
-      type: object
-      required:
-        - affiliation_id
-        - amount_of_money
-        - purchased_on
-        - description
-      properties:
-        affiliation_id:
-            type: integer
-            format: int64
-            description: 所属ID
-            example: 1
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 購入金額
-          example: 3000
-        purchased_on:
+        transacted_on:
           type: string
           format: date
-          description: 購入日
+          description: 取引日
           example: "2022-01-01"
-        description:
-          type: string
-          description: 購入説明
-          example: 食材
     RemittanceRecord:
       description: 送金着金履歴
       type: object
@@ -927,20 +833,45 @@ components:
                   format: float
                   description: 支払割合
                   example: 0.4
-    PurchaseRecordBody:
-      description: リクエスト購入履歴
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/PurchaseRecordRequestBody"
-    PurchaseRecordsBody:
-      description: リクエスト複数購入履歴
+    DebtRecordsBody:
+      description: リクエスト複数借金履歴
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/PurchaseRecordRequestBody"
+              type: object
+              required:
+                - lending_user_id
+                - borrowing_user_id
+                - amount_of_money
+                - description
+                - transacted_on
+              properties:
+                lending_user_id:
+                    type: integer
+                    format: int64
+                    description: 貸主ID
+                    example: 1
+                borrowing_user_id:
+                    type: integer
+                    format: int64
+                    description: 借主ID
+                    example: 2
+                amount_of_money:
+                  type: integer
+                  format: int32
+                  description: 金額
+                  example: 3000
+                description:
+                  type: string
+                  description: 説明
+                  example: 食材
+                transacted_on:
+                  type: string
+                  format: date
+                  description: 取引日
+                  example: "2022-01-01"
     RemittanceRecordBody:
       description: リクエスト送金履歴
       content:
@@ -1079,10 +1010,10 @@ components:
         type: integer
         format: int64
         example: 1
-    PurchaseRecordId:
-      name: purchase_record_id
+    DebtRecordId:
+      name: debt_record_id
       in: path
-      description: 購入履歴ID
+      description: 借金履歴ID
       required: true
       schema:
         type: integer

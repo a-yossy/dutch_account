@@ -253,7 +253,7 @@ paths:
         - debtRecord
       summary: 借金履歴複数作成
       description: 支払グループIDで借金履歴を複数作成する
-      operationId: addDebtRecords
+      operationId: addDebtRecordsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/DebtRecordsBody"
       responses:

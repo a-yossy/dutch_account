@@ -147,7 +147,7 @@ paths:
     post:
       tags:
         - affiliation
-      summary: 所属複数作成
+      summary: 支払グループに紐づく所属複数作成
       description: 支払グループIDで所属を複数作成する
       operationId: addAffiliationsByPaymentGroupId
       requestBody:
@@ -175,7 +175,7 @@ paths:
     put:
       tags:
         - affiliation
-      summary: 所属複数更新
+      summary: 支払グループに紐づく所属複数更新
       description: 支払グループIDで所属を複数更新する
       operationId: updateAffiliationsByPaymentGroupId
       requestBody:
@@ -203,7 +203,7 @@ paths:
     get:
       tags:
         - debtRecord
-      summary: 全借主借金履歴取得
+      summary: 貸主に紐づく全借主借金履歴取得
       description: 貸主IDで全ての借主借金履歴を取得する
       operationId: getBorrowingDebtRecordsByLendingUserId
       responses:
@@ -227,7 +227,7 @@ paths:
     get:
       tags:
         - debtRecord
-      summary: 全借主借金履歴と借主名取得
+      summary: 貸主に紐づく全借主借金履歴と借主名取得
       description: 貸主IDで全ての借主借金履歴と借主名を取得する
       operationId: getBorrowingUserDebtRecordsByLendingUserId
       responses:
@@ -251,7 +251,7 @@ paths:
     post:
       tags:
         - debtRecord
-      summary: 借金履歴複数作成
+      summary: 支払グループに紐づく借金履歴複数作成
       description: 支払グループIDで借金履歴を複数作成する
       operationId: addDebtRecordsByPaymentGroupId
       requestBody:
@@ -655,19 +655,6 @@ components:
           description: 取引日
           example: "2022-01-01"
   requestBodies:
-    UserBody:
-      description: リクエストユーザー
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - name
-            properties:
-              name:
-                type: string
-                description: ユーザー名
-                example: 太郎
     PaymentGroupBody:
       description: リクエスト支払グループ
       content:
@@ -794,15 +781,6 @@ components:
                 description: パスワード
                 example: password
   parameters:
-    UserId:
-      name: user_id
-      in: path
-      description: ユーザーID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
     LendingUserId:
       name: lending_user_id
       in: path

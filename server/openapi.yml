@@ -117,15 +117,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliations:
+  /payment_groups/{payment_group_id}/affiliation_users:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - affiliation
-      summary: 支払グループに紐づく全所属取得
-      description: 支払グループIDで全ての所属を取得する
-      operationId: getAffiliationsByPaymentGroupId
+      summary: 支払グループに紐づく全所属ユーザー取得
+      description: 支払グループIDで全ての所属ユーザーを取得する
+      operationId: getAffiliationUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -134,7 +134,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Affiliation"
+                  $ref: "#/components/schemas/AffiliationUser"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -160,7 +160,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Affiliation"
+                  $ref: "#/components/schemas/AffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -188,7 +188,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Affiliation"
+                  $ref: "#/components/schemas/AffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -486,8 +486,8 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
-    Affiliation:
-      description: 所属
+    AffiliationUser:
+      description: 所属ユーザー
       type: object
       required:
         - id

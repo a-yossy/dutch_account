@@ -20,6 +20,12 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
                                     headers: { 'content-type': 'application/json', accept: 'application/json' }
         end.to change(User, :count).by(1)
         expect(response).to have_http_status(:success)
+        expect(response.has_header?('access-token')).to eq true
+        expect(response.has_header?('uid')).to eq true
+        expect(response.has_header?('client')).to eq true
+        body = JSON.parse(response.body)
+        expect(body['id']).to be_present
+        expect(body['name']).to eq 'taro'
       end
     end
 
@@ -39,6 +45,14 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
                                     headers: { 'content-type': 'application/json', accept: 'application/json' }
         end.not_to change(User, :count)
         expect(response).to have_http_status(:unprocessable_entity)
+        body = JSON.parse(response.body)
+        expect(body['messages']).to eq [
+          I18n.t(
+            'errors.format',
+            attribute: User.human_attribute_name(:email),
+            message: I18n.t('errors.messages.blank')
+          )
+        ]
       end
     end
   end

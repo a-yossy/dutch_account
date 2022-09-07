@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
   describe 'sign in' do
-    before { create(:user, email: 'email@example.com', password: 'password') }
+    before { create(:user, name: 'taro', email: 'email@example.com', password: 'password') }
 
     context 'with valid params' do
       let(:params) do
@@ -19,10 +19,11 @@ RSpec.describe Api::V1::SessionsController, type: :request do
                                   headers: { 'content-type': 'application/json', accept: 'application/json' }
         expect(response).to have_http_status(:success)
         expect(response.has_header?('access-token')).to eq true
-        expect(response.has_header?('expiry')).to eq true
-        expect(response.has_header?('token-type')).to eq true
         expect(response.has_header?('uid')).to eq true
         expect(response.has_header?('client')).to eq true
+        body = JSON.parse(response.body)
+        expect(body['id']).to be_present
+        expect(body['name']).to eq 'taro'
       end
     end
 
@@ -38,11 +39,8 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         post api_v1_sign_in_path, params: params,
                                   headers: { 'content-type': 'application/json', accept: 'application/json' }
         expect(response).to have_http_status(:unauthorized)
-        expect(response.has_header?('access-token')).to eq false
-        expect(response.has_header?('expiry')).to eq false
-        expect(response.has_header?('token-type')).to eq false
-        expect(response.has_header?('uid')).to eq false
-        expect(response.has_header?('client')).to eq false
+        body = JSON.parse(response.body)
+        expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.bad_credentials')]
       end
     end
   end
@@ -65,6 +63,8 @@ RSpec.describe Api::V1::SessionsController, type: :request do
       it 'respond with not_found' do
         delete api_v1_sign_out_path
         expect(response).to have_http_status(:not_found)
+        body = JSON.parse(response.body)
+        expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.user_not_found')]
       end
     end
   end

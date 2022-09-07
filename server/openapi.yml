@@ -197,30 +197,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /users/{lending_user_id}/borrowing_debt_records:
-    parameters:
-      - $ref: "#/components/parameters/LendingUserId"
-    get:
-      tags:
-        - debtRecord
-      summary: 貸主に紐づく全ての借金履歴を取得
-      description: 貸主に紐づく全ての借金履歴を取得する
-      operationId: getBorrowingDebtRecordsByLendingUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/BorrowingDebtRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
   /users/{lending_user_id}/borrowing_user_debt_records:
     parameters:
       - $ref: "#/components/parameters/LendingUserId"
@@ -245,7 +221,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/debt_records/bulk_insert:
+  /payment_groups/{payment_group_id}/user_debt_records/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
@@ -508,46 +484,6 @@ components:
           format: float
           description: 支払割合
           example: 0.4
-    DebtRecord:
-      description: 借金履歴
-      type: object
-      required:
-        - id
-        - lending_user_id
-        - borrowing_user_id
-        - amount_of_money
-        - description
-        - transacted_on
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: 借金履歴ID
-          example: 1
-        lending_user_id:
-          type: integer
-          format: int64
-          description: 貸主ID
-          example: 1
-        borrowing_user_id:
-          type: integer
-          format: int64
-          description: 借主ID
-          example: 2
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 金額
-          example: 3000
-        description:
-          type: string
-          description: 説明
-          example: 食材
-        transacted_on:
-          type: string
-          format: date
-          description: 取引日
-          example: "2022-01-01"
     UserDebtRecord:
       description: 借金履歴及びユーザー名
       type: object
@@ -572,40 +508,6 @@ components:
           type: string
           description: 借主名
           example: 次郎
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 金額
-          example: 3000
-        description:
-          type: string
-          description: 説明
-          example: 食材
-        transacted_on:
-          type: string
-          format: date
-          description: 取引日
-          example: "2022-01-01"
-    BorrowingDebtRecord:
-      description: 借金履歴
-      type: object
-      required:
-        - id
-        - borrowing_user_id
-        - amount_of_money
-        - description
-        - transacted_on
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: 借金履歴ID
-          example: 1
-        borrowing_user_id:
-          type: integer
-          format: int64
-          description: 借主ID
-          example: 2
         amount_of_money:
           type: integer
           format: int32

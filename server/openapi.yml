@@ -692,28 +692,10 @@ components:
         type: integer
         format: int64
         example: 1
-    BorrowingUserId:
-      name: borrowing_user_id
-      in: path
-      description: 借主ID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 2
     PaymentGroupId:
       name: payment_group_id
       in: path
       description: 支払グループID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    AffiliationId:
-      name: affiliation_id
-      in: path
-      description: 所属ID
       required: true
       schema:
         type: integer

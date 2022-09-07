@@ -656,7 +656,7 @@ components:
           example: "2022-01-01"
   requestBodies:
     PaymentGroupBody:
-      description: リクエスト支払グループ
+      description: リクエスト用の支払グループ
       content:
         application/json:
           schema:
@@ -669,7 +669,7 @@ components:
                 description: 支払グループ名
                 example: 家族
     AffiliationsBody:
-      description: リクエスト複数所属
+      description: リクエスト用の所属の配列
       content:
         application/json:
           schema:
@@ -691,7 +691,7 @@ components:
                   description: 支払割合
                   example: 0.4
     DebtRecordsBody:
-      description: リクエスト複数借金履歴
+      description: リクエスト用の借金履歴の配列
       content:
         application/json:
           schema:
@@ -730,7 +730,7 @@ components:
                   description: 取引日
                   example: "2022-01-01"
     SignUpBody:
-      description: サインアップ
+      description: サインアップ用のユーザー
       content:
         application/json:
           schema:
@@ -761,7 +761,7 @@ components:
                 description: 確認用パスワード
                 example: password
     SignInBody:
-      description: サインイン
+      description: サインイン用のユーザー
       content:
         application/json:
           schema:

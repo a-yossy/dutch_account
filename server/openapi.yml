@@ -20,7 +20,7 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 全支払グループ取得
+      summary: 全ての支払グループを取得
       description: 全ての支払グループを取得する
       operationId: getPaymentGroups
       responses:
@@ -39,7 +39,7 @@ paths:
     post:
       tags:
         - paymentGroup
-      summary: 支払グループ作成
+      summary: 支払グループを作成
       description: 支払グループを作成する
       operationId: addPaymentGroup
       requestBody:
@@ -63,8 +63,8 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 支払グループ取得
-      description: 支払グループIDで支払グループを取得する
+      summary: 支払グループを取得
+      description: 支払グループを取得する
       operationId: getPaymentGroupByPaymentGroupId
       responses:
         200:
@@ -82,8 +82,8 @@ paths:
     put:
       tags:
         - paymentGroup
-      summary: 支払グループ更新
-      description: 支払グループIDで支払グループを更新する
+      summary: 支払グループを更新
+      description: 支払グループを更新する
       operationId: updatePaymentGroupByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
@@ -105,8 +105,8 @@ paths:
     delete:
       tags:
         - paymentGroup
-      summary: 支払グループ削除
-      description: 支払グループIDで支払グループを削除する
+      summary: 支払グループを削除
+      description: 支払グループを削除する
       operationId: deletePaymentGroupByPaymentGroupId
       responses:
         204:
@@ -123,8 +123,8 @@ paths:
     get:
       tags:
         - affiliation
-      summary: 支払グループに紐づく全所属ユーザー取得
-      description: 支払グループIDで全ての所属ユーザーを取得する
+      summary: ある支払グループに所属する全てのユーザーを取得
+      description: ある支払グループに所属する全てのユーザーを取得する
       operationId: getAffiliationUsersByPaymentGroupId
       responses:
         200:
@@ -147,8 +147,8 @@ paths:
     post:
       tags:
         - affiliation
-      summary: 支払グループに紐づく所属複数作成
-      description: 支払グループIDで所属を複数作成する
+      summary: ある支払グループに複数のユーザーを所属させる
+      description: ある支払グループに複数のユーザーを所属させる
       operationId: addAffiliationsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/AffiliationsBody"
@@ -175,8 +175,8 @@ paths:
     put:
       tags:
         - affiliation
-      summary: 支払グループに紐づく所属複数更新
-      description: 支払グループIDで所属を複数更新する
+      summary: 複数のユーザーのある支払グループへの所属情報を更新
+      description: 複数のユーザーのある支払グループへの所属情報を更新する
       operationId: updateAffiliationsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/AffiliationsBody"
@@ -203,8 +203,8 @@ paths:
     get:
       tags:
         - debtRecord
-      summary: 貸主に紐づく全借主借金履歴取得
-      description: 貸主IDで全ての借主借金履歴を取得する
+      summary: 貸主に紐づく全ての借金履歴を取得
+      description: 貸主に紐づく全ての借金履歴を取得する
       operationId: getBorrowingDebtRecordsByLendingUserId
       responses:
         200:
@@ -227,8 +227,8 @@ paths:
     get:
       tags:
         - debtRecord
-      summary: 貸主に紐づく全借主借金履歴と借主名取得
-      description: 貸主IDで全ての借主借金履歴と借主名を取得する
+      summary: 貸主に紐づく全ての借金履歴及び借主名を取得
+      description: 貸主に紐づく全ての借金履歴及び借主名を取得する
       operationId: getBorrowingUserDebtRecordsByLendingUserId
       responses:
         200:
@@ -251,8 +251,8 @@ paths:
     post:
       tags:
         - debtRecord
-      summary: 支払グループに紐づく借金履歴複数作成
-      description: 支払グループIDで借金履歴を複数作成する
+      summary: 支払グループに紐づく借金履歴を複数作成
+      description: 支払グループに紐づく借金履歴を複数作成する
       operationId: addDebtRecordsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/DebtRecordsBody"
@@ -279,8 +279,8 @@ paths:
     get:
       tags:
         - debtRecord
-      summary: 借金履歴とユーザー名取得
-      description: 借金履歴IDで借金履歴とユーザー名を取得する
+      summary: 借金履歴及びユーザー名を取得
+      description: 借金履歴及びユーザー名を取得する
       operationId: getUserDebtRecordByDebtRecordId
       responses:
         200:
@@ -298,8 +298,8 @@ paths:
     delete:
       tags:
         - debtRecord
-      summary: 借金履歴削除
-      description: 借金履歴IDで借金履歴を削除する
+      summary: 借金履歴を削除
+      description: 借金履歴を削除する
       operationId: deleteDebtRecordByDebtRecordId
       responses:
         204:
@@ -487,7 +487,7 @@ components:
           description: 支払グループ名
           example: 家族
     AffiliationUser:
-      description: 所属ユーザー
+      description: ある支払グループに所属するユーザー
       type: object
       required:
         - id
@@ -549,7 +549,7 @@ components:
           description: 取引日
           example: "2022-01-01"
     UserDebtRecord:
-      description: 借金履歴とユーザー名
+      description: 借金履歴及びユーザー名
       type: object
       required:
         - id
@@ -587,7 +587,7 @@ components:
           description: 取引日
           example: "2022-01-01"
     BorrowingDebtRecord:
-      description: 借主借金履歴
+      description: 借金履歴
       type: object
       required:
         - id
@@ -621,7 +621,7 @@ components:
           description: 取引日
           example: "2022-01-01"
     BorrowingUserDebtRecord:
-      description: 借主借金履歴と借主名
+      description: 借金履歴及び借主名
       type: object
       required:
         - id

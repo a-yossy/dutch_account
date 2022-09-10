@@ -8,7 +8,7 @@ servers:
     description: 開発環境
 tags:
   - name: paymentGroup
-  - name: affiliation
+  - name: paymentAffiliation
   - name: debtRecord
   - name: user
 security:
@@ -117,15 +117,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliation_users:
+  /payment_groups/{payment_group_id}/payment_affiliation_users:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - affiliation
+        - paymentAffiliation
       summary: ある支払グループに所属する全てのユーザーを取得
       description: ある支払グループに所属する全てのユーザーを取得する
-      operationId: getAffiliationUsersByPaymentGroupId
+      operationId: getPaymentAffiliationUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -134,24 +134,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliations/bulk_insert:
+  /payment_groups/{payment_group_id}/payment_affiliations/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
-        - affiliation
+        - paymentAffiliation
       summary: ある支払グループに複数のユーザーを所属させる
       description: ある支払グループに複数のユーザーを所属させる
-      operationId: addAffiliationsByPaymentGroupId
+      operationId: addPaymentAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/AffiliationsBody"
+        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -160,7 +160,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -169,17 +169,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliations/bulk_update:
+  /payment_groups/{payment_group_id}/payment_affiliations/bulk_update:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
-        - affiliation
+        - paymentAffiliation
       summary: 複数のユーザーのある支払グループへの所属情報を更新
       description: 複数のユーザーのある支払グループへの所属情報を更新する
-      operationId: updateAffiliationsByPaymentGroupId
+      operationId: updatePaymentAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/AffiliationsBody"
+        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:
         200:
           description: 更新が成功した時のレスポンス
@@ -188,7 +188,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -461,13 +461,13 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
-    AffiliationUser:
+    PaymentAffiliationUser:
       description: ある支払グループに所属するユーザー
       type: object
       required:
         - id
         - user_name
-        - payment_ratio
+        - ratio
       properties:
         id:
           type: integer
@@ -478,7 +478,7 @@ components:
           type: string
           description: ユーザー名
           example: 太郎
-        payment_ratio:
+        ratio:
           type: number
           format: float
           description: 支払割合
@@ -569,7 +569,7 @@ components:
                 type: string
                 description: 支払グループ名
                 example: 家族
-    AffiliationsBody:
+    PaymentAffiliationsBody:
       description: リクエスト用の所属の配列
       content:
         application/json:
@@ -579,14 +579,14 @@ components:
               type: object
               required:
                 - user_id
-                - payment_ratio
+                - ratio
               properties:
                 user_id:
                   type: integer
                   format: int64
                   description: ユーザーID
                   example: 1
-                payment_ratio:
+                ratio:
                   type: number
                   format: float
                   description: 支払割合

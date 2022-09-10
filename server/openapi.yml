@@ -221,15 +221,13 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/debt_records/bulk_insert:
-    parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
+  /payment_groups/debt_records/bulk_insert:
     post:
       tags:
         - debtRecord
-      summary: 支払グループに紐づく借金履歴を複数作成
-      description: 支払グループに紐づく借金履歴を複数作成する
-      operationId: addDebtRecordsByPaymentGroupId
+      summary: 借金履歴を複数作成
+      description: 借金履歴を複数作成する
+      operationId: addDebtRecords
       requestBody:
         $ref: "#/components/requestBodies/DebtRecordsBody"
       responses:

@@ -7,8 +7,10 @@ servers:
   - url: http://localhost:8000/api/v1
     description: 開発環境
 tags:
+  - name: managementGroup
+  - name: managementAffiliation
   - name: paymentGroup
-  - name: affiliation
+  - name: paymentAffiliation
   - name: debtRecord
   - name: user
 security:
@@ -16,13 +18,107 @@ security:
     uid: []
     client: []
 paths:
-  /payment_groups:
+  /users/{user_id}/management_groups:
+    parameters:
+      - $ref: "#/components/parameters/UserId"
+    get:
+      tags:
+        - managementGroup
+      summary: ユーザーに紐づく全ての管理グループを取得
+      description: ユーザーに紐づく全ての管理グループを取得する
+      operationId: getManagementGroupsByUserId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ManagementGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /management_groups:
+    post:
+      tags:
+        - managementGroup
+      summary: 管理グループを作成
+      description: 管理グループを作成する
+      operationId: addManagementGroup
+      requestBody:
+        $ref: "#/components/requestBodies/ManagementGroupBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagementGroup"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    get:
+      tags:
+        - managementGroup
+      summary: 管理グループを取得
+      description: 管理グループを取得する
+      operationId: getManagementGroupByManagementGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagementGroup"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/management_affiliation_users:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    get:
+      tags:
+        - managementAffiliation
+      summary: 管理グループに所属する全てのユーザーを取得
+      description: 管理グループに所属する全てのユーザーを取得する
+      operationId: getManagementAffiliationUsersByManagementGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ManagementAffiliationUser"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+            $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
     get:
       tags:
         - paymentGroup
-      summary: 全ての支払グループを取得
-      description: 全ての支払グループを取得する
-      operationId: getPaymentGroups
+      summary: 管理グループに紐づく全ての支払グループを取得
+      description: 管理グループに紐づく全ての支払グループを取得する
+      operationId: getPaymentGroupsByManagementGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -34,14 +130,16 @@ paths:
                   $ref: "#/components/schemas/PaymentGroup"
         401:
           $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
     post:
       tags:
         - paymentGroup
-      summary: 支払グループを作成
-      description: 支払グループを作成する
-      operationId: addPaymentGroup
+      summary: 管理グループに紐づく支払グループを作成
+      description: 管理グループに紐づく支払グループを作成する
+      operationId: addPaymentGroupByManagementGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
       responses:
@@ -55,6 +153,8 @@ paths:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}:
@@ -117,15 +217,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliation_users:
+  /payment_groups/{payment_group_id}/payment_affiliation_users:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - affiliation
-      summary: ある支払グループに所属する全てのユーザーを取得
-      description: ある支払グループに所属する全てのユーザーを取得する
-      operationId: getAffiliationUsersByPaymentGroupId
+        - paymentAffiliation
+      summary: 支払グループに所属する全てのユーザーを取得
+      description: 支払グループに所属する全てのユーザーを取得する
+      operationId: getPaymentAffiliationUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -134,24 +234,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliations/bulk_insert:
+  /payment_groups/{payment_group_id}/payment_affiliations/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
-        - affiliation
-      summary: ある支払グループに複数のユーザーを所属させる
-      description: ある支払グループに複数のユーザーを所属させる
-      operationId: addAffiliationsByPaymentGroupId
+        - paymentAffiliation
+      summary: 支払グループに複数のユーザーを所属させる
+      description: 支払グループに複数のユーザーを所属させる
+      operationId: addPaymentAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/AffiliationsBody"
+        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -160,7 +260,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -169,17 +269,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/affiliations/bulk_update:
+  /payment_groups/{payment_group_id}/payment_affiliations/bulk_update:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
-        - affiliation
-      summary: 複数のユーザーのある支払グループへの所属情報を更新
-      description: 複数のユーザーのある支払グループへの所属情報を更新する
-      operationId: updateAffiliationsByPaymentGroupId
+        - paymentAffiliation
+      summary: 複数のユーザーの支払グループへの所属情報を更新
+      description: 複数のユーザーの支払グループへの所属情報を更新する
+      operationId: updatePaymentAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/AffiliationsBody"
+        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:
         200:
           description: 更新が成功した時のレスポンス
@@ -188,7 +288,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/AffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -460,25 +560,25 @@ components:
         name:
           type: string
           description: 支払グループ名
-          example: 家族
-    AffiliationUser:
-      description: ある支払グループに所属するユーザー
+          example: 兄弟
+    PaymentAffiliationUser:
+      description: 支払グループに所属するユーザー
       type: object
       required:
         - id
         - user_name
-        - payment_ratio
+        - ratio
       properties:
         id:
           type: integer
           format: int64
-          description: 所属ID
+          description: 支払グループ所属ID
           example: 1
         user_name:
           type: string
           description: ユーザー名
           example: 太郎
-        payment_ratio:
+        ratio:
           type: number
           format: float
           description: 支払割合
@@ -555,6 +655,38 @@ components:
           format: date
           description: 取引日
           example: "2022-01-01"
+    ManagementGroup:
+      description: 管理グループ
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 管理グループID
+          example: 1
+        name:
+          type: string
+          description: 管理グループ名
+          example: 家族
+    ManagementAffiliationUser:
+      description: 管理グループに所属するユーザー
+      type: object
+      required:
+        - id
+        - user_name
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: 管理グループ所属ID
+          example: 1
+        user_name:
+          type: string
+          description: ユーザー名
+          example: 太郎
   requestBodies:
     PaymentGroupBody:
       description: リクエスト用の支払グループ
@@ -568,9 +700,9 @@ components:
               name:
                 type: string
                 description: 支払グループ名
-                example: 家族
-    AffiliationsBody:
-      description: リクエスト用の所属の配列
+                example: 兄弟
+    PaymentAffiliationsBody:
+      description: リクエスト用の支払グループの所属情報の配列
       content:
         application/json:
           schema:
@@ -579,14 +711,14 @@ components:
               type: object
               required:
                 - user_id
-                - payment_ratio
+                - ratio
               properties:
                 user_id:
                   type: integer
                   format: int64
                   description: ユーザーID
                   example: 1
-                payment_ratio:
+                ratio:
                   type: number
                   format: float
                   description: 支払割合
@@ -630,6 +762,19 @@ components:
                   format: date
                   description: 取引日
                   example: "2022-01-01"
+    ManagementGroupBody:
+      description: リクエスト用の管理グループ
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: 管理グループ名
+                example: 家族
     SignUpBody:
       description: サインアップ用のユーザー
       content:
@@ -704,6 +849,24 @@ components:
       name: debt_record_id
       in: path
       description: 借金履歴ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    UserId:
+      name: user_id
+      in: path
+      description: ユーザーID
+      required: true
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    ManagementGroupId:
+      name: management_group_id
+      in: path
+      description: 管理グループID
       required: true
       schema:
         type: integer

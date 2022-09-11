@@ -5,6 +5,10 @@ class Api::V1::RegistrationsController < DeviseTokenAuth::RegistrationsControlle
 
   protected
 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name])
+  end
+
   def render_create_success
     data = resource_data
     render json: {
@@ -17,9 +21,5 @@ class Api::V1::RegistrationsController < DeviseTokenAuth::RegistrationsControlle
     render json: {
       messages: resource_errors[:full_messages]
     }, status: :unprocessable_entity
-  end
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name])
   end
 end

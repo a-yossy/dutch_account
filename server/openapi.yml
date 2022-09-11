@@ -110,13 +110,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
             $ref: "#/components/responses/InternalServerError"
-  /payment_groups:
+  /management_groups/{management_group_id}/payment_groups:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
     get:
       tags:
         - paymentGroup
-      summary: 全ての支払グループを取得
-      description: 全ての支払グループを取得する
-      operationId: getPaymentGroups
+      summary: ある管理グループに紐づく全ての支払グループを取得
+      description: ある管理グループに紐づく全ての支払グループを取得する
+      operationId: getPaymentGroupsByManagementGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -128,14 +130,16 @@ paths:
                   $ref: "#/components/schemas/PaymentGroup"
         401:
           $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
     post:
       tags:
         - paymentGroup
-      summary: 支払グループを作成
-      description: 支払グループを作成する
-      operationId: addPaymentGroup
+      summary: ある管理グループに紐づく支払グループを作成
+      description: ある管理グループに紐づく支払グループを作成する
+      operationId: addPaymentGroupByManagementGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
       responses:
@@ -149,6 +153,8 @@ paths:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
   /payment_groups/{payment_group_id}:

@@ -554,7 +554,7 @@ components:
         name:
           type: string
           description: 支払グループ名
-          example: 家族
+          example: 兄弟
     PaymentAffiliationUser:
       description: ある支払グループに所属するユーザー
       type: object
@@ -566,7 +566,7 @@ components:
         id:
           type: integer
           format: int64
-          description: 所属ID
+          description: 支払グループ所属ID
           example: 1
         user_name:
           type: string
@@ -694,9 +694,9 @@ components:
               name:
                 type: string
                 description: 支払グループ名
-                example: 家族
+                example: 兄弟
     PaymentAffiliationsBody:
-      description: リクエスト用の所属の配列
+      description: リクエスト用の支払グループの所属情報の配列
       content:
         application/json:
           schema:

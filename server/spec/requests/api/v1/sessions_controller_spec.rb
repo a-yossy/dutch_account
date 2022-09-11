@@ -11,12 +11,11 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         {
           email: 'email@example.com',
           password: 'password'
-        }.to_json
+        }
       end
 
       it 'respond with success' do
-        post api_v1_sign_in_path, params:,
-                                  headers: { 'content-type': 'application/json', accept: 'application/json' }
+        post_as_json api_v1_sign_in_path, params
         expect(response).to have_http_status(:success)
         expect(response.has_header?('access-token')).to eq true
         expect(response.has_header?('uid')).to eq true
@@ -32,12 +31,11 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         {
           email: 'email@example.com',
           password: 'wrong_password'
-        }.to_json
+        }
       end
 
       it 'respond with unauthorized' do
-        post api_v1_sign_in_path, params:,
-                                  headers: { 'content-type': 'application/json', accept: 'application/json' }
+        post_as_json api_v1_sign_in_path, params
         expect(response).to have_http_status(:unauthorized)
         body = JSON.parse(response.body)
         expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.bad_credentials')]

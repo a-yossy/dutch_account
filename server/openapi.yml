@@ -41,6 +41,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /management_groups:
+    post:
+      tags:
+        - managementGroup
+      summary: 管理グループを作成
+      description: 管理グループを作成する
+      operationId: addManagementGroup
+      requestBody:
+        $ref: "#/components/requestBodies/ManagementGroupBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManagementGroup"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /payment_groups:
     get:
       tags:
@@ -671,6 +693,19 @@ components:
                   format: date
                   description: 取引日
                   example: "2022-01-01"
+    ManagementGroupBody:
+      description: リクエスト用の管理グループ
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+                description: 管理グループ名
+                example: 家族
     SignUpBody:
       description: サインアップ用のユーザー
       content:

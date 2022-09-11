@@ -15,7 +15,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
       end
 
       it 'respond with success' do
-        post api_v1_sign_in_path, params: params,
+        post api_v1_sign_in_path, params:,
                                   headers: { 'content-type': 'application/json', accept: 'application/json' }
         expect(response).to have_http_status(:success)
         expect(response.has_header?('access-token')).to eq true
@@ -36,7 +36,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
       end
 
       it 'respond with unauthorized' do
-        post api_v1_sign_in_path, params: params,
+        post api_v1_sign_in_path, params:,
                                   headers: { 'content-type': 'application/json', accept: 'application/json' }
         expect(response).to have_http_status(:unauthorized)
         body = JSON.parse(response.body)

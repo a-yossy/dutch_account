@@ -17,7 +17,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       it 'respond with success' do
         expect do
           post_as_json api_v1_sign_up_path, params
-          expect(response).to have_http_status(:success)
+          expect(response).to have_http_status :success
         end.to change(User, :count).by(1)
         expect(response.has_header?('access-token')).to eq true
         expect(response.has_header?('uid')).to eq true
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       it 'respond with unprocessable_entity' do
         expect do
           post_as_json api_v1_sign_up_path, params
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status :unprocessable_entity
         end.not_to change(User, :count)
         body = JSON.parse(response.body)
         expect(body['messages']).to eq [

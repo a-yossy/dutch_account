@@ -16,7 +16,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'respond with success' do
         post_as_json api_v1_sign_in_path, params
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status :success
         expect(response.has_header?('access-token')).to eq true
         expect(response.has_header?('uid')).to eq true
         expect(response.has_header?('client')).to eq true
@@ -36,7 +36,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'respond with unauthorized' do
         post_as_json api_v1_sign_in_path, params
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status :unauthorized
         body = JSON.parse(response.body)
         expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.bad_credentials')]
       end
@@ -51,7 +51,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'respond with success' do
         delete api_v1_sign_out_path, headers: auth_tokens
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status :success
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'respond with not_found' do
         delete api_v1_sign_out_path
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status :not_found
         body = JSON.parse(response.body)
         expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.user_not_found')]
       end

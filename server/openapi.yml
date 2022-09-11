@@ -8,9 +8,8 @@ servers:
     description: 開発環境
 tags:
   - name: paymentGroup
-  - name: userPaymentGroup
-  - name: purchaseRecord
-  - name: remittanceRecord
+  - name: affiliation
+  - name: debtRecord
   - name: user
 security:
   - accessToken: []
@@ -21,7 +20,7 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 全支払グループ取得
+      summary: 全ての支払グループを取得
       description: 全ての支払グループを取得する
       operationId: getPaymentGroups
       responses:
@@ -40,7 +39,7 @@ paths:
     post:
       tags:
         - paymentGroup
-      summary: 支払グループ作成
+      summary: 支払グループを作成
       description: 支払グループを作成する
       operationId: addPaymentGroup
       requestBody:
@@ -64,8 +63,8 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: 支払グループ取得
-      description: 支払グループIDで支払グループを取得する
+      summary: 支払グループを取得
+      description: 支払グループを取得する
       operationId: getPaymentGroupByPaymentGroupId
       responses:
         200:
@@ -83,8 +82,8 @@ paths:
     put:
       tags:
         - paymentGroup
-      summary: 支払グループ更新
-      description: 支払グループIDで支払グループを更新する
+      summary: 支払グループを更新
+      description: 支払グループを更新する
       operationId: updatePaymentGroupByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
@@ -106,8 +105,8 @@ paths:
     delete:
       tags:
         - paymentGroup
-      summary: 支払グループ削除
-      description: 支払グループIDで支払グループを削除する
+      summary: 支払グループを削除
+      description: 支払グループを削除する
       operationId: deletePaymentGroupByPaymentGroupId
       responses:
         204:
@@ -118,15 +117,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/user_payment_groups:
+  /payment_groups/{payment_group_id}/affiliation_users:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - userPaymentGroup
-      summary: 支払グループに紐づく全ユーザー支払グループ取得
-      description: 支払グループIDで全てのユーザー支払グループを取得する
-      operationId: getUserPaymentGroupsByPaymentGroupId
+        - affiliation
+      summary: ある支払グループに所属する全てのユーザーを取得
+      description: ある支払グループに所属する全てのユーザーを取得する
+      operationId: getAffiliationUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -135,46 +134,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserPaymentGroup"
+                  $ref: "#/components/schemas/AffiliationUser"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/{user_payment_group_id}:
-    parameters:
-      - $ref: "#/components/parameters/UserPaymentGroupId"
-    get:
-      tags:
-        - userPaymentGroup
-      summary: ユーザー支払グループ取得
-      description: ユーザー支払グループIDでユーザー支払グループを取得する
-      operationId: getUserPaymentGroupByUserPaymentGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserPaymentGroup"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/user_payment_groups/bulk_insert:
+  /payment_groups/{payment_group_id}/affiliations/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
-        - userPaymentGroup
-      summary: ユーザー支払グループ複数作成
-      description: 支払グループIDでユーザー支払グループを複数作成する
-      operationId: addUserPaymentGroupsByPaymentGroupId
+        - affiliation
+      summary: ある支払グループに複数のユーザーを所属させる
+      description: ある支払グループに複数のユーザーを所属させる
+      operationId: addAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
+        $ref: "#/components/requestBodies/AffiliationsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -183,7 +160,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserPaymentGroup"
+                  $ref: "#/components/schemas/AffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -192,17 +169,17 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/user_payment_groups/bulk_update:
+  /payment_groups/{payment_group_id}/affiliations/bulk_update:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
-        - userPaymentGroup
-      summary: ユーザー支払グループ複数更新
-      description: 支払グループIDでユーザー支払グループを複数更新する
-      operationId: updateUserPaymentGroupsByPaymentGroupId
+        - affiliation
+      summary: 複数のユーザーのある支払グループへの所属情報を更新
+      description: 複数のユーザーのある支払グループへの所属情報を更新する
+      operationId: updateAffiliationsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/UserPaymentGroupsBody"
+        $ref: "#/components/requestBodies/AffiliationsBody"
       responses:
         200:
           description: 更新が成功した時のレスポンス
@@ -211,7 +188,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UserPaymentGroup"
+                  $ref: "#/components/schemas/AffiliationUser"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -220,15 +197,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/purchase_records:
+  /users/{lending_user_id}/borrowing_user_debt_records:
     parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
+      - $ref: "#/components/parameters/LendingUserId"
     get:
       tags:
-        - purchaseRecord
-      summary: 支払グループに紐づく全購入履歴取得
-      description: 支払グループIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByPaymentGroupId
+        - debtRecord
+      summary: 貸主に紐づく全ての借金履歴及び借主名を取得
+      description: 貸主に紐づく全ての借金履歴及び借主名を取得する
+      operationId: getBorrowingUserDebtRecordsByLendingUserId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -237,70 +214,22 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PurchaseRecord"
+                  $ref: "#/components/schemas/BorrowingUserDebtRecord"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /users/{user_id}/purchase_records:
-    parameters:
-      - $ref: "#/components/parameters/UserId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: ユーザーに紐づく全購入履歴取得
-      description: ユーザーIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/{user_payment_group_id}/purchase_records:
-    parameters:
-      - $ref: "#/components/parameters/UserPaymentGroupId"
-    get:
-      tags:
-        - purchaseRecord
-      summary: ユーザー支払グループに紐づく全購入履歴取得
-      description: ユーザー支払グループIDで全ての購入履歴を取得する
-      operationId: getPurchaseRecordsByUserPaymentGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PurchaseRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/purchase_records/bulk_insert:
+  /users/debt_records/bulk_insert:
     post:
       tags:
-        - purchaseRecord
-      summary: 購入履歴複数作成
-      description: 購入履歴を複数作成する
-      operationId: addPurchaseRecords
+        - debtRecord
+      summary: 借金履歴を複数作成
+      description: 借金履歴を複数作成する
+      operationId: addDebtRecords
       requestBody:
-        $ref: "#/components/requestBodies/PurchaseRecordsBody"
+        $ref: "#/components/requestBodies/DebtRecordsBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -309,218 +238,44 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PurchaseRecord"
+                  $ref: "#/components/schemas/UserDebtRecord"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /purchase_records/{purchase_record_id}:
+  /user_debt_records/{debt_record_id}:
     parameters:
-      - $ref: "#/components/parameters/PurchaseRecordId"
+      - $ref: "#/components/parameters/DebtRecordId"
     get:
       tags:
-        - purchaseRecord
-      summary: 購入履歴取得
-      description: 購入履歴IDで購入履歴を取得する
-      operationId: getPurchaseRecordByPurchaseRecordId
+        - debtRecord
+      summary: 借金履歴及びユーザー名を取得
+      description: 借金履歴及びユーザー名を取得する
+      operationId: getUserDebtRecordByDebtRecordId
       responses:
         200:
           description: 取得が成功した時のレスポンス
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PurchaseRecord"
+                $ref: "#/components/schemas/UserDebtRecord"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    put:
-      tags:
-        - purchaseRecord
-      summary: 購入履歴更新
-      description: 購入履歴IDで購入履歴を更新する
-      operationId: updatePurchaseRecordByPurchaseRecordId
-      requestBody:
-        $ref: "#/components/requestBodies/PurchaseRecordBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PurchaseRecord"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
+  /debt_records/{debt_record_id}:
+    parameters:
+      - $ref: "#/components/parameters/DebtRecordId"
     delete:
       tags:
-        - purchaseRecord
-      summary: 購入履歴削除
-      description: 購入履歴IDで購入履歴を削除する
-      operationId: deletePurchaseRecordByPurchaseRecordId
-      responses:
-        204:
-          $ref: "#/components/responses/NoContent"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/remittance_records:
-    parameters:
-      - $ref: "#/components/parameters/PaymentGroupId"
-    get:
-      tags:
-        - remittanceRecord
-      summary: 支払グループに紐づく全送金着金履歴取得
-      description: 支払グループIDで全ての送金着金履歴を取得する
-      operationId: getRemittanceRecordsByPaymentGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/RemittanceRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /users/{from_user_id}/remittance_records:
-    parameters:
-      - $ref: "#/components/parameters/FromUserId"
-    get:
-      tags:
-        - remittanceRecord
-      summary: 送金ユーザーに紐づく全着金履歴取得
-      description: 送金ユーザーIDで全ての着金履歴を取得する
-      operationId: getToRemittanceRecordsByFromUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ToRemittanceRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /users/{to_user_id}/remittance_records:
-    parameters:
-      - $ref: "#/components/parameters/ToUserId"
-    get:
-      tags:
-        - remittanceRecord
-      summary: 着金ユーザーに紐づく全送金履歴取得
-      description: 着金ユーザーIDで全ての送金履歴を取得する
-      operationId: getFromRemittanceRecordsByToUserId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/FromRemittanceRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user_payment_groups/remittance_records:
-    post:
-      tags:
-        - remittanceRecord
-      summary: 送金履歴作成
-      description: 送金履歴を作成する
-      operationId: addRemittanceRecord
-      requestBody:
-        $ref: "#/components/requestBodies/RemittanceRecordBody"
-      responses:
-        201:
-          description: 作成が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RemittanceRecord"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /remittance_records/{remittance_record_id}:
-    parameters:
-      - $ref: "#/components/parameters/RemittanceRecordId"
-    get:
-      tags:
-        - remittanceRecord
-      summary: 送金履歴取得
-      description: 送金履歴IDで送金履歴を取得する
-      operationId: getRemittanceRecordByRemittanceRecordId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RemittanceRecord"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    put:
-      tags:
-        - remittanceRecord
-      summary: 送金履歴更新
-      description: 送金履歴IDで送金履歴を更新する
-      operationId: updateRemittanceRecordByRemittanceRecordId
-      requestBody:
-        $ref: "#/components/requestBodies/RemittanceRecordBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RemittanceRecord"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - remittanceRecord
-      summary: 送金履歴削除
-      description: 送金履歴IDで送金履歴を削除する
-      operationId: deleteRemittanceRecordByRemittanceRecordId
+        - debtRecord
+      summary: 借金履歴を削除
+      description: 借金履歴を削除する
+      operationId: deleteDebtRecordByDebtRecordId
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -706,20 +461,20 @@ components:
           type: string
           description: 支払グループ名
           example: 家族
-    UserPaymentGroup:
-      description: ユーザー支払グループ
+    AffiliationUser:
+      description: ある支払グループに所属するユーザー
       type: object
       required:
         - id
-        - name
+        - user_name
         - payment_ratio
       properties:
         id:
           type: integer
           format: int64
-          description: ユーザー支払グループID
+          description: 所属ID
           example: 1
-        name:
+        user_name:
           type: string
           description: ユーザー名
           example: 太郎
@@ -728,172 +483,81 @@ components:
           format: float
           description: 支払割合
           example: 0.4
-    PurchaseRecord:
-      description: 購入履歴
+    UserDebtRecord:
+      description: 借金履歴及びユーザー名
       type: object
       required:
         - id
-        - name
+        - lending_user_name
+        - borrowing_user_name
         - amount_of_money
-        - purchased_on
         - description
+        - transacted_on
       properties:
         id:
           type: integer
           format: int64
-          description: 購入履歴ID
+          description: 借金履歴ID
           example: 1
-        name:
+        lending_user_name:
           type: string
-          description: ユーザー名
+          description: 貸主名
           example: 太郎
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 購入金額
-          example: 3000
-        purchased_on:
+        borrowing_user_name:
           type: string
-          format: date
-          description: 購入日
-          example: "2022-01-01"
-        description:
-          type: string
-          description: 購入説明
-          example: 食材
-    PurchaseRecordRequestBody:
-      description: 購入履歴のリクエスト
-      type: object
-      required:
-        - user_payment_group_id
-        - amount_of_money
-        - purchased_on
-        - description
-      properties:
-        user_payment_group_id:
-            type: integer
-            format: int64
-            description: ユーザー支払グループID
-            example: 1
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 購入金額
-          example: 3000
-        purchased_on:
-          type: string
-          format: date
-          description: 購入日
-          example: "2022-01-01"
-        description:
-          type: string
-          description: 購入説明
-          example: 食材
-    RemittanceRecord:
-      description: 送金着金履歴
-      type: object
-      required:
-        - id
-        - from_user_name
-        - to_user_name
-        - amount_of_money
-        - transferred_on
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: 送金履歴ID
-          example: 1
-        from_user_name:
-          type: string
-          description: 送金ユーザー名
-          example: 太郎
-        to_user_name:
-          type: string
-          description: 着金ユーザー名
+          description: 借主名
           example: 次郎
         amount_of_money:
           type: integer
           format: int32
-          description: 送金金額
+          description: 金額
           example: 3000
-        transferred_on:
+        description:
+          type: string
+          description: 説明
+          example: 食材
+        transacted_on:
           type: string
           format: date
-          description: 送金日
+          description: 取引日
           example: "2022-01-01"
-    FromRemittanceRecord:
-      description: 送金履歴
+    BorrowingUserDebtRecord:
+      description: 借金履歴及び借主名
       type: object
       required:
         - id
-        - from_user_name
+        - borrowing_user_name
         - amount_of_money
-        - transferred_on
+        - description
+        - transacted_on
       properties:
         id:
           type: integer
           format: int64
-          description: 送金履歴ID
+          description: 借金履歴ID
           example: 1
-        from_user_name:
-          type: string
-          description: 送金ユーザー名
-          example: 太郎
-        amount_of_money:
-          type: integer
-          format: int32
-          description: 送金金額
-          example: 3000
-        transferred_on:
-          type: string
-          format: date
-          description: 送金日
-          example: "2022-01-01"
-    ToRemittanceRecord:
-      description: 着金履歴
-      type: object
-      required:
-        - id
-        - to_user_name
-        - amount_of_money
-        - transferred_on
-      properties:
-        id:
+        borrowing_user_name:
           type: integer
           format: int64
-          description: 送金履歴ID
-          example: 1
-        to_user_name:
-          type: string
-          description: 着金ユーザー名
+          description: 借主名
           example: 次郎
         amount_of_money:
           type: integer
           format: int32
-          description: 送金金額
+          description: 金額
           example: 3000
-        transferred_on:
+        description:
+          type: string
+          description: 説明
+          example: 食材
+        transacted_on:
           type: string
           format: date
-          description: 送金日
+          description: 取引日
           example: "2022-01-01"
   requestBodies:
-    UserBody:
-      description: リクエストユーザー
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - name
-            properties:
-              name:
-                type: string
-                description: ユーザー名
-                example: 太郎
     PaymentGroupBody:
-      description: リクエスト支払グループ
+      description: リクエスト用の支払グループ
       content:
         application/json:
           schema:
@@ -905,8 +569,8 @@ components:
                 type: string
                 description: 支払グループ名
                 example: 家族
-    UserPaymentGroupsBody:
-      description: リクエスト複数ユーザー支払グループ
+    AffiliationsBody:
+      description: リクエスト用の所属の配列
       content:
         application/json:
           schema:
@@ -927,54 +591,47 @@ components:
                   format: float
                   description: 支払割合
                   example: 0.4
-    PurchaseRecordBody:
-      description: リクエスト購入履歴
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/PurchaseRecordRequestBody"
-    PurchaseRecordsBody:
-      description: リクエスト複数購入履歴
+    DebtRecordsBody:
+      description: リクエスト用の借金履歴の配列
       content:
         application/json:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/PurchaseRecordRequestBody"
-    RemittanceRecordBody:
-      description: リクエスト送金履歴
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - from_user_payment_group_id
-              - to_user_payment_group_id
-              - amount_of_money
-              - transferred_on
-            properties:
-              from_user_payment_group_id:
-                type: integer
-                format: int64
-                description: 送金ユーザーID
-                example: 1
-              to_user_payment_group_id:
-                type: integer
-                format: int64
-                description: 着金ユーザーID
-                example: 2
-              amount_of_money:
-                type: integer
-                format: int32
-                description: 送金金額
-                example: 3000
-              transferred_on:
-                type: string
-                format: date
-                description: 送金日
-                example: "2022-01-01"
+              type: object
+              required:
+                - lending_user_id
+                - borrowing_user_id
+                - amount_of_money
+                - description
+                - transacted_on
+              properties:
+                lending_user_id:
+                    type: integer
+                    format: int64
+                    description: 貸主ID
+                    example: 1
+                borrowing_user_id:
+                    type: integer
+                    format: int64
+                    description: 借主ID
+                    example: 2
+                amount_of_money:
+                  type: integer
+                  format: int32
+                  description: 金額
+                  example: 3000
+                description:
+                  type: string
+                  description: 説明
+                  example: 食材
+                transacted_on:
+                  type: string
+                  format: date
+                  description: 取引日
+                  example: "2022-01-01"
     SignUpBody:
-      description: サインアップ
+      description: サインアップ用のユーザー
       content:
         application/json:
           schema:
@@ -1005,7 +662,7 @@ components:
                 description: 確認用パスワード
                 example: password
     SignInBody:
-      description: サインイン
+      description: サインイン用のユーザー
       content:
         application/json:
           schema:
@@ -1025,28 +682,10 @@ components:
                 description: パスワード
                 example: password
   parameters:
-    UserId:
-      name: user_id
+    LendingUserId:
+      name: lending_user_id
       in: path
-      description: ユーザーID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    FromUserId:
-      name: from_user_id
-      in: path
-      description: 送金ユーザーID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    ToUserId:
-      name: to_user_id
-      in: path
-      description: 着金ユーザーID
+      description: 貸主ID
       required: true
       schema:
         type: integer
@@ -1061,28 +700,10 @@ components:
         type: integer
         format: int64
         example: 1
-    UserPaymentGroupId:
-      name: user_payment_group_id
+    DebtRecordId:
+      name: debt_record_id
       in: path
-      description: ユーザー支払グループID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    RemittanceRecordId:
-      name: remittance_record_id
-      in: path
-      description: 送金履歴ID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    PurchaseRecordId:
-      name: purchase_record_id
-      in: path
-      description: 購入履歴ID
+      description: 借金履歴ID
       required: true
       schema:
         type: integer

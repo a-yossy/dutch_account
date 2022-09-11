@@ -92,8 +92,8 @@ paths:
     get:
       tags:
         - managementAffiliation
-      summary: ある管理グループに所属する全てのユーザーを取得
-      description: ある管理グループに所属する全てのユーザーを取得する
+      summary: 管理グループに所属する全てのユーザーを取得
+      description: 管理グループに所属する全てのユーザーを取得する
       operationId: getManagementAffiliationUsersByManagementGroupId
       responses:
         200:
@@ -116,8 +116,8 @@ paths:
     get:
       tags:
         - paymentGroup
-      summary: ある管理グループに紐づく全ての支払グループを取得
-      description: ある管理グループに紐づく全ての支払グループを取得する
+      summary: 管理グループに紐づく全ての支払グループを取得
+      description: 管理グループに紐づく全ての支払グループを取得する
       operationId: getPaymentGroupsByManagementGroupId
       responses:
         200:
@@ -137,8 +137,8 @@ paths:
     post:
       tags:
         - paymentGroup
-      summary: ある管理グループに紐づく支払グループを作成
-      description: ある管理グループに紐づく支払グループを作成する
+      summary: 管理グループに紐づく支払グループを作成
+      description: 管理グループに紐づく支払グループを作成する
       operationId: addPaymentGroupByManagementGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
@@ -223,8 +223,8 @@ paths:
     get:
       tags:
         - paymentAffiliation
-      summary: ある支払グループに所属する全てのユーザーを取得
-      description: ある支払グループに所属する全てのユーザーを取得する
+      summary: 支払グループに所属する全てのユーザーを取得
+      description: 支払グループに所属する全てのユーザーを取得する
       operationId: getPaymentAffiliationUsersByPaymentGroupId
       responses:
         200:
@@ -247,8 +247,8 @@ paths:
     post:
       tags:
         - paymentAffiliation
-      summary: ある支払グループに複数のユーザーを所属させる
-      description: ある支払グループに複数のユーザーを所属させる
+      summary: 支払グループに複数のユーザーを所属させる
+      description: 支払グループに複数のユーザーを所属させる
       operationId: addPaymentAffiliationsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentAffiliationsBody"
@@ -275,8 +275,8 @@ paths:
     put:
       tags:
         - paymentAffiliation
-      summary: 複数のユーザーのある支払グループへの所属情報を更新
-      description: 複数のユーザーのある支払グループへの所属情報を更新する
+      summary: 複数のユーザーの支払グループへの所属情報を更新
+      description: 複数のユーザーの支払グループへの所属情報を更新する
       operationId: updatePaymentAffiliationsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentAffiliationsBody"
@@ -562,7 +562,7 @@ components:
           description: 支払グループ名
           example: 兄弟
     PaymentAffiliationUser:
-      description: ある支払グループに所属するユーザー
+      description: 支払グループに所属するユーザー
       type: object
       required:
         - id
@@ -672,7 +672,7 @@ components:
           description: 管理グループ名
           example: 家族
     ManagementAffiliationUser:
-      description: ある管理グループに所属するユーザー
+      description: 管理グループに所属するユーザー
       type: object
       required:
         - id

@@ -6,7 +6,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
   describe '#create' do
     subject { post_as_json api_v1_sign_in_path, params }
 
-    before { create(:user, name: 'taro', email: 'email@example.com', password: 'password') }
+    let!(:user) { create(:user, name: 'taro', email: 'email@example.com', password: 'password') }
 
     context 'with valid params' do
       let(:params) do
@@ -23,7 +23,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         expect(response.has_header?('uid')).to eq true
         expect(response.has_header?('client')).to eq true
         body = JSON.parse(response.body)
-        expect(body['id']).to be_present
+        expect(body['id']).to eq user.id
         expect(body['name']).to eq 'taro'
       end
     end

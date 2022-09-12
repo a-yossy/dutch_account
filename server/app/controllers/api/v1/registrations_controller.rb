@@ -10,10 +10,9 @@ class Api::V1::RegistrationsController < DeviseTokenAuth::RegistrationsControlle
   end
 
   def render_create_success
-    data = resource_data
     render json: {
-      id: data['id'],
-      name: data['name']
+      id: resource_data['id'],
+      name: resource_data['name']
     }
   end
 

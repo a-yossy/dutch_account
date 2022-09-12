@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::RegistrationsController, type: :request do
-  describe 'sign up' do
+  describe '#create' do
     context 'with valid params' do
       let(:params) do
         {
@@ -14,7 +14,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         }
       end
 
-      it 'respond with success' do
+      it 'responds with success' do
         expect do
           post_as_json api_v1_sign_up_path, params
           expect(response).to have_http_status :success
@@ -38,7 +38,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         }
       end
 
-      it 'respond with unprocessable_entity' do
+      it 'responds with unprocessable_entity' do
         expect do
           post_as_json api_v1_sign_up_path, params
           expect(response).to have_http_status :unprocessable_entity

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
-  describe 'sign in' do
+  describe '#create' do
     before { create(:user, name: 'taro', email: 'email@example.com', password: 'password') }
 
     context 'with valid params' do
@@ -14,7 +14,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         }
       end
 
-      it 'respond with success' do
+      it 'responds with success' do
         post_as_json api_v1_sign_in_path, params
         expect(response).to have_http_status :success
         expect(response.has_header?('access-token')).to eq true
@@ -34,7 +34,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         }
       end
 
-      it 'respond with unauthorized' do
+      it 'responds with unauthorized' do
         post_as_json api_v1_sign_in_path, params
         expect(response).to have_http_status :unauthorized
         body = JSON.parse(response.body)
@@ -43,13 +43,13 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     end
   end
 
-  describe 'sign out' do
+  describe '#destroy' do
     let(:user) { create(:user) }
 
     context 'with valid headers' do
       let(:auth_tokens) { sign_in(user) }
 
-      it 'respond with success' do
+      it 'responds with success' do
         delete api_v1_sign_out_path, headers: auth_tokens
         expect(response).to have_http_status :success
       end
@@ -58,7 +58,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     context 'without valid headers' do
       before { sign_in(user) }
 
-      it 'respond with not_found' do
+      it 'responds with not_found' do
         delete api_v1_sign_out_path
         expect(response).to have_http_status :not_found
         body = JSON.parse(response.body)

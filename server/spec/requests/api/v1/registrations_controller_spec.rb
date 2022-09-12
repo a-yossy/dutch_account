@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::RegistrationsController, type: :request do
   describe '#create' do
+    subject { post_as_json api_v1_sign_up_path, params }
+
     context 'with valid params' do
       let(:params) do
         {
@@ -15,7 +17,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       end
 
       it 'responds with success' do
-        expect { post_as_json api_v1_sign_up_path, params }.to change(User, :count).by(1)
+        expect { subject }.to change(User, :count).by(1)
         expect(response).to have_http_status :success
         expect(response.has_header?('access-token')).to eq true
         expect(response.has_header?('uid')).to eq true
@@ -37,7 +39,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
       end
 
       it 'responds with unprocessable_entity' do
-        expect { post_as_json api_v1_sign_up_path, params }.not_to change(User, :count)
+        expect { subject }.not_to change(User, :count)
         expect(response).to have_http_status :unprocessable_entity
         body = JSON.parse(response.body)
         expect(body['messages']).to eq [

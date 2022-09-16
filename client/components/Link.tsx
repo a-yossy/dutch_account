@@ -1,12 +1,15 @@
 import { FC } from "react"
 import NextLink from "next/link"
-import { Link as ChakraLink } from "@chakra-ui/react"
+import {
+  Link as ChakraLink,
+  LinkProps as ChakraLinkProps
+} from "@chakra-ui/react"
 
 type LinkProps = {
   href: string
-  ml: number
-  fontSize: number
-  fontWeight: string
+  ml: ChakraLinkProps['ml']
+  fontSize: ChakraLinkProps['fontSize']
+  fontWeight: ChakraLinkProps['fontWeight']
   title: string
 }
 

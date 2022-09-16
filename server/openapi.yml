@@ -522,6 +522,7 @@ components:
       type: object
       required:
         - messages
+      additionalProperties: false
       properties:
         messages:
           type: array
@@ -535,6 +536,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -551,6 +553,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -568,6 +571,7 @@ components:
         - id
         - user_name
         - ratio
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -593,6 +597,7 @@ components:
         - amount_of_money
         - description
         - transacted_on
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -630,6 +635,7 @@ components:
         - amount_of_money
         - description
         - transacted_on
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -661,6 +667,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -677,6 +684,7 @@ components:
       required:
         - id
         - user_name
+      additionalProperties: false
       properties:
         id:
           type: integer

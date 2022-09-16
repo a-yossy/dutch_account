@@ -18,13 +18,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
 
       it 'responds with success' do
         expect { subject }.to change(User, :count).by(1)
-        expect(response).to have_http_status :success
-        expect(response.has_header?('access-token')).to eq true
-        expect(response.has_header?('uid')).to eq true
-        expect(response.has_header?('client')).to eq true
-        body = JSON.parse(response.body)
-        expect(body['id']).to be_present
-        expect(body['name']).to eq 'taro'
+        assert_response_schema_confirm(200)
       end
     end
 
@@ -40,15 +34,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
 
       it 'responds with unprocessable_entity' do
         expect { subject }.not_to change(User, :count)
-        expect(response).to have_http_status :unprocessable_entity
-        body = JSON.parse(response.body)
-        expect(body['messages']).to eq [
-          I18n.t(
-            'errors.format',
-            attribute: User.human_attribute_name(:email),
-            message: I18n.t('errors.messages.blank')
-          )
-        ]
+        assert_response_schema_confirm(422)
       end
     end
   end

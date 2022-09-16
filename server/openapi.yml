@@ -442,7 +442,7 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /sign_out:
-    post:
+    delete:
       tags:
         - user
       summary: サインアウト

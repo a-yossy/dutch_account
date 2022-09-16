@@ -449,10 +449,8 @@ paths:
       description: サインアウトする
       operationId: signOut
       responses:
-        200:
-          description: サインアウトに成功した時のレスポンス
-          content:
-            {}
+        204:
+          $ref: "#/components/responses/NoContent"
         404:
           $ref: "#/components/responses/NotFound"
         500:
@@ -461,8 +459,6 @@ components:
   responses:
     NoContent:
       description: リクエストが成功し、返すリソースがない時のレスポンス
-      content:
-        {}
     BadRequest:
       description: リクエストパラメーターに不備がある時のレスポンス
       content:

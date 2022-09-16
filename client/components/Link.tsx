@@ -3,11 +3,11 @@ import NextLink from "next/link"
 import { Link as ChakraLink } from "@chakra-ui/react"
 
 type LinkProps = {
-  readonly href: string
-  readonly ml: number
-  readonly fontSize: number
-  readonly fontWeight: string
-  readonly title: string
+  href: string
+  ml: number
+  fontSize: number
+  fontWeight: string
+  title: string
 }
 
 const Link: FC<LinkProps> = ({ href, ml, fontSize, fontWeight, title }) => (

@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Header from 'components/layouts/Header'
 
 type LayoutProps = {
-  readonly children: ReactElement
+  children: ReactElement
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => (

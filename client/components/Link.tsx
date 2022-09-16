@@ -4,9 +4,9 @@ import { Link as ChakraLink } from "@chakra-ui/react"
 
 type LinkProps = Required<{
   readonly href: string
-  readonly ml: number,
-  readonly fontSize: number,
-  readonly fontWeight: string,
+  readonly ml: number
+  readonly fontSize: number
+  readonly fontWeight: string
   readonly title: string
 }>
 

@@ -2,9 +2,9 @@ import { FC, ReactElement } from 'react'
 import Head from 'next/head'
 import Header from 'components/layouts/Header'
 
-type LayoutProps = Required<{
+type LayoutProps = {
   readonly children: ReactElement
-}>
+}
 
 const Layout: FC<LayoutProps> = ({ children }) => (
   <>

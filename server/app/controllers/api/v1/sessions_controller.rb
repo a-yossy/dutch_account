@@ -18,7 +18,7 @@ class Api::V1::SessionsController < DeviseTokenAuth::SessionsController
   end
 
   def render_destroy_success
-    render status: :ok
+    head :no_content
   end
 
   def render_destroy_error

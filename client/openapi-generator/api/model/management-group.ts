@@ -15,16 +15,22 @@
 
 
 /**
- * エラー
+ * 管理グループ
  * @export
- * @interface ModelError
+ * @interface ManagementGroup
  */
-export interface ModelError {
+export interface ManagementGroup {
     /**
-     * エラーメッセージ
-     * @type {Array<string>}
-     * @memberof ModelError
+     * 管理グループID
+     * @type {number}
+     * @memberof ManagementGroup
      */
-    'messages': Array<string>;
+    'id': number;
+    /**
+     * 管理グループ名
+     * @type {string}
+     * @memberof ManagementGroup
+     */
+    'name': string;
 }
 

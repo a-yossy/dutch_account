@@ -21,7 +21,7 @@
  */
 export interface SignUpRequest {
     /**
-     * 管理者名
+     * ユーザー名
      * @type {string}
      * @memberof SignUpRequest
      */
@@ -38,5 +38,11 @@ export interface SignUpRequest {
      * @memberof SignUpRequest
      */
     'password': string;
+    /**
+     * 確認用パスワード
+     * @type {string}
+     * @memberof SignUpRequest
+     */
+    'password_confirmation': string;
 }
 

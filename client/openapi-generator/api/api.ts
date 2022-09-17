@@ -14,10 +14,10 @@
 
 
 
-export * from './api/admin-api';
+export * from './api/debt-record-api';
+export * from './api/management-affiliation-api';
+export * from './api/management-group-api';
+export * from './api/payment-affiliation-api';
 export * from './api/payment-group-api';
-export * from './api/purchase-record-api';
-export * from './api/remittance-record-api';
 export * from './api/user-api';
-export * from './api/user-payment-group-api';
 

@@ -15,16 +15,22 @@
 
 
 /**
- * エラー
+ * 
  * @export
- * @interface ModelError
+ * @interface SignInRequest
  */
-export interface ModelError {
+export interface SignInRequest {
     /**
-     * エラーメッセージ
-     * @type {Array<string>}
-     * @memberof ModelError
+     * メールアドレス
+     * @type {string}
+     * @memberof SignInRequest
      */
-    'messages': Array<string>;
+    'email': string;
+    /**
+     * パスワード
+     * @type {string}
+     * @memberof SignInRequest
+     */
+    'password': string;
 }
 

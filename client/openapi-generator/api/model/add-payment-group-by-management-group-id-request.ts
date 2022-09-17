@@ -15,16 +15,16 @@
 
 
 /**
- * エラー
+ * 
  * @export
- * @interface ModelError
+ * @interface AddPaymentGroupByManagementGroupIdRequest
  */
-export interface ModelError {
+export interface AddPaymentGroupByManagementGroupIdRequest {
     /**
-     * エラーメッセージ
-     * @type {Array<string>}
-     * @memberof ModelError
+     * 支払グループ名
+     * @type {string}
+     * @memberof AddPaymentGroupByManagementGroupIdRequest
      */
-    'messages': Array<string>;
+    'name': string;
 }
 

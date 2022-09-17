@@ -1,9 +1,9 @@
-import { FC, ReactElement } from 'react'
+import { FC, ReactNode } from 'react'
 import Head from 'next/head'
 import Header from 'components/layouts/Header'
 
 type LayoutProps = {
-  children: ReactElement
+  children: ReactNode
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => (

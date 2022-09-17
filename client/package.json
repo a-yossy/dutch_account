@@ -10,6 +10,10 @@
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./openapi-generator/api -c ./openapiConfig.yml"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.3.2",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "framer-motion": "^7.3.4",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"

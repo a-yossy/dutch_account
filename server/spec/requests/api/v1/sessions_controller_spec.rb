@@ -6,7 +6,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
   describe '#create' do
     subject { post_as_json api_v1_sign_in_path, params }
 
-    let!(:user) { create(:user, name: 'taro', email: 'email@example.com', password: 'password') }
+    before { create(:user, email: 'email@example.com', password: 'password') }
 
     context 'with valid params' do
       let(:params) do
@@ -18,13 +18,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'responds with success' do
         subject
-        expect(response).to have_http_status :success
-        expect(response.has_header?('access-token')).to eq true
-        expect(response.has_header?('uid')).to eq true
-        expect(response.has_header?('client')).to eq true
-        body = JSON.parse(response.body)
-        expect(body['id']).to eq user.id
-        expect(body['name']).to eq 'taro'
+        assert_response_schema_confirm(200)
       end
     end
 
@@ -38,9 +32,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'responds with unauthorized' do
         subject
-        expect(response).to have_http_status :unauthorized
-        body = JSON.parse(response.body)
-        expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.bad_credentials')]
+        assert_response_schema_confirm(401)
       end
     end
   end
@@ -55,7 +47,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'responds with success' do
         subject
-        expect(response).to have_http_status :success
+        assert_response_schema_confirm(204)
       end
     end
 
@@ -64,9 +56,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
 
       it 'responds with not_found' do
         subject
-        expect(response).to have_http_status :not_found
-        body = JSON.parse(response.body)
-        expect(body['messages']).to eq [I18n.t('devise_token_auth.sessions.user_not_found')]
+        assert_response_schema_confirm(404)
       end
     end
   end

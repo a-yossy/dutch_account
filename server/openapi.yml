@@ -442,17 +442,15 @@ paths:
         500:
           $ref: "#/components/responses/InternalServerError"
   /sign_out:
-    post:
+    delete:
       tags:
         - user
       summary: サインアウト
       description: サインアウトする
       operationId: signOut
       responses:
-        200:
-          description: サインアウトに成功した時のレスポンス
-          content:
-            {}
+        204:
+          $ref: "#/components/responses/NoContent"
         404:
           $ref: "#/components/responses/NotFound"
         500:
@@ -461,8 +459,6 @@ components:
   responses:
     NoContent:
       description: リクエストが成功し、返すリソースがない時のレスポンス
-      content:
-        {}
     BadRequest:
       description: リクエストパラメーターに不備がある時のレスポンス
       content:
@@ -522,6 +518,7 @@ components:
       type: object
       required:
         - messages
+      additionalProperties: false
       properties:
         messages:
           type: array
@@ -535,6 +532,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -551,6 +549,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -568,6 +567,7 @@ components:
         - id
         - user_name
         - ratio
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -593,6 +593,7 @@ components:
         - amount_of_money
         - description
         - transacted_on
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -630,6 +631,7 @@ components:
         - amount_of_money
         - description
         - transacted_on
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -661,6 +663,7 @@ components:
       required:
         - id
         - name
+      additionalProperties: false
       properties:
         id:
           type: integer
@@ -677,6 +680,7 @@ components:
       required:
         - id
         - user_name
+      additionalProperties: false
       properties:
         id:
           type: integer

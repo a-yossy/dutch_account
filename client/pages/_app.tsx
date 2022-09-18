@@ -3,14 +3,13 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Layout from 'components/layouts/Layout';
 import theme from 'components/layouts/theme';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
-  );
-}
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <ChakraProvider theme={theme}>
+    <Layout>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <Component {...pageProps} />
+    </Layout>
+  </ChakraProvider>
+);
 
 export default MyApp;

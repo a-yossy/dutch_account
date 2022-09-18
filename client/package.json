@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write .",
+    "format": "yarn prettier --write .",
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./openapi-generator/api -c ./openapiConfig.yml"
   },
   "dependencies": {

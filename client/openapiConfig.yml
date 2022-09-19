@@ -1,5 +1,5 @@
-apiPackage: "api"
-modelPackage: "model"
-modelPropertyNaming: "camelCase"
+apiPackage: api
+modelPackage: model
+modelPropertyNaming: camelCase
 supportsES6: true
 withSeparateModelsAndApi: true

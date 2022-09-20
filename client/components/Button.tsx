@@ -7,7 +7,6 @@ import {
 type ButtonProps = {
   title: string;
   colorSchema: ChakraButtonProps['colorScheme'];
-  variant: ChakraButtonProps['variant'];
   type: ChakraButtonProps['type'];
   handleClick: () => void;
   isLoading: ChakraButtonProps['isLoading'];
@@ -16,7 +15,6 @@ type ButtonProps = {
 
 const Button: FC<ButtonProps> = ({
   colorSchema,
-  variant,
   type,
   handleClick,
   isLoading,
@@ -24,8 +22,8 @@ const Button: FC<ButtonProps> = ({
   mt,
 }) => (
   <ChakraButton
+    variant='outline'
     colorScheme={colorSchema}
-    variant={variant}
     type={type}
     onClick={handleClick}
     isLoading={isLoading}

@@ -60,7 +60,6 @@ const SignUp: NextPage = () => {
         <Button
           title='作成'
           colorSchema='cyan'
-          variant='outline'
           type='submit'
           handleClick={handleSubmit((values) => alert(JSON.stringify(values)))}
           isLoading={isSubmitting}

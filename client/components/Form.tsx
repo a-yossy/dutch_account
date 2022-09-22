@@ -34,8 +34,4 @@ const Form: FC<FormProps> = ({
   </FormControl>
 );
 
-Form.defaultProps = {
-  placeholder: undefined,
-};
-
 export default Form;

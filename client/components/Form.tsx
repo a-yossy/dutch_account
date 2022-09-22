@@ -10,7 +10,7 @@ import {
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 type FormProps = {
-  errors: FieldError | undefined;
+  error: FieldError | undefined;
   register: UseFormRegisterReturn;
   mt: FormControlProps['mt'];
   id: string;
@@ -20,7 +20,7 @@ type FormProps = {
 };
 
 const Form: FC<FormProps> = ({
-  errors,
+  error,
   register,
   mt,
   id,
@@ -28,10 +28,10 @@ const Form: FC<FormProps> = ({
   type,
   placeholder,
 }) => (
-  <FormControl isInvalid={typeof errors !== 'undefined'} mt={mt}>
+  <FormControl isInvalid={typeof error !== 'undefined'} mt={mt}>
     <FormLabel htmlFor={id}>{formLabel}</FormLabel>
     <Input type={type} placeholder={placeholder} id={id} {...register} />
-    <FormErrorMessage>{errors?.message}</FormErrorMessage>
+    <FormErrorMessage>{error?.message}</FormErrorMessage>
   </FormControl>
 );
 

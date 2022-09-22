@@ -23,7 +23,7 @@ const SignUp: NextPage = () => {
       </Text>
       <Box width={350} mx='auto'>
         <Form
-          errors={errors.name}
+          error={errors.name}
           register={register('name')}
           mt={5}
           id='name'
@@ -32,7 +32,7 @@ const SignUp: NextPage = () => {
           placeholder='taro'
         />
         <Form
-          errors={errors.email}
+          error={errors.email}
           register={register('email')}
           mt={5}
           id='email'
@@ -41,7 +41,7 @@ const SignUp: NextPage = () => {
           placeholder='email@example.com'
         />
         <Form
-          errors={errors.password}
+          error={errors.password}
           register={register('password')}
           mt={5}
           id='password'
@@ -50,7 +50,7 @@ const SignUp: NextPage = () => {
           placeholder='･･････'
         />
         <Form
-          errors={errors.password_confirmation}
+          error={errors.password_confirmation}
           register={register('password_confirmation')}
           mt={5}
           id='password_confirmation'

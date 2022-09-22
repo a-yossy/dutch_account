@@ -8,7 +8,6 @@ type ButtonProps = {
   title: string;
   colorSchema: ChakraButtonProps['colorScheme'];
   type: ChakraButtonProps['type'];
-  handleClick: () => void;
   isLoading: ChakraButtonProps['isLoading'];
   mt: ChakraButtonProps['mt'];
 };
@@ -16,7 +15,6 @@ type ButtonProps = {
 const Button: FC<ButtonProps> = ({
   colorSchema,
   type,
-  handleClick,
   isLoading,
   title,
   mt,
@@ -25,7 +23,6 @@ const Button: FC<ButtonProps> = ({
     variant='outline'
     colorScheme={colorSchema}
     type={type}
-    onClick={handleClick}
     isLoading={isLoading}
     mt={mt}
   >

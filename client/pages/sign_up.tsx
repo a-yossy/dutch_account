@@ -22,48 +22,51 @@ const SignUp: NextPage = () => {
         サインアップ
       </Text>
       <Box width={350} mx='auto'>
-        <Form
-          error={errors.name}
-          register={register('name')}
-          mt={5}
-          id='name'
-          formLabel='名前'
-          type='text'
-          placeholder='taro'
-        />
-        <Form
-          error={errors.email}
-          register={register('email')}
-          mt={5}
-          id='email'
-          formLabel='メールアドレス'
-          type='email'
-          placeholder='email@example.com'
-        />
-        <Form
-          error={errors.password}
-          register={register('password')}
-          mt={5}
-          id='password'
-          formLabel='パスワード'
-          type='password'
-        />
-        <Form
-          error={errors.password_confirmation}
-          register={register('password_confirmation')}
-          mt={5}
-          id='password_confirmation'
-          formLabel='確認用パスワード'
-          type='password'
-        />
-        <Button
-          title='作成'
-          colorSchema='cyan'
-          type='submit'
-          handleClick={handleSubmit((values) => alert(JSON.stringify(values)))}
-          isLoading={isSubmitting}
-          mt={5}
-        />
+        <form
+          onSubmit={handleSubmit((values) => alert(JSON.stringify(values)))}
+        >
+          <Form
+            error={errors.name}
+            register={register('name')}
+            mt={5}
+            id='name'
+            formLabel='名前'
+            type='text'
+            placeholder='taro'
+          />
+          <Form
+            error={errors.email}
+            register={register('email')}
+            mt={5}
+            id='email'
+            formLabel='メールアドレス'
+            type='email'
+            placeholder='email@example.com'
+          />
+          <Form
+            error={errors.password}
+            register={register('password')}
+            mt={5}
+            id='password'
+            formLabel='パスワード'
+            type='password'
+          />
+          <Form
+            error={errors.password_confirmation}
+            register={register('password_confirmation')}
+            mt={5}
+            id='password_confirmation'
+            formLabel='確認用パスワード'
+            type='password'
+          />
+          <Button
+            title='作成'
+            colorSchema='cyan'
+            type='submit'
+            isLoading={isSubmitting}
+            mt={5}
+          />
+        </form>
       </Box>
     </>
   );

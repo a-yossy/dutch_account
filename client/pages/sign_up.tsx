@@ -27,37 +27,37 @@ const SignUp: NextPage = () => {
         >
           <Form
             error={errors.name}
-            register={register('name')}
-            mt={5}
             id='name'
             formLabel='名前'
             type='text'
+            register={register('name')}
             placeholder='taro'
+            mt={5}
           />
           <Form
             error={errors.email}
-            register={register('email')}
-            mt={5}
             id='email'
             formLabel='メールアドレス'
             type='email'
+            register={register('email')}
             placeholder='email@example.com'
+            mt={5}
           />
           <Form
             error={errors.password}
-            register={register('password')}
-            mt={5}
             id='password'
             formLabel='パスワード'
             type='password'
+            register={register('password')}
+            mt={5}
           />
           <Form
             error={errors.password_confirmation}
-            register={register('password_confirmation')}
-            mt={5}
             id='password_confirmation'
             formLabel='確認用パスワード'
             type='password'
+            register={register('password_confirmation')}
+            mt={5}
           />
           <OutlineButton
             title='作成'

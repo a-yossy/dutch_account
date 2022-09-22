@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Box, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'components/Form';
-import Button from 'components/Button';
+import OutlineButton from 'components/OutlineButton';
 import SignUpSchema from 'formSchemas/signUpSchema';
 import { SignUpRequest } from 'openapi-generator/api';
 
@@ -59,9 +59,9 @@ const SignUp: NextPage = () => {
             formLabel='確認用パスワード'
             type='password'
           />
-          <Button
+          <OutlineButton
             title='作成'
-            colorSchema='cyan'
+            colorScheme='cyan'
             type='submit'
             isLoading={isSubmitting}
             mt={5}

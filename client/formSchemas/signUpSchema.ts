@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { SignUpRequest as OpenApiSignUpRequest } from 'openapi-generator/api';
 
-export interface SignUpRequest extends OpenApiSignUpRequest {
+type SignUpRequest = {
   password_confirmation: string;
-}
+} & OpenApiSignUpRequest;
 
 export const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
   z

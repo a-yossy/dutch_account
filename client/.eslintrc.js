@@ -24,14 +24,6 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     '@typescript-eslint/no-unused-vars': 'error',
-    'react/jsx-props-no-spreading': [
-      'error',
-      {
-        html: 'enforce',
-        custom: 'enforce',
-        explicitSpread: 'ignore',
-        exceptions: ['Input', 'Component'],
-      },
-    ],
+    'react/jsx-props-no-spreading': 'off',
   },
 };

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { SignUpRequest } from 'openapi-generator/api';
 
-export const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
+const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
   z
     .object({
       name: z.string().min(1, { message: '名前を入力してください' }),
@@ -17,4 +17,4 @@ export const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
     })
 );
 
-export type SignUpFormData = z.infer<typeof SignUpSchema>;
+export default SignUpSchema;

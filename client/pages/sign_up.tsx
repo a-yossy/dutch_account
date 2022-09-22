@@ -4,14 +4,15 @@ import { Box, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'components/Form';
 import Button from 'components/Button';
-import { SignUpSchema, SignUpFormData } from 'schemas/signUpSchema';
+import SignUpSchema from 'schemas/signUpSchema';
+import { SignUpRequest } from 'openapi-generator/api';
 
 const SignUp: NextPage = () => {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpFormData>({
+  } = useForm<SignUpRequest>({
     resolver: zodResolver(SignUpSchema),
   });
 

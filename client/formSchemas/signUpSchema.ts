@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { SignUpRequest as OpenApiSignUpRequest } from 'openapi-generator/api';
 
-type SignUpRequest = {
+export type SignUpRequest = {
   password_confirmation: string;
 } & OpenApiSignUpRequest;
 

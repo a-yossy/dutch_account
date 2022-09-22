@@ -1,8 +1,5 @@
 import { FC } from 'react';
-import {
-  Button,
-  ButtonProps,
-} from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 
 type OutlineButtonProps = {
   title: string;

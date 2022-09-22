@@ -16,7 +16,7 @@ type FormProps = {
   id: string;
   formLabel: string;
   type: InputProps['type'];
-  placeholder: InputProps['placeholder'];
+  placeholder?: InputProps['placeholder'];
 };
 
 const Form: FC<FormProps> = ({
@@ -34,5 +34,9 @@ const Form: FC<FormProps> = ({
     <FormErrorMessage>{error?.message}</FormErrorMessage>
   </FormControl>
 );
+
+Form.defaultProps = {
+  placeholder: undefined,
+};
 
 export default Form;

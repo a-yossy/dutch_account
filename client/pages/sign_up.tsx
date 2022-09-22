@@ -47,7 +47,6 @@ const SignUp: NextPage = () => {
           id='password'
           formLabel='パスワード'
           type='password'
-          placeholder='･･････'
         />
         <Form
           error={errors.password_confirmation}
@@ -56,7 +55,6 @@ const SignUp: NextPage = () => {
           id='password_confirmation'
           formLabel='確認用パスワード'
           type='password'
-          placeholder='･･････'
         />
         <Button
           title='作成'

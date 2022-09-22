@@ -28,7 +28,7 @@ const Form: FC<FormProps> = ({
   type,
   placeholder,
 }) => (
-  <FormControl isInvalid={typeof error !== 'undefined'} mt={mt}>
+  <FormControl isInvalid={error !== undefined} mt={mt}>
     <FormLabel htmlFor={id}>{formLabel}</FormLabel>
     <Input type={type} placeholder={placeholder} id={id} {...register} />
     <FormErrorMessage>{error?.message}</FormErrorMessage>

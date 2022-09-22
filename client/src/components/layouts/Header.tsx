@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
-import NoDecorationLink from 'components/NoDecorationLink';
+import NoDecorationLink from 'src/components/NoDecorationLink';
 
 const Header: FC = () => (
   <header>

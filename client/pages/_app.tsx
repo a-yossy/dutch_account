@@ -6,7 +6,6 @@ import theme from 'components/layouts/theme';
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ChakraProvider theme={theme}>
     <Layout>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Component {...pageProps} />
     </Layout>
   </ChakraProvider>

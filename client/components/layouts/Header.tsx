@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
-import Link from 'components/Link';
+import NoDecorationLink from 'components/NoDecorationLink';
 
 const Header: FC = () => (
   <header>
@@ -11,12 +11,12 @@ const Header: FC = () => (
       background='#68697d1b'
       h='60px'
     >
-      <Link
+      <NoDecorationLink
+        title='Dutch Account'
         href='/'
         ml={20}
         fontSize={20}
         fontWeight='bold'
-        title='Dutch Account'
       />
     </Flex>
   </header>

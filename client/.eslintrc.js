@@ -24,5 +24,7 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     '@typescript-eslint/no-unused-vars': 'error',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
   },
 };

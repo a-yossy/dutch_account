@@ -1,17 +1,17 @@
 import { FC } from 'react';
 import {
-  Button as ChakraButton,
-  ButtonProps as ChakraButtonProps,
+  Button,
+  ButtonProps,
 } from '@chakra-ui/react';
 
 type OutlineButtonProps = {
   title: string;
-} & Omit<ChakraButtonProps, 'variant'>;
+} & Omit<ButtonProps, 'variant'>;
 
 const OutlineButton: FC<OutlineButtonProps> = ({ title, ...props }) => (
-  <ChakraButton variant='outline' {...props}>
+  <Button variant='outline' {...props}>
     {title}
-  </ChakraButton>
+  </Button>
 );
 
 export default OutlineButton;

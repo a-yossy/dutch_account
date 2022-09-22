@@ -789,7 +789,6 @@ components:
               - name
               - email
               - password
-              - password_confirmation
             properties:
               name:
                 type: string
@@ -804,11 +803,6 @@ components:
                 type: string
                 format: password
                 description: パスワード
-                example: password
-              password_confirmation:
-                type: string
-                format: password
-                description: 確認用パスワード
                 example: password
     SignInBody:
       description: サインイン用のユーザー

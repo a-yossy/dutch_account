@@ -38,11 +38,5 @@ export interface SignUpRequest {
      * @memberof SignUpRequest
      */
     'password': string;
-    /**
-     * 確認用パスワード
-     * @type {string}
-     * @memberof SignUpRequest
-     */
-    'password_confirmation': string;
 }
 

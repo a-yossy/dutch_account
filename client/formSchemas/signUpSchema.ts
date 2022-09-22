@@ -1,7 +1,11 @@
 import { z } from 'zod';
-import { SignUpRequest } from 'openapi-generator/api';
+import { SignUpRequest as OpenApiSignUpRequest } from 'openapi-generator/api';
 
-const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
+export interface SignUpRequest extends OpenApiSignUpRequest {
+  password_confirmation: string;
+}
+
+export const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
   z
     .object({
       name: z.string().min(1, { message: '名前を入力してください' }),
@@ -16,5 +20,3 @@ const SignUpSchema: z.ZodType<SignUpRequest> = z.lazy(() =>
       path: ['password_confirmation'],
     })
 );
-
-export default SignUpSchema;

@@ -4,8 +4,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'components/Form';
 import OutlineButton from 'components/OutlineButton';
-import SignUpSchema from 'formSchemas/signUpSchema';
-import { SignUpRequest } from 'openapi-generator/api';
+import { SignUpSchema, SignUpRequest } from 'formSchemas/signUpSchema';
 
 const SignUp: NextPage = () => {
   const {

@@ -4,7 +4,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import InputForm from 'src/components/InputForm';
 import OutlineButton from 'src/components/OutlineButton';
-import { SignUpSchema, SignUpRequest } from 'src/formSchemas/signUpSchema';
+import { SignUpSchema, SignUpForm } from 'src/formSchemas/signUpSchema';
 
 const SignUp: NextPage = () => {
   const {

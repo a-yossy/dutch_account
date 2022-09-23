@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-type FormProps = {
+type InputFormProps = {
   error: FieldError | undefined;
   id: string;
   formLabel: string;
@@ -18,7 +18,7 @@ type FormProps = {
   register: UseFormRegisterReturn;
 } & FormControlProps;
 
-const Form: FC<FormProps> = ({
+const InputForm: FC<InputFormProps> = ({
   error,
   id,
   formLabel,
@@ -34,4 +34,4 @@ const Form: FC<FormProps> = ({
   </FormControl>
 );
 
-export default Form;
+export default InputForm;

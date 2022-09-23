@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { AddManagementGroupRequest } from '../model';
 // @ts-ignore
 import { ManagementGroup } from '../model';
+// @ts-ignore
+import { ResponseError } from '../model';
 /**
  * ManagementGroupApi - axios parameter creator
  * @export

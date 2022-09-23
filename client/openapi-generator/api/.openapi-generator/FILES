@@ -21,9 +21,9 @@ model/borrowing-user-debt-record.ts
 model/index.ts
 model/management-affiliation-user.ts
 model/management-group.ts
-model/model-error.ts
 model/payment-affiliation-user.ts
 model/payment-group.ts
+model/response-error.ts
 model/sign-in-request.ts
 model/sign-up-request.ts
 model/user-debt-record.ts

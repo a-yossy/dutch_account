@@ -17,13 +17,13 @@
 /**
  * エラー
  * @export
- * @interface ModelError
+ * @interface ResponseError
  */
-export interface ModelError {
+export interface ResponseError {
     /**
      * エラーメッセージ
      * @type {Array<string>}
-     * @memberof ModelError
+     * @memberof ResponseError
      */
     'messages': Array<string>;
 }

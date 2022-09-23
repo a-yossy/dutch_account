@@ -25,6 +25,8 @@ import { AddDebtRecordsRequestInner } from '../model';
 // @ts-ignore
 import { BorrowingUserDebtRecord } from '../model';
 // @ts-ignore
+import { ResponseError } from '../model';
+// @ts-ignore
 import { UserDebtRecord } from '../model';
 /**
  * DebtRecordApi - axios parameter creator

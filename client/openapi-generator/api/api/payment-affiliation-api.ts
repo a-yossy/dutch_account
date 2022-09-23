@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { AddPaymentAffiliationsByPaymentGroupIdRequestInner } from '../model';
 // @ts-ignore
 import { PaymentAffiliationUser } from '../model';
+// @ts-ignore
+import { ResponseError } from '../model';
 /**
  * PaymentAffiliationApi - axios parameter creator
  * @export

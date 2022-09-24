@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setCookie } from 'nookies';
 import { UserApi, SignUpRequest } from 'openapi-generator/api';
 import ResponseErrorSchema from 'src/formSchemas/responseErrorSchema';
-import useToast from 'src/hooks/toast';
+import useToast from 'src/hooks/useToast';
 
 const useSignUp = () => {
   const toast = useToast();

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import InputForm from 'src/components/InputForm';
 import OutlineButton from 'src/components/OutlineButton';
 import { SignUpSchema, SignUpForm } from 'src/formSchemas/signUpSchema';
-import useSignUp from 'src/hooks/signUp';
+import useSignUp from 'src/hooks/useSignUp';
 
 const SignUp: NextPage = () => {
   const signUp = useSignUp();

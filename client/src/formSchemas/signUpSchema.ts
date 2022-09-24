@@ -5,7 +5,7 @@ export type SignUpForm = {
   password_confirmation: string;
 } & SignUpRequest;
 
-export const SignUpSchema: z.ZodType<SignUpForm> = z.lazy(() =>
+export const SignUpSchema: z.ZodType<SignUpForm> =
   z
     .object({
       name: z.string().min(1, { message: '名前を入力してください' }),
@@ -19,4 +19,4 @@ export const SignUpSchema: z.ZodType<SignUpForm> = z.lazy(() =>
       message: 'パスワードと確認用パスワードが一致しません',
       path: ['password_confirmation'],
     })
-);
+;

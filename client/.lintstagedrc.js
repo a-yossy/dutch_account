@@ -11,6 +11,6 @@ const buildEPrettierCommand = (filenames) =>
     .join(' ')}`;
 
 module.exports = {
-  '*.{js,jsx,ts,tsx}': [buildEslintCommand],
-  '*.{js,jsx,ts,tsx,json,yml,yaml,md,css}': [buildEPrettierCommand],
+  '*.{js,jsx,ts,tsx}': [buildEslintCommand, buildEPrettierCommand],
+  '*.{json,yml,yaml,md,css}': [buildEPrettierCommand],
 };

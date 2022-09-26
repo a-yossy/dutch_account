@@ -5,8 +5,6 @@ jobs:
     docker:
       - image: cimg/ruby:3.1.2
         auth:
-          username: user
-          password: password
         environment:
           RAILS_ENV: test
       - image: cimg/mysql:8.0

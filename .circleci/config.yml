@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build-server:
-    working_directory: ~/dutch-account-app/server
+    working_directory: ~/dutch-account
     docker:
       - image: cimg/ruby:3.1.2
         environment:
@@ -16,7 +16,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dutch-account-server-{{ checksum "Gemfile.lock" }}
+            - dutch-account-server-{{ checksum "server/Gemfile.lock" }}
             - dutch-account-server-
 
       - run:
@@ -26,7 +26,7 @@ jobs:
       - save_cache:
           paths:
             - vendor/bundle
-          key: dutch-account-server-{{ checksum "Gemfile.lock" }}
+          key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
 
       - run:
           name: Database Setup

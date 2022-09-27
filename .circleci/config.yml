@@ -20,7 +20,7 @@ jobs:
           command: cd server
       - restore_cache:
           keys:
-            - dutch-account-server-{{ checksum "server/Gemfile.lock" }}
+            - dutch-account-server-{{ checksum Gemfile.lock" }}
             - dutch-account-server-
 
       - run:
@@ -33,7 +33,7 @@ jobs:
       - save_cache:
           paths:
             - vendor/bundle
-          key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
+          key: dutch-account-server-{{ checksum "Gemfile.lock" }}
 
       - run:
           working_directory: ~/dutch-account/server

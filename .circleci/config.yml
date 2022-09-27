@@ -16,7 +16,8 @@ jobs:
           MYSQL_PASSWORD: password
     steps:
       - checkout
-      - working_directory: ~/dutch-account/server
+      - run:
+          command: cd server
       - restore_cache:
           keys:
             - dutch-account-server-{{ checksum "server/Gemfile.lock" }}

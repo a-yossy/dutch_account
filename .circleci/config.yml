@@ -12,6 +12,7 @@ jobs:
           MYSQL_DATABASE: dutch_account_db
           MYSQL_USER: user
           MYSQL_PASSWORD: password
+          MYSQL_HOST: test-db
     steps:
       - checkout
       - restore_cache:

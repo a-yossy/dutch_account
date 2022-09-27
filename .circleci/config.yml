@@ -6,14 +6,14 @@ jobs:
       - image: cimg/ruby:3.1.2
         environment:
           RAILS_ENV: test
-          DB_HOST: '127.0.0.1'
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: root
+          DB_PASSWORD: rootpass
       - image: cimg/mysql:8.0
         environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: dutch_account_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-          MYSQL_HOST: '127.0.0.1'
+          MYSQL_ROOT_PASSWORD: rootpass
+          MYSQL_DATABASE: ci_test
+          MYSQL_USER: root
     steps:
       - checkout
       - restore_cache:
@@ -42,6 +42,7 @@ jobs:
           working_directory: ~/dutch-account/server
           name: Database Setup
           command: |
+            dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
             bundle exec rails db:create
             bundle exec rails db:schema:load
 

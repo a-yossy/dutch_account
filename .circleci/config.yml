@@ -36,9 +36,9 @@ jobs:
             - vendor/bundle
           key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
 
-      # - run:
-      #     working_directory: ~/dutch-account/server
-      #     command: mv config/databaseci.yml config/database.yml
+      - run:
+          working_directory: ~/dutch-account/server
+          command: mv config/databaseci.yml config/database.yml
 
       - run:
           working_directory: ~/dutch-account/server

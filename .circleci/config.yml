@@ -34,6 +34,10 @@ jobs:
 
       - run:
           working_directory: ~/dutch-account/server
+          command: mv config/databaseci.yml config/database.yml
+
+      - run:
+          working_directory: ~/dutch-account/server
           name: Database Setup
           command: |
             bundle exec rails db:create

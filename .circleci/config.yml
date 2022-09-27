@@ -24,6 +24,9 @@ jobs:
           command: bundle config set --local path 'vendor/bundle'
 
       - run:
+          command: mysql -v && show variables like 'hostname';
+
+      - run:
           working_directory: ~/dutch-account/server
           name: Install dependencies
           command: bundle check || bundle install --jobs 4 --retry 3

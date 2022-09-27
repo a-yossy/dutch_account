@@ -9,4 +9,4 @@ default: &default
 test:
   <<: *default
   database: dutch_account_db
-  host: db-test
+  host: 127.0.0.1

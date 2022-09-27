@@ -37,6 +37,9 @@ jobs:
           command: mv config/databaseci.yml config/database.yml
 
       - run:
+          command: sleep 60
+
+      - run:
           working_directory: ~/dutch-account/server
           name: Database Setup
           command: |

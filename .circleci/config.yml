@@ -12,7 +12,7 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: rootpass
           MYSQL_DATABASE: dutch_account_db
-          MYSQL_USER: mysqluser
+          MYSQL_USER: user
           MYSQL_PASSWORD: password
     steps:
       - checkout
@@ -42,7 +42,6 @@ jobs:
           working_directory: ~/dutch-account/server
           name: Database Setup
           command: |
-            dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
             bundle exec rails db:create
             bundle exec rails db:schema:load
 

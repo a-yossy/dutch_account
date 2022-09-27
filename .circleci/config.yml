@@ -7,13 +7,13 @@ jobs:
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
-          DB_USERNAME: root
+          DB_USERNAME: user
           DB_PASSWORD: rootpass
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpass
           MYSQL_DATABASE: ci_test
-          MYSQL_USER: root
+          MYSQL_USER: user
           MYSQL_PASSWORD: password
           MYSQL_HOST: '127.0.0.1'
     steps:

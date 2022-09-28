@@ -19,7 +19,7 @@ const useSignUp = () => {
       setCookie(null, 'access-token', response.headers['access-token']);
       setCookie(null, 'uid', response.headers.uid);
       setCookie(null, 'client', response.headers.client);
-      void router.push('/');
+      await router.push('/');
       toast('success', 'サインアップしました');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response !== undefined) {
@@ -35,6 +35,7 @@ const useSignUp = () => {
         }
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return signUp;

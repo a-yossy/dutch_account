@@ -22,6 +22,7 @@ const useToast = () => {
       containerStyle: {
         whiteSpace: 'pre-line',
       },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }), []);
 
   return toast;

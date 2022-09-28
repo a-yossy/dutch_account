@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { setCookie } from 'nookies';
@@ -8,7 +9,7 @@ import useToast from 'src/hooks/useToast';
 const useSignUp = () => {
   const toast = useToast();
   const router = useRouter();
-  const signUp = async (params: SignUpRequest) => {
+  const signUp = useCallback(async (params: SignUpRequest) => {
     try {
       const response = await new UserApi().signUp({
         name: params.name,
@@ -34,7 +35,7 @@ const useSignUp = () => {
         }
       }
     }
-  };
+  }, []);
 
   return signUp;
 };

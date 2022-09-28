@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import {
   useToast as useChakraToast,
   ToastProps as ChakraToastProps,
@@ -6,7 +7,7 @@ import {
 
 const useToast = () => {
   const chakraToast = useChakraToast();
-  const toast = (
+  const toast = useCallback((
     status: ChakraToastProps['status'],
     title: ChakraToastProps['title'],
     description?: ChakraToastProps['description']
@@ -21,7 +22,7 @@ const useToast = () => {
       containerStyle: {
         whiteSpace: 'pre-line',
       },
-    });
+    }), []);
 
   return toast;
 };

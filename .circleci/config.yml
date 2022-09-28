@@ -16,40 +16,42 @@ jobs:
           MYSQL_PASSWORD: password
     steps:
       - checkout
-      - run:
-          command: cd server
       - restore_cache:
           keys:
-            - dutch-account-server-{{ checksum Gemfile.lock" }}
+            - dutch-account-server-{{ checksum "server/Gemfile.lock" }}
             - dutch-account-server-
 
       - run:
           command: bundle config set --local path 'vendor/bundle'
 
       - run:
+          working_directory: ~/dutch-account/server
           name: Install dependencies
           command: bundle check || bundle install --jobs 4 --retry 3
 
       - save_cache:
           paths:
             - vendor/bundle
-          key: dutch-account-server-{{ checksum "Gemfile.lock" }}
+          key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
 
       - run:
           working_directory: ~/dutch-account/server
           command: mv config/databaseci.yml config/database.yml
 
       - run:
+          working_directory: ~/dutch-account/server
           name: Database Setup
           command: |
             bundle exec rails db:create
             bundle exec rails db:schema:load
 
       - run:
+          working_directory: ~/dutch-account/server
           name: Rspec
           command: bundle exec rspec
 
       - run:
+          working_directory: ~/dutch-account/server
           name: Rubocop
           command: bundle exec rubocop
   say-hello:

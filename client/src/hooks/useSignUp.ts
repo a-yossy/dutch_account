@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { setCookie } from 'nookies';
 import { UserApi, SignUpRequest } from 'openapi-generator/api';
-import ResponseErrorSchema from 'src/types/responseErrorSchema';
+import isResponseError from 'src/libs/isResponseError';
 import useToast from 'src/hooks/useToast';
 
 const useSignUp = () => {
@@ -21,21 +20,16 @@ const useSignUp = () => {
       setCookie(null, 'client', response.headers.client);
       await router.push('/');
       toast('success', 'サインアップしました');
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response !== undefined) {
-        const responseError = ResponseErrorSchema.safeParse(
-          error.response.data
+    } catch (error: unknown) {
+      if (isResponseError(error)) {
+        toast(
+          'error',
+          'サインアップに失敗しました',
+          error.response.data.messages.join(`\n`)
         );
-        if (responseError.success) {
-          toast(
-            'error',
-            'サインアップに失敗しました',
-            responseError.data.messages.join(`\n`)
-          );
-        }
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return signUp;

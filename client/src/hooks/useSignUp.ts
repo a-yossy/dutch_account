@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { setCookie } from 'nookies';
 import { UserApi, SignUpRequest } from 'openapi-generator/api';
-import ResponseErrorSchema from 'src/formSchemas/responseErrorSchema';
+import ResponseErrorSchema from 'src/types/responseErrorSchema';
 import useToast from 'src/hooks/useToast';
 
 const useSignUp = () => {

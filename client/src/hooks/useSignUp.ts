@@ -29,8 +29,7 @@ const useSignUp = () => {
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router, toast]);
 
   return signUp;
 };

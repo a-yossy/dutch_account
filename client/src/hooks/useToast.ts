@@ -24,8 +24,7 @@ const useToast = () => {
           whiteSpace: 'pre-line',
         },
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [chakraToast]
   );
 
   return toast;

@@ -1,0 +1,93 @@
+version: 2.1
+jobs:
+  build-server:
+    working_directory: ~/dutch-account
+    docker:
+      - image: cimg/ruby:3.1.2
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: user
+      - image: cimg/mysql:8.0
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpass
+          MYSQL_DATABASE: dutch_account_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dutch-account-server-{{ checksum "server/Gemfile.lock" }}
+            - dutch-account-server-
+
+      - run:
+          command: bundle config set --local path 'vendor/bundle'
+
+      - run:
+          working_directory: ~/dutch-account/server
+          name: Install dependencies
+          command: bundle check || bundle install --jobs 4 --retry 3
+
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
+
+      - run:
+          working_directory: ~/dutch-account/server
+          command: mv config/databaseci.yml config/database.yml
+
+      - run:
+          working_directory: ~/dutch-account/server
+          name: Database Setup
+          command: |
+            dockerize -wait tcp://127.0.0.1:3306 -timeout 3m
+            bundle exec rails db:create
+            bundle exec rails db:schema:load
+
+      - run:
+          working_directory: ~/dutch-account/server
+          name: Rspec
+          command: bundle exec rspec
+
+      - run:
+          working_directory: ~/dutch-account/server
+          name: Rubocop
+          command: bundle exec rubocop
+
+  build-client:
+    working_directory: ~/dutch-account
+    docker:
+      - image: cimg/node:18.0.0
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "client/yarn.lock" }}
+
+      - run:
+          working_directory: ~/dutch-account/client
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - run:
+          working_directory: ~/dutch-account/client
+          command: yarn lint
+
+      - run:
+          working_directory: ~/dutch-account/client
+          command: yarn format
+
+workflows:
+  server-workflow:
+    jobs:
+      - build-server
+      - build-client

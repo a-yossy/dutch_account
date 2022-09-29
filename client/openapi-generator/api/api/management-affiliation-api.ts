@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
 import { ManagementAffiliationUser } from '../model';
+// @ts-ignore
+import { ResponseError } from '../model';
 /**
  * ManagementAffiliationApi - axios parameter creator
  * @export

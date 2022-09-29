@@ -21,6 +21,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { ResponseError } from '../model';
+// @ts-ignore
 import { SignInRequest } from '../model';
 // @ts-ignore
 import { SignUpRequest } from '../model';

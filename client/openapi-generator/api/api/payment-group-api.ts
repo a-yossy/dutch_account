@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { AddPaymentGroupByManagementGroupIdRequest } from '../model';
 // @ts-ignore
 import { PaymentGroup } from '../model';
+// @ts-ignore
+import { ResponseError } from '../model';
 /**
  * PaymentGroupApi - axios parameter creator
  * @export

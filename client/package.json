@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "format": "yarn prettier --write .",
+    "format": "yarn prettier --check .",
+    "format:fix": "yarn prettier --write .",
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./openapi-generator/api -c ./openapiConfig.yml",
     "postinstall": "typesync"
   },

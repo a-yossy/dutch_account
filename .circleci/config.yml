@@ -65,7 +65,7 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "client/yarn.lock" }}
 
       - run:
           working_directory: ~/dutch-account/client
@@ -74,7 +74,7 @@ jobs:
 
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
           paths:
             - ~/.cache/yarn
 

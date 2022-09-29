@@ -59,4 +59,3 @@ workflows:
   server-workflow:
     jobs:
       - build-server
-      - say-hello

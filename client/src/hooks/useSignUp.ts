@@ -8,28 +8,31 @@ import useToast from 'src/hooks/useToast';
 const useSignUp = () => {
   const toast = useToast();
   const router = useRouter();
-  const signUp = useCallback(async (params: SignUpRequest) => {
-    try {
-      const response = await new UserApi().signUp({
-        name: params.name,
-        email: params.email,
-        password: params.password,
-      });
-      setCookie(null, 'access-token', response.headers['access-token']);
-      setCookie(null, 'uid', response.headers.uid);
-      setCookie(null, 'client', response.headers.client);
-      await router.push('/');
-      toast('success', 'サインアップしました');
-    } catch (error: unknown) {
-      if (isResponseError(error)) {
-        toast(
-          'error',
-          'サインアップに失敗しました',
-          error.response.data.messages.join(`\n`)
-        );
+  const signUp = useCallback(
+    async (params: SignUpRequest) => {
+      try {
+        const response = await new UserApi().signUp({
+          name: params.name,
+          email: params.email,
+          password: params.password,
+        });
+        setCookie(null, 'access-token', response.headers['access-token']);
+        setCookie(null, 'uid', response.headers.uid);
+        setCookie(null, 'client', response.headers.client);
+        await router.push('/');
+        toast('success', 'サインアップしました');
+      } catch (error: unknown) {
+        if (isResponseError(error)) {
+          toast(
+            'error',
+            'サインアップに失敗しました',
+            error.response.data.messages.join(`\n`)
+          );
+        }
       }
-    }
-  }, [router, toast]);
+    },
+    [router, toast]
+  );
 
   return signUp;
 };

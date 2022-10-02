@@ -58,7 +58,7 @@ const SignUp: NextPage = () => {
           mt={5}
         />
         <OutlineButton
-          title='作成'
+          title='サインアップ'
           colorScheme='cyan'
           type='submit'
           isLoading={isSubmitting}

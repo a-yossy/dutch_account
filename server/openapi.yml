@@ -385,15 +385,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /users/{user_uid}:
+  /users/{user_id}:
     parameters:
-      - $ref: "#/components/parameters/UserUid"
+      - $ref: "#/components/parameters/UserId"
     get:
       tags:
         - user
       summary: ユーザーを取得
       description: ユーザーを取得する
-      operationId: getUserByUserUid
+      operationId: getUserByUserId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -883,14 +883,6 @@ components:
         type: integer
         format: int64
         example: 1
-    UserUid:
-      name: user_uid
-      in: path
-      description: ユーザーを識別するために使用する一意な値
-      required: true
-      schema:
-        type: string
-        example: email@example.com
     ManagementGroupId:
       name: management_group_id
       in: path

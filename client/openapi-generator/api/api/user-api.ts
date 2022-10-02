@@ -37,15 +37,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * ユーザーを取得する
          * @summary ユーザーを取得
-         * @param {string} userEmail ユーザーメールアドレス
+         * @param {string} userUid ユーザーを識別するために使用する一意な値
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserByUserEmail: async (userEmail: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userEmail' is not null or undefined
-            assertParamExists('getUserByUserEmail', 'userEmail', userEmail)
-            const localVarPath = `/users/{user_email}`
-                .replace(`{${"user_email"}}`, encodeURIComponent(String(userEmail)));
+        getUserByUserUid: async (userUid: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userUid' is not null or undefined
+            assertParamExists('getUserByUserUid', 'userUid', userUid)
+            const localVarPath = `/users/{user_uid}`
+                .replace(`{${"user_uid"}}`, encodeURIComponent(String(userUid)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -197,12 +197,12 @@ export const UserApiFp = function(configuration?: Configuration) {
         /**
          * ユーザーを取得する
          * @summary ユーザーを取得
-         * @param {string} userEmail ユーザーメールアドレス
+         * @param {string} userUid ユーザーを識別するために使用する一意な値
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserByUserEmail(userEmail: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByUserEmail(userEmail, options);
+        async getUserByUserUid(userUid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByUserUid(userUid, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -250,12 +250,12 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         /**
          * ユーザーを取得する
          * @summary ユーザーを取得
-         * @param {string} userEmail ユーザーメールアドレス
+         * @param {string} userUid ユーザーを識別するために使用する一意な値
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserByUserEmail(userEmail: string, options?: any): AxiosPromise<User> {
-            return localVarFp.getUserByUserEmail(userEmail, options).then((request) => request(axios, basePath));
+        getUserByUserUid(userUid: string, options?: any): AxiosPromise<User> {
+            return localVarFp.getUserByUserUid(userUid, options).then((request) => request(axios, basePath));
         },
         /**
          * サインインする
@@ -299,13 +299,13 @@ export class UserApi extends BaseAPI {
     /**
      * ユーザーを取得する
      * @summary ユーザーを取得
-     * @param {string} userEmail ユーザーメールアドレス
+     * @param {string} userUid ユーザーを識別するために使用する一意な値
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getUserByUserEmail(userEmail: string, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).getUserByUserEmail(userEmail, options).then((request) => request(this.axios, this.basePath));
+    public getUserByUserUid(userUid: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getUserByUserUid(userUid, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

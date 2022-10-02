@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import { UserApi, SignUpRequest } from 'openapi-generator/api';
 import isResponseError from 'src/libs/isResponseError';
 import useToast from 'src/hooks/useToast';
+import setCookies from 'src/libs/setCookies';
 
 const useSignUp = () => {
   const toast = useToast();
@@ -16,9 +16,7 @@ const useSignUp = () => {
           email: params.email,
           password: params.password,
         });
-        setCookie(null, 'access-token', response.headers['access-token']);
-        setCookie(null, 'uid', response.headers.uid);
-        setCookie(null, 'client', response.headers.client);
+        setCookies(response.headers);
         await router.push('/');
         toast('success', 'サインアップしました');
       } catch (error: unknown) {

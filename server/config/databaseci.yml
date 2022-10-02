@@ -1,10 +1,13 @@
-test:
+default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: user
   password: password
   socket: /tmp/mysql.sock
+  port: 3306
+
+test:
+  <<: *default
   database: dutch_account_db
   host: 127.0.0.1
-  port: 3306

@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build-server:
+  server:
     working_directory: ~/dutch-account
     docker:
       - image: cimg/ruby:3.1.2
@@ -18,8 +18,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dutch-account-server-{{ checksum "server/Gemfile.lock" }}
-            - dutch-account-server-
+            - dutch-account-server-v1-{{ checksum "server/Gemfile.lock" }}
+            - dutch-account-server-v1-
 
       - run:
           command: bundle config set --local path 'vendor/bundle'
@@ -31,7 +31,7 @@ jobs:
 
       - save_cache:
           paths:
-            - vendor/bundle
+            - server/vendor/bundle
           key: dutch-account-server-{{ checksum "server/Gemfile.lock" }}
 
       - run:
@@ -56,7 +56,7 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
 
-  build-client:
+  client:
     working_directory: ~/dutch-account
     docker:
       - image: cimg/node:18.0.0
@@ -65,29 +65,31 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "client/yarn.lock" }}
+            - dutch-account-client-v1-{{ checksum "client/yarn.lock" }}
 
       - run:
           working_directory: ~/dutch-account/client
           name: Install Dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+          command: yarn install --frozen-lockfile --cache-folder client/.cache/yarn
 
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          key: dutch-account-client-v1-{{ checksum "client/yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - client/.cache/yarn
 
       - run:
           working_directory: ~/dutch-account/client
+          name: ESLint
           command: yarn lint
 
       - run:
           working_directory: ~/dutch-account/client
+          name: Prettier
           command: yarn format
 
 workflows:
   server-workflow:
     jobs:
-      - build-server
-      - build-client
+      - server
+      - client

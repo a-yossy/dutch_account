@@ -40,7 +40,7 @@ const SignIn: NextPage = () => {
           mt={5}
         />
         <OutlineButton
-          title='ログイン'
+          title='サインイン'
           colorScheme='cyan'
           type='submit'
           isLoading={isSubmitting}

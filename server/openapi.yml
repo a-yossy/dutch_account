@@ -385,6 +385,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /users/{user_email}:
+    parameters:
+      - $ref: "#/components/parameters/UserEmail"
+    get:
+      tags:
+        - user
+      summary: ユーザーを取得
+      description: ユーザーを取得する
+      operationId: getUserByUserEmail
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -861,6 +883,15 @@ components:
         type: integer
         format: int64
         example: 1
+    UserEmail:
+      name: user_email
+      in: path
+      description: ユーザーメールアドレス
+      required: true
+      schema:
+        type: string
+        format: email
+        example: email@example.com
     ManagementGroupId:
       name: management_group_id
       in: path

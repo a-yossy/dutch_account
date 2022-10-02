@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { UserApi, SignInRequest } from 'openapi-generator/api';
 import isResponseError from 'src/libs/isResponseError';
 import useToast from 'src/hooks/useToast';
-import setCookies from 'src/libs/setCookies';
+import setAuthCookies from 'src/libs/setAuthCookies';
 
 const useSignIn = () => {
   const toast = useToast();
@@ -15,7 +15,7 @@ const useSignIn = () => {
           email: params.email,
           password: params.password,
         });
-        setCookies(response.headers);
+        setAuthCookies(response.headers);
         await router.push('/');
         toast('success', 'サインインしました');
       } catch (error: unknown) {

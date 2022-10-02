@@ -1,37 +1,27 @@
 import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
-import { Box, Text } from '@chakra-ui/react';
+import { Text, Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import InputForm from 'src/components/InputForm';
 import OutlineButton from 'src/components/OutlineButton';
-import { SignUpSchema, SignUpForm } from 'src/formSchemas/signUpSchema';
-import useSignUp from 'src/hooks/useSignUp';
+import SignInSchema from 'src/formSchemas/signInSchema';
+import { SignInRequest } from 'openapi-generator/api';
+import useSignIn from 'src/hooks/useSignIn';
 
-const SignUp: NextPage = () => {
-  const signUp = useSignUp();
+const SignIn: NextPage = () => {
+  const signIn = useSignIn();
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpForm>({
-    resolver: zodResolver(SignUpSchema),
-  });
+  } = useForm<SignInRequest>({ resolver: zodResolver(SignInSchema) });
 
   return (
     <>
       <Text fontSize='xl' align='center'>
-        サインアップ
+        サインイン
       </Text>
-      <Box as='form' onSubmit={handleSubmit(signUp)} width={350} mx='auto'>
-        <InputForm
-          error={errors.name}
-          id='name'
-          formLabel='名前'
-          type='text'
-          register={register('name')}
-          placeholder='taro'
-          mt={5}
-        />
+      <Box as='form' onSubmit={handleSubmit(signIn)} width={350} mx='auto'>
         <InputForm
           error={errors.email}
           id='email'
@@ -49,16 +39,8 @@ const SignUp: NextPage = () => {
           register={register('password')}
           mt={5}
         />
-        <InputForm
-          error={errors.password_confirmation}
-          id='password_confirmation'
-          formLabel='確認用パスワード'
-          type='password'
-          register={register('password_confirmation')}
-          mt={5}
-        />
         <OutlineButton
-          title='サインアップ'
+          title='サインイン'
           colorScheme='cyan'
           type='submit'
           isLoading={isSubmitting}
@@ -69,4 +51,4 @@ const SignUp: NextPage = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

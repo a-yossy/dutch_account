@@ -1,30 +1,29 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { UserApi, SignUpRequest } from 'openapi-generator/api';
+import { UserApi, SignInRequest } from 'openapi-generator/api';
 import isResponseError from 'src/libs/isResponseError';
 import useToast from 'src/hooks/useToast';
 import setAuthCookies from 'src/libs/setAuthCookies';
 
-const useSignUp = () => {
+const useSignIn = () => {
   const toast = useToast();
   const router = useRouter();
-  const signUp = useCallback(
-    async (params: SignUpRequest) => {
+  const signIn = useCallback(
+    async (params: SignInRequest) => {
       try {
-        const response = await new UserApi().signUp({
-          name: params.name,
+        const response = await new UserApi().signIn({
           email: params.email,
           password: params.password,
         });
         setAuthCookies(response.headers);
         await router.push('/');
-        toast('success', 'サインアップしました');
+        toast('success', 'サインインしました');
       } catch (error: unknown) {
         if (isResponseError(error)) {
           toast(
             'error',
-            'サインアップに失敗しました',
-            error.response.data.messages.join(`\n`)
+            'サインインに失敗しました',
+            error.response.data.messages.join('\n')
           );
         }
       }
@@ -32,7 +31,7 @@ const useSignUp = () => {
     [router, toast]
   );
 
-  return signUp;
+  return signIn;
 };
 
-export default useSignUp;
+export default useSignIn;

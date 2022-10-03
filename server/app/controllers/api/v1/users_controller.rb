@@ -8,8 +8,7 @@ class Api::V1::UsersController < ApplicationController
     if current_user != user
       render json: {
         messages: [I18n.t('errors.messages.forbidden')]
-      }, status: :forbidden
-      return
+      }, status: :forbidden and return
     end
 
     render json: {

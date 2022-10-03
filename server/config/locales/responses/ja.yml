@@ -1,0 +1,5 @@
+ja:
+  errors:
+    messages:
+      forbidden: アクセス権限がありません
+      not_found: ページが見つかりません

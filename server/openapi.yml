@@ -498,7 +498,7 @@ components:
           schema:
             $ref: "#/components/schemas/ResponseError"
           example:
-            messages: [ログインして下さい]
+            messages: [ログインしてください]
     Forbidden:
       description: アクセス権限がない時のレスポンス
       content:

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         delete '/sign_out', to: 'sessions#destroy'
       end
 
-      resources :users, only: %i[show]
+      resource :sign_in_user, only: %i[show]
     end
   end
 end

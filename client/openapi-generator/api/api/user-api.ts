@@ -35,17 +35,13 @@ import { User } from '../model';
 export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * ユーザーを取得する
-         * @summary ユーザーを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserByUserId: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getUserByUserId', 'userId', userId)
-            const localVarPath = `/users/{user_id}`
-                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+        getSignInUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/sign_in_user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -195,14 +191,13 @@ export const UserApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
     return {
         /**
-         * ユーザーを取得する
-         * @summary ユーザーを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserByUserId(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserByUserId(userId, options);
+        async getSignInUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSignInUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -248,14 +243,13 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = UserApiFp(configuration)
     return {
         /**
-         * ユーザーを取得する
-         * @summary ユーザーを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserByUserId(userId: number, options?: any): AxiosPromise<User> {
-            return localVarFp.getUserByUserId(userId, options).then((request) => request(axios, basePath));
+        getSignInUser(options?: any): AxiosPromise<User> {
+            return localVarFp.getSignInUser(options).then((request) => request(axios, basePath));
         },
         /**
          * サインインする
@@ -297,15 +291,14 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
  */
 export class UserApi extends BaseAPI {
     /**
-     * ユーザーを取得する
-     * @summary ユーザーを取得
-     * @param {number} userId ユーザーID
+     * サインインしているユーザーを取得する
+     * @summary サインインしているユーザーを取得
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getUserByUserId(userId: number, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).getUserByUserId(userId, options).then((request) => request(this.axios, this.basePath));
+    public getSignInUser(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getSignInUser(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -385,15 +385,13 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /users/{user_id}:
-    parameters:
-      - $ref: "#/components/parameters/UserId"
+  /sign_in_user:
     get:
       tags:
         - user
-      summary: ユーザーを取得
-      description: ユーザーを取得する
-      operationId: getUserByUserId
+      summary: サインインしているユーザーを取得
+      description: サインインしているユーザーを取得する
+      operationId: getSignInUser
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -403,10 +401,6 @@ paths:
                 $ref: "#/components/schemas/User"
         401:
           $ref: "#/components/responses/Unauthorized"
-        403:
-          $ref: "#/components/responses/Forbidden"
-        404:
-          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
   /sign_up:
@@ -499,14 +493,6 @@ components:
             $ref: "#/components/schemas/ResponseError"
           example:
             messages: [ログインしてください]
-    Forbidden:
-      description: アクセス権限がない時のレスポンス
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ResponseError"
-          example:
-            messages: [アクセス権限がありません]
     NotFound:
       description: リクエストされたリソースが存在しない時のレスポンス
       content:

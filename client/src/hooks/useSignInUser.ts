@@ -8,7 +8,7 @@ const useSignInUser = () => {
     new UserApi()
       .getSignInUser({ headers: getAuthCookies() })
       .then((res) => res.data);
-  const { data, error } = useSWR<User, AxiosError<ResponseError>>(
+  const { data, error, isValidating } = useSWR<User, AxiosError<ResponseError>>(
     '/api/v1/sign_in_user',
     fetcher
   );
@@ -16,6 +16,7 @@ const useSignInUser = () => {
   return {
     signInUser: data,
     error,
+    isValidating,
   };
 };
 

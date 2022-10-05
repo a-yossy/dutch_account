@@ -385,6 +385,24 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /sign_in_user:
+    get:
+      tags:
+        - user
+      summary: サインインしているユーザーを取得
+      description: サインインしているユーザーを取得する
+      operationId: getSignInUser
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -474,7 +492,7 @@ components:
           schema:
             $ref: "#/components/schemas/ResponseError"
           example:
-            messages: [アクセス権限がありません]
+            messages: [ログインしてください]
     NotFound:
       description: リクエストされたリソースが存在しない時のレスポンス
       content:

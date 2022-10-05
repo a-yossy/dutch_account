@@ -35,6 +35,45 @@ import { User } from '../model';
 export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSignInUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/sign_in_user`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
+
+            // authentication client required
+            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
+
+            // authentication uid required
+            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * サインインする
          * @summary サインイン
          * @param {SignInRequest} [signInRequest] サインイン用のユーザー
@@ -152,6 +191,16 @@ export const UserApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
     return {
         /**
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSignInUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSignInUser(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * サインインする
          * @summary サインイン
          * @param {SignInRequest} [signInRequest] サインイン用のユーザー
@@ -194,6 +243,15 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = UserApiFp(configuration)
     return {
         /**
+         * サインインしているユーザーを取得する
+         * @summary サインインしているユーザーを取得
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSignInUser(options?: any): AxiosPromise<User> {
+            return localVarFp.getSignInUser(options).then((request) => request(axios, basePath));
+        },
+        /**
          * サインインする
          * @summary サインイン
          * @param {SignInRequest} [signInRequest] サインイン用のユーザー
@@ -232,6 +290,17 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
  * @extends {BaseAPI}
  */
 export class UserApi extends BaseAPI {
+    /**
+     * サインインしているユーザーを取得する
+     * @summary サインインしているユーザーを取得
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public getSignInUser(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getSignInUser(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * サインインする
      * @summary サインイン

@@ -1,26 +1,25 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { AxiosError } from 'axios';
 import useToast from 'src/hooks/useToast';
-import { ResponseError } from 'openapi-generator/api';
+import SomeRequired from 'src/types/someRequired';
+import AxiosResponseError from 'src/types/axiosResponseError';
 
-const useRequireLogin = (
-  isValidating: boolean,
-  error: AxiosError<ResponseError> | undefined
-) => {
+const useRequireLogin = () => {
   const router = useRouter();
   const toast = useToast();
-  useEffect(() => {
-    if (isValidating || !error) return;
-    if (error.response !== undefined && error.response.status === 401) {
+  const requireLogin = useCallback(
+    (error: SomeRequired<AxiosResponseError, 'response'>) => {
       void router.push('/sign_in');
       toast(
         'error',
         'アクセスできません',
         error.response.data.messages.join('\n')
       );
-    }
-  }, [error, router, toast, isValidating]);
+    },
+    [router, toast]
+  );
+
+  return requireLogin;
 };
 
 export default useRequireLogin;

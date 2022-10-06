@@ -1,6 +1,6 @@
-import useRequireLogin from 'src/hooks/useRequireLogin';
 import type { SWRConfiguration } from 'swr';
-import isResponseError from '../libs/isResponseError';
+import useRequireLogin from 'src/hooks/useRequireLogin';
+import isResponseError from 'src/libs/isResponseError';
 
 const useSwrValue = () => {
   const requireLogin = useRequireLogin();

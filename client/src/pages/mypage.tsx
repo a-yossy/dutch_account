@@ -1,11 +1,9 @@
 import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
-import useSignInUser from 'src/hooks/useSignInUser';
-import useRequireLogin from 'src/hooks/useRequireLogin';
+import useGetSignInUser from 'src/hooks/useGetSignInUser';
 
 const Mypage: NextPage = () => {
-  const { signInUser, error, isValidating } = useSignInUser();
-  useRequireLogin(isValidating, error);
+  const signInUser = useGetSignInUser();
 
   if (!signInUser) return <Spinner />;
 

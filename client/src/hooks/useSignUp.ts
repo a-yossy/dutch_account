@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { UserApi, SignUpRequest } from 'openapi-generator/api';
 import isResponseError from 'src/libs/isResponseError';
@@ -17,7 +17,7 @@ const useSignUp = () => {
           password: params.password,
         });
         setAuthCookies(response.headers);
-        await router.push('/');
+        await router.push('/mypage');
         toast('success', 'サインアップしました');
       } catch (error: unknown) {
         if (isResponseError(error)) {
@@ -31,6 +31,10 @@ const useSignUp = () => {
     },
     [router, toast]
   );
+
+  useEffect(() => {
+    void router.prefetch('/mypage');
+  }, [router]);
 
   return signUp;
 };

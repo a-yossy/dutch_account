@@ -11,13 +11,9 @@ const Header: FC = () => (
       background='#68697d1b'
       h='60px'
     >
-      <NoDecorationLink
-        title='Dutch Account'
-        href='/'
-        ml={20}
-        fontSize={20}
-        fontWeight='bold'
-      />
+      <NoDecorationLink href='/' ml={10} fontSize={20} fontWeight='bold'>
+        Dutch Account
+      </NoDecorationLink>
     </Flex>
   </header>
 );

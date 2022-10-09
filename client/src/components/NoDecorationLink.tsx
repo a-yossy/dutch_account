@@ -1,20 +1,20 @@
 import { FC } from 'react';
-import NextLink from 'next/link';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { Link, LinkProps } from '@chakra-ui/react';
+import OmitStrict from 'src/types/omitStrict';
 
 type NoDecorationLinkProps = {
-  href: string;
-  title: string;
-} & LinkProps;
+  href: NextLinkProps['href'];
+} & OmitStrict<LinkProps, 'href'>;
 
 const NoDecorationLink: FC<NoDecorationLinkProps> = ({
   href,
-  title,
+  children,
   ...props
 }) => (
   <NextLink href={href} passHref>
     <Link {...props} style={{ textDecoration: 'none' }}>
-      {title}
+      {children}
     </Link>
   </NextLink>
 );

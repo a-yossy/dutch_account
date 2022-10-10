@@ -119,17 +119,13 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * ユーザーに紐づく全ての管理グループを取得する
-         * @summary ユーザーに紐づく全ての管理グループを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * @summary サインインしているユーザーに紐づく全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupsByUserId: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getManagementGroupsByUserId', 'userId', userId)
-            const localVarPath = `/users/{user_id}/management_groups`
-                .replace(`{${"user_id"}}`, encodeURIComponent(String(userId)));
+        getManagementGroupsBySignedInUserId: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/signed_in_user/management_groups`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -194,14 +190,13 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * ユーザーに紐づく全ての管理グループを取得する
-         * @summary ユーザーに紐づく全ての管理グループを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * @summary サインインしているユーザーに紐づく全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementGroupsByUserId(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroupsByUserId(userId, options);
+        async getManagementGroupsBySignedInUserId(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroupsBySignedInUserId(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -235,14 +230,13 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
             return localVarFp.getManagementGroupByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * ユーザーに紐づく全ての管理グループを取得する
-         * @summary ユーザーに紐づく全ての管理グループを取得
-         * @param {number} userId ユーザーID
+         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * @summary サインインしているユーザーに紐づく全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupsByUserId(userId: number, options?: any): AxiosPromise<Array<ManagementGroup>> {
-            return localVarFp.getManagementGroupsByUserId(userId, options).then((request) => request(axios, basePath));
+        getManagementGroupsBySignedInUserId(options?: any): AxiosPromise<Array<ManagementGroup>> {
+            return localVarFp.getManagementGroupsBySignedInUserId(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -279,14 +273,13 @@ export class ManagementGroupApi extends BaseAPI {
     }
 
     /**
-     * ユーザーに紐づく全ての管理グループを取得する
-     * @summary ユーザーに紐づく全ての管理グループを取得
-     * @param {number} userId ユーザーID
+     * サインインしているユーザーに紐づく全ての管理グループを取得する
+     * @summary サインインしているユーザーに紐づく全ての管理グループを取得
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ManagementGroupApi
      */
-    public getManagementGroupsByUserId(userId: number, options?: AxiosRequestConfig) {
-        return ManagementGroupApiFp(this.configuration).getManagementGroupsByUserId(userId, options).then((request) => request(this.axios, this.basePath));
+    public getManagementGroupsBySignedInUserId(options?: AxiosRequestConfig) {
+        return ManagementGroupApiFp(this.configuration).getManagementGroupsBySignedInUserId(options).then((request) => request(this.axios, this.basePath));
     }
 }

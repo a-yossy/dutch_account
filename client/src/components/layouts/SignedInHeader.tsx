@@ -10,7 +10,7 @@ import {
   IconButton,
   MenuDivider,
 } from '@chakra-ui/react';
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import { User } from 'openapi-generator/api';
 import NoDecorationLink from 'src/components/NoDecorationLink';
 import useSignOut from 'src/hooks/useSignOut';
@@ -41,9 +41,7 @@ const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
             as={IconButton}
             icon={<HamburgerIcon />}
             variant='ghost'
-          >
-            <ChevronDownIcon />
-          </MenuButton>
+          />
           <MenuList>
             <Text ml={3}>{currentUser.name}</Text>
             <MenuDivider />

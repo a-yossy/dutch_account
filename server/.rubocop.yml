@@ -30,7 +30,7 @@ Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   Exclude:
-    - "app/controllers/api/v1/*"
+    - "app/controllers/api/v1/**/*"
 
 #-----------------------------------------------------------------
 # metrics

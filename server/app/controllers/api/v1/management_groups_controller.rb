@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::SignedInUser::ManagementGroupsController < ApplicationController
+class Api::V1::ManagementGroupsController < ApplicationController
   before_action :authenticate_user!
 
   def index

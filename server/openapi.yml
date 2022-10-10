@@ -18,13 +18,13 @@ security:
     uid: []
     client: []
 paths:
-  /signed_in_user/management_groups:
+  /management_groups:
     get:
       tags:
         - managementGroup
-      summary: サインインしているユーザーに紐づく全ての管理グループを取得
+      summary: 全ての管理グループを取得
       description: サインインしているユーザーに紐づく全ての管理グループを取得する
-      operationId: getManagementGroupsBySignedInUserId
+      operationId: getManagementGroupsBySignedInUser
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -38,7 +38,6 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups:
     post:
       tags:
         - managementGroup

@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    models:
+      management_group: 管理グループ
+    attributes:
+      name: 名前

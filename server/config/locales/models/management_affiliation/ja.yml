@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      management_affiliation:
+        user: ユーザー
+        management_group: 管理グループ

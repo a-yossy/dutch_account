@@ -6,5 +6,5 @@ class ManagementGroup < ApplicationRecord
 
   scope :alphabetical_order, -> { order(:name) }
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
 end

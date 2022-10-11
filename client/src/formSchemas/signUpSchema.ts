@@ -7,7 +7,10 @@ export type SignUpForm = {
 
 export const SignUpSchema: z.ZodType<SignUpForm> = z
   .object({
-    name: z.string().min(1, { message: '名前を入力してください' }),
+    name: z
+      .string()
+      .min(1, { message: '名前を入力してください' })
+      .max(20, { message: '名前は20文字以内で入力してください' }),
     email: z.string().email({ message: 'メールアドレスが不正です' }),
     password: z
       .string()

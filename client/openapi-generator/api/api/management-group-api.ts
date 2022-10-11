@@ -124,7 +124,7 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupsBySignedInUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getManagementGroups: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/management_groups`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -195,8 +195,8 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementGroupsBySignedInUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementGroup>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroupsBySignedInUser(options);
+        async getManagementGroups(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementGroup>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroups(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -235,8 +235,8 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupsBySignedInUser(options?: any): AxiosPromise<Array<ManagementGroup>> {
-            return localVarFp.getManagementGroupsBySignedInUser(options).then((request) => request(axios, basePath));
+        getManagementGroups(options?: any): AxiosPromise<Array<ManagementGroup>> {
+            return localVarFp.getManagementGroups(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -279,7 +279,7 @@ export class ManagementGroupApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ManagementGroupApi
      */
-    public getManagementGroupsBySignedInUser(options?: AxiosRequestConfig) {
-        return ManagementGroupApiFp(this.configuration).getManagementGroupsBySignedInUser(options).then((request) => request(this.axios, this.basePath));
+    public getManagementGroups(options?: AxiosRequestConfig) {
+        return ManagementGroupApiFp(this.configuration).getManagementGroups(options).then((request) => request(this.axios, this.basePath));
     }
 }

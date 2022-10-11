@@ -24,7 +24,7 @@ paths:
         - managementGroup
       summary: 全ての管理グループを取得
       description: サインインしているユーザーに紐づく全ての管理グループを取得する
-      operationId: getManagementGroupsBySignedInUser
+      operationId: getManagementGroups
       responses:
         200:
           description: 取得が成功した時のレスポンス

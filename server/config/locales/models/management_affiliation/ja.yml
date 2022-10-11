@@ -1,5 +1,7 @@
 ja:
   activerecord:
+    models:
+      management_affiliation: 管理グループ所属情報
     attributes:
       management_affiliation:
         user: ユーザー

@@ -3,4 +3,5 @@ ja:
     models:
       management_group: 管理グループ
     attributes:
-      name: グループ名
+      management_group:
+        name: グループ名

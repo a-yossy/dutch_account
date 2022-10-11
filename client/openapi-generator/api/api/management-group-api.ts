@@ -76,7 +76,7 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * 管理グループを取得する
+         * サインインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -179,7 +179,7 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 管理グループを取得する
+         * サインインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -220,7 +220,7 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
             return localVarFp.addManagementGroup(addManagementGroupRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 管理グループを取得する
+         * サインインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -261,7 +261,7 @@ export class ManagementGroupApi extends BaseAPI {
     }
 
     /**
-     * 管理グループを取得する
+     * サインインしているユーザーに紐づく管理グループを取得する
      * @summary 管理グループを取得
      * @param {number} managementGroupId 管理グループID
      * @param {*} [options] Override http request option.

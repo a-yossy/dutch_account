@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       end
 
       resource :sign_in_user, only: %i[show]
-      resources :management_groups, only: %i[index]
+      resources :management_groups, only: %i[index show]
     end
   end
 end

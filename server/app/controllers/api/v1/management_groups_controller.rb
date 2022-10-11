@@ -6,4 +6,8 @@ class Api::V1::ManagementGroupsController < ApplicationController
   def index
     render json: current_user.management_groups.select('id', 'name').alphabetical_order
   end
+
+  def show
+    render json: current_user.management_groups.select('id', 'name').find(params[:id])
+  end
 end

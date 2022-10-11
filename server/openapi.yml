@@ -66,7 +66,7 @@ paths:
       tags:
         - managementGroup
       summary: 管理グループを取得
-      description: 管理グループを取得する
+      description: サインインしているユーザーに紐づく管理グループを取得する
       operationId: getManagementGroupByManagementGroupId
       responses:
         200:

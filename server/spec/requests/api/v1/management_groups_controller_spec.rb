@@ -24,11 +24,12 @@ RSpec.describe Api::V1::ManagementGroupsController, type: :request do
   end
 
   describe '#show' do
-    let(:user) { create(:user) }
-    let(:auth_tokens) { sign_in(user) }
     let(:management_group) { create(:management_group) }
 
     context 'when the user signs in' do
+      let(:user) { create(:user) }
+      let(:auth_tokens) { sign_in(user) }
+
       context 'when the management group related to the user does not exist' do
         let(:other_management_group) { create(:management_group) }
 

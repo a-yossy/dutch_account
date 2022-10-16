@@ -2,9 +2,21 @@ import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { User } from 'openapi-generator/api';
 import RecoilAtomKeys from 'src/recoil/keys';
 
-const currentUserState = atom<undefined | null | User>({
+type CurrentUserState =
+  | {
+      state: 'loading';
+    }
+  | {
+      state: 'sign_in';
+      data: User;
+    }
+  | {
+      state: 'sign_out';
+    };
+
+const currentUserState = atom<CurrentUserState>({
   key: RecoilAtomKeys.CURRENT_USER_STATE,
-  default: undefined,
+  default: { state: 'loading' },
 });
 
 export const useGetCurrentUser = () => {

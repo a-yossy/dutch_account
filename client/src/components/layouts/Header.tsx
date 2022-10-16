@@ -7,10 +7,10 @@ import UnSignedInHeader from './UnSignedInHeader';
 const Header: FC = () => {
   const currentUser = useGetCurrentUser();
 
-  if (currentUser === undefined) return <LoadingHeader />;
-  if (currentUser === null) return <UnSignedInHeader />;
+  if (currentUser.state === 'loading') return <LoadingHeader />;
+  if (currentUser.state === 'sign_out') return <UnSignedInHeader />;
 
-  return <SignedInHeader currentUser={currentUser} />;
+  return <SignedInHeader currentUser={currentUser.data} />;
 };
 
 export default Header;

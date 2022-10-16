@@ -13,9 +13,9 @@ const CurrentUser: FC = () => {
         const res = await new UserApi().getSignInUser({
           headers: cookies,
         });
-        setUser(res.data);
+        setUser({ state: 'sign_in', data: res.data });
       } catch {
-        setUser(null);
+        setUser({ state: 'sign_out' });
       }
     };
     void setCurrentUser();

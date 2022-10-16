@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useGetCurrentUser } from 'src/libs/currentUserState';
+import { useGetCurrentUser } from 'src/recoil/currentUserState';
 import LoadingHeader from './LoadingHeader';
 import SignedInHeader from './SignedInHeader';
 import UnSignedInHeader from './UnSignedInHeader';

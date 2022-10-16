@@ -5,11 +5,11 @@ import LoadingHeader from './LoadingHeader';
 import UnSignedInHeader from './UnSignedInHeader';
 import SignedInHeader from './SignedInHeader';
 
-type CommonLayoutProps = {
+type LayoutProps = {
   children: ReactNode;
 };
 
-const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
   const currentUser = useCurrentUser();
 
   return (
@@ -27,4 +27,4 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
   );
 };
 
-export default CommonLayout;
+export default Layout;

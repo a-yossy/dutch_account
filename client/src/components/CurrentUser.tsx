@@ -5,7 +5,7 @@ import currentUserState from 'src/libs/currentUserState';
 import getAuthCookies from 'src/libs/getAuthCookies';
 
 const CurrentUser: FC = () => {
-  const [, setUser] = useRecoilState(currentUserState);
+  const setUser = useRecoilState(currentUserState)[1];
   const cookies = getAuthCookies();
 
   useEffect(() => {

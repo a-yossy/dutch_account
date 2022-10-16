@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { Text, Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,10 +7,8 @@ import OutlineButton from 'src/components/OutlineButton';
 import SignInSchema from 'src/formSchemas/signInSchema';
 import { SignInRequest } from 'openapi-generator/api';
 import useSignIn from 'src/hooks/useSignIn';
-import UnSignedInLayout from 'src/components/layouts/UnSignedInLayout';
-import type NextPageWithLayout from 'src/types/nextPageWithLayout';
 
-const SignIn: NextPageWithLayout = () => {
+const SignIn: NextPage = () => {
   const signIn = useSignIn();
   const {
     handleSubmit,
@@ -53,9 +51,5 @@ const SignIn: NextPageWithLayout = () => {
     </>
   );
 };
-
-SignIn.getLayout = (page: ReactElement) => (
-  <UnSignedInLayout>{page}</UnSignedInLayout>
-);
 
 export default SignIn;

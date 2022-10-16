@@ -1,11 +1,10 @@
 import { FC, useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { UserApi } from 'openapi-generator/api';
-import currentUserState from 'src/libs/currentUserState';
 import getAuthCookies from 'src/libs/getAuthCookies';
+import { useSetCurrentUser } from 'src/libs/currentUserState';
 
 const CurrentUser: FC = () => {
-  const setUser = useSetRecoilState(currentUserState);
+  const setUser = useSetCurrentUser();
   const cookies = getAuthCookies();
 
   useEffect(() => {

@@ -19,7 +19,7 @@ const useToast = () => {
         description,
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: 'top',
         containerStyle: {
           whiteSpace: 'pre-line',
         },

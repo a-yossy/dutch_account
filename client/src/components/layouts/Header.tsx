@@ -1,25 +1,16 @@
 import { FC } from 'react';
-import { Flex } from '@chakra-ui/react';
-import NoDecorationLink from 'src/components/NoDecorationLink';
+import { useGetCurrentUser } from 'src/recoil/currentUserState';
+import LoadingHeader from './LoadingHeader';
+import SignedInHeader from './SignedInHeader';
+import UnSignedInHeader from './UnSignedInHeader';
 
-const Header: FC = () => (
-  <header>
-    <Flex
-      minWidth='max-content'
-      alignItems='center'
-      gap='4'
-      background='#68697d1b'
-      h='60px'
-    >
-      <NoDecorationLink
-        title='Dutch Account'
-        href='/'
-        ml={20}
-        fontSize={20}
-        fontWeight='bold'
-      />
-    </Flex>
-  </header>
-);
+const Header: FC = () => {
+  const currentUser = useGetCurrentUser();
+
+  if (currentUser.state === 'loading') return <LoadingHeader />;
+  if (currentUser.state === 'sign_out') return <UnSignedInHeader />;
+
+  return <SignedInHeader currentUser={currentUser.data} />;
+};
 
 export default Header;

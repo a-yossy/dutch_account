@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import Header from 'src/components/layouts/Header';
+import Header from './Header';
 
 type LayoutProps = {
   children: ReactNode;

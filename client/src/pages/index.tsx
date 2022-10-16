@@ -1,9 +1,5 @@
-import type { ReactElement } from 'react';
-import CommonLayout from 'src/components/layouts/CommonLayout';
-import type NextPageWithLayout from 'src/types/nextPageWithLayout';
+import type { NextPage } from 'next';
 
-const Home: NextPageWithLayout = () => <div>TOP</div>;
-
-Home.getLayout = (page: ReactElement) => <CommonLayout>{page}</CommonLayout>;
+const Home: NextPage = () => <div>TOP</div>;
 
 export default Home;

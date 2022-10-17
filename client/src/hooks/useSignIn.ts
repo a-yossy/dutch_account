@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { UserApi, SignInRequest } from 'openapi-generator/api';
-import isResponseError from 'src/libs/isResponseError';
-import useToast from 'src/hooks/useToast';
-import setAuthCookies from 'src/libs/setAuthCookies';
+import { isResponseError } from 'src/libs/isResponseError';
+import { useToast } from 'src/hooks/useToast';
+import { setAuthCookies } from 'src/libs/setAuthCookies';
 
-const useSignIn = () => {
+export const useSignIn = () => {
   const toast = useToast();
   const router = useRouter();
   const signIn = useCallback(
@@ -37,5 +37,3 @@ const useSignIn = () => {
 
   return signIn;
 };
-
-export default useSignIn;

@@ -2,10 +2,10 @@ import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { Box, Text } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import InputForm from 'src/components/InputForm';
-import OutlineButton from 'src/components/OutlineButton';
+import { InputForm } from 'src/components/InputForm';
+import { OutlineButton } from 'src/components/OutlineButton';
 import { SignUpSchema, SignUpForm } from 'src/formSchemas/signUpSchema';
-import useSignUp from 'src/hooks/useSignUp';
+import { useSignUp } from 'src/hooks/useSignUp';
 
 const SignUp: NextPage = () => {
   const signUp = useSignUp();

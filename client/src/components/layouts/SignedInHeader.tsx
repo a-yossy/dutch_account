@@ -12,14 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { User } from 'openapi-generator/api';
-import NoDecorationLink from 'src/components/NoDecorationLink';
-import useSignOut from 'src/hooks/useSignOut';
+import { NoDecorationLink } from 'src/components/NoDecorationLink';
+import { useSignOut } from 'src/hooks/useSignOut';
 
 type SignedInHeaderProps = {
   currentUser: User;
 };
 
-const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
+export const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
   const signOut = useSignOut();
 
   return (
@@ -55,5 +55,3 @@ const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
     </header>
   );
 };
-
-export default SignedInHeader;

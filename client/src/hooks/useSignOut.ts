@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { UserApi } from 'openapi-generator/api';
-import getAuthCookies from 'src/libs/getAuthCookies';
-import isResponseError from 'src/libs/isResponseError';
-import useToast from 'src/hooks/useToast';
-import destroyAuthCookies from 'src/libs/destroyAuthCookies';
+import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { isResponseError } from 'src/libs/isResponseError';
+import { useToast } from 'src/hooks/useToast';
+import { destroyAuthCookies } from 'src/libs/destroyAuthCookies';
 
-const useSignOut = () => {
+export const useSignOut = () => {
   const toast = useToast();
   const router = useRouter();
   const signOut = useCallback(async () => {
@@ -28,5 +28,3 @@ const useSignOut = () => {
 
   return signOut;
 };
-
-export default useSignOut;

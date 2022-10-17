@@ -1,6 +1,6 @@
 import { parseCookies } from 'nookies';
 
-const getAuthCookies = () => {
+export const getAuthCookies = () => {
   const cookies = parseCookies();
 
   return {
@@ -9,5 +9,3 @@ const getAuthCookies = () => {
     client: cookies.client,
   };
 };
-
-export default getAuthCookies;

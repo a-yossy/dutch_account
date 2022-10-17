@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
-import LoadingHeader from './LoadingHeader';
-import SignedInHeader from './SignedInHeader';
-import UnSignedInHeader from './UnSignedInHeader';
+import { LoadingHeader } from 'src/components/layouts/LoadingHeader';
+import { SignedInHeader } from 'src/components/layouts/SignedInHeader';
+import { UnSignedInHeader } from 'src/components/layouts/UnSignedInHeader';
 
-const Header: FC = () => {
+export const Header: FC = () => {
   const currentUser = useGetCurrentUser();
 
   if (currentUser.state === 'loading') return <LoadingHeader />;
@@ -12,5 +12,3 @@ const Header: FC = () => {
 
   return <SignedInHeader currentUser={currentUser.data} />;
 };
-
-export default Header;

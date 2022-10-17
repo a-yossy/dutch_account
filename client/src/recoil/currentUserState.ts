@@ -1,6 +1,6 @@
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { User } from 'openapi-generator/api';
-import RecoilAtomKeys from 'src/recoil/keys';
+import { RecoilAtomKeys } from 'src/recoil/keys';
 
 type CurrentUserState =
   | {

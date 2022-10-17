@@ -1,7 +1,7 @@
 import type { SWRConfiguration } from 'swr';
-import useRequireLogin from 'src/hooks/useRequireLogin';
+import { useRequireLogin } from 'src/hooks/useRequireLogin';
 
-const useSwrValue = () => {
+export const useSwrValue = () => {
   const requireLogin = useRequireLogin();
   const swrValue: SWRConfiguration = {
     onError: (error: unknown) => {
@@ -11,5 +11,3 @@ const useSwrValue = () => {
 
   return swrValue;
 };
-
-export default useSwrValue;

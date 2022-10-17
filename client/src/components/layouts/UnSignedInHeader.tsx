@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Flex, Spacer } from '@chakra-ui/react';
-import NoDecorationLink from 'src/components/NoDecorationLink';
+import { NoDecorationLink } from 'src/components/NoDecorationLink';
 
-const UnSignedInHeader: FC = () => (
+export const UnSignedInHeader: FC = () => (
   <header>
     <Flex
       minWidth='max-content'
@@ -22,5 +22,3 @@ const UnSignedInHeader: FC = () => (
     </Flex>
   </header>
 );
-
-export default UnSignedInHeader;

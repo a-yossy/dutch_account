@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
-import useToast from 'src/hooks/useToast';
-import isResponseError from 'src/libs/isResponseError';
+import { useToast } from 'src/hooks/useToast';
+import { isResponseError } from 'src/libs/isResponseError';
 
-const useRequireLogin = () => {
+export const useRequireLogin = () => {
   const router = useRouter();
   const toast = useToast();
   const requireLogin = useCallback(
@@ -22,5 +22,3 @@ const useRequireLogin = () => {
 
   return requireLogin;
 };
-
-export default useRequireLogin;

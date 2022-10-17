@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 import { User, UserApi } from 'openapi-generator/api';
-import getAuthCookies from 'src/libs/getAuthCookies';
-import AxiosResponseError from 'src/types/axiosResponseError';
+import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-const useGetSignInUser = () => {
+export const useGetSignInUser = () => {
   const fetcher = () =>
     new UserApi()
       .getSignInUser({ headers: getAuthCookies() })
@@ -15,5 +15,3 @@ const useGetSignInUser = () => {
 
   return data;
 };
-
-export default useGetSignInUser;

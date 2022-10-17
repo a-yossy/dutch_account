@@ -1,3 +1,2 @@
-type SomeRequired<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
-
-export default SomeRequired;
+export type SomeRequired<T, K extends keyof T> = Omit<T, K> &
+  Required<Pick<T, K>>;

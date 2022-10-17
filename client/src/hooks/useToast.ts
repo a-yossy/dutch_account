@@ -5,7 +5,7 @@ import {
   ToastId,
 } from '@chakra-ui/react';
 
-const useToast = () => {
+export const useToast = () => {
   const chakraToast = useChakraToast();
   const toast = useCallback(
     (
@@ -29,5 +29,3 @@ const useToast = () => {
 
   return toast;
 };
-
-export default useToast;

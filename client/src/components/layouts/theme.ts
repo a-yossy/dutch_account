@@ -15,6 +15,4 @@ const styles: Styles = {
   },
 };
 
-const theme = extendTheme({ config, styles });
-
-export default theme;
+export const theme = extendTheme({ config, styles });

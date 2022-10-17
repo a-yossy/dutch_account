@@ -1,9 +1,9 @@
 import axios from 'axios';
-import ResponseErrorSchema from 'src/types/responseErrorSchema';
-import SomeRequired from 'src/types/someRequired';
-import AxiosResponseError from 'src/types/axiosResponseError';
+import { ResponseErrorSchema } from 'src/types/responseErrorSchema';
+import { SomeRequired } from 'src/types/someRequired';
+import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-const isResponseError = (
+export const isResponseError = (
   error: unknown
 ): error is SomeRequired<AxiosResponseError, 'response'> => {
   if (axios.isAxiosError(error) && error.response !== undefined) {
@@ -14,5 +14,3 @@ const isResponseError = (
 
   return false;
 };
-
-export default isResponseError;

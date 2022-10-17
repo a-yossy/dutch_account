@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Flex, Spacer, Spinner } from '@chakra-ui/react';
-import NoDecorationLink from 'src/components/NoDecorationLink';
+import { NoDecorationLink } from 'src/components/NoDecorationLink';
 
-const LoadingHeader: FC = () => (
+export const LoadingHeader: FC = () => (
   <header>
     <Flex
       minWidth='max-content'
@@ -19,5 +19,3 @@ const LoadingHeader: FC = () => (
     </Flex>
   </header>
 );
-
-export default LoadingHeader;

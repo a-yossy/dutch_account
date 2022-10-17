@@ -18,7 +18,7 @@ type InputFormProps = {
   register: UseFormRegisterReturn;
 } & FormControlProps;
 
-const InputForm: FC<InputFormProps> = ({
+export const InputForm: FC<InputFormProps> = ({
   error,
   id,
   formLabel,
@@ -33,5 +33,3 @@ const InputForm: FC<InputFormProps> = ({
     <FormErrorMessage>{error?.message}</FormErrorMessage>
   </FormControl>
 );
-
-export default InputForm;

@@ -1,12 +1,12 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
-import Header from './Header';
+import { Header } from 'src/components/layouts/Header';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout: FC<LayoutProps> = ({ children }) => (
+export const Layout: FC<LayoutProps> = ({ children }) => (
   <>
     <Head>
       <title>Dutch Account</title>
@@ -17,5 +17,3 @@ const Layout: FC<LayoutProps> = ({ children }) => (
     <main>{children}</main>
   </>
 );
-
-export default Layout;

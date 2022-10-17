@@ -48,5 +48,6 @@ module.exports = {
         next: 'return',
       },
     ],
+    'import/prefer-default-export': 'off',
   },
 };

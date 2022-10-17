@@ -23,7 +23,7 @@ paths:
       tags:
         - managementGroup
       summary: 全ての管理グループを取得
-      description: サインインしているユーザーに紐づく全ての管理グループを取得する
+      description: ログインしているユーザーに紐づく全ての管理グループを取得する
       operationId: getManagementGroups
       responses:
         200:
@@ -66,7 +66,7 @@ paths:
       tags:
         - managementGroup
       summary: 管理グループを取得
-      description: サインインしているユーザーに紐づく管理グループを取得する
+      description: ログインしているユーザーに紐づく管理グループを取得する
       operationId: getManagementGroupByManagementGroupId
       responses:
         200:
@@ -380,13 +380,13 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /sign_in_user:
+  /current_user:
     get:
       tags:
         - user
-      summary: サインインしているユーザーを取得
-      description: サインインしているユーザーを取得する
-      operationId: getSignInUser
+      summary: ログインしているユーザーを取得
+      description: ログインしているユーザーを取得する
+      operationId: getCurrentUser
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -426,19 +426,19 @@ paths:
           $ref: "#/components/responses/UnprocessableEntity"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /sign_in:
+  /log_in:
     post:
       tags:
         - user
-      summary: サインイン
-      description: サインインする
-      operationId: signIn
+      summary: ログイン
+      description: ログインする
+      operationId: logIn
       security: []
       requestBody:
         $ref: "#/components/requestBodies/SignInBody"
       responses:
         200:
-          description: サインインに成功した時のレスポンス
+          description: ログインに成功した時のレスポンス
           content:
             application/json:
               schema:
@@ -454,13 +454,13 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /sign_out:
+  /log_out:
     delete:
       tags:
         - user
-      summary: サインアウト
-      description: サインアウトする
-      operationId: signOut
+      summary: ログアウト
+      description: ログアウトする
+      operationId: logOut
       responses:
         204:
           $ref: "#/components/responses/NoContent"
@@ -818,7 +818,7 @@ components:
                 description: パスワード
                 example: password
     SignInBody:
-      description: サインイン用のユーザー
+      description: ログイン用のユーザー
       content:
         application/json:
           schema:

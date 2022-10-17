@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { UserApi } from 'openapi-generator/api';
+import { UserApi } from 'src/openapi-generator';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import { useSetCurrentUser } from 'src/recoil/currentUserState';
 
@@ -10,12 +10,12 @@ export const CurrentUser: FC = () => {
   useEffect(() => {
     const setCurrentUser = async () => {
       try {
-        const res = await new UserApi().getSignInUser({
+        const res = await new UserApi().getCurrentUser({
           headers: cookies,
         });
-        setUser({ state: 'sign_in', data: res.data });
+        setUser({ state: 'log_in', data: res.data });
       } catch {
-        setUser({ state: 'sign_out' });
+        setUser({ state: 'log_out' });
       }
     };
     void setCurrentUser();

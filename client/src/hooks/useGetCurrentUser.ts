@@ -1,12 +1,12 @@
 import useSWR from 'swr';
-import { User, UserApi } from 'openapi-generator/api';
+import { User, UserApi } from 'src/openapi-generator';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetSignInUser = () => {
+export const useGetCurrentUser = () => {
   const fetcher = () =>
     new UserApi()
-      .getSignInUser({ headers: getAuthCookies() })
+      .getCurrentUser({ headers: getAuthCookies() })
       .then((res) => res.data);
   const { data } = useSWR<User, AxiosResponseError>(
     '/api/v1/sign_in_user',

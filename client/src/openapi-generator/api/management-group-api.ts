@@ -76,7 +76,7 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * サインインしているユーザーに紐づく管理グループを取得する
+         * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -119,7 +119,7 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * ログインしているユーザーに紐づく全ての管理グループを取得する
          * @summary 全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -179,7 +179,7 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * サインインしているユーザーに紐づく管理グループを取得する
+         * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -190,7 +190,7 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * ログインしているユーザーに紐づく全ての管理グループを取得する
          * @summary 全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -220,7 +220,7 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
             return localVarFp.addManagementGroup(addManagementGroupRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * サインインしているユーザーに紐づく管理グループを取得する
+         * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
          * @param {number} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
@@ -230,7 +230,7 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
             return localVarFp.getManagementGroupByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
         /**
-         * サインインしているユーザーに紐づく全ての管理グループを取得する
+         * ログインしているユーザーに紐づく全ての管理グループを取得する
          * @summary 全ての管理グループを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -261,7 +261,7 @@ export class ManagementGroupApi extends BaseAPI {
     }
 
     /**
-     * サインインしているユーザーに紐づく管理グループを取得する
+     * ログインしているユーザーに紐づく管理グループを取得する
      * @summary 管理グループを取得
      * @param {number} managementGroupId 管理グループID
      * @param {*} [options] Override http request option.
@@ -273,7 +273,7 @@ export class ManagementGroupApi extends BaseAPI {
     }
 
     /**
-     * サインインしているユーザーに紐づく全ての管理グループを取得する
+     * ログインしているユーザーに紐づく全ての管理グループを取得する
      * @summary 全ての管理グループを取得
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -10,7 +10,7 @@
     "lint:fix": "next lint --fix",
     "format": "yarn prettier --check .",
     "format:fix": "yarn prettier --write .",
-    "generate-client": "openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./openapi-generator/api -c ./openapiConfig.yml",
+    "generate-client": "rm -rf src/openapi-generator &&  openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./src/openapi-generator -c ./openapiConfig.yml",
     "postinstall": "npx typesync",
     "prepare": "cd .. && husky install client/.husky"
   },

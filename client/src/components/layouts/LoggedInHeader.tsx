@@ -11,16 +11,16 @@ import {
   MenuDivider,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { User } from 'openapi-generator/api';
+import { User } from 'src/openapi-generator';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
-import { useSignOut } from 'src/hooks/useSignOut';
+import { useLogOut } from 'src/hooks/useLogOut';
 
-type SignedInHeaderProps = {
+type LoggedInHeaderProps = {
   currentUser: User;
 };
 
-export const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
-  const signOut = useSignOut();
+export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
+  const logOut = useLogOut();
 
   return (
     <header>
@@ -48,7 +48,7 @@ export const SignedInHeader: FC<SignedInHeaderProps> = ({ currentUser }) => {
             <NoDecorationLink href='/mypage'>
               <MenuItem>マイページ</MenuItem>
             </NoDecorationLink>
-            <MenuItem onClick={signOut}>サインアウト</MenuItem>
+            <MenuItem onClick={logOut}>ログアウト</MenuItem>
           </MenuList>
         </Menu>
       </Flex>

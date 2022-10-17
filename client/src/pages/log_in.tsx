@@ -4,24 +4,24 @@ import { Text, Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputForm } from 'src/components/InputForm';
 import { OutlineButton } from 'src/components/OutlineButton';
-import { SignInSchema } from 'src/formSchemas/signInSchema';
-import { SignInRequest } from 'openapi-generator/api';
-import { useSignIn } from 'src/hooks/useSignIn';
+import { LogInSchema } from 'src/formSchemas/logInSchema';
+import { LogInRequest } from 'src/openapi-generator';
+import { useLogIn } from 'src/hooks/useLogIn';
 
 const SignIn: NextPage = () => {
-  const signIn = useSignIn();
+  const logIn = useLogIn();
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm<SignInRequest>({ resolver: zodResolver(SignInSchema) });
+  } = useForm<LogInRequest>({ resolver: zodResolver(LogInSchema) });
 
   return (
     <>
       <Text fontSize='xl' align='center'>
-        サインイン
+        ログイン
       </Text>
-      <Box as='form' onSubmit={handleSubmit(signIn)} width={350} mx='auto'>
+      <Box as='form' onSubmit={handleSubmit(logIn)} width={350} mx='auto'>
         <InputForm
           error={errors.email}
           id='email'
@@ -45,7 +45,7 @@ const SignIn: NextPage = () => {
           isLoading={isSubmitting}
           mt={5}
         >
-          サインイン
+          ログイン
         </OutlineButton>
       </Box>
     </>

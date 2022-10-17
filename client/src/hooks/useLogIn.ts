@@ -1,28 +1,28 @@
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { UserApi, SignInRequest } from 'openapi-generator/api';
+import { UserApi, LogInRequest } from 'src/openapi-generator';
 import { isResponseError } from 'src/libs/isResponseError';
 import { useToast } from 'src/hooks/useToast';
 import { setAuthCookies } from 'src/libs/setAuthCookies';
 
-export const useSignIn = () => {
+export const useLogIn = () => {
   const toast = useToast();
   const router = useRouter();
   const signIn = useCallback(
-    async (params: SignInRequest) => {
+    async (params: LogInRequest) => {
       try {
-        const response = await new UserApi().signIn({
+        const response = await new UserApi().logIn({
           email: params.email,
           password: params.password,
         });
         setAuthCookies(response.headers);
         await router.push('/mypage');
-        toast('success', 'サインインしました');
+        toast('success', 'ログインしました');
       } catch (error: unknown) {
         if (isResponseError(error)) {
           toast(
             'error',
-            'サインインに失敗しました',
+            'ログインに失敗しました',
             error.response.data.messages.join('\n')
           );
         }

@@ -21,9 +21,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ResponseError } from '../model';
+import { LogInRequest } from '../model';
 // @ts-ignore
-import { SignInRequest } from '../model';
+import { ResponseError } from '../model';
 // @ts-ignore
 import { SignUpRequest } from '../model';
 // @ts-ignore
@@ -35,13 +35,13 @@ import { User } from '../model';
 export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * サインインしているユーザーを取得する
-         * @summary サインインしているユーザーを取得
+         * ログインしているユーザーを取得する
+         * @summary ログインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSignInUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sign_in_user`;
+        getCurrentUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/current_user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -74,14 +74,14 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * サインインする
-         * @summary サインイン
-         * @param {SignInRequest} [signInRequest] サインイン用のユーザー
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン用のユーザー
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signIn: async (signInRequest?: SignInRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sign_in`;
+        logIn: async (logInRequest?: LogInRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log_in`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -100,7 +100,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signInRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(logInRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -108,13 +108,13 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * サインアウトする
-         * @summary サインアウト
+         * ログアウトする
+         * @summary ログアウト
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signOut: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/sign_out`;
+        logOut: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/log_out`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -191,34 +191,34 @@ export const UserApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration)
     return {
         /**
-         * サインインしているユーザーを取得する
-         * @summary サインインしているユーザーを取得
+         * ログインしているユーザーを取得する
+         * @summary ログインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getSignInUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSignInUser(options);
+        async getCurrentUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrentUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * サインインする
-         * @summary サインイン
-         * @param {SignInRequest} [signInRequest] サインイン用のユーザー
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン用のユーザー
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signIn(signInRequest?: SignInRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.signIn(signInRequest, options);
+        async logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logIn(logInRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * サインアウトする
-         * @summary サインアウト
+         * ログアウトする
+         * @summary ログアウト
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signOut(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.signOut(options);
+        async logOut(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logOut(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -243,32 +243,32 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = UserApiFp(configuration)
     return {
         /**
-         * サインインしているユーザーを取得する
-         * @summary サインインしているユーザーを取得
+         * ログインしているユーザーを取得する
+         * @summary ログインしているユーザーを取得
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getSignInUser(options?: any): AxiosPromise<User> {
-            return localVarFp.getSignInUser(options).then((request) => request(axios, basePath));
+        getCurrentUser(options?: any): AxiosPromise<User> {
+            return localVarFp.getCurrentUser(options).then((request) => request(axios, basePath));
         },
         /**
-         * サインインする
-         * @summary サインイン
-         * @param {SignInRequest} [signInRequest] サインイン用のユーザー
+         * ログインする
+         * @summary ログイン
+         * @param {LogInRequest} [logInRequest] ログイン用のユーザー
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signIn(signInRequest?: SignInRequest, options?: any): AxiosPromise<User> {
-            return localVarFp.signIn(signInRequest, options).then((request) => request(axios, basePath));
+        logIn(logInRequest?: LogInRequest, options?: any): AxiosPromise<User> {
+            return localVarFp.logIn(logInRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * サインアウトする
-         * @summary サインアウト
+         * ログアウトする
+         * @summary ログアウト
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signOut(options?: any): AxiosPromise<void> {
-            return localVarFp.signOut(options).then((request) => request(axios, basePath));
+        logOut(options?: any): AxiosPromise<void> {
+            return localVarFp.logOut(options).then((request) => request(axios, basePath));
         },
         /**
          * サインアップする
@@ -291,37 +291,37 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
  */
 export class UserApi extends BaseAPI {
     /**
-     * サインインしているユーザーを取得する
-     * @summary サインインしているユーザーを取得
+     * ログインしているユーザーを取得する
+     * @summary ログインしているユーザーを取得
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getSignInUser(options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).getSignInUser(options).then((request) => request(this.axios, this.basePath));
+    public getCurrentUser(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getCurrentUser(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * サインインする
-     * @summary サインイン
-     * @param {SignInRequest} [signInRequest] サインイン用のユーザー
+     * ログインする
+     * @summary ログイン
+     * @param {LogInRequest} [logInRequest] ログイン用のユーザー
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public signIn(signInRequest?: SignInRequest, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).signIn(signInRequest, options).then((request) => request(this.axios, this.basePath));
+    public logIn(logInRequest?: LogInRequest, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).logIn(logInRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * サインアウトする
-     * @summary サインアウト
+     * ログアウトする
+     * @summary ログアウト
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public signOut(options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).signOut(options).then((request) => request(this.axios, this.basePath));
+    public logOut(options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).logOut(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

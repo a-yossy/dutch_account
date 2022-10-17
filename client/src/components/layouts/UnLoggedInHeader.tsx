@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Flex, Spacer } from '@chakra-ui/react';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
 
-export const UnSignedInHeader: FC = () => (
+export const UnLoggedInHeader: FC = () => (
   <header>
     <Flex
       minWidth='max-content'
@@ -15,9 +15,9 @@ export const UnSignedInHeader: FC = () => (
         Dutch Account
       </NoDecorationLink>
       <Spacer />
-      <NoDecorationLink href='/sign_in'>サインイン</NoDecorationLink>
+      <NoDecorationLink href='/log_in'>ログイン</NoDecorationLink>
       <NoDecorationLink href='/sign_up' mr={20}>
-        サインアップ
+        新規登録
       </NoDecorationLink>
     </Flex>
   </header>

@@ -9,7 +9,7 @@ export const useRequireLogin = () => {
   const requireLogin = useCallback(
     (error: unknown) => {
       if (isResponseError(error) && error.response.status === 401) {
-        void router.push('/sign_in');
+        void router.push('/log_in');
         toast(
           'error',
           'アクセスできません',

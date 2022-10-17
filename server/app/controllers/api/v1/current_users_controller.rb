@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::SignInUsersController < ApplicationController
+class Api::V1::CurrentUsersController < ApplicationController
   before_action :authenticate_user!
 
   def show

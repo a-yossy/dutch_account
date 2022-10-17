@@ -7,5 +7,8 @@ class User < ApplicationRecord
          :validatable
   include DeviseTokenAuth::Concerns::User
 
-  validates :name, presence: true
+  has_many :management_affiliations, dependent: :destroy
+  has_many :management_groups, through: :management_affiliations
+
+  validates :name, presence: true, length: { maximum: 20 }
 end

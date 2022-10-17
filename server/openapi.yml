@@ -18,15 +18,13 @@ security:
     uid: []
     client: []
 paths:
-  /users/{user_id}/management_groups:
-    parameters:
-      - $ref: "#/components/parameters/UserId"
+  /management_groups:
     get:
       tags:
         - managementGroup
-      summary: ユーザーに紐づく全ての管理グループを取得
-      description: ユーザーに紐づく全ての管理グループを取得する
-      operationId: getManagementGroupsByUserId
+      summary: 全ての管理グループを取得
+      description: サインインしているユーザーに紐づく全ての管理グループを取得する
+      operationId: getManagementGroups
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -38,11 +36,8 @@ paths:
                   $ref: "#/components/schemas/ManagementGroup"
         401:
           $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups:
     post:
       tags:
         - managementGroup
@@ -71,7 +66,7 @@ paths:
       tags:
         - managementGroup
       summary: 管理グループを取得
-      description: 管理グループを取得する
+      description: サインインしているユーザーに紐づく管理グループを取得する
       operationId: getManagementGroupByManagementGroupId
       responses:
         200:
@@ -865,15 +860,6 @@ components:
       name: debt_record_id
       in: path
       description: 借金履歴ID
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 1
-    UserId:
-      name: user_id
-      in: path
-      description: ユーザーID
       required: true
       schema:
         type: integer

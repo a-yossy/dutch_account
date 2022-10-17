@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_scope :user do
         post '/sign_up', to: 'registrations#create'
-        post '/sign_in', to: 'sessions#create'
-        delete '/sign_out', to: 'sessions#destroy'
+        post '/log_in', to: 'sessions#create'
+        delete '/log_out', to: 'sessions#destroy'
       end
 
-      resource :sign_in_user, only: %i[show]
+      resource :current_user, only: %i[show]
       resources :management_groups, only: %i[index show]
     end
   end

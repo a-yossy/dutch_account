@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { UserApi, SignUpRequest } from 'openapi-generator/api';
+import { UserApi, SignUpRequest } from 'src/openapi-generator';
 import { isResponseError } from 'src/libs/isResponseError';
 import { useToast } from 'src/hooks/useToast';
 import { setAuthCookies } from 'src/libs/setAuthCookies';
@@ -18,12 +18,12 @@ export const useSignUp = () => {
         });
         setAuthCookies(response.headers);
         await router.push('/mypage');
-        toast('success', 'サインアップしました');
+        toast('success', 'アカウント登録しました');
       } catch (error: unknown) {
         if (isResponseError(error)) {
           toast(
             'error',
-            'サインアップに失敗しました',
+            'アカウント登録に失敗しました',
             error.response.data.messages.join(`\n`)
           );
         }

@@ -19,12 +19,12 @@ model/add-payment-affiliations-by-payment-group-id-request-inner.ts
 model/add-payment-group-by-management-group-id-request.ts
 model/borrowing-user-debt-record.ts
 model/index.ts
+model/log-in-request.ts
 model/management-affiliation-user.ts
 model/management-group.ts
 model/payment-affiliation-user.ts
 model/payment-group.ts
 model/response-error.ts
-model/sign-in-request.ts
 model/sign-up-request.ts
 model/user-debt-record.ts
 model/user.ts

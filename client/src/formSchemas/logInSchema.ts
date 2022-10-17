@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { SignInRequest } from 'openapi-generator/api';
+import { LogInRequest } from 'src/openapi-generator';
 
-export const SignInSchema: z.ZodType<SignInRequest> = z.object({
+export const LogInSchema: z.ZodType<LogInRequest> = z.object({
   email: z.string().email({ message: 'メールアドレスが不正です' }),
   password: z
     .string()

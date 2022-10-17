@@ -1,18 +1,18 @@
 import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
-import { useGetSignInUser } from 'src/hooks/useGetSignInUser';
+import { useGetCurrentUser } from 'src/hooks/useGetCurrentUser';
 
 const Mypage: NextPage = () => {
-  const signInUser = useGetSignInUser();
+  const currentUser = useGetCurrentUser();
 
-  if (!signInUser) return <Spinner />;
+  if (!currentUser) return <Spinner />;
 
   return (
     <>
       <Text fontSize='xl' align='center'>
         マイページ
       </Text>
-      {signInUser.name}
+      {currentUser.name}
     </>
   );
 };

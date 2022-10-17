@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SignUpRequest } from 'openapi-generator/api';
+import { SignUpRequest } from 'src/openapi-generator';
 
 export type SignUpForm = {
   password_confirmation: string;

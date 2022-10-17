@@ -20,7 +20,7 @@ const SignUp: NextPage = () => {
   return (
     <>
       <Text fontSize='xl' align='center'>
-        サインアップ
+        新規登録
       </Text>
       <Box as='form' onSubmit={handleSubmit(signUp)} width={350} mx='auto'>
         <InputForm
@@ -63,7 +63,7 @@ const SignUp: NextPage = () => {
           isLoading={isSubmitting}
           mt={5}
         >
-          サインアップ
+          登録
         </OutlineButton>
       </Box>
     </>

@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ManagementGroupsController, type: :request do
   describe '#index' do
-    context 'when the user signs in' do
+    context 'when the user logs in' do
       let(:user) { create(:user) }
-      let(:auth_tokens) { sign_in(user) }
+      let(:auth_tokens) { log_in(user) }
       let(:management_affiliations) { create(:management_affiliations, user:) }
 
       it 'returns success response' do
@@ -15,7 +15,7 @@ RSpec.describe Api::V1::ManagementGroupsController, type: :request do
       end
     end
 
-    context 'when the user does not sign in' do
+    context 'when the user does not log in' do
       it 'returns unauthorized response' do
         get api_v1_management_groups_path
         assert_response_schema_confirm(401)
@@ -26,9 +26,9 @@ RSpec.describe Api::V1::ManagementGroupsController, type: :request do
   describe '#show' do
     let(:management_group) { create(:management_group) }
 
-    context 'when the user signs in' do
+    context 'when the user logs in' do
       let(:user) { create(:user) }
-      let(:auth_tokens) { sign_in(user) }
+      let(:auth_tokens) { log_in(user) }
 
       context 'when the management group related to the user does not exist' do
         let(:other_management_group) { create(:management_group) }
@@ -49,7 +49,7 @@ RSpec.describe Api::V1::ManagementGroupsController, type: :request do
       end
     end
 
-    context 'when the user does not sign in' do
+    context 'when the user does not log in' do
       it 'returns unauthorized response' do
         get api_v1_management_group_path(management_group)
         assert_response_schema_confirm(401)

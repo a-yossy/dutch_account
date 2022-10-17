@@ -17,19 +17,19 @@
 /**
  * 
  * @export
- * @interface SignInRequest
+ * @interface LogInRequest
  */
-export interface SignInRequest {
+export interface LogInRequest {
     /**
      * メールアドレス
      * @type {string}
-     * @memberof SignInRequest
+     * @memberof LogInRequest
      */
     'email': string;
     /**
      * パスワード
      * @type {string}
-     * @memberof SignInRequest
+     * @memberof LogInRequest
      */
     'password': string;
 }

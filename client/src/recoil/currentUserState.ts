@@ -1,5 +1,5 @@
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
-import { User } from 'openapi-generator/api';
+import { User } from 'src/openapi-generator';
 import { RecoilAtomKeys } from 'src/recoil/keys';
 
 type CurrentUserState =
@@ -7,11 +7,11 @@ type CurrentUserState =
       state: 'loading';
     }
   | {
-      state: 'sign_in';
+      state: 'log_in';
       data: User;
     }
   | {
-      state: 'sign_out';
+      state: 'log_out';
     };
 
 const currentUserState = atom<CurrentUserState>({

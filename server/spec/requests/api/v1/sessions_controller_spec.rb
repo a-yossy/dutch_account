@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
   describe '#create' do
-    subject { post_as_json api_v1_sign_in_path, params }
+    subject { post_as_json api_v1_log_in_path, params }
 
     before { create(:user, email: 'email@example.com', password: 'password') }
 
@@ -38,12 +38,12 @@ RSpec.describe Api::V1::SessionsController, type: :request do
   end
 
   describe '#destroy' do
-    subject { delete api_v1_sign_out_path, headers: auth_tokens }
+    subject { delete api_v1_log_out_path, headers: auth_tokens }
 
     let(:user) { create(:user) }
 
     context 'with valid headers' do
-      let(:auth_tokens) { sign_in(user) }
+      let(:auth_tokens) { log_in(user) }
 
       it 'responds with success' do
         subject
@@ -52,7 +52,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     end
 
     context 'with invalid headers' do
-      let(:auth_tokens) { sign_in(user).slice('access-token', 'uid') }
+      let(:auth_tokens) { log_in(user).slice('access-token', 'uid') }
 
       it 'responds with not_found' do
         subject

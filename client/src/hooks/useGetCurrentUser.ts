@@ -9,7 +9,7 @@ export const useGetCurrentUser = () => {
       .getCurrentUser({ headers: getAuthCookies() })
       .then((res) => res.data);
   const { data } = useSWR<User, AxiosResponseError>(
-    '/api/v1/sign_in_user',
+    '/api/v1/current_user',
     fetcher
   );
 

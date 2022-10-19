@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+User.create!(name: 'no-relation', email: 'norelation@example.com', password: 'password')
 user = User.create!(name: 'name', email: 'email@example.com', password: 'password')
 
 5.times do |i|

@@ -48,6 +48,10 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
             <NoDecorationLink href='/mypage'>
               <MenuItem>マイページ</MenuItem>
             </NoDecorationLink>
+            <NoDecorationLink href='/management_groups'>
+              <MenuItem>管理グループ</MenuItem>
+            </NoDecorationLink>
+            <MenuDivider />
             <MenuItem onClick={logOut}>ログアウト</MenuItem>
           </MenuList>
         </Menu>

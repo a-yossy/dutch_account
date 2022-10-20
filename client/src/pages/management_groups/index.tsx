@@ -24,7 +24,7 @@ const ManagementGroups: NextPage = () => {
             mx='auto'
             boxShadow='dark-lg'
             rounded='md'
-            bg='#2470e91b'
+            bg='#164b9f1b'
             height={12}
             display='flex'
             alignItems='center'

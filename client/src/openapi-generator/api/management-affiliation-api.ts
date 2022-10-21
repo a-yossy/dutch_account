@@ -33,11 +33,11 @@ export const ManagementAffiliationApiAxiosParamCreator = function (configuration
         /**
          * 管理グループに所属する全てのユーザーを取得する
          * @summary 管理グループに所属する全てのユーザーを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementAffiliationUsersByManagementGroupId: async (managementGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getManagementAffiliationUsersByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
             assertParamExists('getManagementAffiliationUsersByManagementGroupId', 'managementGroupId', managementGroupId)
             const localVarPath = `/management_groups/{management_group_id}/management_affiliation_users`
@@ -86,11 +86,11 @@ export const ManagementAffiliationApiFp = function(configuration?: Configuration
         /**
          * 管理グループに所属する全てのユーザーを取得する
          * @summary 管理グループに所属する全てのユーザーを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementAffiliationUsersByManagementGroupId(managementGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementAffiliationUser>>> {
+        async getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementAffiliationUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -107,11 +107,11 @@ export const ManagementAffiliationApiFactory = function (configuration?: Configu
         /**
          * 管理グループに所属する全てのユーザーを取得する
          * @summary 管理グループに所属する全てのユーザーを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementAffiliationUsersByManagementGroupId(managementGroupId: number, options?: any): AxiosPromise<Array<ManagementAffiliationUser>> {
+        getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<ManagementAffiliationUser>> {
             return localVarFp.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
     };
@@ -127,12 +127,12 @@ export class ManagementAffiliationApi extends BaseAPI {
     /**
      * 管理グループに所属する全てのユーザーを取得する
      * @summary 管理グループに所属する全てのユーザーを取得
-     * @param {number} managementGroupId 管理グループID
+     * @param {string} managementGroupId 管理グループID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ManagementAffiliationApi
      */
-    public getManagementAffiliationUsersByManagementGroupId(managementGroupId: number, options?: AxiosRequestConfig) {
+    public getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
         return ManagementAffiliationApiFp(this.configuration).getManagementAffiliationUsersByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 }

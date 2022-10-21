@@ -35,12 +35,12 @@ export const PaymentAffiliationApiAxiosParamCreator = function (configuration?: 
         /**
          * 支払グループに複数のユーザーを所属させる
          * @summary 支払グループに複数のユーザーを所属させる
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addPaymentAffiliationsByPaymentGroupId: async (paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addPaymentAffiliationsByPaymentGroupId: async (paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paymentGroupId' is not null or undefined
             assertParamExists('addPaymentAffiliationsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
             const localVarPath = `/payment_groups/{payment_group_id}/payment_affiliations/bulk_insert`
@@ -82,11 +82,11 @@ export const PaymentAffiliationApiAxiosParamCreator = function (configuration?: 
         /**
          * 支払グループに所属する全てのユーザーを取得する
          * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentAffiliationUsersByPaymentGroupId: async (paymentGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentAffiliationUsersByPaymentGroupId: async (paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paymentGroupId' is not null or undefined
             assertParamExists('getPaymentAffiliationUsersByPaymentGroupId', 'paymentGroupId', paymentGroupId)
             const localVarPath = `/payment_groups/{payment_group_id}/payment_affiliation_users`
@@ -125,12 +125,12 @@ export const PaymentAffiliationApiAxiosParamCreator = function (configuration?: 
         /**
          * 複数のユーザーの支払グループへの所属情報を更新する
          * @summary 複数のユーザーの支払グループへの所属情報を更新
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentAffiliationsByPaymentGroupId: async (paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePaymentAffiliationsByPaymentGroupId: async (paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paymentGroupId' is not null or undefined
             assertParamExists('updatePaymentAffiliationsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
             const localVarPath = `/payment_groups/{payment_group_id}/payment_affiliations/bulk_update`
@@ -182,35 +182,35 @@ export const PaymentAffiliationApiFp = function(configuration?: Configuration) {
         /**
          * 支払グループに複数のユーザーを所属させる
          * @summary 支払グループに複数のユーザーを所属させる
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addPaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+        async addPaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addPaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 支払グループに所属する全てのユーザーを取得する
          * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+        async getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 複数のユーザーの支払グループへの所属情報を更新する
          * @summary 複数のユーザーの支払グループへの所属情報を更新
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+        async updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -227,33 +227,33 @@ export const PaymentAffiliationApiFactory = function (configuration?: Configurat
         /**
          * 支払グループに複数のユーザーを所属させる
          * @summary 支払グループに複数のユーザーを所属させる
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addPaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+        addPaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
             return localVarFp.addPaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
         },
         /**
          * 支払グループに所属する全てのユーザーを取得する
          * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: number, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+        getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
             return localVarFp.getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 複数のユーザーの支払グループへの所属情報を更新する
          * @summary 複数のユーザーの支払グループへの所属情報を更新
-         * @param {number} paymentGroupId 支払グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+        updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
             return localVarFp.updatePaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
         },
     };
@@ -269,38 +269,38 @@ export class PaymentAffiliationApi extends BaseAPI {
     /**
      * 支払グループに複数のユーザーを所属させる
      * @summary 支払グループに複数のユーザーを所属させる
-     * @param {number} paymentGroupId 支払グループID
+     * @param {string} paymentGroupId 支払グループID
      * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentAffiliationApi
      */
-    public addPaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
+    public addPaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
         return PaymentAffiliationApiFp(this.configuration).addPaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 支払グループに所属する全てのユーザーを取得する
      * @summary 支払グループに所属する全てのユーザーを取得
-     * @param {number} paymentGroupId 支払グループID
+     * @param {string} paymentGroupId 支払グループID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentAffiliationApi
      */
-    public getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: number, options?: AxiosRequestConfig) {
+    public getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig) {
         return PaymentAffiliationApiFp(this.configuration).getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 複数のユーザーの支払グループへの所属情報を更新する
      * @summary 複数のユーザーの支払グループへの所属情報を更新
-     * @param {number} paymentGroupId 支払グループID
+     * @param {string} paymentGroupId 支払グループID
      * @param {Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>} [addPaymentAffiliationsByPaymentGroupIdRequestInner] リクエスト用の支払グループの所属情報の配列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentAffiliationApi
      */
-    public updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: number, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
+    public updatePaymentAffiliationsByPaymentGroupId(paymentGroupId: string, addPaymentAffiliationsByPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByPaymentGroupIdRequestInner>, options?: AxiosRequestConfig) {
         return PaymentAffiliationApiFp(this.configuration).updatePaymentAffiliationsByPaymentGroupId(paymentGroupId, addPaymentAffiliationsByPaymentGroupIdRequestInner, options).then((request) => request(this.axios, this.basePath));
     }
 }

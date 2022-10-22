@@ -10,5 +10,7 @@ class User < ApplicationRecord
   has_many :management_affiliations, dependent: :destroy
   has_many :management_groups, through: :management_affiliations
 
+  scope :alphabetical_order, -> { order(:name) }
+
   validates :name, presence: true, length: { maximum: 20 }
 end

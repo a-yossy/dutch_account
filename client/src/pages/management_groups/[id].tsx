@@ -1,23 +1,14 @@
-import { Spinner, Text } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useGetManagementGroup } from 'src/hooks/useGetManagementGroup';
-import { isResponseError } from 'src/libs/isResponseError';
-import NotFoundErrorPage from 'src/pages/404';
+import { ManagementGroupWithId } from 'src/components/ManagementGroupWithId';
 
 const ManagementGroup = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { managementGroup, error } = useGetManagementGroup(id);
 
-  if (isResponseError(error) && error.response.status === 404)
-    return <NotFoundErrorPage />;
-  if (!managementGroup) return <Spinner />;
+  if (typeof id !== 'string') return <Spinner />;
 
-  return (
-    <Text fontSize='xl' align='center'>
-      {managementGroup.name}
-    </Text>
-  );
+  return <ManagementGroupWithId id={id} />;
 };
 
 export default ManagementGroup;

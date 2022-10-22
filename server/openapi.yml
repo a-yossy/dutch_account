@@ -578,7 +578,7 @@ components:
       type: object
       required:
         - id
-        - user_name
+        - name
         - ratio
       additionalProperties: false
       properties:
@@ -587,7 +587,7 @@ components:
           format: int64
           description: 支払グループ所属ID
           example: 1
-        user_name:
+        name:
           type: string
           description: ユーザー名
           example: 太郎
@@ -692,7 +692,7 @@ components:
       type: object
       required:
         - id
-        - user_name
+        - name
       additionalProperties: false
       properties:
         id:
@@ -700,7 +700,7 @@ components:
           format: int64
           description: 管理グループ所属ID
           example: 1
-        user_name:
+        name:
           type: string
           description: ユーザー名
           example: 太郎

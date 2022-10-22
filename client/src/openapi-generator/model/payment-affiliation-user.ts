@@ -31,7 +31,7 @@ export interface PaymentAffiliationUser {
      * @type {string}
      * @memberof PaymentAffiliationUser
      */
-    'user_name': string;
+    'name': string;
     /**
      * 支払割合
      * @type {number}

@@ -81,7 +81,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/management_affiliation_users:
+  /management_groups/{management_group_id}/users:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
     get:
@@ -89,7 +89,7 @@ paths:
         - managementAffiliation
       summary: 管理グループに所属する全てのユーザーを取得
       description: 管理グループに所属する全てのユーザーを取得する
-      operationId: getManagementAffiliationUsersByManagementGroupId
+      operationId: getUsersByManagementGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -212,7 +212,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/payment_affiliation_users:
+  /payment_groups/{payment_group_id}/users:
     parameters:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
@@ -220,7 +220,7 @@ paths:
         - paymentAffiliation
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getPaymentAffiliationUsersByPaymentGroupId
+      operationId: getUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

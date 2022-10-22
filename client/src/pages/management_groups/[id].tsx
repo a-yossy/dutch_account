@@ -1,4 +1,4 @@
-import { Spinner, Box } from '@chakra-ui/react';
+import { Spinner, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useGetManagementGroup } from 'src/hooks/useGetManagementGroup';
 import { isResponseError } from 'src/libs/isResponseError';
@@ -14,19 +14,9 @@ const ManagementGroup = () => {
   if (!managementGroup) return <Spinner />;
 
   return (
-    <Box
-      width={400}
-      mx='auto'
-      boxShadow='dark-lg'
-      rounded='md'
-      bg='#164b9f1b'
-      height={12}
-      display='flex'
-      alignItems='center'
-      pl={3}
-    >
+    <Text fontSize='xl' align='center'>
       {managementGroup.name}
-    </Box>
+    </Text>
   );
 };
 

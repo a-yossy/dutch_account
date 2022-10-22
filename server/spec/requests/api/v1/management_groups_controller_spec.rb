@@ -7,7 +7,8 @@ RSpec.describe Api::V1::ManagementGroupsController, type: :request do
     context 'when the user logs in' do
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
-      let(:management_affiliations) { create(:management_affiliations, user:) }
+
+      before { create(:management_affiliation, user:) }
 
       it 'returns success response' do
         get api_v1_management_groups_path, headers: auth_tokens

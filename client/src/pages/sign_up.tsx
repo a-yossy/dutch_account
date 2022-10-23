@@ -7,7 +7,7 @@ import { OutlineButton } from 'src/components/OutlineButton';
 import { SignUpSchema, SignUpForm } from 'src/formSchemas/signUpSchema';
 import { useSignUp } from 'src/hooks/useSignUp';
 
-const SignUp: NextPage = () => {
+const SignUpPage: NextPage = () => {
   const signUp = useSignUp();
   const {
     handleSubmit,
@@ -70,4 +70,4 @@ const SignUp: NextPage = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

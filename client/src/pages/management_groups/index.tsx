@@ -3,7 +3,7 @@ import { Box, Text, Spinner } from '@chakra-ui/react';
 import { useGetManagementGroups } from 'src/hooks/useGetManagementGroups';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
 
-const ManagementGroups: NextPage = () => {
+const ManagementGroupsPage: NextPage = () => {
   const managementGroups = useGetManagementGroups();
 
   if (!managementGroups) return <Spinner />;
@@ -42,4 +42,4 @@ const ManagementGroups: NextPage = () => {
   );
 };
 
-export default ManagementGroups;
+export default ManagementGroupsPage;

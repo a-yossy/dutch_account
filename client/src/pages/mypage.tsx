@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
 import { useGetCurrentUser } from 'src/hooks/useGetCurrentUser';
 
-const Mypage: NextPage = () => {
+const MypagePage: NextPage = () => {
   const currentUser = useGetCurrentUser();
 
   if (!currentUser) return <Spinner />;
@@ -17,4 +17,4 @@ const Mypage: NextPage = () => {
   );
 };
 
-export default Mypage;
+export default MypagePage;

@@ -5,15 +5,47 @@ import { useGetManagementGroup } from 'src/hooks/useGetManagementGroup';
 import { isResponseError } from 'src/libs/isResponseError';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/hooks/useGetManagementAffiliationUsers';
-import { ManagementGroup } from 'src/openapi-generator';
+import { ManagementGroup as ManagementGroupType } from 'src/openapi-generator';
 
-type ManagementAffiliationUsersWithManagementGroupProps = {
-  managementGroup: ManagementGroup;
+const ManagementGroupPage = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  if (typeof id !== 'string') return <Spinner />;
+
+  return <ManagementGroup id={id} />;
 };
 
-const ManagementAffiliationUsersWithManagementGroup: FC<
-  ManagementAffiliationUsersWithManagementGroupProps
-> = ({ managementGroup }) => {
+export default ManagementGroupPage;
+
+type ManagementGroupProps = {
+  id: string;
+};
+
+const ManagementGroup: FC<ManagementGroupProps> = ({ id }) => {
+  const { managementGroup, error } = useGetManagementGroup(id);
+
+  if (isResponseError(error) && error.response.status === 404)
+    return <NotFoundErrorPage />;
+  if (!managementGroup) return <Spinner />;
+
+  return (
+    <>
+      <Text fontSize='xl' align='center'>
+        管理グループ：{managementGroup.name}
+      </Text>
+      <ManagementAffiliationUsers managementGroup={managementGroup} />
+    </>
+  );
+};
+
+type ManagementAffiliationUsersProps = {
+  managementGroup: ManagementGroupType;
+};
+
+const ManagementAffiliationUsers: FC<ManagementAffiliationUsersProps> = ({
+  managementGroup,
+}) => {
   const { managementAffiliationUsers, error } =
     useGetManagementAffiliationUsers(managementGroup.id.toString());
   if (isResponseError(error) && error.response.status === 404)
@@ -42,37 +74,3 @@ const ManagementAffiliationUsersWithManagementGroup: FC<
     </>
   );
 };
-
-type ManagementGroupWithIdProps = {
-  id: string;
-};
-
-const ManagementGroupWithId: FC<ManagementGroupWithIdProps> = ({ id }) => {
-  const { managementGroup, error } = useGetManagementGroup(id);
-
-  if (isResponseError(error) && error.response.status === 404)
-    return <NotFoundErrorPage />;
-  if (!managementGroup) return <Spinner />;
-
-  return (
-    <>
-      <Text fontSize='xl' align='center'>
-        管理グループ：{managementGroup.name}
-      </Text>
-      <ManagementAffiliationUsersWithManagementGroup
-        managementGroup={managementGroup}
-      />
-    </>
-  );
-};
-
-const ManagementGroupPage = () => {
-  const router = useRouter();
-  const { id } = router.query;
-
-  if (typeof id !== 'string') return <Spinner />;
-
-  return <ManagementGroupWithId id={id} />;
-};
-
-export default ManagementGroupPage;

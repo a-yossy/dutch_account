@@ -86,9 +86,9 @@ export const PaymentAffiliationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersByPaymentGroupId: async (paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentAffiliationUsersByPaymentGroupId: async (paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('getUsersByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            assertParamExists('getPaymentAffiliationUsersByPaymentGroupId', 'paymentGroupId', paymentGroupId)
             const localVarPath = `/payment_groups/{payment_group_id}/users`
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -198,8 +198,8 @@ export const PaymentAffiliationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersByPaymentGroupId(paymentGroupId, options);
+        async getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -242,8 +242,8 @@ export const PaymentAffiliationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersByPaymentGroupId(paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
-            return localVarFp.getUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+            return localVarFp.getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 複数のユーザーの支払グループへの所属情報を更新する
@@ -287,8 +287,8 @@ export class PaymentAffiliationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentAffiliationApi
      */
-    public getUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig) {
-        return PaymentAffiliationApiFp(this.configuration).getUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    public getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig) {
+        return PaymentAffiliationApiFp(this.configuration).getPaymentAffiliationUsersByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -89,7 +89,7 @@ paths:
         - managementAffiliation
       summary: 管理グループに所属する全てのユーザーを取得
       description: 管理グループに所属する全てのユーザーを取得する
-      operationId: getUsersByManagementGroupId
+      operationId: getManagementAffiliationUsersByManagementGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -220,7 +220,7 @@ paths:
         - paymentAffiliation
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getUsersByPaymentGroupId
+      operationId: getPaymentAffiliationUsersByPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

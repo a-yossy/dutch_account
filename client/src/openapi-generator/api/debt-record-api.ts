@@ -80,11 +80,11 @@ export const DebtRecordApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 借金履歴を削除する
          * @summary 借金履歴を削除
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDebtRecordByDebtRecordId: async (debtRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteDebtRecordByDebtRecordId: async (debtRecordId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'debtRecordId' is not null or undefined
             assertParamExists('deleteDebtRecordByDebtRecordId', 'debtRecordId', debtRecordId)
             const localVarPath = `/debt_records/{debt_record_id}`
@@ -123,11 +123,11 @@ export const DebtRecordApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 貸主に紐づく全ての借金履歴及び借主名を取得する
          * @summary 貸主に紐づく全ての借金履歴及び借主名を取得
-         * @param {number} lendingUserId 貸主ID
+         * @param {string} lendingUserId 貸主ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBorrowingUserDebtRecordsByLendingUserId: async (lendingUserId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getBorrowingUserDebtRecordsByLendingUserId: async (lendingUserId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'lendingUserId' is not null or undefined
             assertParamExists('getBorrowingUserDebtRecordsByLendingUserId', 'lendingUserId', lendingUserId)
             const localVarPath = `/users/{lending_user_id}/borrowing_user_debt_records`
@@ -166,11 +166,11 @@ export const DebtRecordApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 借金履歴及びユーザー名を取得する
          * @summary 借金履歴及びユーザー名を取得
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserDebtRecordByDebtRecordId: async (debtRecordId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserDebtRecordByDebtRecordId: async (debtRecordId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'debtRecordId' is not null or undefined
             assertParamExists('getUserDebtRecordByDebtRecordId', 'debtRecordId', debtRecordId)
             const localVarPath = `/user_debt_records/{debt_record_id}`
@@ -230,33 +230,33 @@ export const DebtRecordApiFp = function(configuration?: Configuration) {
         /**
          * 借金履歴を削除する
          * @summary 借金履歴を削除
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteDebtRecordByDebtRecordId(debtRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteDebtRecordByDebtRecordId(debtRecordId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteDebtRecordByDebtRecordId(debtRecordId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 貸主に紐づく全ての借金履歴及び借主名を取得する
          * @summary 貸主に紐づく全ての借金履歴及び借主名を取得
-         * @param {number} lendingUserId 貸主ID
+         * @param {string} lendingUserId 貸主ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BorrowingUserDebtRecord>>> {
+        async getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BorrowingUserDebtRecord>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getBorrowingUserDebtRecordsByLendingUserId(lendingUserId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 借金履歴及びユーザー名を取得する
          * @summary 借金履歴及びユーザー名を取得
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserDebtRecordByDebtRecordId(debtRecordId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDebtRecord>> {
+        async getUserDebtRecordByDebtRecordId(debtRecordId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserDebtRecord>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserDebtRecordByDebtRecordId(debtRecordId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -283,31 +283,31 @@ export const DebtRecordApiFactory = function (configuration?: Configuration, bas
         /**
          * 借金履歴を削除する
          * @summary 借金履歴を削除
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteDebtRecordByDebtRecordId(debtRecordId: number, options?: any): AxiosPromise<void> {
+        deleteDebtRecordByDebtRecordId(debtRecordId: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteDebtRecordByDebtRecordId(debtRecordId, options).then((request) => request(axios, basePath));
         },
         /**
          * 貸主に紐づく全ての借金履歴及び借主名を取得する
          * @summary 貸主に紐づく全ての借金履歴及び借主名を取得
-         * @param {number} lendingUserId 貸主ID
+         * @param {string} lendingUserId 貸主ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: number, options?: any): AxiosPromise<Array<BorrowingUserDebtRecord>> {
+        getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: string, options?: any): AxiosPromise<Array<BorrowingUserDebtRecord>> {
             return localVarFp.getBorrowingUserDebtRecordsByLendingUserId(lendingUserId, options).then((request) => request(axios, basePath));
         },
         /**
          * 借金履歴及びユーザー名を取得する
          * @summary 借金履歴及びユーザー名を取得
-         * @param {number} debtRecordId 借金履歴ID
+         * @param {string} debtRecordId 借金履歴ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserDebtRecordByDebtRecordId(debtRecordId: number, options?: any): AxiosPromise<UserDebtRecord> {
+        getUserDebtRecordByDebtRecordId(debtRecordId: string, options?: any): AxiosPromise<UserDebtRecord> {
             return localVarFp.getUserDebtRecordByDebtRecordId(debtRecordId, options).then((request) => request(axios, basePath));
         },
     };
@@ -335,36 +335,36 @@ export class DebtRecordApi extends BaseAPI {
     /**
      * 借金履歴を削除する
      * @summary 借金履歴を削除
-     * @param {number} debtRecordId 借金履歴ID
+     * @param {string} debtRecordId 借金履歴ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DebtRecordApi
      */
-    public deleteDebtRecordByDebtRecordId(debtRecordId: number, options?: AxiosRequestConfig) {
+    public deleteDebtRecordByDebtRecordId(debtRecordId: string, options?: AxiosRequestConfig) {
         return DebtRecordApiFp(this.configuration).deleteDebtRecordByDebtRecordId(debtRecordId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 貸主に紐づく全ての借金履歴及び借主名を取得する
      * @summary 貸主に紐づく全ての借金履歴及び借主名を取得
-     * @param {number} lendingUserId 貸主ID
+     * @param {string} lendingUserId 貸主ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DebtRecordApi
      */
-    public getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: number, options?: AxiosRequestConfig) {
+    public getBorrowingUserDebtRecordsByLendingUserId(lendingUserId: string, options?: AxiosRequestConfig) {
         return DebtRecordApiFp(this.configuration).getBorrowingUserDebtRecordsByLendingUserId(lendingUserId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 借金履歴及びユーザー名を取得する
      * @summary 借金履歴及びユーザー名を取得
-     * @param {number} debtRecordId 借金履歴ID
+     * @param {string} debtRecordId 借金履歴ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DebtRecordApi
      */
-    public getUserDebtRecordByDebtRecordId(debtRecordId: number, options?: AxiosRequestConfig) {
+    public getUserDebtRecordByDebtRecordId(debtRecordId: string, options?: AxiosRequestConfig) {
         return DebtRecordApiFp(this.configuration).getUserDebtRecordByDebtRecordId(debtRecordId, options).then((request) => request(this.axios, this.basePath));
     }
 }

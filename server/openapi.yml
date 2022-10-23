@@ -844,8 +844,7 @@ components:
       description: 貸主ID
       required: true
       schema:
-        type: integer
-        format: int64
+        type: string
         example: 1
     PaymentGroupId:
       name: payment_group_id
@@ -853,8 +852,7 @@ components:
       description: 支払グループID
       required: true
       schema:
-        type: integer
-        format: int64
+        type: string
         example: 1
     DebtRecordId:
       name: debt_record_id
@@ -862,8 +860,7 @@ components:
       description: 借金履歴ID
       required: true
       schema:
-        type: integer
-        format: int64
+        type: string
         example: 1
     ManagementGroupId:
       name: management_group_id
@@ -871,8 +868,7 @@ components:
       description: 管理グループID
       required: true
       schema:
-        type: integer
-        format: int64
+        type: string
         example: 1
   securitySchemes:
     accessToken:

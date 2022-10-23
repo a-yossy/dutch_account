@@ -78,11 +78,11 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
         /**
          * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupByManagementGroupId: async (managementGroupId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getManagementGroupByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
             assertParamExists('getManagementGroupByManagementGroupId', 'managementGroupId', managementGroupId)
             const localVarPath = `/management_groups/{management_group_id}`
@@ -181,11 +181,11 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
         /**
          * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementGroupByManagementGroupId(managementGroupId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManagementGroup>> {
+        async getManagementGroupByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ManagementGroup>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroupByManagementGroupId(managementGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -222,11 +222,11 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
         /**
          * ログインしているユーザーに紐づく管理グループを取得する
          * @summary 管理グループを取得
-         * @param {number} managementGroupId 管理グループID
+         * @param {string} managementGroupId 管理グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementGroupByManagementGroupId(managementGroupId: number, options?: any): AxiosPromise<ManagementGroup> {
+        getManagementGroupByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<ManagementGroup> {
             return localVarFp.getManagementGroupByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -263,12 +263,12 @@ export class ManagementGroupApi extends BaseAPI {
     /**
      * ログインしているユーザーに紐づく管理グループを取得する
      * @summary 管理グループを取得
-     * @param {number} managementGroupId 管理グループID
+     * @param {string} managementGroupId 管理グループID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ManagementGroupApi
      */
-    public getManagementGroupByManagementGroupId(managementGroupId: number, options?: AxiosRequestConfig) {
+    public getManagementGroupByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
         return ManagementGroupApiFp(this.configuration).getManagementGroupByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 

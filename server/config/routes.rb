@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       end
 
       resource :current_user, only: %i[show]
-      resources :management_groups, only: %i[index show]
+      resources :management_groups, only: %i[index show] do
+        resources :users, only: %i[index], module: :management_groups
+      end
     end
   end
 end

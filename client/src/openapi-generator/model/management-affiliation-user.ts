@@ -31,6 +31,6 @@ export interface ManagementAffiliationUser {
      * @type {string}
      * @memberof ManagementAffiliationUser
      */
-    'user_name': string;
+    'name': string;
 }
 

@@ -37,10 +37,10 @@ export const ManagementAffiliationApiAxiosParamCreator = function (configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementAffiliationUsersByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('getManagementAffiliationUsersByManagementGroupId', 'managementGroupId', managementGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/management_affiliation_users`
+            assertParamExists('getUsersByManagementGroupId', 'managementGroupId', managementGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/users`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -90,8 +90,8 @@ export const ManagementAffiliationApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementAffiliationUser>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options);
+        async getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementAffiliationUser>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersByManagementGroupId(managementGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -111,8 +111,8 @@ export const ManagementAffiliationApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<ManagementAffiliationUser>> {
-            return localVarFp.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
+        getUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<ManagementAffiliationUser>> {
+            return localVarFp.getUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -132,7 +132,7 @@ export class ManagementAffiliationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ManagementAffiliationApi
      */
-    public getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
-        return ManagementAffiliationApiFp(this.configuration).getManagementAffiliationUsersByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
+    public getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
+        return ManagementAffiliationApiFp(this.configuration).getUsersByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -152,8 +152,9 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:

@@ -22,10 +22,10 @@
 export interface ManagementAffiliationUser {
     /**
      * 管理グループ所属ID
-     * @type {number}
+     * @type {string}
      * @memberof ManagementAffiliationUser
      */
-    'id': number;
+    'id': string;
     /**
      * ユーザー名
      * @type {string}

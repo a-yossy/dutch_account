@@ -22,10 +22,10 @@
 export interface AddPaymentAffiliationsByPaymentGroupIdRequestInner {
     /**
      * ユーザーID
-     * @type {number}
+     * @type {string}
      * @memberof AddPaymentAffiliationsByPaymentGroupIdRequestInner
      */
-    'user_id': number;
+    'user_id': string;
     /**
      * 支払割合
      * @type {number}

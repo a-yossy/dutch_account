@@ -25,7 +25,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ id }) => {
   const { managementGroup, error: managementGroupError } =
     useGetManagementGroup(id);
   const { managementAffiliationUsers, error: managementAffiliationUsersError } =
-    useGetManagementAffiliationUsers(managementGroup?.id.toString());
+    useGetManagementAffiliationUsers(managementGroup?.id);
 
   if (
     (isResponseError(managementGroupError) &&

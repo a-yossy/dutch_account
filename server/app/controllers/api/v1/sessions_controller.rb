@@ -6,7 +6,7 @@ class Api::V1::SessionsController < DeviseTokenAuth::SessionsController
   def render_create_success
     data = resource_data(resource_json: @resource.token_validation_response)
     render json: {
-      id: data['id'],
+      id: data['id'].to_s,
       name: data['name']
     }
   end

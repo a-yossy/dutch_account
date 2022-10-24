@@ -5,7 +5,8 @@ class Api::V1::ManagementGroups::UsersController < ApplicationController
 
   def index
     render json: UserResource.new(
-      current_user.management_groups
+      current_user
+      .management_groups
       .find(params[:management_group_id])
       .users
       .alphabetical_order

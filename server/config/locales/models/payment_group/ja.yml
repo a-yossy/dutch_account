@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      payment_group: 支払グループ
+    attributes:
+      payment_group:
+        management_group: 管理グループ
+        name: グループ名

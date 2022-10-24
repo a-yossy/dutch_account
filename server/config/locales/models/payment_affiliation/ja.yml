@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      payment_affiliation: 支払グループ所属情報
+    attributes:
+      payment_affiliation:
+        user: ユーザー
+        payment_group: 支払グループ
+        ratio: 支払割合

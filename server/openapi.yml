@@ -152,14 +152,15 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - paymentGroup
-      summary: 支払グループを取得
-      description: 支払グループを取得する
+      summary: 管理グループに紐づく支払グループを取得
+      description: 管理グループに紐づく支払グループを取得する
       operationId: getPaymentGroupByPaymentGroupId
       responses:
         200:
@@ -177,8 +178,8 @@ paths:
     put:
       tags:
         - paymentGroup
-      summary: 支払グループを更新
-      description: 支払グループを更新する
+      summary: 管理グループに紐づく支払グループを更新
+      description: 管理グループに紐づく支払グループを更新する
       operationId: updatePaymentGroupByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
@@ -200,8 +201,8 @@ paths:
     delete:
       tags:
         - paymentGroup
-      summary: 支払グループを削除
-      description: 支払グループを削除する
+      summary: 管理グループに紐づく支払グループを削除
+      description: 管理グループに紐づく支払グループを削除する
       operationId: deletePaymentGroupByPaymentGroupId
       responses:
         204:

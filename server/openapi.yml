@@ -548,8 +548,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: ユーザーID
           example: 1
         name:
@@ -565,8 +564,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 支払グループID
           example: 1
         name:
@@ -583,8 +581,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 支払グループ所属ID
           example: 1
         name:
@@ -609,8 +606,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 借金履歴ID
           example: 1
         lending_user_name:
@@ -647,8 +643,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 借金履歴ID
           example: 1
         borrowing_user_name:
@@ -679,8 +674,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 管理グループID
           example: 1
         name:
@@ -696,8 +690,7 @@ components:
       additionalProperties: false
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 管理グループ所属ID
           example: 1
         name:
@@ -731,8 +724,7 @@ components:
                 - ratio
               properties:
                 user_id:
-                  type: integer
-                  format: int64
+                  type: string
                   description: ユーザーID
                   example: 1
                 ratio:
@@ -756,13 +748,11 @@ components:
                 - transacted_on
               properties:
                 lending_user_id:
-                    type: integer
-                    format: int64
+                    type: string
                     description: 貸主ID
                     example: 1
                 borrowing_user_id:
-                    type: integer
-                    format: int64
+                    type: string
                     description: 借主ID
                     example: 2
                 amount_of_money:

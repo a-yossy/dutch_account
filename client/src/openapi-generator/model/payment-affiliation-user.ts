@@ -22,10 +22,10 @@
 export interface PaymentAffiliationUser {
     /**
      * 支払グループ所属ID
-     * @type {number}
+     * @type {string}
      * @memberof PaymentAffiliationUser
      */
-    'id': number;
+    'id': string;
     /**
      * ユーザー名
      * @type {string}

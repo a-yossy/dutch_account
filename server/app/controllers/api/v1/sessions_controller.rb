@@ -5,10 +5,7 @@ class Api::V1::SessionsController < DeviseTokenAuth::SessionsController
 
   def render_create_success
     data = resource_data(resource_json: @resource.token_validation_response)
-    render json: {
-      id: data['id'],
-      name: data['name']
-    }
+    render json: UserResource.new(User.new(id: data['id'], name: data['name'])).serialize
   end
 
   def render_create_error_bad_credentials

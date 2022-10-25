@@ -22,16 +22,16 @@
 export interface AddDebtRecordsRequestInner {
     /**
      * 貸主ID
-     * @type {number}
+     * @type {string}
      * @memberof AddDebtRecordsRequestInner
      */
-    'lending_user_id': number;
+    'lending_user_id': string;
     /**
      * 借主ID
-     * @type {number}
+     * @type {string}
      * @memberof AddDebtRecordsRequestInner
      */
-    'borrowing_user_id': number;
+    'borrowing_user_id': string;
     /**
      * 金額
      * @type {number}

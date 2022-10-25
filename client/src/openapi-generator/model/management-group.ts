@@ -22,10 +22,10 @@
 export interface ManagementGroup {
     /**
      * 管理グループID
-     * @type {number}
+     * @type {string}
      * @memberof ManagementGroup
      */
-    'id': number;
+    'id': string;
     /**
      * 管理グループ名
      * @type {string}

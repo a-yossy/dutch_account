@@ -22,10 +22,10 @@
 export interface PaymentGroup {
     /**
      * 支払グループID
-     * @type {number}
+     * @type {string}
      * @memberof PaymentGroup
      */
-    'id': number;
+    'id': string;
     /**
      * 支払グループ名
      * @type {string}

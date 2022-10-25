@@ -22,10 +22,10 @@
 export interface User {
     /**
      * ユーザーID
-     * @type {number}
+     * @type {string}
      * @memberof User
      */
-    'id': number;
+    'id': string;
     /**
      * ユーザー名
      * @type {string}

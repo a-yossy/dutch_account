@@ -22,10 +22,10 @@
 export interface BorrowingUserDebtRecord {
     /**
      * 借金履歴ID
-     * @type {number}
+     * @type {string}
      * @memberof BorrowingUserDebtRecord
      */
-    'id': number;
+    'id': string;
     /**
      * 借主名
      * @type {number}

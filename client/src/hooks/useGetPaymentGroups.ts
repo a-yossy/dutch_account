@@ -15,7 +15,7 @@ export const useGetPaymentGroups = (id: string | undefined) => {
       : null;
   const { data, error } = useSWR<PaymentGroup[], AxiosResponseError>(
     typeof id === 'string'
-      ? 'api/v1/management_groups/id/payment_groups'
+      ? `api/v1/management_groups/${id}/payment_groups`
       : null,
     fetcher
   );

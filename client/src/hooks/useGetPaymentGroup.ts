@@ -9,9 +9,13 @@ export const useGetPaymentGroup = (
 ) => {
   const fetcher = () =>
     new PaymentGroupApi()
-      .getPaymentGroupByPaymentGroupId(managementGroupId, paymentGroupId, {
-        headers: getAuthCookies(),
-      })
+      .getPaymentGroupByManagementGroupIdAndPaymentGroupId(
+        managementGroupId,
+        paymentGroupId,
+        {
+          headers: getAuthCookies(),
+        }
+      )
       .then((res) => res.data);
 
   const { data, error } = useSWR<PaymentGroup, AxiosResponseError>(

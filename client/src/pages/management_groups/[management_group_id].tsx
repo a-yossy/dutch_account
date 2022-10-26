@@ -60,7 +60,6 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
           <Tab>ユーザー</Tab>
           <Tab>支払グループ</Tab>
         </TabList>
-
         <TabPanels>
           <TabPanel>
             {managementAffiliationUsers === undefined ? (
@@ -92,7 +91,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
               paymentGroups.map((paymentGroup) => (
                 <Box
                   as={NoDecorationLink}
-                  href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
+                  href={`/management_groups/${managementGroupId}}/payment_groups/${paymentGroup.id}`}
                   key={paymentGroup.id}
                   width={400}
                   mx='auto'

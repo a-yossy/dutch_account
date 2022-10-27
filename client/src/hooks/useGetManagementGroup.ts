@@ -3,16 +3,16 @@ import { ManagementGroup, ManagementGroupApi } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 import useSWR from 'swr';
 
-export const useGetManagementGroup = (id: string) => {
+export const useGetManagementGroup = (managementGroupId: string) => {
   const fetcher = () =>
     new ManagementGroupApi()
-      .getManagementGroupByManagementGroupId(id, {
+      .getManagementGroupByManagementGroupId(managementGroupId, {
         headers: getAuthCookies(),
       })
       .then((res) => res.data);
 
   const { data, error } = useSWR<ManagementGroup, AxiosResponseError>(
-    `api/v1/management_groups/${id}`,
+    `api/v1/management_groups/${managementGroupId}`,
     fetcher
   );
 

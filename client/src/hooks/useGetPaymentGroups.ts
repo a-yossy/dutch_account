@@ -3,19 +3,19 @@ import { PaymentGroup, PaymentGroupApi } from 'src/openapi-generator';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetPaymentGroups = (id: string | undefined) => {
+export const useGetPaymentGroups = (managementGroupId: string | undefined) => {
   const fetcher =
-    typeof id === 'string'
+    typeof managementGroupId === 'string'
       ? () =>
           new PaymentGroupApi()
-            .getPaymentGroupsByManagementGroupId(id, {
+            .getPaymentGroupsByManagementGroupId(managementGroupId, {
               headers: getAuthCookies(),
             })
             .then((res) => res.data)
       : null;
   const { data, error } = useSWR<PaymentGroup[], AxiosResponseError>(
-    typeof id === 'string'
-      ? `api/v1/management_groups/${id}/payment_groups`
+    typeof managementGroupId === 'string'
+      ? `api/v1/management_groups/${managementGroupId}/payment_groups`
       : null,
     fetcher
   );

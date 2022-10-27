@@ -213,15 +213,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/users:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/users:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - paymentAffiliation
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getPaymentAffiliationUsersByPaymentGroupId
+      operationId: getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -237,15 +238,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/payment_affiliations/bulk_insert:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations/bulk_insert:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
         - paymentAffiliation
       summary: 支払グループに複数のユーザーを所属させる
       description: 支払グループに複数のユーザーを所属させる
-      operationId: addPaymentAffiliationsByPaymentGroupId
+      operationId: addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:
@@ -265,15 +267,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /payment_groups/{payment_group_id}/payment_affiliations/bulk_update:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations/bulk_update:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     put:
       tags:
         - paymentAffiliation
       summary: 複数のユーザーの支払グループへの所属情報を更新
       description: 複数のユーザーの支払グループへの所属情報を更新する
-      operationId: updatePaymentAffiliationsByPaymentGroupId
+      operationId: updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentAffiliationsBody"
       responses:

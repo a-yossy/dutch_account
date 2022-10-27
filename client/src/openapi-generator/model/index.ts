@@ -1,6 +1,6 @@
 export * from './add-debt-records-request-inner';
 export * from './add-management-group-request';
-export * from './add-payment-affiliations-by-payment-group-id-request-inner';
+export * from './add-payment-affiliations-by-management-group-id-and-payment-group-id-request-inner';
 export * from './add-payment-group-by-management-group-id-request';
 export * from './borrowing-user-debt-record';
 export * from './log-in-request';

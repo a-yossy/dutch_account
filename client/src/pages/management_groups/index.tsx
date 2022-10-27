@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Box, Text, Spinner } from '@chakra-ui/react';
+import { Text, Spinner } from '@chakra-ui/react';
 import { useGetManagementGroups } from 'src/hooks/useGetManagementGroups';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
 
@@ -19,8 +19,7 @@ const ManagementGroupsPage: NextPage = () => {
         </Text>
       ) : (
         managementGroups.map((managementGroup) => (
-          <Box
-            as={NoDecorationLink}
+          <NoDecorationLink
             href={`/management_groups/${managementGroup.id}`}
             key={managementGroup.id}
             width={400}
@@ -35,7 +34,7 @@ const ManagementGroupsPage: NextPage = () => {
             mt={5}
           >
             {managementGroup.name}
-          </Box>
+          </NoDecorationLink>
         ))
       )}
     </>

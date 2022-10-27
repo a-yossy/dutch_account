@@ -89,8 +89,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
               <Spinner />
             ) : (
               paymentGroups.map((paymentGroup) => (
-                <Box
-                  as={NoDecorationLink}
+                <NoDecorationLink
                   href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
                   key={paymentGroup.id}
                   width={400}
@@ -105,7 +104,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                   mt={5}
                 >
                   {paymentGroup.name}
-                </Box>
+                </NoDecorationLink>
               ))
             )}
           </TabPanel>

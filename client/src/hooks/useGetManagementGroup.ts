@@ -10,6 +10,7 @@ export const useGetManagementGroup = (id: string) => {
         headers: getAuthCookies(),
       })
       .then((res) => res.data);
+
   const { data, error } = useSWR<ManagementGroup, AxiosResponseError>(
     `api/v1/management_groups/${id}`,
     fetcher

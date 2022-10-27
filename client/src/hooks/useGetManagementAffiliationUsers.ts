@@ -6,14 +6,19 @@ import {
 } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetManagementAffiliationUsers = (id: string | undefined) => {
+export const useGetManagementAffiliationUsers = (
+  managementGroupId: string | undefined
+) => {
   const fetcher =
-    typeof id === 'string'
+    typeof managementGroupId === 'string'
       ? () =>
           new ManagementAffiliationApi()
-            .getManagementAffiliationUsersByManagementGroupId(id, {
-              headers: getAuthCookies(),
-            })
+            .getManagementAffiliationUsersByManagementGroupId(
+              managementGroupId,
+              {
+                headers: getAuthCookies(),
+              }
+            )
             .then((res) => res.data)
       : null;
 
@@ -21,7 +26,9 @@ export const useGetManagementAffiliationUsers = (id: string | undefined) => {
     ManagementAffiliationUser[],
     AxiosResponseError
   >(
-    typeof id === 'string' ? `api/v1/management_groups/${id}/users` : null,
+    typeof managementGroupId === 'string'
+      ? `api/v1/management_groups/${managementGroupId}/users`
+      : null,
     fetcher
   );
 

@@ -161,7 +161,7 @@ paths:
         - paymentGroup
       summary: 管理グループに紐づく支払グループを取得
       description: 管理グループに紐づく支払グループを取得する
-      operationId: getPaymentGroupByPaymentGroupId
+      operationId: getPaymentGroupByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

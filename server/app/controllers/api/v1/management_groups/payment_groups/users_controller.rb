@@ -6,7 +6,7 @@ class Api::V1::ManagementGroups::PaymentGroups::UsersController < ApplicationCon
   before_action :set_payment_group
 
   def index
-    render json: UserResource.new(@payment_group.users).serialize
+    render json: UserResource.new(@payment_group.users.alphabetical_order).serialize
   end
 
   private

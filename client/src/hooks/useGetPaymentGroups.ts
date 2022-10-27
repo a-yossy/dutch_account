@@ -3,7 +3,7 @@ import { PaymentGroup, PaymentGroupApi } from 'src/openapi-generator';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetPaymentGroups = (id: string | undefined) => {
+export const useGetPaymentGroups = (managementGroupId: string | undefined) => {
   const fetcher =
     typeof id === 'string'
       ? () =>

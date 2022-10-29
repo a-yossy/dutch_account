@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::ManagementGroups::PaymentGroups::UsersController, type: :request do
+RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController, type: :request do
   describe '#index' do
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group) }
@@ -13,7 +13,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::UsersController, type: 
 
       context 'when the management group related to the user does not exit' do
         it 'returns not_found response' do
-          get api_v1_management_group_payment_group_users_path(management_group, payment_group), headers: auth_tokens
+          get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
           assert_response_schema_confirm(404)
         end
       end
@@ -23,16 +23,23 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::UsersController, type: 
 
         context 'when the payment group related to the management group does not exist' do
           it 'returns not_found response' do
-            get api_v1_management_group_payment_group_users_path(management_group, payment_group), headers: auth_tokens
+            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
             assert_response_schema_confirm(404)
           end
         end
 
         context 'when the payment group related to the management group exists' do
+          before do
+            create(:payment_affiliation, user:, payment_group:)
+            create(:payment_affiliation, user: other_user, payment_group:)
+          end
+
+          let(:other_user) { create(:user) }
+
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do
-            get api_v1_management_group_payment_group_users_path(management_group, payment_group), headers: auth_tokens
+            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
             assert_response_schema_confirm(200)
           end
         end
@@ -41,7 +48,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::UsersController, type: 
 
     context 'when the user does not log in' do
       it 'returns unauthorized response' do
-        get api_v1_management_group_payment_group_users_path(management_group, payment_group)
+        get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group)
         assert_response_schema_confirm(401)
       end
     end

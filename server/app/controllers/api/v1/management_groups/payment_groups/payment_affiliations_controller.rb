@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Api::V1::ManagementGroups::PaymentGroups::UsersController < ApplicationController
+class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_management_group
   before_action :set_payment_group
 
   def index
-    render json: UserResource.new(@payment_group.users.alphabetical_order).serialize
+    render json: PaymentAffiliationResource.new(@payment_group.payment_affiliations.eager_load(:user)).serialize
   end
 
   private

@@ -2,11 +2,11 @@ import useSWR from 'swr';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import {
   PaymentAffiliationApi,
-  PaymentAffiliationUser,
+  PaymentAffiliation,
 } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetPaymentAffiliationUsers = (
+export const useGetPaymentAffiliations = (
   managementGroupId: string,
   paymentGroupId: string | undefined
 ) => {
@@ -14,19 +14,19 @@ export const useGetPaymentAffiliationUsers = (
     typeof paymentGroupId === 'string'
       ? () =>
           new PaymentAffiliationApi()
-            .getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(
+            .getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(
               managementGroupId,
               paymentGroupId,
               { headers: getAuthCookies() }
             )
             .then((res) => res.data)
       : null;
-  const { data, error } = useSWR<PaymentAffiliationUser[], AxiosResponseError>(
+  const { data, error } = useSWR<PaymentAffiliation[], AxiosResponseError>(
     typeof paymentGroupId === 'string'
       ? `api/v1/management_groups/${managementGroupId}/payment_groups/${paymentGroupId}/users`
       : null,
     fetcher
   );
 
-  return { paymentAffiliationUsers: data, error };
+  return { paymentAffiliations: data, error };
 };

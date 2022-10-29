@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Spinner, Text, Box } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/hooks/useGetPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
-import { useGetPaymentAffiliationUsers } from 'src/hooks/useGetPaymentAffiliationUsers';
+import { useGetPaymentAffiliations } from 'src/hooks/useGetPaymentAffiliations';
 
 const PaymentGroupPage: NextPage = () => {
   const router = useRouter();
@@ -42,12 +42,12 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
     managementGroupId,
     paymentGroupId
   );
-  const { paymentAffiliationUsers, error: paymentAffiliationUsersError } =
-    useGetPaymentAffiliationUsers(managementGroupId, paymentGroup?.id);
+  const { paymentAffiliations, error: paymentAffiliationsError } =
+    useGetPaymentAffiliations(managementGroupId, paymentGroup?.id);
 
   if (
     paymentGroupError?.response?.status === 404 ||
-    paymentAffiliationUsersError?.response?.status === 404
+    paymentAffiliationsError?.response?.status === 404
   )
     return <NotFoundErrorPage />;
 
@@ -58,12 +58,12 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
       <Text fontSize='xl' align='center'>
         支払グループ：{paymentGroup.name}
       </Text>
-      {paymentAffiliationUsers === undefined ? (
+      {paymentAffiliations === undefined ? (
         <Spinner />
       ) : (
-        paymentAffiliationUsers.map((paymentAffiliationUser) => (
+        paymentAffiliations.map((paymentAffiliation) => (
           <Box
-            key={paymentAffiliationUser.id}
+            key={paymentAffiliation.user.id}
             width={400}
             mx='auto'
             boxShadow='dark-lg'
@@ -75,7 +75,7 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
             pl={3}
             mt={5}
           >
-            {paymentAffiliationUser.name}
+            {paymentAffiliation.user.name}
           </Box>
         ))
       )}

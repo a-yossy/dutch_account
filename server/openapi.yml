@@ -98,8 +98,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
-                minItems: 1
+                  $ref: "#/components/schemas/ManagementAffiliationUser"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -233,7 +232,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PaymentAffiliationUser"
-                minItems: 1
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -261,7 +259,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PaymentAffiliationUser"
-                minItems: 2
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -291,7 +288,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/PaymentAffiliationUser"
-                minItems: 2
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -590,7 +586,7 @@ components:
       properties:
         id:
           type: string
-          description: ユーザーID
+          description: 支払グループ所属ID
           example: 1
         name:
           type: string
@@ -689,6 +685,22 @@ components:
           type: string
           description: 管理グループ名
           example: 家族
+    ManagementAffiliationUser:
+      description: 管理グループに所属するユーザー
+      type: object
+      required:
+        - id
+        - name
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: 管理グループ所属ID
+          example: 1
+        name:
+          type: string
+          description: ユーザー名
+          example: 太郎
   requestBodies:
     PaymentGroupBody:
       description: リクエスト用の支払グループ

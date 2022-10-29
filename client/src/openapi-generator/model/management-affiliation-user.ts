@@ -15,28 +15,22 @@
 
 
 /**
- * 支払グループに所属するユーザー
+ * 管理グループに所属するユーザー
  * @export
- * @interface PaymentAffiliationUser
+ * @interface ManagementAffiliationUser
  */
-export interface PaymentAffiliationUser {
+export interface ManagementAffiliationUser {
     /**
-     * 支払グループ所属ID
+     * 管理グループ所属ID
      * @type {string}
-     * @memberof PaymentAffiliationUser
+     * @memberof ManagementAffiliationUser
      */
     'id': string;
     /**
      * ユーザー名
      * @type {string}
-     * @memberof PaymentAffiliationUser
+     * @memberof ManagementAffiliationUser
      */
     'name': string;
-    /**
-     * 支払割合
-     * @type {number}
-     * @memberof PaymentAffiliationUser
-     */
-    'ratio': number;
 }
 

@@ -20,6 +20,7 @@ model/add-payment-group-by-management-group-id-request.ts
 model/borrowing-user-debt-record.ts
 model/index.ts
 model/log-in-request.ts
+model/management-affiliation-user.ts
 model/management-group.ts
 model/payment-affiliation-user.ts
 model/payment-group.ts

@@ -37,7 +37,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
           end
 
           let(:other_user) { create(:user) }
-
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do

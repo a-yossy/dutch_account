@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Spinner, Text, Box } from '@chakra-ui/react';
+import { Spinner, Text, Box, Badge, Spacer } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/hooks/useGetPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetPaymentAffiliations } from 'src/hooks/useGetPaymentAffiliations';
@@ -73,9 +73,12 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
             display='flex'
             alignItems='center'
             pl={3}
+            pr={3}
             mt={5}
           >
             {paymentAffiliation.user.name}
+            <Spacer />
+            <Badge ml={5}>{paymentAffiliation.ratio}</Badge>
           </Box>
         ))
       )}

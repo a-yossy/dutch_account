@@ -1,9 +1,6 @@
 import useSWR from 'swr';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
-import {
-  ManagementAffiliationApi,
-  ManagementAffiliationUser,
-} from 'src/openapi-generator';
+import { ManagementAffiliationApi, User } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
 export const useGetManagementAffiliationUsers = (
@@ -22,10 +19,7 @@ export const useGetManagementAffiliationUsers = (
             .then((res) => res.data)
       : null;
 
-  const { data, error } = useSWR<
-    ManagementAffiliationUser[],
-    AxiosResponseError
-  >(
+  const { data, error } = useSWR<User[], AxiosResponseError>(
     typeof managementGroupId === 'string'
       ? `api/v1/management_groups/${managementGroupId}/users`
       : null,

@@ -21,9 +21,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ManagementAffiliationUser } from '../model';
-// @ts-ignore
 import { ResponseError } from '../model';
+// @ts-ignore
+import { User } from '../model';
 /**
  * ManagementAffiliationApi - axios parameter creator
  * @export
@@ -90,7 +90,7 @@ export const ManagementAffiliationApiFp = function(configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ManagementAffiliationUser>>> {
+        async getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -111,7 +111,7 @@ export const ManagementAffiliationApiFactory = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<ManagementAffiliationUser>> {
+        getManagementAffiliationUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<User>> {
             return localVarFp.getManagementAffiliationUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
     };

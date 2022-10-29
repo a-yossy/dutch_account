@@ -21,7 +21,7 @@
  */
 export interface PaymentAffiliationUser {
     /**
-     * 支払グループ所属ID
+     * ユーザーID
      * @type {string}
      * @memberof PaymentAffiliationUser
      */

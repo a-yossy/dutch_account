@@ -214,7 +214,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/users:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
@@ -223,7 +223,7 @@ paths:
         - paymentAffiliation
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId
+      operationId: getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -232,7 +232,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PaymentAffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliation"
                 minItems: 2
         401:
           $ref: "#/components/responses/Unauthorized"
@@ -260,7 +260,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PaymentAffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliation"
                 minItems: 2
         400:
           $ref: "#/components/responses/BadRequest"
@@ -290,7 +290,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PaymentAffiliationUser"
+                  $ref: "#/components/schemas/PaymentAffiliation"
                 minItems: 2
         400:
           $ref: "#/components/responses/BadRequest"
@@ -579,23 +579,16 @@ components:
           type: string
           description: 支払グループ名
           example: 兄弟
-    PaymentAffiliationUser:
-      description: 支払グループに所属するユーザー
+    PaymentAffiliation:
+      description: 支払グループ所属情報
       type: object
       required:
-        - id
-        - name
+        - user
         - ratio
       additionalProperties: false
       properties:
-        id:
-          type: string
-          description: ユーザーID
-          example: 1
-        name:
-          type: string
-          description: ユーザー名
-          example: 太郎
+        user:
+          $ref: "#/components/schemas/User"
         ratio:
           type: number
           format: float

@@ -23,7 +23,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner } from '../model';
 // @ts-ignore
-import { PaymentAffiliationUser } from '../model';
+import { PaymentAffiliation } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
 /**
@@ -91,12 +91,12 @@ export const PaymentAffiliationApiAxiosParamCreator = function (configuration?: 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
+            assertParamExists('getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
             // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/users`
+            assertParamExists('getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -200,7 +200,7 @@ export const PaymentAffiliationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+        async addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliation>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -212,8 +212,8 @@ export const PaymentAffiliationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
+        async getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliation>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -225,7 +225,7 @@ export const PaymentAffiliationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliationUser>>> {
+        async updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliation>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -248,7 +248,7 @@ export const PaymentAffiliationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+        addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliation>> {
             return localVarFp.addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
         },
         /**
@@ -259,8 +259,8 @@ export const PaymentAffiliationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
-            return localVarFp.getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
+        getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliation>> {
+            return localVarFp.getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 複数のユーザーの支払グループへの所属情報を更新する
@@ -271,7 +271,7 @@ export const PaymentAffiliationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliationUser>> {
+        updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner?: Array<AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner>, options?: any): AxiosPromise<Array<PaymentAffiliation>> {
             return localVarFp.updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, addPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner, options).then((request) => request(axios, basePath));
         },
     };
@@ -307,8 +307,8 @@ export class PaymentAffiliationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentAffiliationApi
      */
-    public getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
-        return PaymentAffiliationApiFp(this.configuration).getPaymentAffiliationUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    public getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
+        return PaymentAffiliationApiFp(this.configuration).getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

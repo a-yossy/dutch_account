@@ -5,7 +5,7 @@ export * from './add-payment-group-by-management-group-id-request';
 export * from './borrowing-user-debt-record';
 export * from './log-in-request';
 export * from './management-group';
-export * from './payment-affiliation-user';
+export * from './payment-affiliation';
 export * from './payment-group';
 export * from './response-error';
 export * from './sign-up-request';

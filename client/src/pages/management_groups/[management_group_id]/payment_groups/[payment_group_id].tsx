@@ -78,7 +78,7 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
           >
             {paymentAffiliation.user.name}
             <Spacer />
-            <Badge ml={5}>{paymentAffiliation.ratio}</Badge>
+            <Badge>{paymentAffiliation.ratio}</Badge>
           </Box>
         ))
       )}

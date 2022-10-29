@@ -23,7 +23,7 @@ export const useGetPaymentAffiliations = (
       : null;
   const { data, error } = useSWR<PaymentAffiliation[], AxiosResponseError>(
     typeof paymentGroupId === 'string'
-      ? `api/v1/management_groups/${managementGroupId}/payment_groups/${paymentGroupId}/users`
+      ? `api/v1/management_groups/${managementGroupId}/payment_groups/${paymentGroupId}/payment_affiliations`
       : null,
     fetcher
   );

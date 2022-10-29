@@ -13,29 +13,26 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { User } from './user';
 
 /**
- * 支払グループに所属するユーザー
+ * 支払グループ所属情報
  * @export
- * @interface PaymentAffiliationUser
+ * @interface PaymentAffiliation
  */
-export interface PaymentAffiliationUser {
+export interface PaymentAffiliation {
     /**
-     * 支払グループ所属ID
-     * @type {string}
-     * @memberof PaymentAffiliationUser
+     * 
+     * @type {User}
+     * @memberof PaymentAffiliation
      */
-    'id': string;
-    /**
-     * ユーザー名
-     * @type {string}
-     * @memberof PaymentAffiliationUser
-     */
-    'name': string;
+    'user': User;
     /**
      * 支払割合
      * @type {number}
-     * @memberof PaymentAffiliationUser
+     * @memberof PaymentAffiliation
      */
     'ratio': number;
 }

@@ -13,7 +13,8 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
 
       context 'when the management group related to the user does not exit' do
         it 'returns not_found response' do
-          get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
+          get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
+              headers: auth_tokens
           assert_response_schema_confirm(404)
         end
       end
@@ -23,15 +24,16 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
 
         context 'when the payment group related to the management group does not exist' do
           it 'returns not_found response' do
-            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
+            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
+                headers: auth_tokens
             assert_response_schema_confirm(404)
           end
         end
 
         context 'when the payment group related to the management group exists' do
           before do
-            create(:payment_affiliation, user:, payment_group:)
-            create(:payment_affiliation, user: other_user, payment_group:)
+            create(:payment_affiliation, user:, payment_group:, ratio: 0.5)
+            create(:payment_affiliation, user: other_user, payment_group:, ratio: 0.5)
           end
 
           let(:other_user) { create(:user) }
@@ -39,7 +41,8 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do
-            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens
+            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
+                headers: auth_tokens
             assert_response_schema_confirm(200)
           end
         end

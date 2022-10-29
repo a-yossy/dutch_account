@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       resource :current_user, only: %i[show]
       resources :management_groups, only: %i[index show] do
         resources :users, only: %i[index], module: :management_groups
-        resources :payment_groups, only: %i[index show], module: :management_groups
+        resources :payment_groups, only: %i[index show], module: :management_groups do
+          resources :payment_affiliations, only: %i[index], module: :payment_groups
+        end
       end
     end
   end

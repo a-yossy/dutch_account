@@ -15,27 +15,21 @@
 
 
 /**
- * 支払グループに所属するユーザー
+ * 
  * @export
- * @interface PaymentAffiliationUser
+ * @interface AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
  */
-export interface PaymentAffiliationUser {
+export interface AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner {
     /**
-     * 支払グループ所属ID
+     * ユーザーID
      * @type {string}
-     * @memberof PaymentAffiliationUser
+     * @memberof AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
      */
-    'id': string;
-    /**
-     * ユーザー名
-     * @type {string}
-     * @memberof PaymentAffiliationUser
-     */
-    'name': string;
+    'user_id': string;
     /**
      * 支払割合
      * @type {number}
-     * @memberof PaymentAffiliationUser
+     * @memberof AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
      */
     'ratio': number;
 }

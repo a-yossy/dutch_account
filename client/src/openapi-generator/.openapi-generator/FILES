@@ -15,14 +15,13 @@ git_push.sh
 index.ts
 model/add-debt-records-request-inner.ts
 model/add-management-group-request.ts
-model/add-payment-affiliations-by-payment-group-id-request-inner.ts
+model/add-payment-affiliations-by-management-group-id-and-payment-group-id-request-inner.ts
 model/add-payment-group-by-management-group-id-request.ts
 model/borrowing-user-debt-record.ts
 model/index.ts
 model/log-in-request.ts
-model/management-affiliation-user.ts
 model/management-group.ts
-model/payment-affiliation-user.ts
+model/payment-affiliation.ts
 model/payment-group.ts
 model/response-error.ts
 model/sign-up-request.ts

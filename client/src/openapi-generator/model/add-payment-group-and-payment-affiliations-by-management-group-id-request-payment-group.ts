@@ -15,15 +15,15 @@
 
 
 /**
- * 
+ * 支払グループ
  * @export
- * @interface AddPaymentGroupByManagementGroupIdRequest
+ * @interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup
  */
-export interface AddPaymentGroupByManagementGroupIdRequest {
+export interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup {
     /**
-     * 支払グループ名
+     * グループ名
      * @type {string}
-     * @memberof AddPaymentGroupByManagementGroupIdRequest
+     * @memberof AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup
      */
     'name': string;
 }

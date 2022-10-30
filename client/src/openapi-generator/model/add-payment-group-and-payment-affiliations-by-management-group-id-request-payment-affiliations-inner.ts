@@ -17,19 +17,19 @@
 /**
  * 
  * @export
- * @interface AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
+ * @interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentAffiliationsInner
  */
-export interface AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner {
+export interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentAffiliationsInner {
     /**
      * ユーザーID
      * @type {string}
-     * @memberof AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
+     * @memberof AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentAffiliationsInner
      */
     'user_id': string;
     /**
      * 支払割合
      * @type {number}
-     * @memberof AddPaymentAffiliationsByManagementGroupIdAndPaymentGroupIdRequestInner
+     * @memberof AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentAffiliationsInner
      */
     'ratio': number;
 }

@@ -130,29 +130,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - paymentGroup
-      summary: 管理グループに紐づく支払グループを作成
-      description: 管理グループに紐づく支払グループを作成する
-      operationId: addPaymentGroupByManagementGroupId
-      requestBody:
-        $ref: "#/components/requestBodies/PaymentGroupBody"
-      responses:
-        201:
-          description: 作成が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PaymentGroup"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -214,6 +191,32 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/payment_groups/payment_affiliations/bulk_insert:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    post:
+      tags:
+        - paymentGroup
+      summary: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
+      description: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
+      operationId: addPaymentGroupAndPaymentAffiliationsByManagementGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/PaymentGroupAndPaymentAffiliationsBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentGroupAndPaymentAffiliations"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -234,36 +237,15 @@ paths:
                 items:
                   $ref: "#/components/schemas/PaymentAffiliation"
                 minItems: 2
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations/bulk_insert:
-    parameters:
-      - $ref: "#/components/parameters/ManagementGroupId"
-      - $ref: "#/components/parameters/PaymentGroupId"
-    post:
-      tags:
-        - paymentAffiliation
-      summary: 支払グループに複数のユーザーを所属させる
-      description: 支払グループに複数のユーザーを所属させる
-      operationId: addPaymentAffiliationsByManagementGroupIdAndPaymentGroupId
-      requestBody:
-        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
-      responses:
-        201:
-          description: 作成が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PaymentAffiliation"
-                minItems: 2
-        400:
-          $ref: "#/components/responses/BadRequest"
+                example:
+                  - user:
+                      id: 1
+                      name: 太郎
+                    ratio: 0.5
+                  - user:
+                      id: 2
+                      name: 次郎
+                    ratio: 0.5
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -594,6 +576,30 @@ components:
           format: float
           description: 支払割合
           example: 0.4
+    PaymentGroupAndPaymentAffiliations:
+      description: 支払グループと支払グループ所属情報の配列
+      type: object
+      required:
+        - payment_group
+        - payment_affiliations
+      additionalProperties: false
+      properties:
+        payment_group:
+          $ref: "#/components/schemas/PaymentGroup"
+        payment_affiliations:
+          type: array
+          items:
+            $ref: "#/components/schemas/PaymentAffiliation"
+          minItems: 2
+          example:
+            - user:
+                id: 1
+                name: 太郎
+              ratio: 0.5
+            - user:
+                id: 2
+                name: 次郎
+              ratio: 0.5
     UserDebtRecord:
       description: 借金履歴及びユーザー名
       type: object
@@ -717,6 +723,50 @@ components:
                   format: float
                   description: 支払割合
                   example: 0.4
+    PaymentGroupAndPaymentAffiliationsBody:
+      description: リクエスト用の支払グループと支払グループの所属情報の配列
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - payment_group
+              - payment_affiliations
+            properties:
+              payment_group:
+                description: 支払グループ
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+                    description: グループ名
+                    example: 兄弟
+              payment_affiliations:
+                description: 支払グループの所属情報の配列
+                type: array
+                items:
+                  type: object
+                  required:
+                    - user_id
+                    - ratio
+                  properties:
+                    user_id:
+                      type: string
+                      description: ユーザーID
+                      example: 1
+                    ratio:
+                      type: number
+                      format: float
+                      description: 支払割合
+                      example: 0.4
+                minItems: 2
+                example:
+                  - user_id: 1
+                    ratio: 0.5
+                  - user_id: 2
+                    ratio: 0.5
     DebtRecordsBody:
       description: リクエスト用の借金履歴の配列
       content:

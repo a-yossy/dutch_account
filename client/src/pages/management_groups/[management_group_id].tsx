@@ -85,28 +85,32 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
             )}
           </TabPanel>
           <TabPanel>
-            {paymentGroups === undefined ? (
-              <Spinner />
-            ) : (
-              paymentGroups.map((paymentGroup) => (
-                <NoDecorationLink
-                  href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
-                  key={paymentGroup.id}
-                  width={400}
-                  mx='auto'
-                  boxShadow='dark-lg'
-                  rounded='md'
-                  bg='#164b9f1b'
-                  height={12}
-                  display='flex'
-                  alignItems='center'
-                  pl={3}
-                  mt={5}
-                >
-                  {paymentGroup.name}
-                </NoDecorationLink>
-              ))
-            )}
+            {paymentGroups === undefined && <Spinner />}
+            {paymentGroups !== undefined &&
+              (paymentGroups.length === 0 ? (
+                <Text align='center' mt={5}>
+                  グループが存在しません
+                </Text>
+              ) : (
+                paymentGroups.map((paymentGroup) => (
+                  <NoDecorationLink
+                    href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
+                    key={paymentGroup.id}
+                    width={400}
+                    mx='auto'
+                    boxShadow='dark-lg'
+                    rounded='md'
+                    bg='#164b9f1b'
+                    height={12}
+                    display='flex'
+                    alignItems='center'
+                    pl={3}
+                    mt={5}
+                  >
+                    {paymentGroup.name}
+                  </NoDecorationLink>
+                ))
+              ))}
           </TabPanel>
         </TabPanels>
       </Tabs>

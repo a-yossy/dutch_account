@@ -99,7 +99,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
-                minItems: 1
+                minItems: 2
+                example:
+                  - id: 1
+                    name: 太郎
+                  - id: 2
+                    name: 次郎
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

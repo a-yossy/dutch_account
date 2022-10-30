@@ -18,7 +18,12 @@ RSpec.describe Api::V1::ManagementGroups::UsersController, type: :request do
       end
 
       context 'when the management group related to the user exists' do
-        before { create(:management_affiliation, user:, management_group:) }
+        before do
+          create(:management_affiliation, user:, management_group:)
+          create(:management_affiliation, user: other_user, management_group:)
+        end
+
+        let(:other_user) { create(:user) }
 
         it 'returns success response' do
           get api_v1_management_group_users_path(management_group), headers: auth_tokens

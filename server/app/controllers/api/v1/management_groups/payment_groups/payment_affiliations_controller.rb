@@ -6,7 +6,11 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
   before_action :set_payment_group
 
   def index
-    render json: PaymentAffiliationResource.new(@payment_group.payment_affiliations.eager_load(:user)).serialize
+    render json: PaymentAffiliationResource.new(
+      @payment_group.payment_affiliations
+                    .eager_load(:user)
+                    .order('users.name asc')
+    ).serialize
   end
 
   private

@@ -4,7 +4,7 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
   before_action :authenticate_user!
   before_action :set_management_group
   before_action :set_payment_group, only: %i[index]
-  rescue_from RatioTotalNotEqualsOneError, ActiveRecord::RecordInvalid, with: :render_transaction
+  rescue_from RatioTotalNotEqualsOneError, ActiveRecord::RecordInvalid, with: :render_bad_request_error
 
   def index
     render json: PaymentAffiliationResource.new(
@@ -37,9 +37,9 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
     params.permit(payment_group: :name, payment_affiliations: %i[user_id ratio])
   end
 
-  def render_transaction(error)
+  def render_bad_request_error(error)
     render json: {
-      messages: error.message.split(',')
+      messages: error.message.split(', ')
     }, status: :bad_request
   end
 end

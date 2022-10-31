@@ -28,8 +28,8 @@ class PaymentGroupAffiliationsCreator
   private
 
   def check_ratio_total_equals_one!
-    if @payment_affiliations_params.sum { |payment_affiliation| payment_affiliation[:ratio].to_d } != 1.0.to_d
-      raise RatioTotalNotEqualsOneError, "#{PaymentAffiliation.human_attribute_name('ratio')}の合計が1になるよう入力してください"
-    end
+    return if @payment_affiliations_params.sum { |params| params[:ratio].to_d } == 1.0.to_d
+
+    raise RatioTotalNotEqualsOneError, "#{PaymentAffiliation.human_attribute_name('ratio')}の合計が1になるよう入力してください"
   end
 end

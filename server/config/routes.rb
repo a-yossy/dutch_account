@@ -18,8 +18,8 @@ Rails.application.routes.draw do
         end
         scope module: :management_groups do
           namespace :payment_groups do
-            resources :payment_affiliations, only: %i[] do
-              post 'bulk_insert', on: :collection
+            scope :payment_affiliations do
+              post :bulk_insert, to: 'payment_affiliations#bulk_insert'
             end
           end
         end

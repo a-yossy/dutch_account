@@ -19,7 +19,7 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
       management_group: @management_group,
       payment_group_params: payment_group_affiliations_params[:payment_group],
       payment_affiliations_params: payment_group_affiliations_params[:payment_affiliations]
-    ).call
+    ).call!
     render json: PaymentGroupAffiliationsResource.new(payment_group_affiliations).serialize, status: :created
   end
 

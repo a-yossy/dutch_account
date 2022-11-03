@@ -9,7 +9,7 @@ class PaymentGroupAffiliationsCreator
     @payment_affiliations_params = payment_affiliations_params
   end
 
-  def call
+  def call!
     check_ratio_total_equals_one!
 
     ActiveRecord::Base.transaction do

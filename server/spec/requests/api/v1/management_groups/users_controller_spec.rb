@@ -10,14 +10,14 @@ RSpec.describe Api::V1::ManagementGroups::UsersController, type: :request do
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
 
-      context 'when the management group related to the user does not exist' do
+      context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
           get api_v1_management_group_users_path(management_group), headers: auth_tokens
           assert_response_schema_confirm(404)
         end
       end
 
-      context 'when the management group related to the user exists' do
+      context 'when the management_group related to the user exists' do
         before do
           create(:management_affiliation, user:, management_group:)
           create(:management_affiliation, user: other_user, management_group:)

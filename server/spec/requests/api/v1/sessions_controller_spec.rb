@@ -16,7 +16,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         }
       end
 
-      it 'responds with success' do
+      it 'returns success response' do
         subject
         assert_response_schema_confirm(200)
       end
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
         }
       end
 
-      it 'responds with unauthorized' do
+      it 'returns unauthorized response' do
         subject
         assert_response_schema_confirm(401)
       end
@@ -45,7 +45,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     context 'with valid headers' do
       let(:auth_tokens) { log_in(user) }
 
-      it 'responds with success' do
+      it 'returns success response' do
         subject
         assert_response_schema_confirm(204)
       end
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::SessionsController, type: :request do
     context 'with invalid headers' do
       let(:auth_tokens) { log_in(user).slice('access-token', 'uid') }
 
-      it 'responds with not_found' do
+      it 'returns not_found response' do
         subject
         assert_response_schema_confirm(404)
       end

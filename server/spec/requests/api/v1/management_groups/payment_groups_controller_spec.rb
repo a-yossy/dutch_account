@@ -10,14 +10,14 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
 
-      context 'when the management group related to the user does not exist' do
+      context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
           get api_v1_management_group_payment_groups_path(management_group), headers: auth_tokens
           assert_response_schema_confirm(404)
         end
       end
 
-      context 'when the management group related to the user exists' do
+      context 'when the management_group related to the user exists' do
         before do
           create(:management_affiliation, user:, management_group:)
           create(:payment_group, management_group:)
@@ -46,24 +46,24 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
 
-      context 'when the management group related to the user does not exist' do
+      context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
           get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens
           assert_response_schema_confirm(404)
         end
       end
 
-      context 'when the management group related to the user exists' do
+      context 'when the management_group related to the user exists' do
         before { create(:management_affiliation, user:, management_group:) }
 
-        context 'when the payment group related to the management group does not exist' do
+        context 'when the payment_group related to the management_group does not exist' do
           it 'returns not_found response' do
             get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens
             assert_response_schema_confirm(404)
           end
         end
 
-        context 'when the payment group related to the management group exists' do
+        context 'when the payment_group related to the management_group exists' do
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do

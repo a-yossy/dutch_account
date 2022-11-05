@@ -11,7 +11,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
 
-      context 'when the management group related to the user does not exit' do
+      context 'when the management_group related to the user does not exit' do
         it 'returns not_found response' do
           get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
               headers: auth_tokens
@@ -19,10 +19,10 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
         end
       end
 
-      context 'when the management group related to the user exists' do
+      context 'when the management_group related to the user exists' do
         before { create(:management_affiliation, user:, management_group:) }
 
-        context 'when the payment group related to the management group does not exist' do
+        context 'when the payment_group related to the management_group does not exist' do
           it 'returns not_found response' do
             get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
                 headers: auth_tokens
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
           end
         end
 
-        context 'when the payment group related to the management group exists' do
+        context 'when the payment_group related to the management_group exists' do
           before do
             create(:payment_affiliation, user:, payment_group:, ratio: 0.5)
             create(:payment_affiliation, user: other_user, payment_group:, ratio: 0.5)

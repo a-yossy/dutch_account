@@ -15,7 +15,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         }
       end
 
-      it 'responds with success' do
+      it 'returns success response' do
         expect { subject }.to change(User, :count).by(1)
         assert_response_schema_confirm(200)
       end
@@ -30,7 +30,7 @@ RSpec.describe Api::V1::RegistrationsController, type: :request do
         }
       end
 
-      it 'responds with unprocessable_entity' do
+      it 'returns unprocessable_entity response' do
         expect { subject }.not_to change(User, :count)
         assert_response_schema_confirm(422)
       end

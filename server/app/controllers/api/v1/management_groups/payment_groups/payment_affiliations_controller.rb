@@ -4,7 +4,11 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
   before_action :authenticate_user!
   before_action :set_management_group
   before_action :set_payment_group, only: %i[index]
-  rescue_from RatioTotalNotEqualsOneError, ActiveRecord::RecordInvalid, with: :render_bad_request_error
+  rescue_from PaymentRelation::PaymentGroupMustHaveAtLeastTwoUsersError,
+              PaymentRelation::NotBelongingToManagementGroupError,
+              PaymentRelation::RatioTotalNotEqualsOneError,
+              ActiveRecord::RecordInvalid,
+              with: :render_bad_request_error
 
   def index
     render json: PaymentAffiliationResource.new(
@@ -15,12 +19,12 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
   end
 
   def bulk_insert
-    payment_group_affiliations = PaymentGroupAffiliationsCreator.new(
+    payment_relation = PaymentRelationCreator.new(
       management_group: @management_group,
-      payment_group_params: payment_group_affiliations_params[:payment_group],
-      payment_affiliations_params: payment_group_affiliations_params[:payment_affiliations]
+      payment_group_params: payment_relation_params[:payment_group],
+      payment_affiliations_params: payment_relation_params[:payment_affiliations]
     ).call!
-    render json: PaymentGroupAffiliationsResource.new(payment_group_affiliations).serialize, status: :created
+    render json: PaymentRelationResource.new(payment_relation).serialize, status: :created
   end
 
   private
@@ -33,7 +37,7 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
     @payment_group = @management_group.payment_groups.find(params[:payment_group_id])
   end
 
-  def payment_group_affiliations_params
+  def payment_relation_params
     params.permit(payment_group: :name, payment_affiliations: %i[user_id ratio])
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PaymentGroupAffiliationsResource
+class PaymentRelationResource
   include Alba::Resource
 
   has_one :payment_group, resource: PaymentGroupResource

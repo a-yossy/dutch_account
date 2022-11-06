@@ -30,7 +30,7 @@ class PaymentRelationCreator
   private
 
   def check_exist_at_least_two_users!
-    return if @payment_affiliations_params.size != 1
+    return if @payment_affiliations_params.size >= 2
 
     raise PaymentRelation::PaymentGroupMustHaveAtLeastTwoUsersError,
           "#{PaymentAffiliation.human_attribute_name('user')}は2人以上入力してください"

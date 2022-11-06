@@ -57,8 +57,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
   end
 
   describe '#bulk_insert' do
-    subject { post api_v1_management_group_payment_groups_bulk_insert_path(management_group), headers: auth_tokens, params: }
-
     let(:management_group) { create(:management_group) }
     let(:other_user) { create(:user) }
     let(:params) { { payment_group: { name: '兄弟' }, payment_affiliations: } }
@@ -66,6 +64,8 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
     before { create(:management_affiliation, user: other_user, management_group:) }
 
     context 'when the user logs in' do
+      subject { post api_v1_management_group_payment_groups_bulk_insert_path(management_group), headers: auth_tokens, params: }
+
       let(:user) { create(:user) }
       let(:auth_tokens) { log_in(user) }
 

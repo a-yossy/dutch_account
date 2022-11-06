@@ -25,7 +25,7 @@ RSpec.describe PaymentRelationCreator do
         end.to change(PaymentGroup, :count).by(1).and change(PaymentAffiliation, :count).by(2)
       end
 
-      it 'returns payement_relation_creator instance that have paymnent group and payment affiliations' do
+      it 'returns payement_relation_creator instance that have paymnent_group and payment_affiliations' do
         payment_relation = payment_relation_creator.call!
         expect(payment_relation.instance_of?(described_class)).to eq(true)
         expect(payment_relation.payment_group).to eq(PaymentGroup.first)
@@ -57,7 +57,7 @@ RSpec.describe PaymentRelationCreator do
       end
     end
 
-    context 'with invalid arguments whose user does not belong to the management group' do
+    context 'with invalid arguments whose user does not belong to the management_group' do
       let(:other_user) { create(:user) }
       let(:payment_affiliations_params) { [{ user_id: user1.id.to_s, ratio: 0.5 }, { user_id: other_user.id.to_s, ratio: 0.5 }] }
 

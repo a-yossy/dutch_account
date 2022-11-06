@@ -40,7 +40,7 @@ class PaymentRelationCreator
     return if @payment_affiliations_params.all? { |params| @management_group.user_ids.map(&:to_s).include?(params[:user_id]) }
 
     raise PaymentRelation::NotBelongingToManagementGroupError,
-          "#{PaymentGroup.human_attribute_name('management_group')}に所属している#{PaymentAffiliation.human_attribute_name('user')}を入力してください"
+          "#{ManagementGroup.model_name.human}に所属している#{PaymentAffiliation.human_attribute_name('user')}を入力してください"
   end
 
   def check_ratio_total_equals_one!

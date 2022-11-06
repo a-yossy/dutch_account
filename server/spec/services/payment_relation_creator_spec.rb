@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe PaymentRelationCreator do
   describe '#call!' do
-    let(:user1) { create(:user) }
-    let(:user2) { create(:user) }
+    let(:user1) { create(:user, name: 'user_1') }
+    let(:user2) { create(:user, name: 'user_2') }
     let(:management_group) { create(:management_group) }
     let(:payment_relation_creator) do
       described_class.new(management_group:, payment_group_params: { name: '兄弟' }, payment_affiliations_params:)
@@ -17,7 +17,7 @@ RSpec.describe PaymentRelationCreator do
     end
 
     context 'with valid arguments' do
-      let(:payment_affiliations_params) { [{ user_id: user1.id.to_s, ratio: 0.5 }, { user_id: user2.id.to_s, ratio: 0.5 }] }
+      let(:payment_affiliations_params) { [{ user_id: user2.id.to_s, ratio: 0.5 }, { user_id: user1.id.to_s, ratio: 0.5 }] }
 
       it 'creates one payment_group and two payment_affiliations' do
         expect do
@@ -29,7 +29,7 @@ RSpec.describe PaymentRelationCreator do
         payment_relation = payment_relation_creator.call!
         expect(payment_relation.instance_of?(described_class)).to eq(true)
         expect(payment_relation.payment_group).to eq(PaymentGroup.first)
-        expect(payment_relation.payment_affiliations).to eq([PaymentAffiliation.first, PaymentAffiliation.second])
+        expect(payment_relation.payment_affiliations).to eq([PaymentAffiliation.second, PaymentAffiliation.first])
       end
     end
 

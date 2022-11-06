@@ -24,6 +24,7 @@ class PaymentRelationCreator
       end
     end
 
+    payment_affiliations.sort_by! { |payment_affiliation| payment_affiliation.user.name }
     self
   end
 

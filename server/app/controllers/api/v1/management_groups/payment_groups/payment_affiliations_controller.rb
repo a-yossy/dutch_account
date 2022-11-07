@@ -4,11 +4,6 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
   before_action :authenticate_user!
   before_action :set_management_group
   before_action :set_payment_group, only: %i[index]
-  rescue_from PaymentRelation::PaymentGroupMustHaveAtLeastTwoUsersError,
-              PaymentRelation::NotBelongingToManagementGroupError,
-              PaymentRelation::RatioTotalNotEqualsOneError,
-              ActiveRecord::RecordInvalid,
-              with: :render_bad_request_error
 
   def index
     render json: PaymentAffiliationResource.new(
@@ -25,6 +20,11 @@ class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < 
       payment_affiliations_params: payment_relation_params[:payment_affiliations]
     ).call!
     render json: PaymentRelationResource.new(payment_relation).serialize, status: :created
+  rescue PaymentRelation::PaymentGroupMustHaveAtLeastTwoUsersError,
+         PaymentRelation::NotBelongingToManagementGroupError,
+         PaymentRelation::RatioTotalNotEqualsOneError,
+         ActiveRecord::RecordInvalid => e
+    render_bad_request_error(e)
   end
 
   private

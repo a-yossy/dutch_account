@@ -24,6 +24,12 @@ Rails:
   Enabled: true
 
 #-----------------------------------------------------------------
+# layout
+#-----------------------------------------------------------------
+Layout/LineLength:
+  Max: 140
+
+#-----------------------------------------------------------------
 # style
 #-----------------------------------------------------------------
 Style/Documentation:
@@ -36,6 +42,8 @@ Style/ClassAndModuleChildren:
 # metrics
 #-----------------------------------------------------------------
 Metrics/MethodLength:
+  Max: 20
+Metrics/AbcSize:
   Max: 20
 
 #-----------------------------------------------------------------
@@ -51,3 +59,5 @@ RSpec/NamedSubject:
   Enabled: false
 RSpec/NestedGroups:
   Max: 5
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false

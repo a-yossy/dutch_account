@@ -9,7 +9,7 @@ import { destroyAuthCookies } from 'src/libs/destroyAuthCookies';
 export const useLogOut = () => {
   const toast = useToast();
   const router = useRouter();
-  const signOut = useCallback(async () => {
+  const logOut = useCallback(async () => {
     try {
       await new UserApi().logOut({ headers: getAuthCookies() });
       destroyAuthCookies();
@@ -26,5 +26,5 @@ export const useLogOut = () => {
     }
   }, [router, toast]);
 
-  return signOut;
+  return logOut;
 };

@@ -43,7 +43,7 @@ export const PaymentRelationApiAxiosParamCreator = function (configuration?: Con
         addPaymentRelationByManagementGroupId: async (managementGroupId: string, addPaymentRelationByManagementGroupIdRequest?: AddPaymentRelationByManagementGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
             assertParamExists('addPaymentRelationByManagementGroupId', 'managementGroupId', managementGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_relation/bulk_insert`
+            const localVarPath = `/management_groups/{management_group_id}/payment_relations/bulk_insert`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

@@ -197,7 +197,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_relation/bulk_insert:
+  /management_groups/{management_group_id}/payment_relations/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
     post:

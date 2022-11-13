@@ -11,6 +11,7 @@ tags:
   - name: managementAffiliation
   - name: paymentGroup
   - name: paymentAffiliation
+  - name: paymentRelation
   - name: debtRecord
   - name: user
 security:
@@ -196,24 +197,24 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/payment_affiliations/bulk_insert:
+  /management_groups/{management_group_id}/payment_relation/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
     post:
       tags:
-        - paymentGroup
+        - paymentRelation
       summary: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
       description: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-      operationId: addPaymentGroupAndPaymentAffiliationsByManagementGroupId
+      operationId: addPaymentRelationByManagementGroupId
       requestBody:
-        $ref: "#/components/requestBodies/PaymentGroupAndPaymentAffiliationsBody"
+        $ref: "#/components/requestBodies/PaymentRelationBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentGroupAndPaymentAffiliations"
+                $ref: "#/components/schemas/PaymentRelation"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -581,17 +582,17 @@ components:
           format: float
           description: 支払割合
           example: 0.4
-    PaymentGroupAndPaymentAffiliations:
+    PaymentRelation:
       description: 支払グループと支払グループ所属情報の配列
       type: object
       required:
-        - payment_group
-        - payment_affiliations
+        - group
+        - affiliations
       additionalProperties: false
       properties:
-        payment_group:
+        group:
           $ref: "#/components/schemas/PaymentGroup"
-        payment_affiliations:
+        affiliations:
           type: array
           items:
             $ref: "#/components/schemas/PaymentAffiliation"
@@ -728,17 +729,17 @@ components:
                   format: float
                   description: 支払割合
                   example: 0.4
-    PaymentGroupAndPaymentAffiliationsBody:
+    PaymentRelationBody:
       description: リクエスト用の支払グループと支払グループの所属情報の配列
       content:
         application/json:
           schema:
             type: object
             required:
-              - payment_group
-              - payment_affiliations
+              - group
+              - affiliations
             properties:
-              payment_group:
+              group:
                 description: 支払グループ
                 type: object
                 required:
@@ -748,7 +749,7 @@ components:
                     type: string
                     description: グループ名
                     example: 兄弟
-              payment_affiliations:
+              affiliations:
                 description: 支払グループの所属情報の配列
                 type: array
                 items:

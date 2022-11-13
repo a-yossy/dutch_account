@@ -11,10 +11,7 @@ export const useLogIn = () => {
   const logIn = useCallback(
     async (params: LogInRequest) => {
       try {
-        const response = await new UserApi().logIn({
-          email: params.email,
-          password: params.password,
-        });
+        const response = await new UserApi().logIn(params);
         setAuthCookies(response.headers);
         await router.push('/mypage');
         toast('success', 'ログインしました');

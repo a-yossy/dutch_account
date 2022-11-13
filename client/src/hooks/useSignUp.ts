@@ -11,11 +11,7 @@ export const useSignUp = () => {
   const signUp = useCallback(
     async (params: SignUpRequest) => {
       try {
-        const response = await new UserApi().signUp({
-          name: params.name,
-          email: params.email,
-          password: params.password,
-        });
+        const response = await new UserApi().signUp(params);
         setAuthCookies(response.headers);
         await router.push('/mypage');
         toast('success', 'アカウント登録しました');

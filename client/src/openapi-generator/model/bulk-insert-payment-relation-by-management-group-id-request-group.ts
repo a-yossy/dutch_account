@@ -17,13 +17,13 @@
 /**
  * 支払グループ
  * @export
- * @interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup
+ * @interface BulkInsertPaymentRelationByManagementGroupIdRequestGroup
  */
-export interface AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup {
+export interface BulkInsertPaymentRelationByManagementGroupIdRequestGroup {
     /**
      * グループ名
      * @type {string}
-     * @memberof AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequestPaymentGroup
+     * @memberof BulkInsertPaymentRelationByManagementGroupIdRequestGroup
      */
     'name': string;
 }

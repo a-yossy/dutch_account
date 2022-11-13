@@ -23,20 +23,20 @@ import { PaymentGroup } from './payment-group';
 /**
  * 支払グループと支払グループ所属情報の配列
  * @export
- * @interface PaymentGroupAndPaymentAffiliations
+ * @interface PaymentRelation
  */
-export interface PaymentGroupAndPaymentAffiliations {
+export interface PaymentRelation {
     /**
      * 
      * @type {PaymentGroup}
-     * @memberof PaymentGroupAndPaymentAffiliations
+     * @memberof PaymentRelation
      */
-    'payment_group': PaymentGroup;
+    'group': PaymentGroup;
     /**
      * 
      * @type {Array<PaymentAffiliation>}
-     * @memberof PaymentGroupAndPaymentAffiliations
+     * @memberof PaymentRelation
      */
-    'payment_affiliations': Array<PaymentAffiliation>;
+    'affiliations': Array<PaymentAffiliation>;
 }
 

@@ -94,10 +94,10 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
     } else {
       remove(index);
       setSelectedUsers((prev) => {
-        const tmp = { ...prev };
-        delete tmp[user.id];
+        const users = { ...prev };
+        delete users[user.id];
 
-        return tmp;
+        return users;
       });
     }
   };

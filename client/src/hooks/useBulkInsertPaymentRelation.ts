@@ -4,28 +4,24 @@ import { useToast } from 'src/hooks/useToast';
 import { getAuthCookies } from 'src/libs/getAuthCookies';
 import { isResponseError } from 'src/libs/isResponseError';
 import {
-  AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest,
-  PaymentGroupApi,
+  BulkInsertPaymentRelationByManagementGroupIdRequest,
+  PaymentRelationApi,
 } from 'src/openapi-generator';
 
-export const useAddPaymentGroupAndPaymentAffiliations = (
-  managementGroupId: string
-) => {
+export const useBulkInsertPaymentRelation = (managementGroupId: string) => {
   const toast = useToast();
   const router = useRouter();
   const addPaymentGroupAndPaymentAffiliations = useCallback(
-    async (
-      params: AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest
-    ) => {
+    async (params: BulkInsertPaymentRelationByManagementGroupIdRequest) => {
       try {
         const response =
-          await new PaymentGroupApi().addPaymentGroupAndPaymentAffiliationsByManagementGroupId(
+          await new PaymentRelationApi().bulkInsertPaymentRelationByManagementGroupId(
             managementGroupId,
             params,
             { headers: getAuthCookies() }
           );
         await router.push(
-          `/management_groups/${managementGroupId}/payment_groups/${response.data.payment_group.id}`
+          `/management_groups/${managementGroupId}/payment_groups/${response.data.group.id}`
         );
         toast('success', '作成しました');
       } catch (error: unknown) {

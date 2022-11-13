@@ -30,13 +30,13 @@ import { NoDecorationLink } from 'src/components/NoDecorationLink';
 import { OutlineButton } from 'src/components/OutlineButton';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
-  AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest,
+  BulkInsertPaymentRelationByManagementGroupIdRequest,
   User,
 } from 'src/openapi-generator';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AddPaymentGroupAndPaymentAffiliationsSchema } from 'src/formSchemas/addPaymentGroupAndPaymentAffiliationsSchema';
+import { BulkInsertPaymentRelationSchema } from 'src/formSchemas/bulkInsertPaymentRelationSchema';
 import { InputForm } from 'src/components/InputForm';
-import { useAddPaymentGroupAndPaymentAffiliations } from 'src/hooks/useAddPaymentGroupAndPaymentAffiliations';
+import { useBulkInsertPaymentRelation } from 'src/hooks/useBulkInsertPaymentRelation';
 
 const ManagementGroupPage: NextPage = () => {
   const router = useRouter();
@@ -68,16 +68,16 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
     handleSubmit,
     register,
     formState: { errors, isSubmitting, isSubmitted },
-  } = useForm<AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest>({
-    resolver: zodResolver(AddPaymentGroupAndPaymentAffiliationsSchema),
+  } = useForm<BulkInsertPaymentRelationByManagementGroupIdRequest>({
+    resolver: zodResolver(BulkInsertPaymentRelationSchema),
   });
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'payment_affiliations',
+    name: 'affiliations',
   });
   const [users, setUsers] = useState<Record<string, string>>({});
-  const addPaymentGroupAndPaymentAffiliations =
-    useAddPaymentGroupAndPaymentAffiliations(managementGroupId);
+  const bulkInsertPaymentRelation =
+    useBulkInsertPaymentRelation(managementGroupId);
 
   const handleChange = (user: User) => {
     const index = fields
@@ -157,24 +157,22 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                 <ModalBody>
                   <Box
                     as='form'
-                    onSubmit={handleSubmit(
-                      addPaymentGroupAndPaymentAffiliations
-                    )}
+                    onSubmit={handleSubmit(bulkInsertPaymentRelation)}
                     width={350}
                     mx='auto'
                   >
                     <InputForm
-                      error={errors.payment_group?.name}
+                      error={errors.group?.name}
                       id='name'
                       formLabel='グループ名'
                       type='text'
-                      register={register('payment_group.name')}
+                      register={register('group.name')}
                       placeholder='家族'
                       mt={5}
                     />
-                    {isSubmitted && errors.payment_affiliations && (
+                    {isSubmitted && errors.affiliations && (
                       <Text fontSize='sm' color='red.300' mt={5}>
-                        {errors.payment_affiliations.message}
+                        {errors.affiliations.message}
                       </Text>
                     )}
                     {fields.map((field, index) => (
@@ -182,19 +180,19 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                         <InputForm
                           error={
                             isSubmitted
-                              ? errors.payment_affiliations?.[index]?.user_id
+                              ? errors.affiliations?.[index]?.user_id
                               : undefined
                           }
                           value={field.user_id}
                           type='hidden'
                           register={register(
-                            `payment_affiliations.${index}.user_id` as const
+                            `affiliations.${index}.user_id` as const
                           )}
                         />
                         <InputForm
                           error={
                             isSubmitted
-                              ? errors.payment_affiliations?.[index]?.ratio
+                              ? errors.affiliations?.[index]?.ratio
                               : undefined
                           }
                           id={`ratio_${field.user_id}`}
@@ -202,7 +200,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                           type='number'
                           step='0.1'
                           register={register(
-                            `payment_affiliations.${index}.ratio` as const,
+                            `affiliations.${index}.ratio` as const,
                             { valueAsNumber: true }
                           )}
                           placeholder='0.5'

@@ -21,11 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest } from '../model';
-// @ts-ignore
 import { PaymentGroup } from '../model';
-// @ts-ignore
-import { PaymentGroupAndPaymentAffiliations } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
 // @ts-ignore
@@ -36,53 +32,6 @@ import { UpdatePaymentGroupByPaymentGroupIdRequest } from '../model';
  */
 export const PaymentGroupApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @param {string} managementGroupId 管理グループID
-         * @param {AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest} [addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addPaymentGroupAndPaymentAffiliationsByManagementGroupId: async (managementGroupId: string, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest?: AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('addPaymentGroupAndPaymentAffiliationsByManagementGroupId', 'managementGroupId', managementGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_groups/payment_affiliations/bulk_insert`
-                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication accessToken required
-            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
-
-            // authentication client required
-            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
-
-            // authentication uid required
-            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 管理グループに紐づく支払グループを削除する
          * @summary 管理グループに紐づく支払グループを削除
@@ -282,18 +231,6 @@ export const PaymentGroupApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentGroupApiAxiosParamCreator(configuration)
     return {
         /**
-         * 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @param {string} managementGroupId 管理グループID
-         * @param {AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest} [addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId: string, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest?: AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentGroupAndPaymentAffiliations>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * 管理グループに紐づく支払グループを削除する
          * @summary 管理グループに紐づく支払グループを削除
          * @param {string} managementGroupId 管理グループID
@@ -352,17 +289,6 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
     const localVarFp = PaymentGroupApiFp(configuration)
     return {
         /**
-         * 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-         * @param {string} managementGroupId 管理グループID
-         * @param {AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest} [addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId: string, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest?: AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options?: any): AxiosPromise<PaymentGroupAndPaymentAffiliations> {
-            return localVarFp.addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * 管理グループに紐づく支払グループを削除する
          * @summary 管理グループに紐づく支払グループを削除
          * @param {string} managementGroupId 管理グループID
@@ -416,19 +342,6 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
  * @extends {BaseAPI}
  */
 export class PaymentGroupApi extends BaseAPI {
-    /**
-     * 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-     * @summary 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-     * @param {string} managementGroupId 管理グループID
-     * @param {AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest} [addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApi
-     */
-    public addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId: string, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest?: AddPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options?: AxiosRequestConfig) {
-        return PaymentGroupApiFp(this.configuration).addPaymentGroupAndPaymentAffiliationsByManagementGroupId(managementGroupId, addPaymentGroupAndPaymentAffiliationsByManagementGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 管理グループに紐づく支払グループを削除する
      * @summary 管理グループに紐づく支払グループを削除

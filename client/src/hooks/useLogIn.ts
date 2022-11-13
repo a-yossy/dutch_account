@@ -8,7 +8,7 @@ import { setAuthCookies } from 'src/libs/setAuthCookies';
 export const useLogIn = () => {
   const toast = useToast();
   const router = useRouter();
-  const signIn = useCallback(
+  const logIn = useCallback(
     async (params: LogInRequest) => {
       try {
         const response = await new UserApi().logIn({
@@ -35,5 +35,5 @@ export const useLogIn = () => {
     void router.prefetch('/mypage');
   }, [router]);
 
-  return signIn;
+  return logIn;
 };

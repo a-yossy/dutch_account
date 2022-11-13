@@ -12,8 +12,8 @@ import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 type InputFormProps = {
   error: FieldError | undefined;
-  id: FormLabelProps['htmlFor'];
-  formLabel: FormLabelProps['children'];
+  id?: FormLabelProps['htmlFor'];
+  formLabel?: FormLabelProps['children'];
   type: InputProps['type'];
   placeholder?: InputProps['placeholder'];
   value?: InputProps['value'];

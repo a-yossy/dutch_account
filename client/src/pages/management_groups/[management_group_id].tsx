@@ -75,7 +75,9 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
     control,
     name: 'affiliations',
   });
-  const [users, setUsers] = useState<Record<string, string>>({});
+  const [selectedUsers, setSelectedUsers] = useState<Record<string, string>>(
+    {}
+  );
   const bulkInsertPaymentRelation =
     useBulkInsertPaymentRelation(managementGroupId);
 
@@ -84,14 +86,14 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
       .map((field) => field.user_id)
       .findIndex((user_id) => user_id === user.id);
     if (index === -1) {
-      setUsers((prev) => ({
+      setSelectedUsers((prev) => ({
         ...prev,
         [user.id]: user.name,
       }));
       append({ user_id: user.id, ratio: 0 });
     } else {
       remove(index);
-      setUsers((prev) => {
+      setSelectedUsers((prev) => {
         const tmp = { ...prev };
         delete tmp[user.id];
 
@@ -196,7 +198,9 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                               : undefined
                           }
                           id={`ratio_${field.user_id}`}
-                          formLabel={`${users[field.user_id]}の支払割合`}
+                          formLabel={`${
+                            selectedUsers[field.user_id]
+                          }の支払割合`}
                           type='number'
                           step='0.1'
                           register={register(

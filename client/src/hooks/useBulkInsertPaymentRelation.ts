@@ -11,7 +11,7 @@ import {
 export const useBulkInsertPaymentRelation = (managementGroupId: string) => {
   const toast = useToast();
   const router = useRouter();
-  const addPaymentGroupAndPaymentAffiliations = useCallback(
+  const bulkInsertPaymentRelation = useCallback(
     async (params: BulkInsertPaymentRelationByManagementGroupIdRequest) => {
       try {
         const response =
@@ -37,5 +37,5 @@ export const useBulkInsertPaymentRelation = (managementGroupId: string) => {
     [managementGroupId, router, toast]
   );
 
-  return addPaymentGroupAndPaymentAffiliations;
+  return bulkInsertPaymentRelation;
 };

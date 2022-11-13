@@ -43,5 +43,13 @@ export const BulkInsertPaymentRelationSchema: z.ZodType<BulkInsertPaymentRelatio
           code: z.ZodIssueCode.custom,
         });
       }
+
+      const userIds = affiliations.map((affiliation) => affiliation.user_id);
+      if (userIds.length !== new Set(userIds).size) {
+        ctx.addIssue({
+          message: '同じユーザーは選択できません',
+          code: z.ZodIssueCode.custom,
+        });
+      }
     }),
   });

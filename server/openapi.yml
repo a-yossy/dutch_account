@@ -205,7 +205,7 @@ paths:
         - paymentRelation
       summary: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
       description: 管理グループに紐づく支払グループを作成し複数のユーザーを所属させる
-      operationId: addPaymentRelationByManagementGroupId
+      operationId: bulkInsertPaymentRelationByManagementGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentRelationBody"
       responses:

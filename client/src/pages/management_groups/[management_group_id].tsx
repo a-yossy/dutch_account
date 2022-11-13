@@ -172,7 +172,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                       placeholder='家族'
                       mt={5}
                     />
-                    {isSubmitted && errors.affiliations && (
+                    {errors.affiliations && (
                       <Text fontSize='sm' color='red.300' mt={5}>
                         {errors.affiliations.message}
                       </Text>
@@ -228,24 +228,28 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                   <Box width={350} mx='auto' mt={5}>
                     <Text>ユーザー</Text>
                     <Stack>
-                      {managementAffiliationUsers?.map(
-                        (managementAffiliationUser) => (
-                          <Checkbox
-                            key={managementAffiliationUser.id}
-                            onChange={() =>
-                              handleChange(managementAffiliationUser)
-                            }
-                            defaultChecked={
-                              fields
-                                .map((field) => field.user_id)
-                                .find(
-                                  (user_id) =>
-                                    user_id === managementAffiliationUser.id
-                                ) !== undefined
-                            }
-                          >
-                            {managementAffiliationUser.name}
-                          </Checkbox>
+                      {managementAffiliationUsers === undefined ? (
+                        <Spinner />
+                      ) : (
+                        managementAffiliationUsers.map(
+                          (managementAffiliationUser) => (
+                            <Checkbox
+                              key={managementAffiliationUser.id}
+                              onChange={() =>
+                                handleChange(managementAffiliationUser)
+                              }
+                              defaultChecked={
+                                fields
+                                  .map((field) => field.user_id)
+                                  .find(
+                                    (user_id) =>
+                                      user_id === managementAffiliationUser.id
+                                  ) !== undefined
+                              }
+                            >
+                              {managementAffiliationUser.name}
+                            </Checkbox>
+                          )
                         )
                       )}
                     </Stack>

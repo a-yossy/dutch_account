@@ -172,7 +172,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                       placeholder='家族'
                       mt={5}
                     />
-                    {errors.affiliations && (
+                    {isSubmitted && errors.affiliations && (
                       <Text fontSize='sm' color='red.300' mt={5}>
                         {errors.affiliations.message}
                       </Text>

@@ -144,7 +144,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
             )}
           </TabPanel>
           <TabPanel>
-            <Center mt={5}>
+            <Center>
               <OutlineButton onClick={onOpen} colorScheme='teal'>
                 支払グループ作成
               </OutlineButton>

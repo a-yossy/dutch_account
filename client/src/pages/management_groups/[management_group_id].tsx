@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Fragment, useState } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import {
@@ -10,12 +10,33 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Checkbox,
+  HStack,
+  Stack,
+  Center,
 } from '@chakra-ui/react';
 import { useGetManagementGroup } from 'src/hooks/useGetManagementGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/hooks/useGetManagementAffiliationUsers';
 import { useGetPaymentGroups } from 'src/hooks/useGetPaymentGroups';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
+import { OutlineButton } from 'src/components/OutlineButton';
+import { useFieldArray, useForm } from 'react-hook-form';
+import {
+  BulkInsertPaymentRelationByManagementGroupIdRequest,
+  User,
+} from 'src/openapi-generator';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { BulkInsertPaymentRelationSchema } from 'src/formSchemas/bulkInsertPaymentRelationSchema';
+import { InputForm } from 'src/components/InputForm';
+import { useBulkInsertPaymentRelation } from 'src/hooks/useBulkInsertPaymentRelation';
 
 const ManagementGroupPage: NextPage = () => {
   const router = useRouter();
@@ -40,6 +61,46 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
   const { paymentGroups, error: paymentGroupsError } = useGetPaymentGroups(
     managementGroup?.id
   );
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting, isSubmitted },
+  } = useForm<BulkInsertPaymentRelationByManagementGroupIdRequest>({
+    resolver: zodResolver(BulkInsertPaymentRelationSchema),
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'affiliations',
+  });
+  const [selectedUsers, setSelectedUsers] = useState<Record<string, string>>(
+    {}
+  );
+  const bulkInsertPaymentRelation =
+    useBulkInsertPaymentRelation(managementGroupId);
+
+  const handleChange = (user: User) => {
+    const index = fields
+      .map((field) => field.user_id)
+      .findIndex((user_id) => user_id === user.id);
+    if (index === -1) {
+      setSelectedUsers((prev) => ({
+        ...prev,
+        [user.id]: user.name,
+      }));
+      append({ user_id: user.id, ratio: 0 });
+    } else {
+      remove(index);
+      setSelectedUsers((prev) => {
+        const users = { ...prev };
+        delete users[user.id];
+
+        return users;
+      });
+    }
+  };
 
   if (
     managementGroupError?.response?.status === 404 ||
@@ -85,6 +146,117 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
             )}
           </TabPanel>
           <TabPanel>
+            <Center>
+              <OutlineButton onClick={onOpen} colorScheme='teal'>
+                支払グループ作成
+              </OutlineButton>
+            </Center>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>支払グループ作成</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Box
+                    as='form'
+                    onSubmit={handleSubmit(bulkInsertPaymentRelation)}
+                    width={350}
+                    mx='auto'
+                  >
+                    <InputForm
+                      error={errors.group?.name}
+                      id='name'
+                      formLabel='グループ名'
+                      type='text'
+                      register={register('group.name')}
+                      placeholder='家族'
+                      mt={5}
+                    />
+                    {isSubmitted && errors.affiliations && (
+                      <Text fontSize='sm' color='red.300' mt={5}>
+                        {errors.affiliations.message}
+                      </Text>
+                    )}
+                    {fields.map((field, index) => (
+                      <Fragment key={field.id}>
+                        <InputForm
+                          error={
+                            isSubmitted
+                              ? errors.affiliations?.[index]?.user_id
+                              : undefined
+                          }
+                          value={field.user_id}
+                          type='hidden'
+                          register={register(
+                            `affiliations.${index}.user_id` as const
+                          )}
+                        />
+                        <InputForm
+                          error={
+                            isSubmitted
+                              ? errors.affiliations?.[index]?.ratio
+                              : undefined
+                          }
+                          id={`ratio_${field.user_id}`}
+                          formLabel={`${
+                            selectedUsers[field.user_id]
+                          }の支払割合`}
+                          type='number'
+                          step='0.01'
+                          register={register(
+                            `affiliations.${index}.ratio` as const,
+                            { valueAsNumber: true }
+                          )}
+                          placeholder='0.5'
+                          mt={5}
+                        />
+                      </Fragment>
+                    ))}
+                    <HStack mt={5}>
+                      <OutlineButton
+                        type='submit'
+                        colorScheme='cyan'
+                        isLoading={isSubmitting}
+                      >
+                        作成
+                      </OutlineButton>
+                      <OutlineButton onClick={onClose}>
+                        キャンセル
+                      </OutlineButton>
+                    </HStack>
+                  </Box>
+                  <Box width={350} mx='auto' mt={5}>
+                    <Text>ユーザー</Text>
+                    <Stack>
+                      {managementAffiliationUsers === undefined ? (
+                        <Spinner />
+                      ) : (
+                        managementAffiliationUsers.map(
+                          (managementAffiliationUser) => (
+                            <Checkbox
+                              key={managementAffiliationUser.id}
+                              onChange={() =>
+                                handleChange(managementAffiliationUser)
+                              }
+                              defaultChecked={
+                                fields
+                                  .map((field) => field.user_id)
+                                  .find(
+                                    (user_id) =>
+                                      user_id === managementAffiliationUser.id
+                                  ) !== undefined
+                              }
+                            >
+                              {managementAffiliationUser.name}
+                            </Checkbox>
+                          )
+                        )
+                      )}
+                    </Stack>
+                  </Box>
+                </ModalBody>
+              </ModalContent>
+            </Modal>
             {paymentGroups === undefined && <Spinner />}
             {paymentGroups !== undefined &&
               (paymentGroups.length === 0 ? (

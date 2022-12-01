@@ -202,7 +202,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                             selectedUsers[field.user_id]
                           }の支払割合`}
                           type='number'
-                          step='0.1'
+                          step='0.01'
                           register={register(
                             `affiliations.${index}.ratio` as const,
                             { valueAsNumber: true }

@@ -23,12 +23,12 @@ export const useBulkInsertPaymentRelation = (managementGroupId: string) => {
         await router.push(
           `/management_groups/${managementGroupId}/payment_groups/${response.data.group.id}`
         );
-        toast('success', '作成しました');
+        toast('success', '支払グループを作成しました');
       } catch (error: unknown) {
         if (isResponseError(error)) {
           toast(
             'error',
-            '作成できませんでした',
+            '支払グループの作成に失敗しました',
             error.response.data.messages.join('\n')
           );
         }

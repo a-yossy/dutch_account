@@ -8,7 +8,7 @@ import { LogInSchema } from 'src/formSchemas/logInSchema';
 import { LogInRequest } from 'src/openapi-generator';
 import { useLogIn } from 'src/hooks/useLogIn';
 
-const SignInPage: NextPage = () => {
+const LogInPage: NextPage = () => {
   const logIn = useLogIn();
   const {
     handleSubmit,
@@ -52,4 +52,4 @@ const SignInPage: NextPage = () => {
   );
 };
 
-export default SignInPage;
+export default LogInPage;

@@ -5,7 +5,7 @@ import { Layout } from 'src/components/layouts/Layout';
 import { RecoilRoot } from 'recoil';
 import { theme } from 'src/libs/theme';
 import { useSwrValue } from 'src/hooks/useSwrValue';
-import { CurrentUser } from 'src/components/CurrentUser';
+import { CurrentUser } from 'src/components/functional/CurrentUser';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const swrValue = useSwrValue();

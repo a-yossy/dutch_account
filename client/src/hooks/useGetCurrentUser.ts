@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { User, UserApi } from 'src/openapi-generator';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
 export const useGetCurrentUser = () => {

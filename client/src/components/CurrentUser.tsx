@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { UserApi } from 'src/openapi-generator';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { useSetCurrentUser } from 'src/recoil/currentUserState';
 
 export const CurrentUser: FC = () => {

@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { SWRConfig } from 'swr';
 import { Layout } from 'src/components/layouts/Layout';
 import { RecoilRoot } from 'recoil';
-import { theme } from 'src/components/layouts/theme';
+import { theme } from 'src/libs/theme';
 import { useSwrValue } from 'src/hooks/useSwrValue';
 import { CurrentUser } from 'src/components/CurrentUser';
 

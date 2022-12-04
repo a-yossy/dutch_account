@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { UserApi } from 'src/openapi-generator';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { isResponseError } from 'src/libs/isResponseError';
 import { useToast } from 'src/hooks/useToast';
-import { destroyAuthCookies } from 'src/libs/destroyAuthCookies';
+import { destroyAuthCookies } from 'src/libs/nookies/destroyAuthCookies';
 
 export const useLogOut = () => {
   const toast = useToast();

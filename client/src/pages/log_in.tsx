@@ -4,9 +4,9 @@ import { Text, Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { InputForm } from 'src/components/InputForm';
 import { OutlineButton } from 'src/components/OutlineButton';
-import { LogInSchema } from 'src/formSchemas/logInSchema';
+import { LogInSchema } from 'src/features/log_in/formSchemas/logInSchema';
 import { LogInRequest } from 'src/openapi-generator';
-import { useLogIn } from 'src/hooks/useLogIn';
+import { useLogIn } from 'src/features/log_in/hooks/useLogIn';
 
 const LogInPage: NextPage = () => {
   const logIn = useLogIn();

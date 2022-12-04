@@ -1,9 +1,5 @@
 import { z } from 'zod';
-import { SignUpRequest } from 'src/openapi-generator';
-
-export type SignUpForm = {
-  password_confirmation: string;
-} & SignUpRequest;
+import { SignUpForm } from 'src/features/sign_up/types/signUpForm';
 
 export const SignUpSchema: z.ZodType<SignUpForm> = z
   .object({

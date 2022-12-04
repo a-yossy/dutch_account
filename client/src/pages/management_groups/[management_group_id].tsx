@@ -22,10 +22,10 @@ import {
   Stack,
   Center,
 } from '@chakra-ui/react';
-import { useGetManagementGroup } from 'src/hooks/useGetManagementGroup';
+import { useGetManagementGroup } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementGroup';
 import NotFoundErrorPage from 'src/pages/404';
-import { useGetManagementAffiliationUsers } from 'src/hooks/useGetManagementAffiliationUsers';
-import { useGetPaymentGroups } from 'src/hooks/useGetPaymentGroups';
+import { useGetManagementAffiliationUsers } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementAffiliationUsers';
+import { useGetPaymentGroups } from 'src/features/management_groups/[management_group_id]/hooks/useGetPaymentGroups';
 import { NoDecorationLink } from 'src/components/NoDecorationLink';
 import { OutlineButton } from 'src/components/OutlineButton';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -34,9 +34,9 @@ import {
   User,
 } from 'src/openapi-generator';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BulkInsertPaymentRelationSchema } from 'src/formSchemas/bulkInsertPaymentRelationSchema';
+import { BulkInsertPaymentRelationSchema } from 'src/features/management_groups/[management_group_id]/formSchemas/bulkInsertPaymentRelationSchema';
 import { InputForm } from 'src/components/InputForm';
-import { useBulkInsertPaymentRelation } from 'src/hooks/useBulkInsertPaymentRelation';
+import { useBulkInsertPaymentRelation } from 'src/features/management_groups/[management_group_id]/hooks/useBulkInsertPaymentRelation';
 
 const ManagementGroupPage: NextPage = () => {
   const router = useRouter();

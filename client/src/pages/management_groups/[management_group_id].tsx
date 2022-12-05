@@ -26,8 +26,11 @@ import { useGetManagementGroup } from 'src/features/management_groups/[managemen
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementAffiliationUsers';
 import { useGetPaymentGroups } from 'src/features/management_groups/[management_group_id]/hooks/useGetPaymentGroups';
-import { NoDecorationLink } from 'src/components/NoDecorationLink/NoDecorationLink';
-import { OutlineButton } from 'src/components/elements/OutlineButton/OutlineButton';
+import {
+  NoDecorationLink,
+  OutlineButton,
+  Input,
+} from 'src/components/elements';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
   BulkInsertPaymentRelationByManagementGroupIdRequest,
@@ -35,7 +38,6 @@ import {
 } from 'src/openapi-generator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BulkInsertPaymentRelationSchema } from 'src/features/management_groups/[management_group_id]/formSchemas/bulkInsertPaymentRelationSchema';
-import { InputForm } from 'src/components/Input/Input';
 import { useBulkInsertPaymentRelation } from 'src/features/management_groups/[management_group_id]/hooks/useBulkInsertPaymentRelation';
 
 const ManagementGroupPage: NextPage = () => {
@@ -163,7 +165,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     width={350}
                     mx='auto'
                   >
-                    <InputForm
+                    <Input
                       error={errors.group?.name}
                       id='name'
                       formLabel='グループ名'
@@ -179,7 +181,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     )}
                     {fields.map((field, index) => (
                       <Fragment key={field.id}>
-                        <InputForm
+                        <Input
                           error={
                             isSubmitted
                               ? errors.affiliations?.[index]?.user_id
@@ -191,7 +193,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                             `affiliations.${index}.user_id` as const
                           )}
                         />
-                        <InputForm
+                        <Input
                           error={
                             isSubmitted
                               ? errors.affiliations?.[index]?.ratio

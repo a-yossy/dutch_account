@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
 import { useGetManagementGroups } from 'src/features/management_groups/hooks/useGetManagementGroups';
-import { NoDecorationLink } from 'src/components/NoDecorationLink/NoDecorationLink';
+import { NoDecorationLink } from 'src/components/elements';
 
 const ManagementGroupsPage: NextPage = () => {
   const managementGroups = useGetManagementGroups();

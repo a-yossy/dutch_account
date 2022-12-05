@@ -2,13 +2,12 @@ import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { Text, Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { InputForm } from 'src/components/InputForm';
-import { OutlineButton } from 'src/components/OutlineButton';
-import { LogInSchema } from 'src/formSchemas/logInSchema';
+import { Input, OutlineButton } from 'src/components/elements';
+import { LogInSchema } from 'src/features/log_in/formSchemas/logInSchema';
 import { LogInRequest } from 'src/openapi-generator';
-import { useLogIn } from 'src/hooks/useLogIn';
+import { useLogIn } from 'src/features/log_in/hooks/useLogIn';
 
-const SignInPage: NextPage = () => {
+const LogInPage: NextPage = () => {
   const logIn = useLogIn();
   const {
     handleSubmit,
@@ -22,7 +21,7 @@ const SignInPage: NextPage = () => {
         ログイン
       </Text>
       <Box as='form' onSubmit={handleSubmit(logIn)} width={350} mx='auto'>
-        <InputForm
+        <Input
           error={errors.email}
           id='email'
           formLabel='メールアドレス'
@@ -31,7 +30,7 @@ const SignInPage: NextPage = () => {
           placeholder='email@example.com'
           mt={5}
         />
-        <InputForm
+        <Input
           error={errors.password}
           id='password'
           formLabel='パスワード'
@@ -52,4 +51,4 @@ const SignInPage: NextPage = () => {
   );
 };
 
-export default SignInPage;
+export default LogInPage;

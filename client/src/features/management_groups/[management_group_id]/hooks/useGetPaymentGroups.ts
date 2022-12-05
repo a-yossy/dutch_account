@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import { PaymentGroup, PaymentGroupApi } from 'src/openapi-generator';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
 export const useGetPaymentGroups = (managementGroupId: string | undefined) => {

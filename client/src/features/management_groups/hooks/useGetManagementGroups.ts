@@ -1,4 +1,4 @@
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { ManagementGroup, ManagementGroupApi } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 import useSWR from 'swr';

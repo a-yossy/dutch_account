@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { UserApi, SignUpRequest } from 'src/openapi-generator';
 import { isResponseError } from 'src/libs/isResponseError';
 import { useToast } from 'src/hooks/useToast';
-import { setAuthCookies } from 'src/libs/setAuthCookies';
+import { setAuthCookies } from 'src/libs/nookies/setAuthCookies';
 
 export const useSignUp = () => {
   const toast = useToast();

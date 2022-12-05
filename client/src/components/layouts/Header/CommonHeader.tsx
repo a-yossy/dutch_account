@@ -1,8 +1,12 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Flex, Spacer } from '@chakra-ui/react';
-import { NoDecorationLink } from 'src/components/NoDecorationLink';
+import { NoDecorationLink } from 'src/components/elements';
 
-export const UnLoggedInHeader: FC = () => (
+type CommonHeaderProps = {
+  children: ReactNode;
+};
+
+export const CommonHeader: FC<CommonHeaderProps> = ({ children }) => (
   <header>
     <Flex
       minWidth='max-content'
@@ -15,10 +19,7 @@ export const UnLoggedInHeader: FC = () => (
         Dutch Account
       </NoDecorationLink>
       <Spacer />
-      <NoDecorationLink href='/log_in'>ログイン</NoDecorationLink>
-      <NoDecorationLink href='/sign_up' mr={20}>
-        新規登録
-      </NoDecorationLink>
+      {children}
     </Flex>
   </header>
 );

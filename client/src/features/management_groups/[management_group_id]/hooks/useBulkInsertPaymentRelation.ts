@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useToast } from 'src/hooks/useToast';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { isResponseError } from 'src/libs/isResponseError';
 import {
   BulkInsertPaymentRelationByManagementGroupIdRequest,

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
-import { LoadingHeader } from 'src/components/layouts/LoadingHeader';
-import { LoggedInHeader } from 'src/components/layouts/LoggedInHeader';
-import { UnLoggedInHeader } from 'src/components/layouts/UnLoggedInHeader';
+import { LoadingHeader } from 'src/components/layouts/Header/LoadingHeader';
+import { LoggedInHeader } from 'src/components/layouts/Header/LoggedInHeader';
+import { UnLoggedInHeader } from 'src/components/layouts/Header/UnLoggedInHeader';
 
 export const Header: FC = () => {
   const currentUser = useGetCurrentUser();

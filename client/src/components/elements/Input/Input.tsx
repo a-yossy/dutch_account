@@ -3,25 +3,25 @@ import {
   FormErrorMessage,
   FormLabel,
   FormControl,
-  Input,
-  InputProps,
+  Input as NextInput,
+  InputProps as NextInputProps,
   FormControlProps,
   FormLabelProps,
 } from '@chakra-ui/react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-type InputFormProps = {
+type InputProps = {
   error: FieldError | undefined;
   id?: FormLabelProps['htmlFor'];
   formLabel?: FormLabelProps['children'];
-  type: InputProps['type'];
-  placeholder?: InputProps['placeholder'];
-  value?: InputProps['value'];
-  step?: InputProps['step'];
+  type: NextInputProps['type'];
+  placeholder?: NextInputProps['placeholder'];
+  value?: NextInputProps['value'];
+  step?: NextInputProps['step'];
   register: UseFormRegisterReturn;
 } & FormControlProps;
 
-export const InputForm: FC<InputFormProps> = ({
+export const Input: FC<InputProps> = ({
   error,
   id,
   formLabel,
@@ -34,7 +34,7 @@ export const InputForm: FC<InputFormProps> = ({
 }) => (
   <FormControl isInvalid={error !== undefined} {...props}>
     <FormLabel htmlFor={id}>{formLabel}</FormLabel>
-    <Input
+    <NextInput
       type={type}
       placeholder={placeholder}
       id={id}

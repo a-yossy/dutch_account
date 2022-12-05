@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { getAuthCookies } from 'src/libs/getAuthCookies';
+import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { PaymentGroup, PaymentGroupApi } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 

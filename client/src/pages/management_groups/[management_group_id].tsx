@@ -30,6 +30,7 @@ import {
   NoDecorationLink,
   OutlineButton,
   Input,
+  Title,
 } from 'src/components/elements';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
@@ -115,9 +116,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
 
   return (
     <>
-      <Text fontSize='xl' align='center'>
-        管理グループ：{managementGroup.name}
-      </Text>
+      <Title>管理グループ：{managementGroup.name}</Title>
       <Tabs isFitted width={450} mx='auto' mt={5}>
         <TabList>
           <Tab>ユーザー</Tab>

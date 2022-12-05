@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from 'src/components/elements';
-import { OutlineButton } from 'src/components/elements/OutlineButton/OutlineButton';
+import { Input, Title } from 'src/components/elements';
+import { OutlineButton } from 'src/components/elements/Button/OutlineButton';
 import { SignUpSchema } from 'src/features/sign_up/formSchemas/signUpSchema';
 import { SignUpForm } from 'src/features/sign_up/types/signUpForm';
 import { useSignUp } from 'src/features/sign_up/hooks/useSignUp';
@@ -20,9 +20,7 @@ const SignUpPage: NextPage = () => {
 
   return (
     <>
-      <Text fontSize='xl' align='center'>
-        新規登録
-      </Text>
+      <Title>新規登録</Title>
       <Box as='form' onSubmit={handleSubmit(signUp)} width={350} mx='auto'>
         <Input
           error={errors.name}

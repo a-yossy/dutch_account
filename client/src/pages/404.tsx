@@ -1,9 +1,5 @@
-import { Text } from '@chakra-ui/react';
+import { Title } from 'src/components/elements';
 
-const NotFoundErrorPage = () => (
-  <Text fontSize='xl' align='center'>
-    ページが見つかりません
-  </Text>
-);
+const NotFoundErrorPage = () => <Title>ページが見つかりません</Title>;
 
 export default NotFoundErrorPage;

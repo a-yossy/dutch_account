@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Spinner, Text, Box, Badge, Spacer } from '@chakra-ui/react';
+import { Spinner, Box, Badge, Spacer } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetPaymentAffiliations } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentAffiliations';
+import { Title } from 'src/components/elements';
 
 const PaymentGroupPage: NextPage = () => {
   const router = useRouter();
@@ -55,9 +56,7 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
 
   return (
     <>
-      <Text fontSize='xl' align='center'>
-        支払グループ：{paymentGroup.name}
-      </Text>
+      <Title>支払グループ：{paymentGroup.name}</Title>
       {paymentAffiliations === undefined ? (
         <Spinner />
       ) : (

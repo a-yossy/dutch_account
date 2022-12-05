@@ -26,8 +26,8 @@ import { useGetManagementGroup } from 'src/features/management_groups/[managemen
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementAffiliationUsers';
 import { useGetPaymentGroups } from 'src/features/management_groups/[management_group_id]/hooks/useGetPaymentGroups';
-import { NoDecorationLink } from 'src/components/NoDecorationLink';
-import { OutlineButton } from 'src/components/OutlineButton';
+import { NoDecorationLink } from 'src/components/NoDecorationLink/NoDecorationLink';
+import { OutlineButton } from 'src/components/elements/OutlineButton/OutlineButton';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
   BulkInsertPaymentRelationByManagementGroupIdRequest,
@@ -35,7 +35,7 @@ import {
 } from 'src/openapi-generator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BulkInsertPaymentRelationSchema } from 'src/features/management_groups/[management_group_id]/formSchemas/bulkInsertPaymentRelationSchema';
-import { InputForm } from 'src/components/InputForm';
+import { InputForm } from 'src/components/Input/Input';
 import { useBulkInsertPaymentRelation } from 'src/features/management_groups/[management_group_id]/hooks/useBulkInsertPaymentRelation';
 
 const ManagementGroupPage: NextPage = () => {

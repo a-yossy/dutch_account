@@ -2,7 +2,8 @@ import type { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { Box } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input, Title } from 'src/components/elements';
+import { Title } from 'src/components/elements';
+import { InputField } from 'src/components/parts';
 import { OutlineButton } from 'src/components/elements/Button/OutlineButton';
 import { SignUpSchema } from 'src/features/sign_up/formSchemas/signUpSchema';
 import { SignUpForm } from 'src/features/sign_up/types/signUpForm';
@@ -22,7 +23,7 @@ const SignUpPage: NextPage = () => {
     <>
       <Title>新規登録</Title>
       <Box as='form' onSubmit={handleSubmit(signUp)} width={350} mx='auto'>
-        <Input
+        <InputField
           error={errors.name}
           id='name'
           formLabel='名前'
@@ -31,7 +32,7 @@ const SignUpPage: NextPage = () => {
           placeholder='taro'
           mt={5}
         />
-        <Input
+        <InputField
           error={errors.email}
           id='email'
           formLabel='メールアドレス'
@@ -40,7 +41,7 @@ const SignUpPage: NextPage = () => {
           placeholder='email@example.com'
           mt={5}
         />
-        <Input
+        <InputField
           error={errors.password}
           id='password'
           formLabel='パスワード'
@@ -48,7 +49,7 @@ const SignUpPage: NextPage = () => {
           register={register('password')}
           mt={5}
         />
-        <Input
+        <InputField
           error={errors.password_confirmation}
           id='password_confirmation'
           formLabel='確認用パスワード'

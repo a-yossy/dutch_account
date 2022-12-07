@@ -29,9 +29,13 @@ import { useGetPaymentGroups } from 'src/features/management_groups/[management_
 import {
   NoDecorationLink,
   OutlineButton,
-  Input,
   Title,
 } from 'src/components/elements';
+import {
+  InputField,
+  NumberInputField,
+  HiddenInputField,
+} from 'src/components/parts';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
   BulkInsertPaymentRelationByManagementGroupIdRequest,
@@ -93,7 +97,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
         ...prev,
         [user.id]: user.name,
       }));
-      append({ user_id: user.id, ratio: 0 });
+      append({ user_id: user.id, ratio: 0.01 });
     } else {
       remove(index);
       setSelectedUsers((prev) => {
@@ -164,13 +168,13 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     width={350}
                     mx='auto'
                   >
-                    <Input
+                    <InputField
                       error={errors.group?.name}
                       id='name'
                       formLabel='グループ名'
                       type='text'
-                      register={register('group.name')}
                       placeholder='家族'
+                      register={register('group.name')}
                       mt={5}
                     />
                     {isSubmitted && errors.affiliations && (
@@ -180,19 +184,8 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     )}
                     {fields.map((field, index) => (
                       <Fragment key={field.id}>
-                        <Input
-                          error={
-                            isSubmitted
-                              ? errors.affiliations?.[index]?.user_id
-                              : undefined
-                          }
-                          value={field.user_id}
-                          type='hidden'
-                          register={register(
-                            `affiliations.${index}.user_id` as const
-                          )}
-                        />
-                        <Input
+                        <HiddenInputField value={field.user_id} />
+                        <NumberInputField
                           error={
                             isSubmitted
                               ? errors.affiliations?.[index]?.ratio
@@ -202,13 +195,14 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                           formLabel={`${
                             selectedUsers[field.user_id]
                           }の支払割合`}
-                          type='number'
-                          step='0.01'
+                          min={0.01}
+                          max={0.99}
+                          precision={2}
+                          step={0.01}
                           register={register(
                             `affiliations.${index}.ratio` as const,
                             { valueAsNumber: true }
                           )}
-                          placeholder='0.5'
                           mt={5}
                         />
                       </Fragment>

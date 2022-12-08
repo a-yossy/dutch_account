@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Spinner, Box, Badge, Spacer } from '@chakra-ui/react';
+import { Spinner, Badge, Spacer } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetPaymentAffiliations } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentAffiliations';
-import { Title } from 'src/components/elements';
+import { OneLineCard, Title } from 'src/components/elements';
 
 const PaymentGroupPage: NextPage = () => {
   const router = useRouter();
@@ -61,16 +61,10 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
         <Spinner />
       ) : (
         paymentAffiliations.map((paymentAffiliation) => (
-          <Box
+          <OneLineCard
             key={paymentAffiliation.user.id}
-            width={400}
             mx='auto'
-            boxShadow='dark-lg'
-            rounded='md'
             bg='#164b9f1b'
-            height={12}
-            display='flex'
-            alignItems='center'
             pl={3}
             pr={3}
             mt={5}
@@ -78,7 +72,7 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
             {paymentAffiliation.user.name}
             <Spacer />
             <Badge>{paymentAffiliation.ratio}</Badge>
-          </Box>
+          </OneLineCard>
         ))
       )}
     </>

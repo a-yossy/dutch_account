@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
 import { useGetManagementGroups } from 'src/features/management_groups/hooks/useGetManagementGroups';
-import { NoDecorationLink, Title } from 'src/components/elements';
+import { Title, OneLineCardLink } from 'src/components/elements';
 
 const ManagementGroupsPage: NextPage = () => {
   const managementGroups = useGetManagementGroups();
@@ -17,22 +17,16 @@ const ManagementGroupsPage: NextPage = () => {
         </Text>
       ) : (
         managementGroups.map((managementGroup) => (
-          <NoDecorationLink
-            href={`/management_groups/${managementGroup.id}`}
+          <OneLineCardLink
             key={managementGroup.id}
-            width={400}
+            href={`/management_groups/${managementGroup.id}`}
             mx='auto'
-            boxShadow='dark-lg'
-            rounded='md'
             bg='#164b9f1b'
-            height={12}
-            display='flex'
-            alignItems='center'
             pl={3}
             mt={5}
           >
             {managementGroup.name}
-          </NoDecorationLink>
+          </OneLineCardLink>
         ))
       )}
     </>

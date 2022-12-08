@@ -27,7 +27,8 @@ import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementAffiliationUsers';
 import { useGetPaymentGroups } from 'src/features/management_groups/[management_group_id]/hooks/useGetPaymentGroups';
 import {
-  NoDecorationLink,
+  OneLineCard,
+  OneLineCardLink,
   OutlineButton,
   Title,
 } from 'src/components/elements';
@@ -132,21 +133,15 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
               <Spinner />
             ) : (
               managementAffiliationUsers.map((managementAffiliationUser) => (
-                <Box
+                <OneLineCard
                   key={managementAffiliationUser.id}
-                  width={400}
                   mx='auto'
-                  boxShadow='dark-lg'
-                  rounded='md'
                   bg='#164b9f1b'
-                  height={12}
-                  display='flex'
-                  alignItems='center'
                   pl={3}
                   mt={5}
                 >
                   {managementAffiliationUser.name}
-                </Box>
+                </OneLineCard>
               ))
             )}
           </TabPanel>
@@ -260,22 +255,16 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                 </Text>
               ) : (
                 paymentGroups.map((paymentGroup) => (
-                  <NoDecorationLink
-                    href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
+                  <OneLineCardLink
                     key={paymentGroup.id}
-                    width={400}
+                    href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
                     mx='auto'
-                    boxShadow='dark-lg'
-                    rounded='md'
                     bg='#164b9f1b'
-                    height={12}
-                    display='flex'
-                    alignItems='center'
                     pl={3}
                     mt={5}
                   >
                     {paymentGroup.name}
-                  </NoDecorationLink>
+                  </OneLineCardLink>
                 ))
               ))}
           </TabPanel>

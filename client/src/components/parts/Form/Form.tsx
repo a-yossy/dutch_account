@@ -1,22 +1,26 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactNode } from 'react';
-import { SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
+import {
+  FieldValues,
+  SubmitHandler,
+  useForm,
+  UseFormReturn,
+} from 'react-hook-form';
+import { OmitStrict } from 'src/types/omitStrict';
 import { ZodType } from 'zod';
 
-type FormProps<TFormValues extends Record<string, unknown>, Schema> = {
+type FormProps<TFormValues extends FieldValues, Schema> = {
   onSubmit: SubmitHandler<TFormValues>;
   schema: Schema;
   children: (methods: UseFormReturn<TFormValues>) => ReactNode;
-};
+} & OmitStrict<BoxProps, 'onSubmit' | 'children'>;
 
-export const Form = <
-  TFormValues extends Record<string, unknown>,
-  Schema extends ZodType
->({
+export const Form = <TFormValues extends FieldValues, Schema extends ZodType>({
   onSubmit,
   schema,
   children,
+  ...props
 }: FormProps<TFormValues, Schema>) => {
   const methods = useForm<TFormValues>({ resolver: zodResolver(schema) });
 
@@ -25,7 +29,7 @@ export const Form = <
       as='form'
       onSubmit={methods.handleSubmit(onSubmit)}
       width={350}
-      mx='auto'
+      {...props}
     >
       {children(methods)}
     </Box>

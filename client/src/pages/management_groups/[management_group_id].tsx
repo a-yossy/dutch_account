@@ -36,6 +36,7 @@ import {
   InputField,
   NumberInputField,
   HiddenInputField,
+  Form,
 } from 'src/components/parts';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
@@ -71,14 +72,10 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors, isSubmitting, isSubmitted },
-  } = useForm<BulkInsertPaymentRelationByManagementGroupIdRequest>({
-    resolver: zodResolver(BulkInsertPaymentRelationSchema),
-  });
+  const { control } =
+    useForm<BulkInsertPaymentRelationByManagementGroupIdRequest>({
+      resolver: zodResolver(BulkInsertPaymentRelationSchema),
+    });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'affiliations',
@@ -157,64 +154,73 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                 <ModalHeader>支払グループ作成</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <Box
-                    as='form'
-                    onSubmit={handleSubmit(bulkInsertPaymentRelation)}
-                    width={350}
-                    mx='auto'
+                  <Form<
+                    BulkInsertPaymentRelationByManagementGroupIdRequest,
+                    typeof BulkInsertPaymentRelationSchema
                   >
-                    <InputField
-                      error={errors.group?.name}
-                      id='name'
-                      formLabel='グループ名'
-                      type='text'
-                      placeholder='家族'
-                      register={register('group.name')}
-                      mt={5}
-                    />
-                    {isSubmitted && errors.affiliations && (
-                      <Text fontSize='sm' color='red.300' mt={5}>
-                        {errors.affiliations.message}
-                      </Text>
-                    )}
-                    {fields.map((field, index) => (
-                      <Fragment key={field.id}>
-                        <HiddenInputField value={field.user_id} />
-                        <NumberInputField
-                          error={
-                            isSubmitted
-                              ? errors.affiliations?.[index]?.ratio
-                              : undefined
-                          }
-                          id={`ratio_${field.user_id}`}
-                          formLabel={`${
-                            selectedUsers[field.user_id]
-                          }の支払割合`}
-                          min={0.01}
-                          max={0.99}
-                          precision={2}
-                          step={0.01}
-                          register={register(
-                            `affiliations.${index}.ratio` as const,
-                            { valueAsNumber: true }
-                          )}
+                    onSubmit={bulkInsertPaymentRelation}
+                    mx='auto'
+                    schema={BulkInsertPaymentRelationSchema}
+                  >
+                    {({
+                      register,
+                      formState: { errors, isSubmitting, isSubmitted },
+                    }) => (
+                      <>
+                        <InputField
+                          error={errors.group?.name}
+                          id='name'
+                          formLabel='グループ名'
+                          type='text'
+                          placeholder='家族'
+                          register={register('group.name')}
                           mt={5}
                         />
-                      </Fragment>
-                    ))}
-                    <HStack mt={5}>
-                      <OutlineButton
-                        type='submit'
-                        colorScheme='cyan'
-                        isLoading={isSubmitting}
-                      >
-                        作成
-                      </OutlineButton>
-                      <OutlineButton onClick={onClose}>
-                        キャンセル
-                      </OutlineButton>
-                    </HStack>
-                  </Box>
+                        {isSubmitted && errors.affiliations && (
+                          <Text fontSize='sm' color='red.300' mt={5}>
+                            {errors.affiliations.message}
+                          </Text>
+                        )}
+                        {fields.map((field, index) => (
+                          <Fragment key={field.id}>
+                            <HiddenInputField value={field.user_id} />
+                            <NumberInputField
+                              error={
+                                isSubmitted
+                                  ? errors.affiliations?.[index]?.ratio
+                                  : undefined
+                              }
+                              id={`ratio_${field.user_id}`}
+                              formLabel={`${
+                                selectedUsers[field.user_id]
+                              }の支払割合`}
+                              min={0.01}
+                              max={0.99}
+                              precision={2}
+                              step={0.01}
+                              register={register(
+                                `affiliations.${index}.ratio` as const,
+                                { valueAsNumber: true }
+                              )}
+                              mt={5}
+                            />
+                          </Fragment>
+                        ))}
+                        <HStack mt={5}>
+                          <OutlineButton
+                            type='submit'
+                            colorScheme='cyan'
+                            isLoading={isSubmitting}
+                          >
+                            作成
+                          </OutlineButton>
+                          <OutlineButton onClick={onClose}>
+                            キャンセル
+                          </OutlineButton>
+                        </HStack>
+                      </>
+                    )}
+                  </Form>
                   <Box width={350} mx='auto' mt={5}>
                     <Text>ユーザー</Text>
                     <Stack>

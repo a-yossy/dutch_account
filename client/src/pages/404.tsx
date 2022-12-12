@@ -1,5 +1,7 @@
-import { Title } from 'src/components/elements';
+import { CenterTitle } from 'src/components/elements';
 
-const NotFoundErrorPage = () => <Title>ページが見つかりません</Title>;
+const NotFoundErrorPage = () => (
+  <CenterTitle>ページが見つかりません</CenterTitle>
+);
 
 export default NotFoundErrorPage;

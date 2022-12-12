@@ -30,7 +30,7 @@ import {
   OneLineCard,
   OneLineCardLink,
   OutlineButton,
-  Title,
+  CenterTitle,
 } from 'src/components/elements';
 import {
   InputField,
@@ -121,7 +121,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
 
   return (
     <>
-      <Title>管理グループ：{managementGroup.name}</Title>
+      <CenterTitle>管理グループ：{managementGroup.name}</CenterTitle>
       <Tabs isFitted width={450} mx='auto' mt={5}>
         <TabList>
           <Tab>ユーザー</Tab>
@@ -137,6 +137,10 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                   key={managementAffiliationUser.id}
                   mx='auto'
                   bg='#164b9f1b'
+                  boxShadow='dark-lg'
+                  rounded='md'
+                  height={12}
+                  width={400}
                   pl={3}
                   mt={5}
                 >
@@ -260,6 +264,10 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
                     mx='auto'
                     bg='#164b9f1b'
+                    boxShadow='dark-lg'
+                    rounded='md'
+                    height={12}
+                    width={400}
                     pl={3}
                     mt={5}
                   >

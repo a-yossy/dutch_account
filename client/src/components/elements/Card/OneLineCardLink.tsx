@@ -7,22 +7,14 @@ import { OmitStrict } from 'src/types/omitStrict';
 
 type OneLineCardLinkProps = OmitStrict<
   NoDecorationLinkProps,
-  'width' | 'boxShadow' | 'rounded' | 'height' | 'display' | 'alignItems'
+  'display' | 'alignItems'
 >;
 
 export const OneLineCardLink: FC<OneLineCardLinkProps> = ({
   children,
   ...props
 }) => (
-  <NoDecorationLink
-    width={400}
-    boxShadow='dark-lg'
-    rounded='md'
-    height={12}
-    display='flex'
-    alignItems='center'
-    {...props}
-  >
+  <NoDecorationLink display='flex' alignItems='center' {...props}>
     {children}
   </NoDecorationLink>
 );

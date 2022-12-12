@@ -5,7 +5,7 @@ type TitleProps = {
   children: ReactNode;
 };
 
-export const Title: FC<TitleProps> = ({ children }) => (
+export const CenterTitle: FC<TitleProps> = ({ children }) => (
   <Text fontSize='xl' align='center'>
     {children}
   </Text>

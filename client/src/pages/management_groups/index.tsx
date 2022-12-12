@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Text, Spinner } from '@chakra-ui/react';
 import { useGetManagementGroups } from 'src/features/management_groups/hooks/useGetManagementGroups';
-import { Title, OneLineCardLink } from 'src/components/elements';
+import { CenterTitle, OneLineCardLink } from 'src/components/elements';
 
 const ManagementGroupsPage: NextPage = () => {
   const managementGroups = useGetManagementGroups();
@@ -10,7 +10,7 @@ const ManagementGroupsPage: NextPage = () => {
 
   return (
     <>
-      <Title>管理グループ</Title>
+      <CenterTitle>管理グループ</CenterTitle>
       {managementGroups.length === 0 ? (
         <Text align='center' mt={5}>
           グループが存在しません
@@ -22,6 +22,10 @@ const ManagementGroupsPage: NextPage = () => {
             href={`/management_groups/${managementGroup.id}`}
             mx='auto'
             bg='#164b9f1b'
+            boxShadow='dark-lg'
+            rounded='md'
+            height={12}
+            width={400}
             pl={3}
             mt={5}
           >

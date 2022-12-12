@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { Title } from 'src/components/elements';
+import { CenterTitle } from 'src/components/elements';
 import { InputField, Form } from 'src/components/parts';
 import { OutlineButton } from 'src/components/elements/Button/OutlineButton';
 import { SignUpSchema } from 'src/features/sign_up/formSchemas/signUpSchema';
@@ -11,7 +11,7 @@ const SignUpPage: NextPage = () => {
 
   return (
     <>
-      <Title>新規登録</Title>
+      <CenterTitle>新規登録</CenterTitle>
       <Form<SignUpForm, typeof SignUpSchema>
         onSubmit={signUp}
         mx='auto'

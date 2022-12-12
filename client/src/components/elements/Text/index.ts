@@ -1,1 +1,1 @@
-export * from 'src/components/elements/Text/Title';
+export * from 'src/components/elements/Text/CenterTitle';

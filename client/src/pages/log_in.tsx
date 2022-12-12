@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { OutlineButton, Title } from 'src/components/elements';
+import { OutlineButton, CenterTitle } from 'src/components/elements';
 import { Form, InputField } from 'src/components/parts';
 import { LogInSchema } from 'src/features/log_in/formSchemas/logInSchema';
 import { LogInRequest } from 'src/openapi-generator';
@@ -10,7 +10,7 @@ const LogInPage: NextPage = () => {
 
   return (
     <>
-      <Title>ログイン</Title>
+      <CenterTitle>ログイン</CenterTitle>
       <Form<LogInRequest, typeof LogInSchema>
         onSubmit={logIn}
         mx='auto'

@@ -5,7 +5,7 @@ import { Spinner, Badge, Spacer } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { useGetPaymentAffiliations } from 'src/features/management_groups/[management_group_id]/payment_groups/[payment_group_id]/hooks/useGetPaymentAffiliations';
-import { OneLineCard, Title } from 'src/components/elements';
+import { OneLineCard, CenterTitle } from 'src/components/elements';
 
 const PaymentGroupPage: NextPage = () => {
   const router = useRouter();
@@ -56,7 +56,7 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
 
   return (
     <>
-      <Title>支払グループ：{paymentGroup.name}</Title>
+      <CenterTitle>支払グループ：{paymentGroup.name}</CenterTitle>
       {paymentAffiliations === undefined ? (
         <Spinner />
       ) : (
@@ -65,6 +65,10 @@ const PaymentGroup: FC<PaymentGroupProps> = ({
             key={paymentAffiliation.user.id}
             mx='auto'
             bg='#164b9f1b'
+            boxShadow='dark-lg'
+            rounded='md'
+            height={12}
+            width={400}
             pl={3}
             pr={3}
             mt={5}

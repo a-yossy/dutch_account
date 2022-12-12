@@ -27,10 +27,16 @@ import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementAffiliationUsers } from 'src/features/management_groups/[management_group_id]/hooks/useGetManagementAffiliationUsers';
 import { useGetPaymentGroups } from 'src/features/management_groups/[management_group_id]/hooks/useGetPaymentGroups';
 import {
-  NoDecorationLink,
+  OneLineCard,
+  OneLineCardLink,
   OutlineButton,
-  Input,
+  CenterTitle,
 } from 'src/components/elements';
+import {
+  InputField,
+  NumberInputField,
+  HiddenInputField,
+} from 'src/components/parts';
 import { useFieldArray, useForm } from 'react-hook-form';
 import {
   BulkInsertPaymentRelationByManagementGroupIdRequest,
@@ -92,7 +98,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
         ...prev,
         [user.id]: user.name,
       }));
-      append({ user_id: user.id, ratio: 0 });
+      append({ user_id: user.id, ratio: 0.01 });
     } else {
       remove(index);
       setSelectedUsers((prev) => {
@@ -115,9 +121,7 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
 
   return (
     <>
-      <Text fontSize='xl' align='center'>
-        管理グループ：{managementGroup.name}
-      </Text>
+      <CenterTitle>管理グループ：{managementGroup.name}</CenterTitle>
       <Tabs isFitted width={450} mx='auto' mt={5}>
         <TabList>
           <Tab>ユーザー</Tab>
@@ -129,21 +133,19 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
               <Spinner />
             ) : (
               managementAffiliationUsers.map((managementAffiliationUser) => (
-                <Box
+                <OneLineCard
                   key={managementAffiliationUser.id}
-                  width={400}
                   mx='auto'
+                  bg='#164b9f1b'
                   boxShadow='dark-lg'
                   rounded='md'
-                  bg='#164b9f1b'
                   height={12}
-                  display='flex'
-                  alignItems='center'
+                  width={400}
                   pl={3}
                   mt={5}
                 >
                   {managementAffiliationUser.name}
-                </Box>
+                </OneLineCard>
               ))
             )}
           </TabPanel>
@@ -165,13 +167,13 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     width={350}
                     mx='auto'
                   >
-                    <Input
+                    <InputField
                       error={errors.group?.name}
                       id='name'
                       formLabel='グループ名'
                       type='text'
-                      register={register('group.name')}
                       placeholder='家族'
+                      register={register('group.name')}
                       mt={5}
                     />
                     {isSubmitted && errors.affiliations && (
@@ -181,19 +183,8 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                     )}
                     {fields.map((field, index) => (
                       <Fragment key={field.id}>
-                        <Input
-                          error={
-                            isSubmitted
-                              ? errors.affiliations?.[index]?.user_id
-                              : undefined
-                          }
-                          value={field.user_id}
-                          type='hidden'
-                          register={register(
-                            `affiliations.${index}.user_id` as const
-                          )}
-                        />
-                        <Input
+                        <HiddenInputField value={field.user_id} />
+                        <NumberInputField
                           error={
                             isSubmitted
                               ? errors.affiliations?.[index]?.ratio
@@ -203,13 +194,14 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                           formLabel={`${
                             selectedUsers[field.user_id]
                           }の支払割合`}
-                          type='number'
-                          step='0.01'
+                          min={0.01}
+                          max={0.99}
+                          precision={2}
+                          step={0.01}
                           register={register(
                             `affiliations.${index}.ratio` as const,
                             { valueAsNumber: true }
                           )}
-                          placeholder='0.5'
                           mt={5}
                         />
                       </Fragment>
@@ -267,22 +259,20 @@ const ManagementGroup: FC<ManagementGroupProps> = ({ managementGroupId }) => {
                 </Text>
               ) : (
                 paymentGroups.map((paymentGroup) => (
-                  <NoDecorationLink
-                    href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
+                  <OneLineCardLink
                     key={paymentGroup.id}
-                    width={400}
+                    href={`/management_groups/${managementGroupId}/payment_groups/${paymentGroup.id}`}
                     mx='auto'
+                    bg='#164b9f1b'
                     boxShadow='dark-lg'
                     rounded='md'
-                    bg='#164b9f1b'
                     height={12}
-                    display='flex'
-                    alignItems='center'
+                    width={400}
                     pl={3}
                     mt={5}
                   >
                     {paymentGroup.name}
-                  </NoDecorationLink>
+                  </OneLineCardLink>
                 ))
               ))}
           </TabPanel>

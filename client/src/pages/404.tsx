@@ -1,9 +1,7 @@
-import { Text } from '@chakra-ui/react';
+import { CenterTitle } from 'src/components/elements';
 
 const NotFoundErrorPage = () => (
-  <Text fontSize='xl' align='center'>
-    ページが見つかりません
-  </Text>
+  <CenterTitle>ページが見つかりません</CenterTitle>
 );
 
 export default NotFoundErrorPage;

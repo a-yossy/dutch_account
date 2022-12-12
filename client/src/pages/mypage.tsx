@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
-import { Text, Spinner } from '@chakra-ui/react';
+import { Spinner } from '@chakra-ui/react';
 import { useGetCurrentUser } from 'src/hooks/useGetCurrentUser';
+import { CenterTitle } from 'src/components/elements';
 
 const MypagePage: NextPage = () => {
   const currentUser = useGetCurrentUser();
@@ -9,9 +10,7 @@ const MypagePage: NextPage = () => {
 
   return (
     <>
-      <Text fontSize='xl' align='center'>
-        マイページ
-      </Text>
+      <CenterTitle>マイページ</CenterTitle>
       {currentUser.name}
     </>
   );

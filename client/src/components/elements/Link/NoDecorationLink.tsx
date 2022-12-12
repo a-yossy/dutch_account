@@ -3,7 +3,7 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { Link, LinkProps } from '@chakra-ui/react';
 import { OmitStrict } from 'src/types/omitStrict';
 
-type NoDecorationLinkProps = {
+export type NoDecorationLinkProps = {
   href: NextLinkProps['href'];
 } & OmitStrict<LinkProps, 'href'>;
 

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SignUpForm } from 'src/features/sign_up/types/signUpForm';
+import { SignUpForm } from 'src/features/users/types';
 
 export const SignUpSchema: z.ZodType<SignUpForm> = z
   .object({

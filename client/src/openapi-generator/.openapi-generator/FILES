@@ -3,7 +3,6 @@
 .openapi-generator-ignore
 api.ts
 api/debt-record-api.ts
-api/management-affiliation-api.ts
 api/management-group-api.ts
 api/payment-affiliation-api.ts
 api/payment-group-api.ts

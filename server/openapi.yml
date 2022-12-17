@@ -8,7 +8,6 @@ servers:
     description: 開発環境
 tags:
   - name: managementGroup
-  - name: managementAffiliation
   - name: paymentGroup
   - name: paymentAffiliation
   - name: paymentRelation
@@ -87,10 +86,10 @@ paths:
       - $ref: "#/components/parameters/ManagementGroupId"
     get:
       tags:
-        - managementAffiliation
+        - managementGroup
       summary: 管理グループに所属する全てのユーザーを取得
       description: 管理グループに所属する全てのユーザーを取得する
-      operationId: getManagementAffiliationUsersByManagementGroupId
+      operationId: getUsersByManagementGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス
@@ -223,16 +222,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/users:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - paymentAffiliation
+        - paymentGroup
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId
+      operationId: getUsersByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

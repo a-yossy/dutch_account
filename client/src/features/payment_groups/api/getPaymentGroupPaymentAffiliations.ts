@@ -1,9 +1,6 @@
 import useSWR from 'swr';
 import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
-import {
-  PaymentAffiliationApi,
-  PaymentAffiliation,
-} from 'src/openapi-generator';
+import { PaymentGroupApi, PaymentAffiliation } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
 export const useGetPaymentGroupPaymentAffiliations = (
@@ -11,7 +8,7 @@ export const useGetPaymentGroupPaymentAffiliations = (
   paymentGroupId: string
 ) => {
   const fetcher = () =>
-    new PaymentAffiliationApi()
+    new PaymentGroupApi()
       .getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(
         managementGroupId,
         paymentGroupId,

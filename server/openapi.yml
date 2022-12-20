@@ -228,7 +228,7 @@ paths:
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - paymentAffiliation
+        - paymentGroup
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
       operationId: getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId

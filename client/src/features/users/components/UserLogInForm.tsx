@@ -3,7 +3,7 @@ import { OutlineButton } from 'src/components/elements';
 import { Form, InputField } from 'src/components/parts';
 import { LogInSchema } from 'src/features/users/formSchemas/logInSchema';
 import { LogInRequest } from 'src/openapi-generator';
-import { useLogIn } from 'src/features/users/api/userLogIn';
+import { useLogIn } from 'src/features/users/api/logIn';
 
 export const UserLogInForm: FC = () => {
   const logIn = useLogIn();

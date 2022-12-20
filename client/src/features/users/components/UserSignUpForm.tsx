@@ -3,7 +3,7 @@ import { InputField, Form } from 'src/components/parts';
 import { OutlineButton } from 'src/components/elements/Button/OutlineButton';
 import { SignUpSchema } from 'src/features/users/formSchemas/signUpSchema';
 import { SignUpForm } from 'src/features/users/types';
-import { useSignUp } from 'src/features/users/api/userSignUp';
+import { useSignUp } from 'src/features/users/api/signUp';
 
 export const UserSignUpForm: FC = () => {
   const signUp = useSignUp();

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ManagementGroups::PaymentGroups::UsersController < ApplicationController
+class Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_management_group
   before_action :set_payment_group

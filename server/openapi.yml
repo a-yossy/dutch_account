@@ -222,16 +222,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/users:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
-        - paymentGroup
+        - paymentAffiliation
       summary: 支払グループに所属する全てのユーザーを取得
       description: 支払グループに所属する全てのユーザーを取得する
-      operationId: getUsersByManagementGroupIdAndPaymentGroupId
+      operationId: getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

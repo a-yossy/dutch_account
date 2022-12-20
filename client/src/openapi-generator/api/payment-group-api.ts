@@ -21,8 +21,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { PaymentAffiliation } from '../model';
-// @ts-ignore
 import { PaymentGroup } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
@@ -172,53 +170,6 @@ export const PaymentGroupApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * 支払グループに所属する全てのユーザーを取得する
-         * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {string} managementGroupId 管理グループID
-         * @param {string} paymentGroupId 支払グループID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUsersByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('getUsersByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
-            // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('getUsersByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/users`
-                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
-                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication accessToken required
-            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
-
-            // authentication client required
-            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
-
-            // authentication uid required
-            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * 管理グループに紐づく支払グループを更新する
          * @summary 管理グループに紐づく支払グループを更新
          * @param {string} managementGroupId 管理グループID
@@ -315,18 +266,6 @@ export const PaymentGroupApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 支払グループに所属する全てのユーザーを取得する
-         * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {string} managementGroupId 管理グループID
-         * @param {string} paymentGroupId 支払グループID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentAffiliation>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * 管理グループに紐づく支払グループを更新する
          * @summary 管理グループに紐づく支払グループを更新
          * @param {string} managementGroupId 管理グループID
@@ -380,17 +319,6 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
          */
         getPaymentGroupsByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<PaymentGroup>> {
             return localVarFp.getPaymentGroupsByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 支払グループに所属する全てのユーザーを取得する
-         * @summary 支払グループに所属する全てのユーザーを取得
-         * @param {string} managementGroupId 管理グループID
-         * @param {string} paymentGroupId 支払グループID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<Array<PaymentAffiliation>> {
-            return localVarFp.getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 管理グループに紐づく支払グループを更新する
@@ -450,19 +378,6 @@ export class PaymentGroupApi extends BaseAPI {
      */
     public getPaymentGroupsByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
         return PaymentGroupApiFp(this.configuration).getPaymentGroupsByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 支払グループに所属する全てのユーザーを取得する
-     * @summary 支払グループに所属する全てのユーザーを取得
-     * @param {string} managementGroupId 管理グループID
-     * @param {string} paymentGroupId 支払グループID
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentGroupApi
-     */
-    public getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
-        return PaymentGroupApiFp(this.configuration).getUsersByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

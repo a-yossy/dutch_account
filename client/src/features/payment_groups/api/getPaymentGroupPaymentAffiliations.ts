@@ -1,15 +1,18 @@
 import useSWR from 'swr';
 import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
-import { PaymentGroupApi, PaymentAffiliation } from 'src/openapi-generator';
+import {
+  PaymentAffiliationApi,
+  PaymentAffiliation,
+} from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
-export const useGetPaymentGroupUsers = (
+export const useGetPaymentGroupPaymentAffiliations = (
   managementGroupId: string,
   paymentGroupId: string
 ) => {
   const fetcher = () =>
-    new PaymentGroupApi()
-      .getUsersByManagementGroupIdAndPaymentGroupId(
+    new PaymentAffiliationApi()
+      .getPaymentAffiliationsByManagementGroupIdAndPaymentGroupId(
         managementGroupId,
         paymentGroupId,
         { headers: getAuthCookies() }
@@ -20,5 +23,5 @@ export const useGetPaymentGroupUsers = (
     fetcher
   );
 
-  return { paymentGroupUsers: data, error };
+  return { paymentGroupPaymentAffiliations: data, error };
 };

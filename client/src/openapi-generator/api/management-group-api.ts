@@ -26,6 +26,8 @@ import { AddManagementGroupRequest } from '../model';
 import { ManagementGroup } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
+// @ts-ignore
+import { User } from '../model';
 /**
  * ManagementGroupApi - axios parameter creator
  * @export
@@ -157,6 +159,49 @@ export const ManagementGroupApiAxiosParamCreator = function (configuration?: Con
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('getUsersByManagementGroupId', 'managementGroupId', managementGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/users`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
+
+            // authentication client required
+            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
+
+            // authentication uid required
+            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -199,6 +244,17 @@ export const ManagementGroupApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getManagementGroups(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersByManagementGroupId(managementGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -237,6 +293,16 @@ export const ManagementGroupApiFactory = function (configuration?: Configuration
          */
         getManagementGroups(options?: any): AxiosPromise<Array<ManagementGroup>> {
             return localVarFp.getManagementGroups(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<User>> {
+            return localVarFp.getUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -281,5 +347,17 @@ export class ManagementGroupApi extends BaseAPI {
      */
     public getManagementGroups(options?: AxiosRequestConfig) {
         return ManagementGroupApiFp(this.configuration).getManagementGroups(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 管理グループに所属する全てのユーザーを取得する
+     * @summary 管理グループに所属する全てのユーザーを取得
+     * @param {string} managementGroupId 管理グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ManagementGroupApi
+     */
+    public getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
+        return ManagementGroupApiFp(this.configuration).getUsersByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 }

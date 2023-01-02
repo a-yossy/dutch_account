@@ -2,7 +2,7 @@ import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { User } from 'src/openapi-generator';
 import { RecoilAtomKeys } from 'src/recoil/keys';
 
-type CurrentUserState =
+export type CurrentUserState =
   | {
       state: 'loading';
     }

@@ -56,7 +56,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['**/*.stories.*'],
+        devDependencies: ['**/*.stories.*', 'src/test/server/handlers/*.ts'],
         peerDependencies: true,
       },
     ],

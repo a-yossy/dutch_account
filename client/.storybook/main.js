@@ -7,7 +7,10 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@chakra-ui/storybook-addon',
+    'storybook-addon-next',
+    'msw-storybook-addon',
   ],
+  staticDirs: ['../public'],
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-webpack5',

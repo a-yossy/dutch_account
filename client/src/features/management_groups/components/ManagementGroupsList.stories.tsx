@@ -15,4 +15,5 @@ export default {
 const Template: ComponentStory<typeof ManagementGroupsList> = () => (
   <ManagementGroupsList />
 );
+
 export const Default = Template.bind({});

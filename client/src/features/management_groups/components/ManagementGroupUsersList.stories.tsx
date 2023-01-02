@@ -15,4 +15,5 @@ export default {
 const Template: ComponentStory<typeof ManagementGroupUsersList> = () => (
   <ManagementGroupUsersList managementGroup={{ id: '1', name: 'group' }} />
 );
+
 export const Default = Template.bind({});

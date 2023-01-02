@@ -19,4 +19,5 @@ const Template: ComponentStory<
     managementGroup={{ id: '1', name: 'name' }}
   />
 );
+
 export const Default = Template.bind({});

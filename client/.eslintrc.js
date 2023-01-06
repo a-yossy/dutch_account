@@ -7,6 +7,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'next/core-web-vitals',
     'prettier',
+    'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -21,7 +22,9 @@ module.exports = {
   rules: {
     'react/function-component-definition': [
       2,
-      { namedComponents: 'arrow-function' },
+      {
+        namedComponents: 'arrow-function',
+      },
     ],
     '@typescript-eslint/no-unused-vars': 'error',
     'react/jsx-props-no-spreading': 'off',
@@ -50,5 +53,12 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/*.stories.*', 'src/test/server/handlers/*.ts'],
+        peerDependencies: true,
+      },
+    ],
   },
 };

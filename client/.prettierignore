@@ -1,2 +1,3 @@
 /.next/
 src/openapi-generator/
+public/mockServiceWorker.js

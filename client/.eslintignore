@@ -1,3 +1,4 @@
 next-env.d.ts
 next.config.js
 src/openapi-generator/
+public/mockServiceWorker.js

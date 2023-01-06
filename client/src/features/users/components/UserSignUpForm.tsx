@@ -13,6 +13,7 @@ export const UserSignUpForm: FC = () => {
       onSubmit={signUp}
       mx='auto'
       schema={SignUpSchema}
+      width={350}
     >
       {({ register, formState: { errors, isSubmitting } }) => (
         <>

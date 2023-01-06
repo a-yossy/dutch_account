@@ -1,12 +1,11 @@
-import { FC, ReactNode } from 'react';
-import { Text } from '@chakra-ui/react';
+import { FC } from 'react';
+import { Text, TextProps } from '@chakra-ui/react';
+import { OmitStrict } from 'src/types/omitStrict';
 
-type TitleProps = {
-  children: ReactNode;
-};
+type TitleProps = OmitStrict<TextProps, 'fontSize' | 'align'>;
 
-export const CenterTitle: FC<TitleProps> = ({ children }) => (
-  <Text fontSize='xl' align='center'>
+export const CenterTitle: FC<TitleProps> = ({ children, ...props }) => (
+  <Text fontSize='xl' align='center' {...props}>
     {children}
   </Text>
 );

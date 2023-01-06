@@ -25,12 +25,7 @@ export const Form = <TFormValues extends FieldValues, Schema extends ZodType>({
   const methods = useForm<TFormValues>({ resolver: zodResolver(schema) });
 
   return (
-    <Box
-      as='form'
-      onSubmit={methods.handleSubmit(onSubmit)}
-      width={350}
-      {...props}
-    >
+    <Box as='form' onSubmit={methods.handleSubmit(onSubmit)} {...props}>
       {children(methods)}
     </Box>
   );

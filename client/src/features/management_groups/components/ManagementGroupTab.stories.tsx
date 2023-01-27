@@ -2,7 +2,10 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ManagementGroupTab } from 'src/features/management_groups/components/ManagementGroupTab';
 import { getManagementGroupUsersHandler } from 'src/test/server/handlers/managementGroup';
-import { getManagementGroupPaymentGroupsHandler } from 'src/test/server/handlers/paymentGroup';
+import {
+  bulkInsertPaymentRelationHandler,
+  getManagementGroupPaymentGroupsHandler,
+} from 'src/test/server/handlers/paymentGroup';
 
 export default {
   component: ManagementGroupTab,
@@ -11,6 +14,7 @@ export default {
       handlers: [
         getManagementGroupUsersHandler(),
         getManagementGroupPaymentGroupsHandler(),
+        bulkInsertPaymentRelationHandler(),
       ],
     },
   },

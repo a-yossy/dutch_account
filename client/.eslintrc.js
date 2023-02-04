@@ -60,9 +60,12 @@ module.exports = {
           '**/*.stories.*',
           'src/test/server/handlers/*.ts',
           '**/__tests__/*.test.*',
+          'src/__tests__/**/*.test.*',
+          'src/utils/test/*.ts',
         ],
         peerDependencies: true,
       },
     ],
+    'no-nested-ternary': 'off',
   },
 };

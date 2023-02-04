@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ManagementGroupTab } from 'src/features/management_groups/components/ManagementGroupTab';
-import { getManagementGroupUsersHandler } from 'src/test/server/handlers/managementGroup';
+import { getManagementGroupUsersHandler } from 'src/test/server/handlers/user';
 import {
   bulkInsertPaymentRelationHandler,
   getManagementGroupPaymentGroupsHandler,

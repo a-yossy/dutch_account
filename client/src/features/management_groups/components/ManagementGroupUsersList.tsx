@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Spinner } from '@chakra-ui/react';
-import NotFoundErrorPage from 'src/pages/404';
 import { useGetManagementGroupUsers } from 'src/features/management_groups/api/getManagementGroupUsers';
-import { OneLineCard } from 'src/components/elements';
+import { OneLineCard, CenterTitle } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 
 type ManagementGroupUsersListProps = {
@@ -16,7 +15,8 @@ export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
     managementGroup.id
   );
 
-  if (error?.response?.status === 404) return <NotFoundErrorPage />;
+  if (error?.response?.status === 404)
+    return <CenterTitle>ユーザーが見つかりません</CenterTitle>;
 
   return (
     <div>

@@ -1,8 +1,8 @@
 import { rest } from 'msw';
 import { BASE_PATH } from 'src/openapi-generator/base';
 import {
+  getManagementGroupResponse,
   getManagementGroupsResponse,
-  getManagementGroupUsersResponse,
 } from 'src/__fixtures__/managementGroup';
 
 export const getManagementGroupsHandler = () =>
@@ -10,9 +10,20 @@ export const getManagementGroupsHandler = () =>
     res(ctx.status(200), ctx.json(getManagementGroupsResponse))
   );
 
-export const getManagementGroupUsersHandler = () =>
+export const getNoManagementGroupsHandler = () =>
+  rest.get(`${BASE_PATH}/management_groups`, (req, res, ctx) =>
+    res(ctx.status(200), ctx.json([]))
+  );
+
+export const getManagementGroupHandler = () =>
   rest.get(
-    `${BASE_PATH}/management_groups/:management_group_id/users`,
+    `${BASE_PATH}/management_groups/:management_group_id`,
     (req, res, ctx) =>
-      res(ctx.status(200), ctx.json(getManagementGroupUsersResponse))
+      res(ctx.status(200), ctx.json(getManagementGroupResponse))
+  );
+
+export const getManagementGroupHandlerWithNotFoundError = () =>
+  rest.get(
+    `${BASE_PATH}/management_groups/:management_group_id`,
+    (req, res, ctx) => res(ctx.status(404))
   );

@@ -31,7 +31,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { BulkInsertPaymentRelationSchema } from 'src/features/payment_relations/formSchemas/bulkInsertPaymentRelationSchema';
 import { useBulkInsertPaymentRelation } from 'src/features/payment_relations/api/bulkInsertPaymentRelation';
 import { useGetManagementGroupUsers } from 'src/features/management_groups/api/getManagementGroupUsers';
-import NotFoundErrorPage from 'src/pages/404';
 
 type PaymentRelationCreateModalFormProps = {
   managementGroup: ManagementGroup;
@@ -84,8 +83,6 @@ export const PaymentRelationCreateModalForm: FC<
       });
     }
   };
-
-  if (error?.response?.status === 404) return <NotFoundErrorPage />;
 
   return (
     <>
@@ -156,7 +153,9 @@ export const PaymentRelationCreateModalForm: FC<
             <Box width={350} mx='auto' mt={5}>
               <Text>ユーザー</Text>
               <Stack>
-                {managementGroupUsers === undefined ? (
+                {error?.response?.status === 404 ? (
+                  <>見つかりません</>
+                ) : managementGroupUsers === undefined ? (
                   <Spinner />
                 ) : (
                   managementGroupUsers.map((managementGroupUser) => (

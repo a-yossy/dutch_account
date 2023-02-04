@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ManagementGroupUsersList } from 'src/features/management_groups/components/ManagementGroupUsersList';
-import { getManagementGroupUsersHandler } from 'src/test/server/handlers/managementGroup';
+import { getManagementGroupUsersHandler } from 'src/test/server/handlers/user';
 
 export default {
   component: ManagementGroupUsersList,

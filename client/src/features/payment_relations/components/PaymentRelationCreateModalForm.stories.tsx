@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { PaymentRelationCreateModalForm } from 'src/features/payment_relations/components/PaymentRelationCreateModalForm';
-import { getManagementGroupUsersHandler } from 'src/test/server/handlers/managementGroup';
+import { getManagementGroupUsersHandler } from 'src/test/server/handlers/user';
 import { bulkInsertPaymentRelationHandler } from 'src/test/server/handlers/paymentGroup';
 
 export default {

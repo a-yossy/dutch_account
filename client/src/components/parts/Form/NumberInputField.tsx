@@ -14,10 +14,10 @@ import {
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 type NumberInputFieldProps = FieldWrapperPassThroughProps & {
-  min: NumberInputProps['min'];
-  max: NumberInputProps['max'];
-  precision: NumberInputProps['precision'];
-  step: NumberInputProps['step'];
+  min?: NumberInputProps['min'];
+  max?: NumberInputProps['max'];
+  precision?: NumberInputProps['precision'];
+  step?: NumberInputProps['step'];
   register: UseFormRegisterReturn;
 };
 
@@ -34,7 +34,7 @@ export const NumberInputField: FC<NumberInputFieldProps> = ({
 }) => (
   <FieldWrapper error={error} id={id} formLabel={formLabel} {...props}>
     <NumberInput min={min} max={max} step={step} precision={precision}>
-      <NextNumberInputField {...register} />
+      <NextNumberInputField id={id} {...register} />
       <NumberInputStepper>
         <NumberIncrementStepper />
         <NumberDecrementStepper />

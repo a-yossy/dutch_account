@@ -14,12 +14,11 @@ type Option = {
 
 type SelectFieldProps = OmitStrict<
   FieldWrapperPassThroughProps,
-  'placeholder' | 'defaultValue' | 'onChange'
+  'defaultValue'
 > & {
   options: Option[];
-  placeholder?: SelectProps['placeholder'];
   defaultValue?: SelectProps['defaultValue'];
-  register?: UseFormRegisterReturn;
+  register: UseFormRegisterReturn;
 };
 
 export const SelectField: FC<SelectFieldProps> = ({
@@ -28,12 +27,11 @@ export const SelectField: FC<SelectFieldProps> = ({
   formLabel,
   register,
   options,
-  placeholder,
   defaultValue,
   ...props
 }) => (
   <FieldWrapper error={error} id={id} formLabel={formLabel} {...props}>
-    <Select defaultValue={defaultValue} placeholder={placeholder} {...register}>
+    <Select defaultValue={defaultValue} {...register}>
       {options.map((option) => (
         <option value={option.value} key={option.value}>
           {option.label}

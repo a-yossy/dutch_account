@@ -16,7 +16,7 @@ export type CurrentManagementGroupState =
     };
 
 const currentManagementGroupState = atom<CurrentManagementGroupState>({
-  key: RecoilAtomKeys.MANAGEMENT_GROUP_STATE,
+  key: RecoilAtomKeys.CURRENT_MANAGEMENT_GROUP_STATE,
   default: { state: 'loading' },
   effects_UNSTABLE: [recoilPersist().persistAtom],
 });

@@ -1,4 +1,4 @@
 export enum RecoilAtomKeys {
   CURRENT_USER_STATE = 'currentUserState',
-  MANAGEMENT_GROUP_STATE = 'managementGroupState',
+  CURRENT_MANAGEMENT_GROUP_STATE = 'currentManagementGroupState',
 }

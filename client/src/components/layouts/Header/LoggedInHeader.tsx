@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import {
   Text,
   Menu,
@@ -59,8 +59,6 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
           </NoDecorationLink>
           {managementGroups === undefined ? (
             <Spinner />
-          ) : managementGroups.length === 0 ? (
-            'グループが存在しません'
           ) : (
             <>
               <FormLabel htmlFor='managementGroup' ml={3}>
@@ -77,12 +75,21 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
                 width='90%'
                 mx='auto'
               >
-                <option value=''>選択してください</option>
-                {managementGroups.map((managementGroup) => (
-                  <option value={managementGroup.id} key={managementGroup.id}>
-                    {managementGroup.name}
-                  </option>
-                ))}
+                {managementGroups.length === 0 ? (
+                  <option value=''>グループが存在しません</option>
+                ) : (
+                  <>
+                    <option value=''>選択してください</option>
+                    {managementGroups.map((managementGroup) => (
+                      <option
+                        value={managementGroup.id}
+                        key={managementGroup.id}
+                      >
+                        {managementGroup.name}
+                      </option>
+                    ))}
+                  </>
+                )}
               </Select>
             </>
           )}

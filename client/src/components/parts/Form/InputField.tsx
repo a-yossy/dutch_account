@@ -5,9 +5,13 @@ import {
 } from 'src/components/parts/Form/FieldWrapper';
 import { Input, InputProps } from '@chakra-ui/react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import { OmitStrict } from 'src/types/omitStrict';
 
-type InputFieldProps = FieldWrapperPassThroughProps & {
-  type: InputProps['type'];
+type InputFieldProps = OmitStrict<
+  FieldWrapperPassThroughProps,
+  'placeholder'
+> & {
+  type?: InputProps['type'];
   placeholder?: InputProps['placeholder'];
   register: UseFormRegisterReturn;
 };

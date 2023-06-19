@@ -20,9 +20,7 @@ export const useBulkInsertPaymentRelation = (managementGroupId: string) => {
             params,
             { headers: getAuthCookies() }
           );
-        await router.push(
-          `/management_groups/${managementGroupId}/payment_groups/${response.data.group.id}`
-        );
+        await router.push(`/payment_groups/${response.data.group.id}`);
         toast('success', '支払グループを作成しました');
       } catch (error: unknown) {
         if (isResponseError(error)) {

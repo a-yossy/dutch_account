@@ -5,9 +5,6 @@ import { recoilPersist } from 'recoil-persist';
 
 export type CurrentManagementGroupState =
   | {
-      state: 'loading';
-    }
-  | {
       state: 'existence';
       data: ManagementGroup;
     }
@@ -15,9 +12,9 @@ export type CurrentManagementGroupState =
       state: 'not_existence';
     };
 
-const currentManagementGroupState = atom<CurrentManagementGroupState>({
+export const currentManagementGroupState = atom<CurrentManagementGroupState>({
   key: RecoilAtomKeys.CURRENT_MANAGEMENT_GROUP_STATE,
-  default: { state: 'loading' },
+  default: { state: 'not_existence' },
   effects_UNSTABLE: [recoilPersist().persistAtom],
 });
 

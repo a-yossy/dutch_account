@@ -1,27 +1,28 @@
-import { FC } from 'react';
-import { Spinner } from '@chakra-ui/react';
-import { useGetManagementGroup } from 'src/features/management_groups/api/getManagementGroup';
+import { FC, useState, useEffect } from 'react';
 import NotFoundErrorPage from 'src/pages/404';
 import { CenterTitle } from 'src/components/elements';
 import { ManagementGroupTab } from 'src/features/management_groups/components/ManagementGroupTab';
+import { useGetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
+import { useGetCurrentUser } from 'src/recoil/currentUserState';
+import { Spinner } from '@chakra-ui/react';
 
-type ManagementGroupProps = {
-  managementGroupId: string;
-};
+export const ManagementGroup: FC = () => {
+  const currentUser = useGetCurrentUser();
+  const currentManagementGroup = useGetCurrentManagementGroup();
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
 
-export const ManagementGroup: FC<ManagementGroupProps> = ({
-  managementGroupId,
-}) => {
-  const { managementGroup, error } = useGetManagementGroup(managementGroupId);
+  if (currentUser.state === 'loading') return <Spinner />;
+  if (currentUser.state === 'log_out') return <NotFoundErrorPage />;
+  if (currentManagementGroup.state === 'not_existence')
+    return <CenterTitle>管理グループを選択してください</CenterTitle>;
 
-  if (error?.response?.status === 404) return <NotFoundErrorPage />;
-
-  if (!managementGroup) return <Spinner />;
-
-  return (
+  return isClient ? (
     <>
-      <CenterTitle>管理グループ：{managementGroup.name}</CenterTitle>
-      <ManagementGroupTab managementGroup={managementGroup} />
+      <CenterTitle>
+        管理グループ：{currentManagementGroup.data.name}
+      </CenterTitle>
+      <ManagementGroupTab managementGroup={currentManagementGroup.data} />
     </>
-  );
+  ) : null;
 };

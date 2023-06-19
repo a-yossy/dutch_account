@@ -58,7 +58,9 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
           </NoDecorationLink>
           <MenuDivider />
           {managementGroups === undefined ? (
-            <Spinner />
+            <MenuItem isDisabled>
+              <Spinner />
+            </MenuItem>
           ) : (
             <>
               {currentManagementGroup.state === 'existence' ? (

@@ -1,6 +1,7 @@
+import { NextPage } from 'next';
 import { CenterTitle } from 'src/components/elements';
 
-const NotFoundErrorPage = () => (
+const NotFoundErrorPage: NextPage = () => (
   <CenterTitle>ページが見つかりません</CenterTitle>
 );
 

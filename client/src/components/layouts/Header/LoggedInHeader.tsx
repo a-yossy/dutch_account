@@ -57,6 +57,7 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
           <NoDecorationLink href='/mypage'>
             <MenuItem>マイページ</MenuItem>
           </NoDecorationLink>
+          <MenuDivider />
           {managementGroups === undefined ? (
             <Spinner />
           ) : (

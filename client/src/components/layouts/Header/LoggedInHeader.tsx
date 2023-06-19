@@ -9,7 +9,6 @@ import {
   MenuDivider,
   Select,
   Spinner,
-  FormLabel,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { User } from 'src/openapi-generator';
@@ -62,9 +61,13 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
             <Spinner />
           ) : (
             <>
-              <FormLabel htmlFor='managementGroup' ml={3}>
-                管理グループ
-              </FormLabel>
+              {currentManagementGroup.state === 'existence' ? (
+                <NoDecorationLink href='/management_group'>
+                  <MenuItem>管理グループ</MenuItem>
+                </NoDecorationLink>
+              ) : (
+                <MenuItem isDisabled>管理グループ</MenuItem>
+              )}
               <Select
                 id='managementGroup'
                 defaultValue={
@@ -75,6 +78,7 @@ export const LoggedInHeader: FC<LoggedInHeaderProps> = ({ currentUser }) => {
                 onChange={handleChange}
                 width='90%'
                 mx='auto'
+                mt={1}
               >
                 {managementGroups.length === 0 ? (
                   <option value=''>グループが存在しません</option>

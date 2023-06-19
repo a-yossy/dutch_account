@@ -6,11 +6,13 @@ import { isResponseError } from 'src/libs/isResponseError';
 import { useToast } from 'src/hooks/useToast';
 import { destroyAuthCookies } from 'src/libs/nookies/destroyAuthCookies';
 import { useSetCurrentUser } from 'src/recoil/currentUserState';
+import { useSetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 
 export const useLogOut = () => {
   const toast = useToast();
   const router = useRouter();
   const setCurrentUser = useSetCurrentUser();
+  const setCurrentManagementGroup = useSetCurrentManagementGroup();
   const logOut = useCallback(async () => {
     try {
       await new UserApi().logOut({ headers: getAuthCookies() });
@@ -18,6 +20,7 @@ export const useLogOut = () => {
       await router.push('/');
       toast('success', 'ログアウトしました');
       setCurrentUser({ state: 'log_out' });
+      setCurrentManagementGroup({ state: 'not_existence' });
     } catch (error: unknown) {
       if (isResponseError(error)) {
         toast(
@@ -27,7 +30,7 @@ export const useLogOut = () => {
         );
       }
     }
-  }, [router, setCurrentUser, toast]);
+  }, [router, setCurrentManagementGroup, setCurrentUser, toast]);
 
   return logOut;
 };

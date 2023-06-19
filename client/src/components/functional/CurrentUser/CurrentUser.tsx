@@ -2,9 +2,11 @@ import { FC, useEffect } from 'react';
 import { UserApi } from 'src/openapi-generator';
 import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { useSetCurrentUser } from 'src/recoil/currentUserState';
+import { useSetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 
 export const CurrentUser: FC = () => {
   const setUser = useSetCurrentUser();
+  const setCurrentManagementGroup = useSetCurrentManagementGroup();
   const cookies = getAuthCookies();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export const CurrentUser: FC = () => {
         setUser({ state: 'log_in', data: res.data });
       } catch {
         setUser({ state: 'log_out' });
+        setCurrentManagementGroup({ state: 'not_existence' });
       }
     };
     void setCurrentUser();

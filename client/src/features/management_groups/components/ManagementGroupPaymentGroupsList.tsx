@@ -29,7 +29,7 @@ export const ManagementGroupPaymentGroupsList: FC<
           managementGroupPaymentGroups.map((managementGroupPaymentGroup) => (
             <OneLineCardLink
               key={managementGroupPaymentGroup.id}
-              href={`/management_groups/${managementGroup.id}/payment_groups/${managementGroupPaymentGroup.id}`}
+              href={`/payment_groups/${managementGroupPaymentGroup.id}`}
               mx='auto'
               bg='#164b9f1b'
               boxShadow='dark-lg'

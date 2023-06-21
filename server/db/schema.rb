@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_090439) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_21_153804) do
+  create_table "expenses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "amount_of_money", null: false
+    t.string "description", null: false
+    t.date "paid_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
   create_table "management_affiliations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "management_group_id", null: false
@@ -60,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_090439) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "expenses", "users"
   add_foreign_key "management_affiliations", "management_groups"
   add_foreign_key "management_affiliations", "users"
   add_foreign_key "payment_affiliations", "payment_groups"

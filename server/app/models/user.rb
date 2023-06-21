@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :management_groups, through: :management_affiliations
   has_many :payment_affiliations, dependent: :destroy
   has_many :payment_groups, through: :payment_affiliations
+  has_many :expenses, dependent: :destroy
 
   scope :alphabetical_order, -> { order(:name) }
 

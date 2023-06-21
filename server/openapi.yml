@@ -28,7 +28,7 @@ paths:
       description: 費用と複数の借金履歴情報を作成する
       operationId: bulkInsertExpenseWithDebtRecordsByPaymentGroupId
       requestBody:
-        $ref: "#/components/requestBodies/ExpenseBody"
+        $ref: "#/components/requestBodies/ExpensesBody"
       responses:
         201:
           description: 作成が成功した時のレスポンス
@@ -596,7 +596,7 @@ components:
           description: 管理グループ名
           example: 家族
   requestBodies:
-    ExpenseBody:
+    ExpensesBody:
       description: リクエスト用の費用の配列
       content:
         application/json:

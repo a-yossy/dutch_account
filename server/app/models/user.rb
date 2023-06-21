@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :payment_affiliations, dependent: :destroy
   has_many :payment_groups, through: :payment_affiliations
   has_many :expenses, dependent: :destroy
+  has_many :lending_debt_records, inverse_of: 'lending_user', dependent: :destroy
+  has_many :borrowing_debt_records, inverse_of: 'borrowing_user', dependent: :destroy
 
   scope :alphabetical_order, -> { order(:name) }
 

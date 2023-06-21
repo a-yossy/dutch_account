@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_153804) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_21_154840) do
+  create_table "debt_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "lending_user_id", null: false
+    t.bigint "borrowing_user_id", null: false
+    t.bigint "expense_id", null: false
+    t.integer "amount_of_money", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["borrowing_user_id"], name: "index_debt_records_on_borrowing_user_id"
+    t.index ["expense_id"], name: "index_debt_records_on_expense_id"
+    t.index ["lending_user_id", "borrowing_user_id", "expense_id"], name: "index_debt_records_on_lending_and_borrowing_and_expense", unique: true
+  end
+
   create_table "expenses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "amount_of_money", null: false
@@ -70,6 +82,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_153804) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "debt_records", "expenses"
+  add_foreign_key "debt_records", "users", column: "borrowing_user_id"
+  add_foreign_key "debt_records", "users", column: "lending_user_id"
   add_foreign_key "expenses", "users"
   add_foreign_key "management_affiliations", "management_groups"
   add_foreign_key "management_affiliations", "users"

@@ -7,6 +7,7 @@ servers:
   - url: http://localhost:8000/api/v1
     description: 開発環境
 tags:
+  - name: expenseWithDebtRecords
   - name: managementGroup
   - name: paymentGroup
   - name: paymentAffiliation
@@ -17,6 +18,35 @@ security:
     uid: []
     client: []
 paths:
+  /payment_groups/{payment_group_id}/expense_with_debt_records/bulk_insert:
+    parameters:
+      - $ref: "#/components/parameters/PaymentGroupId"
+    post:
+      tags:
+        - expenseWithDebtRecords
+      summary: 費用と複数の借金履歴情報を作成
+      description: 費用と複数の借金履歴情報を作成する
+      operationId: bulkInsertExpenseWithDebtRecordsByPaymentGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/ExpenseBody"
+      responses:
+        201:
+          description: 作成が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExpenseWithUser"
+                minItems: 1
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups:
     get:
       tags:
@@ -445,6 +475,39 @@ components:
             type: string
           description: エラーメッセージ
           example: エラーが発生しました
+    ExpenseWithUser:
+      description: 費用と支払いしたユーザー名
+      type: object
+      required:
+        - id
+        - user_name
+        - amount_of_money
+        - description
+        - paid_on
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: 費用ID
+          example: 1
+        user_name:
+          type: string
+          description: ユーザー名
+          example: 太郎
+        amount_of_money:
+          type: number
+          format: int32
+          description: 金額
+          example: 1000
+        description:
+          type: string
+          description: 説明
+          example: 食費
+        paid_on:
+          type: string
+          format: date
+          description: 支払日
+          example: 2020-01-01
     User:
       description: ユーザー
       type: object
@@ -533,6 +596,39 @@ components:
           description: 管理グループ名
           example: 家族
   requestBodies:
+    ExpenseBody:
+      description: リクエスト用の費用の配列
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              required:
+                - user_id
+                - amount_of_money
+                - description
+                - paid_on
+              properties:
+                user_id:
+                  type: string
+                  description: ユーザーID
+                  example: 1
+                amount_of_money:
+                  type: number
+                  format: int32
+                  description: 金額
+                  example: 1000
+                description:
+                  type: string
+                  description: 説明
+                  example: 食費
+                paid_on:
+                  type: string
+                  format: date
+                  description: 支払日
+                  example: 2020-01-01
+            minItems: 1
     PaymentGroupBody:
       description: リクエスト用の支払グループ
       content:

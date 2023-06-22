@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_154840) do
     t.bigint "lending_user_id", null: false
     t.bigint "borrowing_user_id", null: false
     t.bigint "expense_id", null: false
-    t.integer "amount_of_money", null: false
+    t.float "amount_of_money", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["borrowing_user_id"], name: "index_debt_records_on_borrowing_user_id"

@@ -3,7 +3,9 @@
 class PaymentAffiliationResource
   include Alba::Resource
 
-  attributes :ratio
+  attribute :ratio do |resource|
+    resource.ratio.to_f
+  end
 
   has_one :user, resource: UserResource
 end

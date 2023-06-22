@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_154840) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_22_171501) do
   create_table "debt_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "lending_user_id", null: false
     t.bigint "borrowing_user_id", null: false
     t.bigint "expense_id", null: false
-    t.float "amount_of_money", null: false
+    t.decimal "amount_of_money", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["borrowing_user_id"], name: "index_debt_records_on_borrowing_user_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_154840) do
   create_table "payment_affiliations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "payment_group_id", null: false
-    t.float "ratio", null: false
+    t.decimal "ratio", precision: 3, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["payment_group_id"], name: "index_payment_affiliations_on_payment_group_id"

@@ -37,7 +37,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ExpenseWithUser"
+                  $ref: "#/components/schemas/Expense"
                 minItems: 1
         400:
           $ref: "#/components/responses/BadRequest"
@@ -475,12 +475,12 @@ components:
             type: string
           description: エラーメッセージ
           example: エラーが発生しました
-    ExpenseWithUser:
-      description: 費用と支払いしたユーザー名
+    Expense:
+      description: 費用
       type: object
       required:
         - id
-        - user_name
+        - user
         - amount_of_money
         - description
         - paid_on
@@ -490,10 +490,8 @@ components:
           type: string
           description: 費用ID
           example: 1
-        user_name:
-          type: string
-          description: ユーザー名
-          example: 太郎
+        user:
+          $ref: "#/components/schemas/User"
         amount_of_money:
           type: number
           format: int32

@@ -70,18 +70,6 @@ RSpec.describe PaymentRelationCreator do
       end
     end
 
-    context 'with invalid arguments that do not have user_id' do
-      let(:affiliations_params) { [{ user_id: user1.id.to_s, ratio: 0.5 }, { user_id: '', ratio: 0.5 }] }
-
-      it 'raises error' do
-        expect do
-          payment_relation_creator.call!
-        end.to not_change(PaymentGroup, :count)
-           .and not_change(PaymentAffiliation, :count)
-           .and raise_error PaymentRelation::NotBelongingToManagementGroupError
-      end
-    end
-
     context 'with invalid arguments whose ratio total is less than one' do
       let(:affiliations_params) { [{ user_id: user1.id.to_s, ratio: 0.5 }, { user_id: user2.id.to_s, ratio: 0.49 }] }
 

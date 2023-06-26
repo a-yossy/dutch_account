@@ -22,6 +22,11 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :payment_groups, only: %i[show] do
+        resources :expense_with_debt_records, only: %i[], module: :payment_groups do
+          post 'bulk_insert', on: :collection
+        end
+      end
     end
   end
 end

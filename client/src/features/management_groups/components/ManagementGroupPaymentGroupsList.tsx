@@ -1,8 +1,7 @@
 import { FC } from 'react';
-import { Spinner, Text } from '@chakra-ui/react';
-import NotFoundErrorPage from 'src/pages/404';
+import { Spinner } from '@chakra-ui/react';
 import { useGetManagementGroupPaymentGroups } from 'src/features/management_groups/api/getManagementGroupPaymentGroups';
-import { OneLineCardLink } from 'src/components/elements';
+import { OneLineCardLink, CenterTitle } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 
 type ManagementGroupPaymentGroupsListProps = {
@@ -15,16 +14,15 @@ export const ManagementGroupPaymentGroupsList: FC<
   const { managementGroupPaymentGroups, error } =
     useGetManagementGroupPaymentGroups(managementGroup.id);
 
-  if (error?.response?.status === 404) return <NotFoundErrorPage />;
+  if (error?.response?.status === 404)
+    return <CenterTitle mt={5}>グループが見つかりません</CenterTitle>;
 
   return (
     <div>
       {managementGroupPaymentGroups === undefined && <Spinner />}
       {managementGroupPaymentGroups !== undefined &&
         (managementGroupPaymentGroups.length === 0 ? (
-          <Text align='center' mt={5}>
-            グループが存在しません
-          </Text>
+          <CenterTitle mt={5}>グループが存在しません</CenterTitle>
         ) : (
           managementGroupPaymentGroups.map((managementGroupPaymentGroup) => (
             <OneLineCardLink

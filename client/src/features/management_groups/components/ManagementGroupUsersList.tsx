@@ -16,7 +16,7 @@ export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
   );
 
   if (error?.response?.status === 404)
-    return <CenterTitle>ユーザーが見つかりません</CenterTitle>;
+    return <CenterTitle mt={5}>ユーザーが見つかりません</CenterTitle>;
 
   return (
     <div>

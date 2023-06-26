@@ -20,4 +20,10 @@ class ApplicationController < ActionController::API
     }, status: :unauthorized
     # rubocop:enable Style/RedundantReturn
   end
+
+  def render_bad_request_error(error)
+    render json: {
+      messages: error.message.split(', ')
+    }, status: :bad_request
+  end
 end

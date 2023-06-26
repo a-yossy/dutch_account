@@ -27,10 +27,4 @@ class Api::V1::ManagementGroups::PaymentRelationsController < ApplicationControl
   def payment_relation_params
     params.permit(group: :name, affiliations: %i[user_id ratio])
   end
-
-  def render_bad_request_error(error)
-    render json: {
-      messages: error.message.split(', ')
-    }, status: :bad_request
-  end
 end

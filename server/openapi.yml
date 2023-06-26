@@ -35,10 +35,16 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Expense"
-                minItems: 1
+                type: object
+                required:
+                  - expenses
+                additionalProperties: false
+                properties:
+                  expenses:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Expense"
+                    minItems: 1
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -599,34 +605,39 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              type: object
-              required:
-                - user_id
-                - amount_of_money
-                - description
-                - paid_on
-              properties:
-                user_id:
-                  type: string
-                  description: ユーザーID
-                  example: 1
-                amount_of_money:
-                  type: number
-                  format: int32
-                  description: 金額
-                  example: 1000
-                description:
-                  type: string
-                  description: 説明
-                  example: 食費
-                paid_on:
-                  type: string
-                  format: date
-                  description: 支払日
-                  example: 2020-01-01
-            minItems: 1
+            type: object
+            required:
+              - expenses
+            properties:
+              expenses:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - user_id
+                    - amount_of_money
+                    - description
+                    - paid_on
+                  properties:
+                    user_id:
+                      type: string
+                      description: ユーザーID
+                      example: 1
+                    amount_of_money:
+                      type: number
+                      format: int32
+                      description: 金額
+                      example: 1000
+                    description:
+                      type: string
+                      description: 説明
+                      example: 食費
+                    paid_on:
+                      type: string
+                      format: date
+                      description: 支払日
+                      example: 2020-01-01
+                minItems: 1
     PaymentGroupBody:
       description: リクエスト用の支払グループ
       content:

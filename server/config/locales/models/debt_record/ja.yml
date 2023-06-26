@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      debt_record: 借金記録
+    attributes:
+      lending_user: 貸したユーザー
+      borrowing_user: 借りたユーザー
+      expense: 費用
+      amount_of_money: 金額

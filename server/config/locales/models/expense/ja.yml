@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      expense: 費用
+    attributes:
+      user: ユーザー
+      amount_of_money: 金額
+      description: 説明
+      paid_on: 支払日

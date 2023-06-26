@@ -22,7 +22,7 @@ class ExpenseWithDebtRecordsCreator
           expense.debt_records.create!(
             lending_user_id: expense.user_id,
             borrowing_user_id: payment_affiliation.user_id,
-            amount_of_money: expense.amount_of_money * payment_affiliation.ratio
+            amount_of_money: expense.amount_of_money.to_d * payment_affiliation.ratio
           )
         end
       end

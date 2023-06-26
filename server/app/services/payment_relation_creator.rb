@@ -16,12 +16,7 @@ class PaymentRelationCreator
 
     ActiveRecord::Base.transaction do
       @group = @management_group.payment_groups.create!(name: @group_params[:name])
-      @affiliations = @affiliations_params.map do |affilition_params|
-        group.payment_affiliations.create!(
-          user_id: affilition_params[:user_id],
-          ratio: affilition_params[:ratio]
-        )
-      end
+      @affiliations = group.payment_affiliations.create!(@affiliations_params)
     end
 
     affiliations.sort_by! { |affiliation| affiliation.user.name }

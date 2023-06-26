@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Spinner, Badge, Spacer } from '@chakra-ui/react';
-import NotFoundErrorPage from 'src/pages/404';
 import { useGetPaymentGroupPaymentAffiliations } from 'src/features/payment_groups/api/getPaymentGroupPaymentAffiliations';
-import { OneLineCard } from 'src/components/elements';
+import { CenterTitle, OneLineCard } from 'src/components/elements';
 
 type PaymentGroupPaymentAffiliationsListProps = {
   managementGroupId: string;
@@ -15,7 +14,8 @@ export const PaymentGroupPaymentAffiliationsList: FC<
   const { paymentGroupPaymentAffiliations, error } =
     useGetPaymentGroupPaymentAffiliations(managementGroupId, paymentGroupId);
 
-  if (error?.response?.status === 404) return <NotFoundErrorPage />;
+  if (error?.response?.status === 404)
+    return <CenterTitle mt={5}>ユーザーが見つかりません</CenterTitle>;
 
   return (
     <div>

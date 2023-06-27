@@ -13,42 +13,45 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { User } from './user';
 
 /**
- * 
+ * 費用
  * @export
- * @interface AddDebtRecordsRequestInner
+ * @interface Expense
  */
-export interface AddDebtRecordsRequestInner {
+export interface Expense {
     /**
-     * 貸主ID
+     * 費用ID
      * @type {string}
-     * @memberof AddDebtRecordsRequestInner
+     * @memberof Expense
      */
-    'lending_user_id': string;
+    'id': string;
     /**
-     * 借主ID
-     * @type {string}
-     * @memberof AddDebtRecordsRequestInner
+     * 
+     * @type {User}
+     * @memberof Expense
      */
-    'borrowing_user_id': string;
+    'user': User;
     /**
      * 金額
      * @type {number}
-     * @memberof AddDebtRecordsRequestInner
+     * @memberof Expense
      */
     'amount_of_money': number;
     /**
      * 説明
      * @type {string}
-     * @memberof AddDebtRecordsRequestInner
+     * @memberof Expense
      */
     'description': string;
     /**
-     * 取引日
+     * 支払日
      * @type {string}
-     * @memberof AddDebtRecordsRequestInner
+     * @memberof Expense
      */
-    'transacted_on': string;
+    'paid_on': string;
 }
 

@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :expense do
     user
+    payment_group
     sequence(:amount_of_money) { |i| (i + 1) * 1000 }
     sequence(:description) { |i| "description_#{i}" }
     sequence(:paid_on) { |i| Time.zone.today - i.days }

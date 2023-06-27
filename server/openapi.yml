@@ -519,6 +519,7 @@ components:
       required:
         - id
         - user
+        - payment_group_id
         - amount_of_money
         - description
         - paid_on
@@ -530,6 +531,10 @@ components:
           example: 1
         user:
           $ref: "#/components/schemas/User"
+        payment_group_id:
+          type: string
+          description: 支払グループID
+          example: 1
         amount_of_money:
           type: number
           format: int32

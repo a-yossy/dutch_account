@@ -36,6 +36,12 @@ export interface Expense {
      */
     'user': User;
     /**
+     * 支払グループID
+     * @type {string}
+     * @memberof Expense
+     */
+    'payment_group_id': string;
+    /**
      * 金額
      * @type {number}
      * @memberof Expense

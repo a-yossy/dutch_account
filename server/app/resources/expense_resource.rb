@@ -7,7 +7,7 @@ class ExpenseResource
     resource.amount_of_money.to_f
   end
 
-  attributes id: [String, true], description: String, paid_on: [String, true]
+  attributes id: [String, true], payment_group_id: [String, true], description: String, paid_on: [String, true]
 
   has_one :user, resource: UserResource
 end

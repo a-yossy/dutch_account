@@ -19,7 +19,7 @@ security:
     uid: []
     client: []
 paths:
-  /managementGroups/{management_group_id}/payment_groups/{payment_group_id}/expenses:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"

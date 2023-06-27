@@ -43,7 +43,7 @@ export const ExpenseApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('getExpensesByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
             // verify required parameter 'paymentGroupId' is not null or undefined
             assertParamExists('getExpensesByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
-            const localVarPath = `/managementGroups/{management_group_id}/payment_groups/{payment_group_id}/expenses`
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.

@@ -14,7 +14,8 @@
 
 
 
-export * from './api/debt-record-api';
+export * from './api/expense-api';
+export * from './api/expense-with-debt-records-api';
 export * from './api/management-group-api';
 export * from './api/payment-affiliation-api';
 export * from './api/payment-group-api';

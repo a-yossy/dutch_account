@@ -21,7 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { GetExpensesByPaymentGroupId200Response } from '../model';
+import { GetExpensesByManagementGroupIdAndPaymentGroupId200Response } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
 /**
@@ -33,14 +33,18 @@ export const ExpenseApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 支払グループに紐づく全ての費用を取得する
          * @summary 支払グループに紐づく全ての費用を取得
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExpensesByPaymentGroupId: async (paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getExpensesByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('getExpensesByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
             // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('getExpensesByPaymentGroupId', 'paymentGroupId', paymentGroupId)
-            const localVarPath = `/payment_groups/{payment_group_id}/expenses`
+            assertParamExists('getExpensesByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -86,12 +90,13 @@ export const ExpenseApiFp = function(configuration?: Configuration) {
         /**
          * 支払グループに紐づく全ての費用を取得する
          * @summary 支払グループに紐づく全ての費用を取得
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExpensesByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetExpensesByPaymentGroupId200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getExpensesByPaymentGroupId(paymentGroupId, options);
+        async getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetExpensesByManagementGroupIdAndPaymentGroupId200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -107,12 +112,13 @@ export const ExpenseApiFactory = function (configuration?: Configuration, basePa
         /**
          * 支払グループに紐づく全ての費用を取得する
          * @summary 支払グループに紐づく全ての費用を取得
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExpensesByPaymentGroupId(paymentGroupId: string, options?: any): AxiosPromise<GetExpensesByPaymentGroupId200Response> {
-            return localVarFp.getExpensesByPaymentGroupId(paymentGroupId, options).then((request) => request(axios, basePath));
+        getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<GetExpensesByManagementGroupIdAndPaymentGroupId200Response> {
+            return localVarFp.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -127,12 +133,13 @@ export class ExpenseApi extends BaseAPI {
     /**
      * 支払グループに紐づく全ての費用を取得する
      * @summary 支払グループに紐づく全ての費用を取得
+     * @param {string} managementGroupId 管理グループID
      * @param {string} paymentGroupId 支払グループID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExpenseApi
      */
-    public getExpensesByPaymentGroupId(paymentGroupId: string, options?: AxiosRequestConfig) {
-        return ExpenseApiFp(this.configuration).getExpensesByPaymentGroupId(paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    public getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
+        return ExpenseApiFp(this.configuration).getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 }

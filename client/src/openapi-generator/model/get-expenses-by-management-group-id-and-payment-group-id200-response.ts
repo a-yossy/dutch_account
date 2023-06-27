@@ -20,13 +20,13 @@ import { Expense } from './expense';
 /**
  * 
  * @export
- * @interface GetExpensesByPaymentGroupId200Response
+ * @interface GetExpensesByManagementGroupIdAndPaymentGroupId200Response
  */
-export interface GetExpensesByPaymentGroupId200Response {
+export interface GetExpensesByManagementGroupIdAndPaymentGroupId200Response {
     /**
      * 
      * @type {Array<Expense>}
-     * @memberof GetExpensesByPaymentGroupId200Response
+     * @memberof GetExpensesByManagementGroupIdAndPaymentGroupId200Response
      */
     'expenses': Array<Expense>;
 }

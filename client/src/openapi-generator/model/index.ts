@@ -6,7 +6,7 @@ export * from './bulk-insert-payment-relation-by-management-group-id-request';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-affiliations-inner';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-group';
 export * from './expense';
-export * from './get-expenses-by-payment-group-id200-response';
+export * from './get-expenses-by-management-group-id-and-payment-group-id200-response';
 export * from './log-in-request';
 export * from './management-group';
 export * from './payment-affiliation';

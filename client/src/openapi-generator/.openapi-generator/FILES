@@ -22,7 +22,7 @@ model/bulk-insert-payment-relation-by-management-group-id-request-affiliations-i
 model/bulk-insert-payment-relation-by-management-group-id-request-group.ts
 model/bulk-insert-payment-relation-by-management-group-id-request.ts
 model/expense.ts
-model/get-expenses-by-payment-group-id200-response.ts
+model/get-expenses-by-management-group-id-and-payment-group-id200-response.ts
 model/index.ts
 model/log-in-request.ts
 model/management-group.ts

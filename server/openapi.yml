@@ -28,7 +28,7 @@ paths:
         - expense
       summary: 支払グループに紐づく全ての費用を取得
       description: 支払グループに紐づく全ての費用を取得する
-      operationId: getExpensesByManagementGroupAndPaymentGroupId
+      operationId: getExpensesByManagementGroupIdAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

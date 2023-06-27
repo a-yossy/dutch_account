@@ -19,15 +19,16 @@ security:
     uid: []
     client: []
 paths:
-  /payment_groups/{payment_group_id}/expenses:
+  /managementGroups/{management_group_id}/payment_groups/{payment_group_id}/expenses:
     parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     get:
       tags:
         - expense
       summary: 支払グループに紐づく全ての費用を取得
       description: 支払グループに紐づく全ての費用を取得する
-      operationId: getExpensesByPaymentGroupId
+      operationId: getExpensesByManagementGroupAndPaymentGroupId
       responses:
         200:
           description: 取得が成功した時のレスポンス

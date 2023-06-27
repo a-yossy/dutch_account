@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_171501) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_27_172759) do
   create_table "debt_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "lending_user_id", null: false
     t.bigint "borrowing_user_id", null: false
@@ -18,9 +18,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_171501) do
     t.decimal "amount_of_money", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["borrowing_user_id"], name: "index_debt_records_on_borrowing_user_id"
+    t.boolean "is_paid", default: false, null: false
+    t.index ["borrowing_user_id", "expense_id"], name: "index_debt_records_on_borrowing_user_id_and_expense_id", unique: true
     t.index ["expense_id"], name: "index_debt_records_on_expense_id"
-    t.index ["lending_user_id", "borrowing_user_id", "expense_id"], name: "index_debt_records_on_lending_and_borrowing_and_expense", unique: true
+    t.index ["lending_user_id"], name: "index_debt_records_on_lending_user_id"
   end
 
   create_table "expenses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -30,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_171501) do
     t.date "paid_on", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "payment_group_id", null: false
+    t.index ["payment_group_id"], name: "index_expenses_on_payment_group_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
@@ -85,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_171501) do
   add_foreign_key "debt_records", "expenses"
   add_foreign_key "debt_records", "users", column: "borrowing_user_id"
   add_foreign_key "debt_records", "users", column: "lending_user_id"
+  add_foreign_key "expenses", "payment_groups"
   add_foreign_key "expenses", "users"
   add_foreign_key "management_affiliations", "management_groups"
   add_foreign_key "management_affiliations", "users"

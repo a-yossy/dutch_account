@@ -13,7 +13,7 @@ class ExpenseWithDebtRecordsCreator
     check_users_belong_to_payment_group!
 
     ActiveRecord::Base.transaction do
-      @expenses = Expense.create!(@expenses_params)
+      @expenses = Expense.create!(@expenses_params.map { |expense_params| expense_params.merge(payment_group: @payment_group) })
 
       expenses.each do |expense|
         @payment_group.payment_affiliations.each do |payment_affiliation|
@@ -22,6 +22,7 @@ class ExpenseWithDebtRecordsCreator
           expense.debt_records.create!(
             lending_user_id: expense.user_id,
             borrowing_user_id: payment_affiliation.user_id,
+            is_paid: false,
             amount_of_money: expense.amount_of_money.to_d * payment_affiliation.ratio
           )
         end

@@ -2,8 +2,10 @@
 
 class PaymentGroup < ApplicationRecord
   belongs_to :management_group
+
   has_many :payment_affiliations, dependent: :destroy
   has_many :users, through: :payment_affiliations
+  has_many :expenses, dependent: :destroy
 
   scope :alphabetical_order, -> { order(:name) }
 

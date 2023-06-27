@@ -6,5 +6,5 @@ class DebtRecord < ApplicationRecord
   belongs_to :expense
 
   validates :amount_of_money, presence: true, numericality: { greater_than: 0 }
-  validates :lending_user, uniqueness: { scope: %i[borrowing_user expense] }
+  validates :borrowing_user, uniqueness: { scope: :expense }
 end

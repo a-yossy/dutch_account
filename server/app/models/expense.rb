@@ -2,6 +2,7 @@
 
 class Expense < ApplicationRecord
   belongs_to :user
+  belongs_to :payment_group
 
   has_many :debt_records, dependent: :destroy
 

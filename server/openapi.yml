@@ -24,8 +24,8 @@ paths:
     post:
       tags:
         - expenseWithDebtRecords
-      summary: 費用と複数の借金履歴情報を作成
-      description: 費用と複数の借金履歴情報を作成する
+      summary: 管理グループに紐づく費用と複数の借金履歴を作成
+      description: 管理グループに紐づく費用と複数の借金履歴を作成する
       operationId: bulkInsertExpenseWithDebtRecordsByPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/ExpensesBody"

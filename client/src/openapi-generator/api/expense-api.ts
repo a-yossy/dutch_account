@@ -21,7 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { GetExpensesByManagementGroupIdAndPaymentGroupId200Response } from '../model';
+import { Expense } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
 /**
@@ -95,7 +95,7 @@ export const ExpenseApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetExpensesByManagementGroupIdAndPaymentGroupId200Response>> {
+        async getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Expense>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -117,7 +117,7 @@ export const ExpenseApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<GetExpensesByManagementGroupIdAndPaymentGroupId200Response> {
+        getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<Array<Expense>> {
             return localVarFp.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
     };

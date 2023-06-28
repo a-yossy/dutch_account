@@ -17,31 +17,31 @@
 /**
  * 
  * @export
- * @interface BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner
+ * @interface BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner
  */
-export interface BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner {
+export interface BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner {
     /**
      * ユーザーID
      * @type {string}
-     * @memberof BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner
+     * @memberof BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner
      */
     'user_id': string;
     /**
      * 金額
      * @type {number}
-     * @memberof BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner
+     * @memberof BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner
      */
     'amount_of_money': number;
     /**
      * 説明
      * @type {string}
-     * @memberof BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner
+     * @memberof BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner
      */
     'description': string;
     /**
      * 支払日
      * @type {string}
-     * @memberof BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequestExpensesInner
+     * @memberof BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequestExpensesInner
      */
     'paid_on': string;
 }

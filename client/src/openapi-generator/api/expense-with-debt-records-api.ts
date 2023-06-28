@@ -21,9 +21,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { BulkInsertExpenseWithDebtRecordsByPaymentGroupId201Response } from '../model';
+import { BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest } from '../model';
 // @ts-ignore
-import { BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest } from '../model';
+import { Expense } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
 /**
@@ -35,15 +35,19 @@ export const ExpenseWithDebtRecordsApiAxiosParamCreator = function (configuratio
         /**
          * 管理グループに紐づく費用と複数の借金履歴を作成する
          * @summary 管理グループに紐づく費用と複数の借金履歴を作成
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
-         * @param {BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkInsertExpenseWithDebtRecordsByPaymentGroupId: async (paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
             // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('bulkInsertExpenseWithDebtRecordsByPaymentGroupId', 'paymentGroupId', paymentGroupId)
-            const localVarPath = `/payment_groups/{payment_group_id}/expense_with_debt_records/bulk_insert`
+            assertParamExists('bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expense_with_debt_records/bulk_insert`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -72,7 +76,7 @@ export const ExpenseWithDebtRecordsApiAxiosParamCreator = function (configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -92,13 +96,14 @@ export const ExpenseWithDebtRecordsApiFp = function(configuration?: Configuratio
         /**
          * 管理グループに紐づく費用と複数の借金履歴を作成する
          * @summary 管理グループに紐づく費用と複数の借金履歴を作成
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
-         * @param {BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BulkInsertExpenseWithDebtRecordsByPaymentGroupId201Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options);
+        async bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Expense>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -114,13 +119,14 @@ export const ExpenseWithDebtRecordsApiFactory = function (configuration?: Config
         /**
          * 管理グループに紐づく費用と複数の借金履歴を作成する
          * @summary 管理グループに紐づく費用と複数の借金履歴を作成
+         * @param {string} managementGroupId 管理グループID
          * @param {string} paymentGroupId 支払グループID
-         * @param {BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options?: any): AxiosPromise<BulkInsertExpenseWithDebtRecordsByPaymentGroupId201Response> {
-            return localVarFp.bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options).then((request) => request(axios, basePath));
+        bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options?: any): AxiosPromise<Array<Expense>> {
+            return localVarFp.bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -135,13 +141,14 @@ export class ExpenseWithDebtRecordsApi extends BaseAPI {
     /**
      * 管理グループに紐づく費用と複数の借金履歴を作成する
      * @summary 管理グループに紐づく費用と複数の借金履歴を作成
+     * @param {string} managementGroupId 管理グループID
      * @param {string} paymentGroupId 支払グループID
-     * @param {BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest] リクエスト用の費用の配列
+     * @param {BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExpenseWithDebtRecordsApi
      */
-    public bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options?: AxiosRequestConfig) {
-        return ExpenseWithDebtRecordsApiFp(this.configuration).bulkInsertExpenseWithDebtRecordsByPaymentGroupId(paymentGroupId, bulkInsertExpenseWithDebtRecordsByPaymentGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
+    public bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options?: AxiosRequestConfig) {
+        return ExpenseWithDebtRecordsApiFp(this.configuration).bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

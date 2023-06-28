@@ -53,7 +53,7 @@ paths:
         - expenseWithDebtRecords
       summary: 管理グループに紐づく費用と複数の借金履歴を作成
       description: 管理グループに紐づく費用と複数の借金履歴を作成する
-      operationId: bulkInsertExpenseWithDebtRecordsByPaymentGroupId
+      operationId: bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/ExpensesBody"
       responses:

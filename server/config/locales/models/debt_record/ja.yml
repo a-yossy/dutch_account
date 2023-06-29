@@ -3,8 +3,9 @@ ja:
     models:
       debt_record: 借金記録
     attributes:
-      lending_user: 貸したユーザー
-      borrowing_user: 借りたユーザー
-      expense: 費用
-      is_paid: 返済済み
-      amount_of_money: 金額
+      debt_record:
+        lending_user: 貸したユーザー
+        borrowing_user: 借りたユーザー
+        expense: 費用
+        is_paid: 返済済み
+        amount_of_money: 金額

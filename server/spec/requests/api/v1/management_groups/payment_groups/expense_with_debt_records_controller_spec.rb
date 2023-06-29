@@ -36,8 +36,9 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpenseWithDebtRecordsC
 
         context 'when the payment_group related to the management_group exists' do
           before do
-            create(:payment_affiliation, user: other_user, payment_group:)
+            create(:management_affiliation, user: other_user, management_group:)
             create(:payment_affiliation, user:, payment_group:)
+            create(:payment_affiliation, user: other_user, payment_group:)
           end
 
           let(:other_user) { create(:user) }

@@ -30,7 +30,8 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
         context 'when the payment_group related to the management_group exists' do
           before do
-            create(:expense, payment_group:)
+            create(:payment_affiliation, user:, payment_group:)
+            create(:expense, payment_group:, user:)
           end
 
           let(:payment_group) { create(:payment_group, management_group:) }

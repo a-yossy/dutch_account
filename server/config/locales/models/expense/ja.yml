@@ -3,8 +3,9 @@ ja:
     models:
       expense: 費用
     attributes:
-      user: ユーザー
-      payment_group: 支払グループ
-      amount_of_money: 金額
-      description: 説明
-      paid_on: 支払日
+      expense:
+        user: ユーザー
+        payment_group: 支払グループ
+        amount_of_money: 金額
+        description: 説明
+        paid_on: 支払日

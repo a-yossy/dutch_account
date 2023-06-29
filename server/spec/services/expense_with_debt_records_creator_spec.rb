@@ -7,12 +7,16 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
     let(:user1) { create(:user, name: 'user_1') }
     let(:user2) { create(:user, name: 'user_2') }
     let(:user3) { create(:user, name: 'user_3') }
-    let(:payment_group) { create(:payment_group) }
+    let(:management_group) { create(:management_group) }
+    let(:payment_group) { create(:payment_group, management_group:) }
     let(:expense_with_debt_records_creator) do
       described_class.new(expenses_params:, payment_group:)
     end
 
     before do
+      create(:management_affiliation, user: user1, management_group:)
+      create(:management_affiliation, user: user2, management_group:)
+      create(:management_affiliation, user: user3, management_group:)
       create(:payment_affiliation, user: user1, payment_group:, ratio: 0.34)
       create(:payment_affiliation, user: user2, payment_group:, ratio: 0.34)
       create(:payment_affiliation, user: user3, payment_group:, ratio: 0.32)
@@ -67,6 +71,10 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
     context 'with invalid arguments whose user does not belong to the payment_group' do
       let(:other_user) { create(:user) }
       let(:expenses_params) { [{ user_id: other_user.id.to_s, amount_of_money: 1111, description: '食費', paid_on: Time.zone.today }] }
+
+      before do
+        create(:management_affiliation, user: other_user, management_group:)
+      end
 
       it 'raises error' do
         expect do

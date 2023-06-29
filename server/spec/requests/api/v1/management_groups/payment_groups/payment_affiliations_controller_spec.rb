@@ -32,6 +32,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
 
         context 'when the payment_group related to the management_group exists' do
           before do
+            create(:management_affiliation, user: other_user, management_group:)
             create(:payment_affiliation, user:, payment_group:, ratio: 0.5)
             create(:payment_affiliation, user: other_user, payment_group:, ratio: 0.5)
           end

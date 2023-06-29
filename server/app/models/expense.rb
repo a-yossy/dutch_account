@@ -11,12 +11,12 @@ class Expense < ApplicationRecord
   validates :amount_of_money, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :description, presence: true, length: { maximum: 255 }
   validates :paid_on, presence: true, comparison: { less_than_or_equal_to: Time.zone.today }
-  validate :check_user_belongs_to_payment_group, if: :payment_group
+  validate :check_user_belongs_to_payment_group, if: %i[user payment_group]
 
   private
 
   def check_user_belongs_to_payment_group
-    return if payment_group.payment_affiliations.pluck(:user_id).include?(user_id)
+    return if payment_group.payment_affiliations.pluck(:user_id).include?(user.id)
 
     errors.add(:user, "は#{PaymentGroup.model_name.human}に所属していません")
   end

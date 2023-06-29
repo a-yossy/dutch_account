@@ -14,7 +14,7 @@ class DebtRecord < ApplicationRecord
   private
 
   def check_lending_user_and_borrowing_user_are_different
-    return unless lending_user.id == borrowing_user.id
+    return if lending_user.id != borrowing_user.id
 
     errors.add(:borrowing_user, "は#{DebtRecord.human_attribute_name('lending_user')}と同じユーザーにできません")
   end

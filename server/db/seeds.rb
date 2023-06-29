@@ -20,3 +20,15 @@ end
     PaymentAffiliation.create!(user:, payment_group: PaymentGroup.find((i % 10) + 1), ratio: 0.2)
   end
 end
+
+User.find_by(email: 'email@example.com').payment_groups.each_with_index do |payment_group, i|
+  ExpenseWithDebtRecordsCreator.new(
+    expenses_params: [{
+      user_id: User.find_by(email: 'email@example.com').id.to_s,
+      amount_of_money: 1000 * (i + 1),
+      description: "食費_#{i + 1}",
+      paid_on: Time.zone.today
+    }],
+    payment_group:
+  ).call!
+end

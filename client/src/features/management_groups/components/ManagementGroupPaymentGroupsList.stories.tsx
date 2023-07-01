@@ -18,5 +18,5 @@ const Template: ComponentStory<typeof ManagementGroupPaymentGroupsList> = (
 
 export const Default = Template.bind({});
 Default.args = {
-  managementGroup: { id: '1', name: 'name' },
+  managementGroupId: '1',
 };

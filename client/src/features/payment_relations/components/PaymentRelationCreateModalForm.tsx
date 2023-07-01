@@ -33,15 +33,14 @@ import { useBulkInsertPaymentRelation } from 'src/features/payment_relations/api
 import { useGetManagementGroupUsers } from 'src/features/management_groups/api/getManagementGroupUsers';
 
 type PaymentRelationCreateModalFormProps = {
-  managementGroup: ManagementGroup;
+  managementGroupId: ManagementGroup['id'];
 };
 
 export const PaymentRelationCreateModalForm: FC<
   PaymentRelationCreateModalFormProps
-> = ({ managementGroup }) => {
-  const { managementGroupUsers, error } = useGetManagementGroupUsers(
-    managementGroup.id
-  );
+> = ({ managementGroupId }) => {
+  const { managementGroupUsers, error } =
+    useGetManagementGroupUsers(managementGroupId);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -59,9 +58,8 @@ export const PaymentRelationCreateModalForm: FC<
   const [selectedUsers, setSelectedUsers] = useState<Record<string, string>>(
     {}
   );
-  const bulkInsertPaymentRelation = useBulkInsertPaymentRelation(
-    managementGroup.id
-  );
+  const bulkInsertPaymentRelation =
+    useBulkInsertPaymentRelation(managementGroupId);
 
   const handleChange = (user: User) => {
     const index = fields

@@ -22,8 +22,5 @@ const Template: ComponentStory<typeof PaymentRelationCreateModalForm> = (
 
 export const Default = Template.bind({});
 Default.args = {
-  managementGroup: {
-    id: '1',
-    name: 'group',
-  },
+  managementGroupId: '1',
 };

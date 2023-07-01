@@ -6,11 +6,11 @@ import { ManagementGroupPaymentGroupsList } from 'src/features/management_groups
 import { PaymentRelationCreateModalForm } from 'src/features/payment_relations/components/PaymentRelationCreateModalForm';
 
 type ManagementGroupTabProps = {
-  managementGroup: ManagementGroup;
+  managementGroupId: ManagementGroup['id'];
 };
 
 export const ManagementGroupTab: FC<ManagementGroupTabProps> = ({
-  managementGroup,
+  managementGroupId,
 }) => (
   <Tabs isFitted width={450} mx='auto' mt={5}>
     <TabList>
@@ -19,11 +19,13 @@ export const ManagementGroupTab: FC<ManagementGroupTabProps> = ({
     </TabList>
     <TabPanels>
       <TabPanel>
-        <ManagementGroupUsersList managementGroup={managementGroup} />
+        <ManagementGroupUsersList managementGroupId={managementGroupId} />
       </TabPanel>
       <TabPanel>
-        <PaymentRelationCreateModalForm managementGroup={managementGroup} />
-        <ManagementGroupPaymentGroupsList managementGroup={managementGroup} />
+        <PaymentRelationCreateModalForm managementGroupId={managementGroupId} />
+        <ManagementGroupPaymentGroupsList
+          managementGroupId={managementGroupId}
+        />
       </TabPanel>
     </TabPanels>
   </Tabs>

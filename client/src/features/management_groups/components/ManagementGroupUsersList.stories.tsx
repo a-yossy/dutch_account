@@ -12,8 +12,11 @@ export default {
   },
 } as ComponentMeta<typeof ManagementGroupUsersList>;
 
-const Template: ComponentStory<typeof ManagementGroupUsersList> = () => (
-  <ManagementGroupUsersList managementGroup={{ id: '1', name: 'group' }} />
+const Template: ComponentStory<typeof ManagementGroupUsersList> = (args) => (
+  <ManagementGroupUsersList {...args} />
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  managementGroup: { id: '1', name: 'group' },
+};

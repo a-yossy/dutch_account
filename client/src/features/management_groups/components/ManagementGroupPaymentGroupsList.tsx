@@ -5,14 +5,14 @@ import { OneLineCardLink, CenterTitle } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 
 type ManagementGroupPaymentGroupsListProps = {
-  managementGroup: ManagementGroup;
+  managementGroupId: ManagementGroup['id'];
 };
 
 export const ManagementGroupPaymentGroupsList: FC<
   ManagementGroupPaymentGroupsListProps
-> = ({ managementGroup }) => {
+> = ({ managementGroupId }) => {
   const { managementGroupPaymentGroups, error } =
-    useGetManagementGroupPaymentGroups(managementGroup.id);
+    useGetManagementGroupPaymentGroups(managementGroupId);
 
   if (error?.response?.status === 404)
     return <CenterTitle mt={5}>グループが見つかりません</CenterTitle>;

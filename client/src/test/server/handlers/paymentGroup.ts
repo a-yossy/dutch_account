@@ -4,6 +4,7 @@ import {
   bulkInsertPaymentRelationResponse,
   getManagementGroupPaymentGroupsResponse,
   getPaymentGroupPaymentAffiliationsResponse,
+  getPaymentGroupExpensesResponse,
 } from 'src/__fixtures__/paymentGroup';
 
 export const getPaymentGroupPaymentAffiliationsHandler = () =>
@@ -25,4 +26,11 @@ export const bulkInsertPaymentRelationHandler = () =>
     `${BASE_PATH}/management_groups/:management_group_id/payment_relations/bulk_insert`,
     (req, res, ctx) =>
       res(ctx.status(200), ctx.json(bulkInsertPaymentRelationResponse))
+  );
+
+export const getPaymentGroupExpensesHandler = () =>
+  rest.get(
+    `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/expenses`,
+    (req, res, ctx) =>
+      res(ctx.status(200), ctx.json(getPaymentGroupExpensesResponse))
   );

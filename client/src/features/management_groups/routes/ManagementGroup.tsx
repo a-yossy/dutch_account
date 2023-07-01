@@ -22,7 +22,7 @@ export const ManagementGroup: FC = () => {
       <CenterTitle>
         管理グループ：{currentManagementGroup.data.name}
       </CenterTitle>
-      <ManagementGroupTab managementGroup={currentManagementGroup.data} />
+      <ManagementGroupTab managementGroupId={currentManagementGroup.data.id} />
     </>
   ) : null;
 };

@@ -26,8 +26,5 @@ const Template: ComponentStory<typeof ManagementGroupTab> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  managementGroup: {
-    id: '1',
-    name: 'group',
-  },
+  managementGroupId: '1',
 };

@@ -12,12 +12,11 @@ export default {
   },
 } as ComponentMeta<typeof ManagementGroupPaymentGroupsList>;
 
-const Template: ComponentStory<
-  typeof ManagementGroupPaymentGroupsList
-> = () => (
-  <ManagementGroupPaymentGroupsList
-    managementGroup={{ id: '1', name: 'name' }}
-  />
-);
+const Template: ComponentStory<typeof ManagementGroupPaymentGroupsList> = (
+  args
+) => <ManagementGroupPaymentGroupsList {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  managementGroupId: '1',
+};

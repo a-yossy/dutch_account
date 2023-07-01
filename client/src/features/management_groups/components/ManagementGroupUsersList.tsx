@@ -5,15 +5,14 @@ import { OneLineCard, CenterTitle } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 
 type ManagementGroupUsersListProps = {
-  managementGroup: ManagementGroup;
+  managementGroupId: ManagementGroup['id'];
 };
 
 export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
-  managementGroup,
+  managementGroupId,
 }) => {
-  const { managementGroupUsers, error } = useGetManagementGroupUsers(
-    managementGroup.id
-  );
+  const { managementGroupUsers, error } =
+    useGetManagementGroupUsers(managementGroupId);
 
   if (error?.response?.status === 404)
     return <CenterTitle mt={5}>ユーザーが見つかりません</CenterTitle>;

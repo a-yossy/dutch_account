@@ -2,10 +2,11 @@ import { FC } from 'react';
 import { Spinner, Badge, Spacer } from '@chakra-ui/react';
 import { useGetPaymentGroupPaymentAffiliations } from 'src/features/payment_groups/api/getPaymentGroupPaymentAffiliations';
 import { CenterTitle, OneLineCard } from 'src/components/elements';
+import { ManagementGroup, PaymentGroup } from 'src/openapi-generator';
 
 type PaymentGroupPaymentAffiliationsListProps = {
-  managementGroupId: string;
-  paymentGroupId: string;
+  managementGroupId: ManagementGroup['id'];
+  paymentGroupId: PaymentGroup['id'];
 };
 
 export const PaymentGroupPaymentAffiliationsList: FC<

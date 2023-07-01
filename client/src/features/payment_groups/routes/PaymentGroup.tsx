@@ -3,7 +3,7 @@ import { Spinner } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/features/payment_groups/api/getPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { CenterTitle } from 'src/components/elements';
-import { PaymentGroupPaymentAffiliationsList } from 'src/features/payment_groups/components/PaymentGroupPaymentAffiliationsList';
+import { PaymentGroupTab } from 'src/features/payment_groups/components/PaymentGroupTab';
 import { useGetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
 
@@ -32,9 +32,9 @@ export const PaymentGroup: FC<PaymentGroupProps> = ({ paymentGroupId }) => {
   return (
     <>
       <CenterTitle>支払グループ：{paymentGroup.name}</CenterTitle>
-      <PaymentGroupPaymentAffiliationsList
+      <PaymentGroupTab
         managementGroupId={currentManagementGroup.data.id}
-        paymentGroupId={paymentGroupId}
+        paymentGroupId={paymentGroup.id}
       />
     </>
   );

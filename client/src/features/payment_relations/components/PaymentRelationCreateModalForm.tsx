@@ -152,7 +152,7 @@ export const PaymentRelationCreateModalForm: FC<
               <Text>ユーザー</Text>
               <Stack>
                 {error?.response?.status === 404 ? (
-                  <>見つかりません</>
+                  <>ユーザーが見つかりません</>
                 ) : managementGroupUsers === undefined ? (
                   <Spinner />
                 ) : (

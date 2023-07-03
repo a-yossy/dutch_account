@@ -119,11 +119,7 @@ export const PaymentRelationCreateModalForm: FC<
                 <Fragment key={field.id}>
                   <HiddenInputField value={field.user_id} />
                   <NumberInputField
-                    error={
-                      isSubmitted
-                        ? errors.affiliations?.[index]?.ratio
-                        : undefined
-                    }
+                    error={errors.affiliations?.[index]?.ratio}
                     id={`ratio_${field.user_id}`}
                     formLabel={`${selectedUsers[field.user_id]}の支払割合`}
                     min={0.01}
@@ -152,7 +148,7 @@ export const PaymentRelationCreateModalForm: FC<
               <Text>ユーザー</Text>
               <Stack>
                 {error?.response?.status === 404 ? (
-                  <>見つかりません</>
+                  <>ユーザーが見つかりません</>
                 ) : managementGroupUsers === undefined ? (
                   <Spinner />
                 ) : (

@@ -25,7 +25,7 @@ export const bulkInsertPaymentRelationHandler = () =>
   rest.post(
     `${BASE_PATH}/management_groups/:management_group_id/payment_relations/bulk_insert`,
     (req, res, ctx) =>
-      res(ctx.status(200), ctx.json(bulkInsertPaymentRelationResponse))
+      res(ctx.status(201), ctx.json(bulkInsertPaymentRelationResponse))
   );
 
 export const getPaymentGroupExpensesHandler = () =>

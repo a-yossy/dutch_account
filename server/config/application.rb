@@ -25,5 +25,6 @@ module Server
     config.api_only = true
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb, yml}')]
+    config.time_zone = 'Tokyo'
   end
 end

@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { ManagementGroup, PaymentGroup } from 'src/openapi-generator';
 import { PaymentGroupExpensesList } from 'src/features/payment_groups/components/PaymentGroupExpensesList';
 import { PaymentGroupPaymentAffiliationsList } from 'src/features/payment_groups/components/PaymentGroupPaymentAffiliationsList';
+import { ExpensesCreateModalForm } from 'src/features/expenses/components/ExpensesCreateModalForm';
 
 type PaymentGroupTabProps = {
   managementGroupId: ManagementGroup['id'];
@@ -26,6 +27,10 @@ export const PaymentGroupTab: FC<PaymentGroupTabProps> = ({
         />
       </TabPanel>
       <TabPanel>
+        <ExpensesCreateModalForm
+          managementGroupId={managementGroupId}
+          paymentGroupId={paymentGroupId}
+        />
         <PaymentGroupExpensesList
           managementGroupId={managementGroupId}
           paymentGroupId={paymentGroupId}

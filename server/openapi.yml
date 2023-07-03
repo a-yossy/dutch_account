@@ -44,6 +44,30 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+      - $ref: "#/components/parameters/PaymentGroupId"
+      - $ref: "#/components/parameters/ExpenseId"
+    get:
+      tags:
+        - expense
+      summary: 支払グループに紐づく費用を取得
+      description: 支払グループに紐づく費用を取得する
+      operationId: getExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expense_with_debt_records/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -801,10 +825,10 @@ components:
                 description: パスワード
                 example: password
   parameters:
-    LendingUserId:
-      name: lending_user_id
+    ExpenseId:
+      name: expense_id
       in: path
-      description: 貸主ID
+      description: 費用ID
       required: true
       schema:
         type: string

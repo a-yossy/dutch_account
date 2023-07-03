@@ -9,6 +9,10 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Application
     render json: ExpenseResource.new(@payment_group.expenses.recently_paid).serialize
   end
 
+  def show
+    render json: ExpenseResource.new(@payment_group.expenses.find(params[:id])).serialize
+  end
+
   private
 
   def set_management_group

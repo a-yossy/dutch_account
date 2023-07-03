@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         resources :payment_groups, only: %i[index show], module: :management_groups do
           scope module: :payment_groups do
             resources :payment_affiliations, only: %i[index]
-            resources :expenses, only: %i[index]
+            resources :expenses, only: %i[index show]
             resources :expense_with_debt_records, only: %i[] do
               post 'bulk_insert', on: :collection
             end

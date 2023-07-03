@@ -6,5 +6,5 @@ export const bulkInsertExpenseWithDebtRecordsHandler = () =>
   rest.post(
     `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/expense_with_debt_records/bulk_insert`,
     (req, res, ctx) =>
-      res(ctx.status(200), ctx.json(bulkInsertExpenseWithDebtRecordsResponse))
+      res(ctx.status(201), ctx.json(bulkInsertExpenseWithDebtRecordsResponse))
   );

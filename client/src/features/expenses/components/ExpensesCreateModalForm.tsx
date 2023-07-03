@@ -62,19 +62,20 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
     control,
     name: 'expenses',
   });
-  const bulkInsertExpenseWithDebtRecords = useBulkInsertExpenseWithDebtRecords(
-    managementGroupId,
-    paymentGroupId,
-    setExpenses,
-    reset,
-    append
-  );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleAddClick = useCallback(() => {
     append({ user_id: '', paid_on: '', description: '', amount_of_money: 0 });
   }, [append]);
+
+  const bulkInsertExpenseWithDebtRecords = useBulkInsertExpenseWithDebtRecords(
+    managementGroupId,
+    paymentGroupId,
+    setExpenses,
+    reset,
+    handleAddClick
+  );
 
   useEffect(() => {
     handleAddClick();

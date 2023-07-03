@@ -7,17 +7,14 @@ import {
   ExpenseWithDebtRecordsApi,
   Expense,
 } from 'src/openapi-generator';
-import { UseFormReset, UseFieldArrayAppend } from 'react-hook-form';
+import { UseFormReset } from 'react-hook-form';
 
 export const useBulkInsertExpenseWithDebtRecords = (
   managementGroupId: string,
   paymentGroupId: string,
   setExpenses: Dispatch<SetStateAction<Expense[]>>,
   reset: UseFormReset<BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest>,
-  append: UseFieldArrayAppend<
-    BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest,
-    'expenses'
-  >
+  append: () => void
 ) => {
   const toast = useToast();
   const bulkInsertExpenseWithDebtRecords = useCallback(
@@ -34,12 +31,7 @@ export const useBulkInsertExpenseWithDebtRecords = (
           );
         setExpenses(response.data);
         reset();
-        append({
-          user_id: '',
-          amount_of_money: 0,
-          description: '',
-          paid_on: '',
-        });
+        append();
         toast('success', '費用を作成しました');
       } catch (error: unknown) {
         if (isResponseError(error)) {

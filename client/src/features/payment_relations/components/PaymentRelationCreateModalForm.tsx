@@ -119,11 +119,7 @@ export const PaymentRelationCreateModalForm: FC<
                 <Fragment key={field.id}>
                   <HiddenInputField value={field.user_id} />
                   <NumberInputField
-                    error={
-                      isSubmitted
-                        ? errors.affiliations?.[index]?.ratio
-                        : undefined
-                    }
+                    error={errors.affiliations?.[index]?.ratio}
                     id={`ratio_${field.user_id}`}
                     formLabel={`${selectedUsers[field.user_id]}の支払割合`}
                     min={0.01}

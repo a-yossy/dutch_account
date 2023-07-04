@@ -51,7 +51,7 @@ export const Expense: FC<ExpenseProps> = ({
           <br />
           金額: {expense.amount_of_money.toLocaleString()}円
           <br />
-          支払日: {dayjs(new Date(expense.paid_on)).format('YYYY/MM/DD')}{' '}
+          支払日: {dayjs(new Date(expense.paid_on)).format('YYYY/MM/DD')}
         </OneLineCard>
       )}
     </div>

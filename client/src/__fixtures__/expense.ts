@@ -24,3 +24,15 @@ export const bulkInsertExpenseWithDebtRecordsResponse: Expense[] = [
     paid_on: '2021-01-01',
   },
 ];
+
+export const getExpenseResponse: Expense = {
+  id: '1',
+  user: {
+    id: '1',
+    name: '太郎',
+  },
+  payment_group_id: '1',
+  amount_of_money: 1000,
+  description: '食費',
+  paid_on: '2021-01-01',
+};

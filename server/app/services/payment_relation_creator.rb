@@ -33,7 +33,7 @@ class PaymentRelationCreator
   end
 
   def check_users_belong_to_management_group!
-    return if @affiliations_params.pluck(:user_id).to_set.subset?(@management_group.user_ids.map(&:to_s).to_set)
+    return if @affiliations_params.pluck(:user_id).map(&:to_s).to_set.subset?(@management_group.user_ids.map(&:to_s).to_set)
 
     raise PaymentRelation::NotBelongingToManagementGroupError,
           "#{ManagementGroup.model_name.human}に所属している#{PaymentAffiliation.human_attribute_name('user')}を入力してください"

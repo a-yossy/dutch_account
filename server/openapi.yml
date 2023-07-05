@@ -455,6 +455,28 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /user:
+    parameters:
+      - $ref: "#/components/parameters/Email"
+    get:
+      tags:
+        - user
+      summary: メールアドレスでユーザーを取得
+      description: メールアドレスでユーザーを取得する
+      operationId: getUserByEmail
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
 components:
   responses:
     NoContent:
@@ -849,6 +871,15 @@ components:
       schema:
         type: string
         example: 1
+    Email:
+      name: email
+      in: query
+      description: メールアドレス
+      required: true
+      schema:
+        type: string
+        format: email
+        example: email@example.com
   securitySchemes:
     accessToken:
       type: apiKey

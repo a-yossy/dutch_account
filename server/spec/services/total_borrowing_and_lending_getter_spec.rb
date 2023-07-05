@@ -27,6 +27,10 @@ RSpec.describe TotalBorrowingAndLendingGetter do
           { user_id: user3.id, amount_of_money: 0 }
         ]
       end
+
+      it 'returns the sum of amount_of_money is 0' do
+        expect(described_class.new(management_group).call.sum { |borrowing_and_lending| borrowing_and_lending[:amount_of_money] }).to eq 0
+      end
     end
 
     context 'when management group has expenses without unpaid' do
@@ -53,7 +57,7 @@ RSpec.describe TotalBorrowingAndLendingGetter do
       end
 
       it 'returns the sum of amount_of_money is 0' do
-        expect(described_class.new(management_group).call.sum { |expense| expense[:amount_of_money] }).to eq 0
+        expect(described_class.new(management_group).call.sum { |borrowing_and_lending| borrowing_and_lending[:amount_of_money] }).to eq 0
       end
     end
 
@@ -88,7 +92,7 @@ RSpec.describe TotalBorrowingAndLendingGetter do
       end
 
       it 'returns the sum of amount_of_money is 0' do
-        expect(described_class.new(management_group).call.sum { |expense| expense[:amount_of_money] }).to eq 0
+        expect(described_class.new(management_group).call.sum { |borrowing_and_lending| borrowing_and_lending[:amount_of_money] }).to eq 0
       end
     end
   end

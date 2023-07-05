@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class DebtRecord < ApplicationRecord
-  belongs_to :lending_user, class_name: 'User'
-  belongs_to :borrowing_user, class_name: 'User'
+  belongs_to :lending_user, class_name: 'User', inverse_of: :lending_debt_records
+  belongs_to :borrowing_user, class_name: 'User', inverse_of: :borrowing_debt_records
   belongs_to :expense
 
   validates :amount_of_money, presence: true, numericality: { greater_than: 0 }
@@ -10,6 +10,8 @@ class DebtRecord < ApplicationRecord
   validate :check_lending_user_and_borrowing_user_are_different, if: %i[lending_user borrowing_user]
   validate :check_borrowing_user_belongs_to_payment_group, if: %i[borrowing_user expense]
   validate :check_lending_user_is_same_as_expense_user, if: %i[lending_user expense]
+
+  scope :unpaid, -> { where(is_paid: false) }
 
   private
 

@@ -120,6 +120,49 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('getUsersByManagementGroupId', 'managementGroupId', managementGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/users`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
+
+            // authentication client required
+            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
+
+            // authentication uid required
+            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * ログインする
          * @summary ログイン
          * @param {LogInRequest} [logInRequest] ログイン用のユーザー
@@ -258,6 +301,17 @@ export const UserApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersByManagementGroupId(managementGroupId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * ログインする
          * @summary ログイン
          * @param {LogInRequest} [logInRequest] ログイン用のユーザー
@@ -319,6 +373,16 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.getUserByEmail(email, options).then((request) => request(axios, basePath));
         },
         /**
+         * 管理グループに所属する全てのユーザーを取得する
+         * @summary 管理グループに所属する全てのユーザーを取得
+         * @param {string} managementGroupId 管理グループID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<Array<User>> {
+            return localVarFp.getUsersByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * ログインする
          * @summary ログイン
          * @param {LogInRequest} [logInRequest] ログイン用のユーザー
@@ -378,6 +442,18 @@ export class UserApi extends BaseAPI {
      */
     public getUserByEmail(email: string, options?: AxiosRequestConfig) {
         return UserApiFp(this.configuration).getUserByEmail(email, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 管理グループに所属する全てのユーザーを取得する
+     * @summary 管理グループに所属する全てのユーザーを取得
+     * @param {string} managementGroupId 管理グループID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public getUsersByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getUsersByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -9,10 +9,10 @@ export const SignUpSchema: z.ZodType<SignUpForm> = z
       .string()
       .min(1, { message: '名前を入力してください' })
       .max(20, { message: '名前は20文字以内で入力してください' }),
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     email: z
       .string()
       .email({ message: 'メールアドレスが不正です' })
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       .superRefine(async (email, ctx) => {
         try {
           const res = await new UserApi().getUserByEmail(email);

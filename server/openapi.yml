@@ -161,36 +161,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/users:
-    parameters:
-      - $ref: "#/components/parameters/ManagementGroupId"
-    get:
-      tags:
-        - managementGroup
-      summary: 管理グループに所属する全てのユーザーを取得
-      description: 管理グループに所属する全てのユーザーを取得する
-      operationId: getUsersByManagementGroupId
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/User"
-                minItems: 2
-                example:
-                  - id: 1
-                    name: 太郎
-                  - id: 2
-                    name: 次郎
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-            $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -385,6 +355,58 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/users:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    get:
+      tags:
+        - user
+      summary: 管理グループに所属する全てのユーザーを取得
+      description: 管理グループに所属する全てのユーザーを取得する
+      operationId: getUsersByManagementGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+                minItems: 2
+                example:
+                  - id: 1
+                    name: 太郎
+                  - id: 2
+                    name: 次郎
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+            $ref: "#/components/responses/InternalServerError"
+  /user:
+    parameters:
+      - $ref: "#/components/parameters/Email"
+    get:
+      tags:
+        - user
+      summary: メールアドレスでユーザーを取得
+      description: メールアドレスでユーザーを取得する
+      operationId: getUserByEmail
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /sign_up:
     post:
       tags:
@@ -451,28 +473,6 @@ paths:
       responses:
         204:
           $ref: "#/components/responses/NoContent"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /user:
-    parameters:
-      - $ref: "#/components/parameters/Email"
-    get:
-      tags:
-        - user
-      summary: メールアドレスでユーザーを取得
-      description: メールアドレスでユーザーを取得する
-      operationId: getUserByEmail
-      responses:
-        200:
-          description: 取得が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        400:
-          $ref: "#/components/responses/BadRequest"
         404:
           $ref: "#/components/responses/NotFound"
         500:

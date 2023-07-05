@@ -1,11 +1,11 @@
 import useSWR from 'swr';
 import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
-import { ManagementGroupApi, User } from 'src/openapi-generator';
+import { User, UserApi } from 'src/openapi-generator';
 import { AxiosResponseError } from 'src/types/axiosResponseError';
 
 export const useGetManagementGroupUsers = (managementGroupId: string) => {
   const fetcher = () =>
-    new ManagementGroupApi()
+    new UserApi()
       .getUsersByManagementGroupId(managementGroupId, {
         headers: getAuthCookies(),
       })

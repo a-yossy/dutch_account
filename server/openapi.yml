@@ -13,6 +13,7 @@ tags:
   - name: paymentGroup
   - name: paymentAffiliation
   - name: paymentRelation
+  - name: totalBorrowingAndLending
   - name: user
 security:
   - accessToken: []
@@ -331,6 +332,36 @@ paths:
                 minItems: 2
         400:
           $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/total_borrowing_and_lendings:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    get:
+      tags:
+        - totalBorrowingAndLending
+      summary: 管理グループに紐づく全てのユーザーの総貸借を取得
+      description: 管理グループに紐づく全てのユーザーの総貸借を取得する
+      operationId: getTotalBorrowingAndLendingByManagementGroupId
+      responses:
+        200:
+          description: 取得が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/totalBorrowingAndLending"
+                minItems: 2
+                example:
+                  - user_id: 1
+                    amount_of_money: 1000
+                  - user_id: 2
+                    amount_of_money: -1000
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -671,6 +702,23 @@ components:
           type: string
           description: 管理グループ名
           example: 家族
+    totalBorrowingAndLending:
+      description: 総貸借
+      type: object
+      required:
+        - user_id
+        - amount_of_money
+      additionalProperties: false
+      properties:
+        user_id:
+          type: string
+          description: ユーザーID
+          example: 1
+        amount_of_money:
+          type: number
+          format: float
+          description: 総貸借
+          example: 1000
   requestBodies:
     ExpensesBody:
       description: リクエスト用の費用の配列

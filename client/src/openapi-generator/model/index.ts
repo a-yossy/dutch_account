@@ -12,5 +12,6 @@ export * from './payment-group';
 export * from './payment-relation';
 export * from './response-error';
 export * from './sign-up-request';
+export * from './total-borrowing-and-lending';
 export * from './update-payment-group-by-payment-group-id-request';
 export * from './user';

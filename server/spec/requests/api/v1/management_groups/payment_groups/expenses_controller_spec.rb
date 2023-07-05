@@ -31,7 +31,12 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
         context 'when the payment_group related to the management_group exists' do
           before do
             create(:payment_affiliation, user:, payment_group:)
-            create(:expense, payment_group:, user:)
+            ExpenseWithDebtRecordsCreator.new(
+              expenses_params: [
+                { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+              ],
+              payment_group:
+            ).call!.expenses.first
           end
 
           let(:payment_group) { create(:payment_group, management_group:) }
@@ -57,7 +62,14 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
     let(:payment_group) { create(:payment_group) }
     let(:other_payment_group) { create(:payment_group, management_group:) }
     let(:other_user) { create(:user) }
-    let(:expense) { create(:expense, user: other_user, payment_group: other_payment_group) }
+    let(:expense) do
+      ExpenseWithDebtRecordsCreator.new(
+        expenses_params: [
+          { user_id: other_user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+        ],
+        payment_group: other_payment_group
+      ).call!.expenses.first
+    end
 
     before do
       create(:management_affiliation, user: other_user, management_group:)
@@ -100,7 +112,14 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           end
 
           context 'when the expense related to the payment_group exists' do
-            let(:expense) { create(:expense, payment_group:, user:) }
+            let(:expense) do
+              ExpenseWithDebtRecordsCreator.new(
+                expenses_params: [
+                  { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+                ],
+                payment_group:
+              ).call!.expenses.first
+            end
 
             it 'returns success response' do
               get api_v1_management_group_payment_group_expense_path(management_group, payment_group, expense), headers: auth_tokens

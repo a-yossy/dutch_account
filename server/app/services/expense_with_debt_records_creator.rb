@@ -42,7 +42,7 @@ class ExpenseWithDebtRecordsCreator
   end
 
   def check_users_belong_to_payment_group!
-    return if @expenses_params.pluck(:user_id).to_set.subset?(@payment_group.user_ids.map(&:to_s).to_set)
+    return if @expenses_params.pluck(:user_id).map(&:to_s).to_set.subset?(@payment_group.user_ids.map(&:to_s).to_set)
 
     raise ExpenseWithDebtRecords::NotBelongingToPaymentGroupError,
           "#{PaymentGroup.model_name.human}に所属している#{Expense.human_attribute_name('user')}を入力してください"

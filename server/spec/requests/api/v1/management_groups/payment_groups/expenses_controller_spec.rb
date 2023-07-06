@@ -144,7 +144,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
     context 'when the user logs in' do
       subject do
-        post bulk_insert_api_v1_management_group_payment_group_expense_with_debt_records_path(management_group, payment_group),
+        post bulk_insert_api_v1_management_group_payment_group_expenses_path(management_group, payment_group),
              headers: auth_tokens, params:
       end
 
@@ -225,7 +225,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
     context 'when the user does not log in' do
       it 'returns unauthorized response' do
-        post bulk_insert_api_v1_management_group_payment_group_expense_with_debt_records_path(management_group, payment_group)
+        post bulk_insert_api_v1_management_group_payment_group_expenses_path(management_group, payment_group)
         assert_response_schema_confirm(401)
       end
     end

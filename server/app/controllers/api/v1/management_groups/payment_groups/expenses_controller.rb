@@ -14,9 +14,8 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Application
   end
 
   def bulk_insert
-    expense_with_debt_records = ExpenseWithDebtRecordsCreator.new(expenses_params: expenses_params[:expenses],
-                                                                  payment_group: @payment_group).call!
-    render json: ExpenseResource.new(expense_with_debt_records.expenses).serialize, status: :created
+    expenses = ExpenseWithDebtRecordsCreator.new(expenses_params: expenses_params[:expenses], payment_group: @payment_group).call!.expenses
+    render json: ExpenseResource.new(expenses).serialize, status: :created
   rescue ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError,
          ExpenseWithDebtRecords::NotBelongingToPaymentGroupError,
          ActiveRecord::RecordInvalid => e

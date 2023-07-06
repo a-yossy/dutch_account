@@ -13,6 +13,16 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Application
     render json: ExpenseResource.new(@payment_group.expenses.find(params[:id])).serialize
   end
 
+  def bulk_insert
+    expense_with_debt_records = ExpenseWithDebtRecordsCreator.new(expenses_params: expenses_params[:expenses],
+                                                                  payment_group: @payment_group).call!
+    render json: ExpenseResource.new(expense_with_debt_records.expenses).serialize, status: :created
+  rescue ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError,
+         ExpenseWithDebtRecords::NotBelongingToPaymentGroupError,
+         ActiveRecord::RecordInvalid => e
+    render_bad_request_error(e)
+  end
+
   private
 
   def set_management_group
@@ -21,5 +31,9 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Application
 
   def set_payment_group
     @payment_group = @management_group.payment_groups.find(params[:payment_group_id])
+  end
+
+  def expenses_params
+    params.permit(expenses: %i[user_id amount_of_money description paid_on])
   end
 end

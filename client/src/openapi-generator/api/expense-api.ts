@@ -21,15 +21,70 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest } from '../model';
+// @ts-ignore
 import { Expense } from '../model';
 // @ts-ignore
 import { ResponseError } from '../model';
+// @ts-ignore
+import { UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest } from '../model';
 /**
  * ExpenseApi - axios parameter creator
  * @export
  */
 export const ExpenseApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 管理グループに紐づく複数の費用を作成する
+         * @summary 管理グループに紐づく複数の費用を作成
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkInsertExpensesByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('bulkInsertExpensesByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('bulkInsertExpensesByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/bulk_insert`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
+
+            // authentication client required
+            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
+
+            // authentication uid required
+            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 支払グループに紐づく費用を取得する
          * @summary 支払グループに紐づく費用を取得
@@ -128,6 +183,61 @@ export const ExpenseApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 費用を更新する
+         * @summary 費用を更新
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {string} expenseId 費用ID
+         * @param {UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest} [updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest] リクエスト用の費用
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId: async (managementGroupId: string, paymentGroupId: string, expenseId: string, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest?: UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'managementGroupId' is not null or undefined
+            assertParamExists('updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId', 'managementGroupId', managementGroupId)
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId', 'paymentGroupId', paymentGroupId)
+            // verify required parameter 'expenseId' is not null or undefined
+            assertParamExists('updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId', 'expenseId', expenseId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/bulk_update`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)))
+                .replace(`{${"expense_id"}}`, encodeURIComponent(String(expenseId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication accessToken required
+            await setApiKeyToObject(localVarHeaderParameter, "access-token", configuration)
+
+            // authentication client required
+            await setApiKeyToObject(localVarHeaderParameter, "client", configuration)
+
+            // authentication uid required
+            await setApiKeyToObject(localVarHeaderParameter, "uid", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -138,6 +248,19 @@ export const ExpenseApiAxiosParamCreator = function (configuration?: Configurati
 export const ExpenseApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ExpenseApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 管理グループに紐づく複数の費用を作成する
+         * @summary 管理グループに紐づく複数の費用を作成
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Expense>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 支払グループに紐づく費用を取得する
          * @summary 支払グループに紐づく費用を取得
@@ -163,6 +286,20 @@ export const ExpenseApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 費用を更新する
+         * @summary 費用を更新
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {string} expenseId 費用ID
+         * @param {UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest} [updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest] リクエスト用の費用
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId: string, paymentGroupId: string, expenseId: string, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest?: UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Expense>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId, paymentGroupId, expenseId, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -173,6 +310,18 @@ export const ExpenseApiFp = function(configuration?: Configuration) {
 export const ExpenseApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ExpenseApiFp(configuration)
     return {
+        /**
+         * 管理グループに紐づく複数の費用を作成する
+         * @summary 管理グループに紐づく複数の費用を作成
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options?: any): AxiosPromise<Array<Expense>> {
+            return localVarFp.bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options).then((request) => request(axios, basePath));
+        },
         /**
          * 支払グループに紐づく費用を取得する
          * @summary 支払グループに紐づく費用を取得
@@ -196,6 +345,19 @@ export const ExpenseApiFactory = function (configuration?: Configuration, basePa
         getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<Array<Expense>> {
             return localVarFp.getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 費用を更新する
+         * @summary 費用を更新
+         * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
+         * @param {string} expenseId 費用ID
+         * @param {UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest} [updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest] リクエスト用の費用
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId: string, paymentGroupId: string, expenseId: string, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest?: UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options?: any): AxiosPromise<Expense> {
+            return localVarFp.updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId, paymentGroupId, expenseId, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -206,6 +368,20 @@ export const ExpenseApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class ExpenseApi extends BaseAPI {
+    /**
+     * 管理グループに紐づく複数の費用を作成する
+     * @summary 管理グループに紐づく複数の費用を作成
+     * @param {string} managementGroupId 管理グループID
+     * @param {string} paymentGroupId 支払グループID
+     * @param {BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest} [bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest] リクエスト用の費用の配列
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExpenseApi
+     */
+    public bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest?: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options?: AxiosRequestConfig) {
+        return ExpenseApiFp(this.configuration).bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 支払グループに紐づく費用を取得する
      * @summary 支払グループに紐づく費用を取得
@@ -231,5 +407,20 @@ export class ExpenseApi extends BaseAPI {
      */
     public getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
         return ExpenseApiFp(this.configuration).getExpensesByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 費用を更新する
+     * @summary 費用を更新
+     * @param {string} managementGroupId 管理グループID
+     * @param {string} paymentGroupId 支払グループID
+     * @param {string} expenseId 費用ID
+     * @param {UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest} [updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest] リクエスト用の費用
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ExpenseApi
+     */
+    public updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId: string, paymentGroupId: string, expenseId: string, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest?: UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options?: AxiosRequestConfig) {
+        return ExpenseApiFp(this.configuration).updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId(managementGroupId, paymentGroupId, expenseId, updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

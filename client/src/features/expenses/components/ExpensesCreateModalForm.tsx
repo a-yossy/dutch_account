@@ -1,7 +1,7 @@
 import { FC, Fragment, useEffect, useCallback, useState } from 'react';
 import { useGetPaymentGroupPaymentAffiliations } from 'src/features/payment_groups/api/getPaymentGroupPaymentAffiliations';
 import {
-  BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest,
+  BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest,
   Expense,
   ManagementGroup,
   PaymentGroup,
@@ -28,7 +28,7 @@ import {
   SelectField,
 } from 'src/components/parts';
 import { useBulkInsertExpenseWithDebtRecords } from 'src/features/expenses/api/bulkInsertExpenseWithDebtRecords';
-import { BulkInsertExpenseWithDebtRecordsSchema } from 'src/features/expenses/formSchemas/bulkInsertExpenseWithDebtRecordsSchema';
+import { BulkInsertExpenseWithDebtRecordsSchema } from 'src/features/expenses/formSchemas/bulkInsertExpensesSchema';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import dayjs from 'dayjs';
@@ -53,11 +53,9 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
     register,
     reset,
     formState: { errors, isSubmitting, isSubmitted },
-  } = useForm<BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest>(
-    {
-      resolver: zodResolver(BulkInsertExpenseWithDebtRecordsSchema),
-    }
-  );
+  } = useForm<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest>({
+    resolver: zodResolver(BulkInsertExpenseWithDebtRecordsSchema),
+  });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'expenses',

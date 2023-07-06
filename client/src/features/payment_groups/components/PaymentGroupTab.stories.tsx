@@ -5,6 +5,7 @@ import {
   getPaymentGroupPaymentAffiliationsHandler,
   getPaymentGroupExpensesHandler,
 } from 'src/test/server/handlers/paymentGroup';
+import { bulkInsertExpensesHandler } from 'src/test/server/handlers/expense';
 
 export default {
   component: PaymentGroupTab,
@@ -13,6 +14,7 @@ export default {
       handlers: [
         getPaymentGroupPaymentAffiliationsHandler(),
         getPaymentGroupExpensesHandler(),
+        bulkInsertExpensesHandler(),
       ],
     },
   },

@@ -8,7 +8,6 @@ servers:
     description: 開発環境
 tags:
   - name: expense
-  - name: expenseWithDebtRecords
   - name: managementGroup
   - name: paymentGroup
   - name: paymentAffiliation
@@ -69,16 +68,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expense_with_debt_records/bulk_insert:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
     post:
       tags:
-        - expenseWithDebtRecords
-      summary: 管理グループに紐づく費用と複数の借金履歴を作成
-      description: 管理グループに紐づく費用と複数の借金履歴を作成する
-      operationId: bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId
+        - expense
+      summary: 管理グループに紐づく複数の費用を作成
+      description: 管理グループに紐づく複数の費用を作成する
+      operationId: bulkInsertExpensesByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/ExpensesBody"
       responses:
@@ -91,6 +90,34 @@ paths:
                 items:
                   $ref: "#/components/schemas/Expense"
                 minItems: 1
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/bulk_update:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+      - $ref: "#/components/parameters/PaymentGroupId"
+      - $ref: "#/components/parameters/ExpenseId"
+    put:
+      tags:
+        - expense
+      summary: 費用を更新
+      description: 費用を更新する
+      operationId: updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId
+      requestBody:
+        $ref: "#/components/requestBodies/ExpenseBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -720,6 +747,36 @@ components:
           description: 総貸借
           example: 1000
   requestBodies:
+    ExpenseBody:
+      description: リクエスト用の費用
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - user_id
+              - amount_of_money
+              - description
+              - paid_on
+            properties:
+              user_id:
+                type: string
+                description: ユーザーID
+                example: 1
+              amount_of_money:
+                type: number
+                format: int32
+                description: 金額
+                example: 1000
+              description:
+                type: string
+                description: 説明
+                example: 食費
+              paid_on:
+                type: string
+                format: date
+                description: 支払日
+                example: 2020-01-01
     ExpensesBody:
       description: リクエスト用の費用の配列
       content:
@@ -757,7 +814,7 @@ components:
                       format: date
                       description: 支払日
                       example: 2020-01-01
-                minItems: 1
+                      minItems: 1
     PaymentGroupBody:
       description: リクエスト用の支払グループ
       content:

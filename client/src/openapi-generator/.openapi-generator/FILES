@@ -3,7 +3,6 @@
 .openapi-generator-ignore
 api.ts
 api/expense-api.ts
-api/expense-with-debt-records-api.ts
 api/management-group-api.ts
 api/payment-affiliation-api.ts
 api/payment-group-api.ts
@@ -16,8 +15,7 @@ configuration.ts
 git_push.sh
 index.ts
 model/add-management-group-request.ts
-model/bulk-insert-expense-with-debt-records-by-management-group-id-and-payment-group-id-request-expenses-inner.ts
-model/bulk-insert-expense-with-debt-records-by-management-group-id-and-payment-group-id-request.ts
+model/bulk-insert-expenses-by-management-group-id-and-payment-group-id-request.ts
 model/bulk-insert-payment-relation-by-management-group-id-request-affiliations-inner.ts
 model/bulk-insert-payment-relation-by-management-group-id-request-group.ts
 model/bulk-insert-payment-relation-by-management-group-id-request.ts
@@ -31,5 +29,6 @@ model/payment-relation.ts
 model/response-error.ts
 model/sign-up-request.ts
 model/total-borrowing-and-lending.ts
+model/update-expense-by-management-group-id-and-payment-group-id-and-expense-id-request.ts
 model/update-payment-group-by-payment-group-id-request.ts
 model/user.ts

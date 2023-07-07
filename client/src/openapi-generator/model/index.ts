@@ -1,6 +1,5 @@
 export * from './add-management-group-request';
-export * from './bulk-insert-expense-with-debt-records-by-management-group-id-and-payment-group-id-request';
-export * from './bulk-insert-expense-with-debt-records-by-management-group-id-and-payment-group-id-request-expenses-inner';
+export * from './bulk-insert-expenses-by-management-group-id-and-payment-group-id-request';
 export * from './bulk-insert-payment-relation-by-management-group-id-request';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-affiliations-inner';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-group';
@@ -13,5 +12,6 @@ export * from './payment-relation';
 export * from './response-error';
 export * from './sign-up-request';
 export * from './total-borrowing-and-lending';
+export * from './update-expense-by-management-group-id-and-payment-group-id-and-expense-id-request';
 export * from './update-payment-group-by-payment-group-id-request';
 export * from './user';

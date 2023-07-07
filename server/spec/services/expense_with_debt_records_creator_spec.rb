@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe ExpenseWithDebtRecordsCreator do
   describe '#call!' do
-    let(:user1) { create(:user, name: 'user_1') }
-    let(:user2) { create(:user, name: 'user_2') }
-    let(:user3) { create(:user, name: 'user_3') }
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group, management_group:) }
     let(:expense_with_debt_records_creator) do
@@ -34,7 +34,7 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
       it 'returns expense_with_debt_records_creator instance that have expenses' do
         expense_with_debt_records = expense_with_debt_records_creator.call!
         expect(expense_with_debt_records.instance_of?(described_class)).to eq(true)
-        expect(expense_with_debt_records.expenses).to eq([Expense.first])
+        expect(expense_with_debt_records.expenses).to eq([Expense.find_by(user: user1)])
       end
 
       it 'creates debt_records with correct amount_of_money' do
@@ -65,23 +65,6 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
         end.to not_change(Expense, :count)
           .and not_change(DebtRecord, :count)
           .and raise_error ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError
-      end
-    end
-
-    context 'with invalid arguments whose user does not belong to the payment_group' do
-      let(:other_user) { create(:user) }
-      let(:expenses_params) { [{ user_id: other_user.id.to_s, amount_of_money: 1111, description: '食費', paid_on: Time.zone.today }] }
-
-      before do
-        create(:management_affiliation, user: other_user, management_group:)
-      end
-
-      it 'raises error' do
-        expect do
-          expense_with_debt_records_creator.call!
-        end.to not_change(Expense, :count)
-          .and not_change(DebtRecord, :count)
-          .and raise_error ExpenseWithDebtRecords::NotBelongingToPaymentGroupError
       end
     end
   end

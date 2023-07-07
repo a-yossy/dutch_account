@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest } from 'src/openapi-generator';
+import { BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest } from 'src/openapi-generator';
 import dayjs from 'dayjs';
 
 const ExpenseSchema: z.ZodType<
-  BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest['expenses'][number]
+  BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest['expenses'][number]
 > = z.object({
   user_id: z.string().min(1, { message: 'ユーザーを選択してください' }),
   amount_of_money: z
@@ -28,7 +28,7 @@ const ExpenseSchema: z.ZodType<
     ),
 });
 
-export const BulkInsertExpenseWithDebtRecordsSchema: z.ZodType<BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest> =
+export const BulkInsertExpenseWithDebtRecordsSchema: z.ZodType<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest> =
   z.object({
     expenses: ExpenseSchema.array().nonempty({
       message: '費用情報を入力してください',

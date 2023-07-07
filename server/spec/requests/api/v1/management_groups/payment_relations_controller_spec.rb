@@ -46,16 +46,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentRelationsController, type: :req
           end
         end
 
-        context 'with invalid params whose user does not belong to the management group' do
-          let(:wrong_user) { create(:user) }
-          let(:affiliations) { [{ user_id: user.id.to_s, ratio: 0.5 }, { user_id: wrong_user.id.to_s, ratio: 0.5 }] }
-
-          it 'returns bad_request response' do
-            expect { subject }.to not_change(PaymentGroup, :count).and not_change(PaymentAffiliation, :count)
-            assert_response_schema_confirm(400)
-          end
-        end
-
         context 'with invalid arguments whose ratio total is not one' do
           let(:affiliations) { [{ user_id: user.id.to_s, ratio: 0.5 }, { user_id: other_user.id.to_s, ratio: 0.6 }] }
 

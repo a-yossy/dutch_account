@@ -1,6 +1,6 @@
 import { Expense } from 'src/openapi-generator';
 
-export const bulkInsertExpenseWithDebtRecordsResponse: Expense[] = [
+export const bulkInsertExpensesResponse: Expense[] = [
   {
     id: '1',
     user: {

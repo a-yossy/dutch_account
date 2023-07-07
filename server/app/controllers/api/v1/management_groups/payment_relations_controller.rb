@@ -12,7 +12,6 @@ class Api::V1::ManagementGroups::PaymentRelationsController < ApplicationControl
     ).call!
     render json: PaymentRelationResource.new(payment_relation).serialize, status: :created
   rescue PaymentRelation::GroupMustHaveAtLeastTwoUsersError,
-         PaymentRelation::NotBelongingToManagementGroupError,
          PaymentRelation::RatioTotalNotEqualsOneError,
          ActiveRecord::RecordInvalid => e
     render_bad_request_error(e)

@@ -3,9 +3,9 @@ import { getAuthCookies } from 'src/libs/nookies/getAuthCookies';
 import { isResponseError } from 'src/libs/isResponseError';
 import { useCallback, Dispatch, SetStateAction } from 'react';
 import {
-  BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest,
-  ExpenseWithDebtRecordsApi,
+  BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest,
   Expense,
+  ExpenseApi,
 } from 'src/openapi-generator';
 import { UseFormReset } from 'react-hook-form';
 
@@ -13,17 +13,17 @@ export const useBulkInsertExpenseWithDebtRecords = (
   managementGroupId: string,
   paymentGroupId: string,
   setExpenses: Dispatch<SetStateAction<Expense[]>>,
-  reset: UseFormReset<BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest>,
+  reset: UseFormReset<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest>,
   append: () => void
 ) => {
   const toast = useToast();
   const bulkInsertExpenseWithDebtRecords = useCallback(
     async (
-      params: BulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupIdRequest
+      params: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest
     ) => {
       try {
         const response =
-          await new ExpenseWithDebtRecordsApi().bulkInsertExpenseWithDebtRecordsByManagementGroupIdAndPaymentGroupId(
+          await new ExpenseApi().bulkInsertExpensesByManagementGroupIdAndPaymentGroupId(
             managementGroupId,
             paymentGroupId,
             params,

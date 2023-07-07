@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ExpensesCreateModalForm } from 'src/features/expenses/components/ExpensesCreateModalForm';
-import { bulkInsertExpenseWithDebtRecordsHandler } from 'src/test/server/handlers/expense';
+import { bulkInsertExpensesHandler } from 'src/test/server/handlers/expense';
 import { getPaymentGroupPaymentAffiliationsHandler } from 'src/test/server/handlers/paymentGroup';
 
 export default {
@@ -9,7 +9,7 @@ export default {
   parameters: {
     msw: {
       handlers: [
-        bulkInsertExpenseWithDebtRecordsHandler(),
+        bulkInsertExpensesHandler(),
         getPaymentGroupPaymentAffiliationsHandler(),
       ],
     },

@@ -10,7 +10,6 @@ class ExpenseWithDebtRecordsCreator
 
   def call!
     check_exist_at_least_one_expense!
-    check_users_belong_to_payment_group!
 
     ActiveRecord::Base.transaction do
       @expenses = Expense.create!(@expenses_params.map { |expense_params| expense_params.merge(payment_group: @payment_group) })
@@ -39,12 +38,5 @@ class ExpenseWithDebtRecordsCreator
 
     raise ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError,
           "#{Expense.human_attribute_name('expense')}は1つ以上入力してください"
-  end
-
-  def check_users_belong_to_payment_group!
-    return if @expenses_params.pluck(:user_id).map(&:to_s).to_set.subset?(@payment_group.user_ids.map(&:to_s).to_set)
-
-    raise ExpenseWithDebtRecords::NotBelongingToPaymentGroupError,
-          "#{PaymentGroup.model_name.human}に所属している#{Expense.human_attribute_name('user')}を入力してください"
   end
 end

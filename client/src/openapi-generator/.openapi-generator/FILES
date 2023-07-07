@@ -15,7 +15,6 @@ configuration.ts
 git_push.sh
 index.ts
 model/add-management-group-request.ts
-model/bulk-insert-expenses-by-management-group-id-and-payment-group-id-request-expenses-inner.ts
 model/bulk-insert-expenses-by-management-group-id-and-payment-group-id-request.ts
 model/bulk-insert-payment-relation-by-management-group-id-request-affiliations-inner.ts
 model/bulk-insert-payment-relation-by-management-group-id-request-group.ts

@@ -200,7 +200,7 @@ export const ExpenseApiAxiosParamCreator = function (configuration?: Configurati
             assertParamExists('updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId', 'paymentGroupId', paymentGroupId)
             // verify required parameter 'expenseId' is not null or undefined
             assertParamExists('updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId', 'expenseId', expenseId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/bulk_update`
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)))
                 .replace(`{${"expense_id"}}`, encodeURIComponent(String(expenseId)));

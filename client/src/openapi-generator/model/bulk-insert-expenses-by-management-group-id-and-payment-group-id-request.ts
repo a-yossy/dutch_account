@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequestExpensesInner } from './bulk-insert-expenses-by-management-group-id-and-payment-group-id-request-expenses-inner';
+import { UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest } from './update-expense-by-management-group-id-and-payment-group-id-and-expense-id-request';
 
 /**
  * 
@@ -25,9 +25,9 @@ import { BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequestExpensesIn
 export interface BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest {
     /**
      * 
-     * @type {Array<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequestExpensesInner>}
+     * @type {Array<UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest>}
      * @memberof BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest
      */
-    'expenses': Array<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequestExpensesInner>;
+    'expenses': Array<UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest>;
 }
 

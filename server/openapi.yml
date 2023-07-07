@@ -68,6 +68,29 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+    put:
+      tags:
+        - expense
+      summary: 費用を更新
+      description: 費用を更新する
+      operationId: updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId
+      requestBody:
+        $ref: "#/components/requestBodies/ExpenseBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Expense"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -90,34 +113,6 @@ paths:
                 items:
                   $ref: "#/components/schemas/Expense"
                 minItems: 1
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/{expense_id}/bulk_update:
-    parameters:
-      - $ref: "#/components/parameters/ManagementGroupId"
-      - $ref: "#/components/parameters/PaymentGroupId"
-      - $ref: "#/components/parameters/ExpenseId"
-    put:
-      tags:
-        - expense
-      summary: 費用を更新
-      description: 費用を更新する
-      operationId: updateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId
-      requestBody:
-        $ref: "#/components/requestBodies/ExpenseBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Expense"
         400:
           $ref: "#/components/responses/BadRequest"
         401:
@@ -814,7 +809,7 @@ components:
                       format: date
                       description: 支払日
                       example: 2020-01-01
-                      minItems: 1
+                minItems: 1
     PaymentGroupBody:
       description: リクエスト用の支払グループ
       content:

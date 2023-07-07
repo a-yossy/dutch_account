@@ -1,6 +1,5 @@
 export * from './add-management-group-request';
 export * from './bulk-insert-expenses-by-management-group-id-and-payment-group-id-request';
-export * from './bulk-insert-expenses-by-management-group-id-and-payment-group-id-request-expenses-inner';
 export * from './bulk-insert-payment-relation-by-management-group-id-request';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-affiliations-inner';
 export * from './bulk-insert-payment-relation-by-management-group-id-request-group';

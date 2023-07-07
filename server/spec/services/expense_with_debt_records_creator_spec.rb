@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe ExpenseWithDebtRecordsCreator do
   describe '#call!' do
-    let(:user1) { create(:user, name: 'user_1') }
-    let(:user2) { create(:user, name: 'user_2') }
-    let(:user3) { create(:user, name: 'user_3') }
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group, management_group:) }
     let(:expense_with_debt_records_creator) do
@@ -34,7 +34,7 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
       it 'returns expense_with_debt_records_creator instance that have expenses' do
         expense_with_debt_records = expense_with_debt_records_creator.call!
         expect(expense_with_debt_records.instance_of?(described_class)).to eq(true)
-        expect(expense_with_debt_records.expenses).to eq([Expense.first])
+        expect(expense_with_debt_records.expenses).to eq([Expense.find_by(user: user1)])
       end
 
       it 'creates debt_records with correct amount_of_money' do

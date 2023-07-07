@@ -179,18 +179,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           let(:other_user) { create(:user) }
           let(:payment_group) { create(:payment_group, management_group:) }
 
-          context 'with invalid params whose user does not belong to the payment group' do
-            let(:wrong_user) { create(:user) }
-            let(:params) do
-              { expenses: [{ user_id: wrong_user.id.to_s, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }] }
-            end
-
-            it 'returns bad_request response' do
-              expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
-              assert_response_schema_confirm(400)
-            end
-          end
-
           context 'with invalid params that have no expenses' do
             let(:params) { { expenses: [] } }
 

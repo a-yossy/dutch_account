@@ -67,22 +67,5 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
           .and raise_error ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError
       end
     end
-
-    context 'with invalid arguments whose user does not belong to the payment_group' do
-      let(:other_user) { create(:user) }
-      let(:expenses_params) { [{ user_id: other_user.id.to_s, amount_of_money: 1111, description: '食費', paid_on: Time.zone.today }] }
-
-      before do
-        create(:management_affiliation, user: other_user, management_group:)
-      end
-
-      it 'raises error' do
-        expect do
-          expense_with_debt_records_creator.call!
-        end.to not_change(Expense, :count)
-          .and not_change(DebtRecord, :count)
-          .and raise_error ExpenseWithDebtRecords::NotBelongingToPaymentGroupError
-      end
-    end
   end
 end

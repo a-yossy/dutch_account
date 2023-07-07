@@ -11,7 +11,6 @@ class PaymentRelationCreator
 
   def call!
     check_exist_at_least_two_users!
-    check_users_belong_to_management_group!
     check_ratio_total_equals_one!
 
     ActiveRecord::Base.transaction do
@@ -30,13 +29,6 @@ class PaymentRelationCreator
 
     raise PaymentRelation::GroupMustHaveAtLeastTwoUsersError,
           "#{PaymentAffiliation.human_attribute_name('user')}は2人以上入力してください"
-  end
-
-  def check_users_belong_to_management_group!
-    return if @affiliations_params.pluck(:user_id).map(&:to_s).to_set.subset?(@management_group.user_ids.map(&:to_s).to_set)
-
-    raise PaymentRelation::NotBelongingToManagementGroupError,
-          "#{ManagementGroup.model_name.human}に所属している#{PaymentAffiliation.human_attribute_name('user')}を入力してください"
   end
 
   def check_ratio_total_equals_one!

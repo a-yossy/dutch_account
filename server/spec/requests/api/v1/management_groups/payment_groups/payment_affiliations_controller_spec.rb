@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsController, type: :request do
   describe '#index' do
+    subject { get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group), headers: auth_tokens }
+
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group) }
 
@@ -13,8 +15,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
 
       context 'when the management_group related to the user does not exit' do
         it 'returns not_found response' do
-          get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
-              headers: auth_tokens
+          subject
           assert_response_schema_confirm(404)
         end
       end
@@ -24,8 +25,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
 
         context 'when the payment_group related to the management_group does not exist' do
           it 'returns not_found response' do
-            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
-                headers: auth_tokens
+            subject
             assert_response_schema_confirm(404)
           end
         end
@@ -41,8 +41,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do
-            get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group),
-                headers: auth_tokens
+            subject
             assert_response_schema_confirm(200)
           end
         end
@@ -50,8 +49,10 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::PaymentAffiliationsCont
     end
 
     context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
       it 'returns unauthorized response' do
-        get api_v1_management_group_payment_group_payment_affiliations_path(management_group, payment_group)
+        subject
         assert_response_schema_confirm(401)
       end
     end

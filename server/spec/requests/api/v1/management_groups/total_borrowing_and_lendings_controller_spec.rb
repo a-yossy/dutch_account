@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ManagementGroups::TotalBorrowingAndLendingsController, type: :request do
   describe '#index' do
+    subject { get api_v1_management_group_total_borrowing_and_lendings_path(management_group), headers: auth_tokens }
+
     let(:management_group) { create(:management_group) }
 
     context 'when the user logs in' do
@@ -12,7 +14,7 @@ RSpec.describe Api::V1::ManagementGroups::TotalBorrowingAndLendingsController, t
 
       context 'when the management_group related to the user does not exist' do
         it 'return not_found response' do
-          get api_v1_management_group_total_borrowing_and_lendings_path(management_group), headers: auth_tokens
+          subject
           assert_response_schema_confirm(404)
         end
       end
@@ -37,15 +39,17 @@ RSpec.describe Api::V1::ManagementGroups::TotalBorrowingAndLendingsController, t
         end
 
         it 'returns success response' do
-          get api_v1_management_group_total_borrowing_and_lendings_path(management_group), headers: auth_tokens
+          subject
           assert_response_schema_confirm(200)
         end
       end
     end
 
     context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
       it 'returns unauthorized response' do
-        get api_v1_management_group_total_borrowing_and_lendings_path(management_group)
+        subject
         assert_response_schema_confirm(401)
       end
     end

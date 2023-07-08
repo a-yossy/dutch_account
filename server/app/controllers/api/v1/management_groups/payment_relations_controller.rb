@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ManagementGroups::PaymentRelationsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_management_group
-
+class Api::V1::ManagementGroups::PaymentRelationsController < Api::V1::ManagementGroups::ApplicationController
   def bulk_insert
     payment_relation = PaymentRelationCreator.new(
       management_group: @management_group,
@@ -18,10 +15,6 @@ class Api::V1::ManagementGroups::PaymentRelationsController < ApplicationControl
   end
 
   private
-
-  def set_management_group
-    @management_group = current_user.management_groups.find(params[:management_group_id])
-  end
 
   def payment_relation_params
     params.permit(group: :name, affiliations: %i[user_id ratio])

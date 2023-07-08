@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ManagementGroups::PaymentGroupsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_management_group
+class Api::V1::ManagementGroups::PaymentGroupsController < Api::V1::ManagementGroups::ApplicationController
   before_action :set_payment_group, only: %i[show]
 
   def index
@@ -14,10 +12,6 @@ class Api::V1::ManagementGroups::PaymentGroupsController < ApplicationController
   end
 
   private
-
-  def set_management_group
-    @management_group = current_user.management_groups.find(params[:management_group_id])
-  end
 
   def set_payment_group
     @payment_group = @management_group.payment_groups.find(params[:id])

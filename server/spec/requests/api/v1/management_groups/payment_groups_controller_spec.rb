@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :request do
   describe 'index' do
+    subject { get api_v1_management_group_payment_groups_path(management_group), headers: auth_tokens }
+
     let(:management_group) { create(:management_group) }
 
     context 'when the user logs in' do
@@ -12,7 +14,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
 
       context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
-          get api_v1_management_group_payment_groups_path(management_group), headers: auth_tokens
+          subject
           assert_response_schema_confirm(404)
         end
       end
@@ -24,21 +26,25 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
         end
 
         it 'returns success response' do
-          get api_v1_management_group_payment_groups_path(management_group), headers: auth_tokens
+          subject
           assert_response_schema_confirm(200)
         end
       end
     end
 
     context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
       it 'returns unauthorized response' do
-        get api_v1_management_group_payment_groups_path(management_group)
+        subject
         assert_response_schema_confirm(401)
       end
     end
   end
 
   describe '#show' do
+    subject { get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens }
+
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group) }
 
@@ -48,7 +54,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
 
       context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
-          get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens
+          subject
           assert_response_schema_confirm(404)
         end
       end
@@ -58,7 +64,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
 
         context 'when the payment_group related to the management_group does not exist' do
           it 'returns not_found response' do
-            get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens
+            subject
             assert_response_schema_confirm(404)
           end
         end
@@ -67,7 +73,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
           let(:payment_group) { create(:payment_group, management_group:) }
 
           it 'returns success response' do
-            get api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens
+            subject
             assert_response_schema_confirm(200)
           end
         end
@@ -75,8 +81,10 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
     end
 
     context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
       it 'returns unauthorized response' do
-        get api_v1_management_group_payment_group_path(management_group, payment_group)
+        subject
         assert_response_schema_confirm(401)
       end
     end

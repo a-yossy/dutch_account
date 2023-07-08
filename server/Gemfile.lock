@@ -247,8 +247,6 @@ GEM
     rubocop-rspec (2.12.1)
       rubocop (~> 1.31)
     ruby-progressbar (1.11.0)
-    shoulda-matchers (5.1.0)
-      activesupport (>= 5.2.0)
     strscan (3.0.3)
     thor (1.2.1)
     timeout (0.3.0)
@@ -286,7 +284,6 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
-  shoulda-matchers
 
 RUBY VERSION
    ruby 3.1.2p20

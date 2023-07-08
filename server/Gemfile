@@ -33,5 +33,4 @@ end
 
 group :test do
   gem 'committee-rails'
-  gem 'shoulda-matchers'
 end

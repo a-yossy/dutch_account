@@ -8,6 +8,7 @@ import {
   ExpenseApi,
 } from 'src/openapi-generator';
 import { UseFormReset } from 'react-hook-form';
+import { mutate } from 'swr';
 
 export const useBulkInsertExpenseWithDebtRecords = (
   managementGroupId: string,
@@ -32,6 +33,9 @@ export const useBulkInsertExpenseWithDebtRecords = (
         setExpenses(response.data);
         reset();
         append();
+        await mutate(
+          `api/v1/management_groups/${managementGroupId}/payment_groups/${paymentGroupId}/expenses`
+        );
         toast('success', '費用を作成しました');
       } catch (error: unknown) {
         if (isResponseError(error)) {

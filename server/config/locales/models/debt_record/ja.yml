@@ -7,5 +7,5 @@ ja:
         lending_user: 貸したユーザー
         borrowing_user: 借りたユーザー
         expense: 費用
-        is_paid: 返済済み
+        is_paid: 返済状況
         amount_of_money: 金額

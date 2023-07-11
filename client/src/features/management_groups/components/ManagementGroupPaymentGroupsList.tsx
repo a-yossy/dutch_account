@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Spinner } from '@chakra-ui/react';
 import { useGetManagementGroupPaymentGroups } from 'src/features/management_groups/api/getManagementGroupPaymentGroups';
-import { OneLineCardLink, CenterTitle } from 'src/components/elements';
+import { CenterTitle, NoDecorationLink } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 
 type ManagementGroupPaymentGroupsListProps = {
@@ -25,7 +25,9 @@ export const ManagementGroupPaymentGroupsList: FC<
           <CenterTitle mt={5}>グループが存在しません</CenterTitle>
         ) : (
           managementGroupPaymentGroups.map((managementGroupPaymentGroup) => (
-            <OneLineCardLink
+            <NoDecorationLink
+              display='flex'
+              alignItems='center'
               key={managementGroupPaymentGroup.id}
               href={`/payment_groups/${managementGroupPaymentGroup.id}`}
               mx='auto'
@@ -38,7 +40,7 @@ export const ManagementGroupPaymentGroupsList: FC<
               mt={5}
             >
               {managementGroupPaymentGroup.name}
-            </OneLineCardLink>
+            </NoDecorationLink>
           ))
         ))}
     </div>

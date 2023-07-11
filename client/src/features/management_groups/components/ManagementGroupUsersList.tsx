@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { Badge, Spacer, Spinner } from '@chakra-ui/react';
+import { Badge, Spacer, Spinner, Box } from '@chakra-ui/react';
 import { useGetManagementGroupUsers } from 'src/features/management_groups/api/getManagementGroupUsers';
-import { OneLineCard, CenterTitle } from 'src/components/elements';
+import { CenterTitle } from 'src/components/elements';
 import { ManagementGroup } from 'src/openapi-generator';
 import { useGetManagementGroupTotalBorrowingAndLendings } from '../api/getManagementGroupTotalBorrowingAndLendings';
 
@@ -46,7 +46,9 @@ export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
         <Spinner />
       ) : (
         managementGroupUsers.map((managementGroupUser) => (
-          <OneLineCard
+          <Box
+            display='flex'
+            alignItems='center'
             key={managementGroupUser.id}
             mx='auto'
             bg='#164b9f1b'
@@ -65,7 +67,7 @@ export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
             ) : (
               <Badge>{totalBorrowingAndLendings[managementGroupUser.id]}</Badge>
             )}
-          </OneLineCard>
+          </Box>
         ))
       )}
     </div>

@@ -4,7 +4,8 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Api::V1::Ma
   before_action :set_expense, only: %i[show update]
 
   def index
-    render json: ExpenseResource.new(@payment_group.expenses.recently_paid).serialize
+    render json: ExpenseResource.new(@payment_group.expenses.preload(:debt_records).eager_load(%w[user
+                                                                                                  payment_group]).recently_paid).serialize
   end
 
   def show

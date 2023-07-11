@@ -12,6 +12,7 @@ class Expense < ApplicationRecord
   validates :description, presence: true, length: { maximum: 255 }
   validates :paid_on, presence: true, comparison: { less_than_or_equal_to: Time.zone.today }
   validate :check_user_belongs_to_payment_group, if: %i[user payment_group]
+  validate :check_payment_is_completed, on: :update
 
   private
 
@@ -19,5 +20,9 @@ class Expense < ApplicationRecord
     return if payment_group.payment_affiliations.pluck(:user_id).include?(user.id)
 
     errors.add(:user, "は#{PaymentGroup.model_name.human}に所属していません")
+  end
+
+  def check_payment_is_completed
+    errors.add(:base, '返済が完了しているため更新できません') if debt_records.any?(&:is_paid)
   end
 end

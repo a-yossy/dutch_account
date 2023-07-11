@@ -5,8 +5,8 @@ import {
   Expense as ExpenseType,
 } from 'src/openapi-generator';
 import { useGetExpense } from 'src/features/expenses/api/getExpense';
-import { CenterTitle, OneLineCard } from 'src/components/elements';
-import { Spinner } from '@chakra-ui/react';
+import { CenterTitle, NoDecorationLink } from 'src/components/elements';
+import { Spinner, Box } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 
 type ExpenseProps = {
@@ -34,7 +34,7 @@ export const Expense: FC<ExpenseProps> = ({
     <div>
       {expense === undefined && <Spinner />}
       {expense !== undefined && (
-        <OneLineCard
+        <Box
           mx='auto'
           bg='#164b9f1b'
           boxShadow='dark-lg'
@@ -52,7 +52,14 @@ export const Expense: FC<ExpenseProps> = ({
           金額: {expense.amount_of_money.toLocaleString()}円
           <br />
           支払日: {dayjs(new Date(expense.paid_on)).format('YYYY/MM/DD')}
-        </OneLineCard>
+          <br />
+          支払グループ:{' '}
+          <NoDecorationLink href={`/payment_groups/${paymentGroupId}`}>
+            {expense.payment_group.name}
+          </NoDecorationLink>
+          <br />
+          返済状況: {expense.is_paid ? '完了' : '未完了'}
+        </Box>
       )}
     </div>
   );

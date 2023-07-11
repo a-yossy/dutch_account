@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { PaymentGroup, ManagementGroup } from 'src/openapi-generator';
 import { useGetPaymentGroupExpenses } from 'src/features/payment_groups/api/getPaymentGroupExpenses';
-import { CenterTitle, OneLineCardLink } from 'src/components/elements';
+import { CenterTitle, NoDecorationLink } from 'src/components/elements';
 import { Spinner } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 
@@ -30,7 +30,8 @@ export const PaymentGroupExpensesList: FC<PaymentGroupExpensesListProps> = ({
           <CenterTitle mt={5}>費用が存在しません</CenterTitle>
         ) : (
           paymentGroupExpenses.map((paymentGroupExpense) => (
-            <OneLineCardLink
+            <NoDecorationLink
+              display='block'
               key={paymentGroupExpense.id}
               href={`/payment_groups/${paymentGroupId}/expenses/${paymentGroupExpense.id}`}
               mx='auto'
@@ -53,7 +54,7 @@ export const PaymentGroupExpensesList: FC<PaymentGroupExpensesListProps> = ({
               {dayjs(new Date(paymentGroupExpense.paid_on)).format(
                 'YYYY/MM/DD'
               )}
-            </OneLineCardLink>
+            </NoDecorationLink>
           ))
         ))}
     </div>

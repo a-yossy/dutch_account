@@ -607,10 +607,11 @@ components:
       required:
         - id
         - user
-        - payment_group_id
+        - payment_group
         - amount_of_money
         - description
         - paid_on
+        - is_paid
       additionalProperties: false
       properties:
         id:
@@ -619,10 +620,8 @@ components:
           example: 1
         user:
           $ref: "#/components/schemas/User"
-        payment_group_id:
-          type: string
-          description: 支払グループID
-          example: 1
+        payment_group:
+          $ref: "#/components/schemas/PaymentGroup"
         amount_of_money:
           type: number
           format: int32
@@ -637,6 +636,10 @@ components:
           format: date
           description: 支払日
           example: 2020-01-01
+        is_paid:
+          type: boolean
+          description: 返済状況
+          example: false
     User:
       description: ユーザー
       type: object

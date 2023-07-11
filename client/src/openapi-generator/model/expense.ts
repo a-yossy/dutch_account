@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { PaymentGroup } from './payment-group';
+// May contain unused imports in some cases
+// @ts-ignore
 import { User } from './user';
 
 /**
@@ -36,11 +39,11 @@ export interface Expense {
      */
     'user': User;
     /**
-     * 支払グループID
-     * @type {string}
+     * 
+     * @type {PaymentGroup}
      * @memberof Expense
      */
-    'payment_group_id': string;
+    'payment_group': PaymentGroup;
     /**
      * 金額
      * @type {number}
@@ -59,5 +62,11 @@ export interface Expense {
      * @memberof Expense
      */
     'paid_on': string;
+    /**
+     * 返済状況
+     * @type {boolean}
+     * @memberof Expense
+     */
+    'is_paid': boolean;
 }
 

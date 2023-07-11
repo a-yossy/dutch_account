@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Spinner, Badge, Spacer } from '@chakra-ui/react';
+import { Spinner, Badge, Spacer, Box } from '@chakra-ui/react';
 import { useGetPaymentGroupPaymentAffiliations } from 'src/features/payment_groups/api/getPaymentGroupPaymentAffiliations';
-import { CenterTitle, OneLineCard } from 'src/components/elements';
+import { CenterTitle } from 'src/components/elements';
 import { ManagementGroup, PaymentGroup } from 'src/openapi-generator';
 
 type PaymentGroupPaymentAffiliationsListProps = {
@@ -25,7 +25,9 @@ export const PaymentGroupPaymentAffiliationsList: FC<
       ) : (
         paymentGroupPaymentAffiliations.map(
           (paymentGroupPaymentAffiliation) => (
-            <OneLineCard
+            <Box
+              display='flex'
+              alignItems='center'
               key={paymentGroupPaymentAffiliation.user.id}
               mx='auto'
               bg='#164b9f1b'
@@ -40,7 +42,7 @@ export const PaymentGroupPaymentAffiliationsList: FC<
               {paymentGroupPaymentAffiliation.user.name}
               <Spacer />
               <Badge>{paymentGroupPaymentAffiliation.ratio}</Badge>
-            </OneLineCard>
+            </Box>
           )
         )
       )}

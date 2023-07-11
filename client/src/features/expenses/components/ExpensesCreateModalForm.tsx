@@ -21,7 +21,7 @@ import {
   Text,
   Flex,
 } from '@chakra-ui/react';
-import { OutlineButton, OneLineCardLink } from 'src/components/elements';
+import { OutlineButton, NoDecorationLink } from 'src/components/elements';
 import {
   InputField,
   NumberInputField,
@@ -217,7 +217,8 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
               <ModalHeader>費用作成完了</ModalHeader>
               <ModalBody>
                 {expenses.map((expense) => (
-                  <OneLineCardLink
+                  <NoDecorationLink
+                    display='block'
                     key={expense.id}
                     href={`/payment_groups/${paymentGroupId}/expenses/${expense.id}`}
                     mx='auto'
@@ -238,7 +239,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
                     <br />
                     支払日:{' '}
                     {dayjs(new Date(expense.paid_on)).format('YYYY/MM/DD')}
-                  </OneLineCardLink>
+                  </NoDecorationLink>
                 ))}
               </ModalBody>
             </>

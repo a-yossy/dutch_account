@@ -8,7 +8,7 @@ class ExpenseResource
   end
 
   attribute :is_paid do |resource|
-    resource.debt_records.first.is_paid
+    resource.debt_records.any?(&:is_paid)
   end
 
   attributes id: [String, true], description: String, paid_on: [String, true]

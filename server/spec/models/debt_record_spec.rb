@@ -112,7 +112,7 @@ RSpec.describe DebtRecord, type: :model do
     end
   end
 
-  describe '#check_payment_is_completed' do
+  describe '#check_payment_is_completed_when_updating' do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
     let(:management_group) { create(:management_group) }

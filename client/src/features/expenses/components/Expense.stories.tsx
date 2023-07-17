@@ -1,13 +1,16 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Expense } from 'src/features/expenses/components/Expense';
-import { getExpenseHandler } from 'src/test/server/handlers/expense';
+import {
+  getExpenseHandler,
+  updateExpenseHandler,
+} from 'src/test/server/handlers/expense';
 
 export default {
   component: Expense,
   parameters: {
     msw: {
-      handlers: [getExpenseHandler()],
+      handlers: [getExpenseHandler(), updateExpenseHandler()],
     },
   },
 } as ComponentMeta<typeof Expense>;

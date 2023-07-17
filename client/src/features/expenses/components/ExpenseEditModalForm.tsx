@@ -55,12 +55,11 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  if (expense === undefined) return <Spinner />;
   if (expenseError?.response?.status === 404) return <>費用が見つかりません</>;
 
   return (
     <>
-      <Center>
+      <Center mt={5}>
         <OutlineButton colorScheme='green' onClick={onOpen}>
           編集
         </OutlineButton>
@@ -71,82 +70,86 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
           <ModalHeader>費用編集</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Form<
-              UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest,
-              typeof UpdateExpenseSchema
-            >
-              onSubmit={updateExpense}
-              mx='auto'
-              schema={UpdateExpenseSchema}
-              width={350}
-            >
-              {({ register, formState: { errors, isSubmitting } }) => (
-                <>
-                  {paymentGroupPaymentAffiliationsError?.response?.status ===
-                  404 ? (
-                    <>ユーザーが見つかりません</>
-                  ) : paymentGroupPaymentAffiliations === undefined ? (
-                    <Spinner />
-                  ) : (
-                    <SelectField
-                      error={errors.user_id}
-                      id='user_id'
-                      formLabel='支払ったユーザー'
-                      register={register('user_id')}
+            {expense === undefined ? (
+              <Spinner />
+            ) : (
+              <Form<
+                UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest,
+                typeof UpdateExpenseSchema
+              >
+                onSubmit={updateExpense}
+                mx='auto'
+                schema={UpdateExpenseSchema}
+                width={350}
+              >
+                {({ register, formState: { errors, isSubmitting } }) => (
+                  <>
+                    {paymentGroupPaymentAffiliationsError?.response?.status ===
+                    404 ? (
+                      <>ユーザーが見つかりません</>
+                    ) : paymentGroupPaymentAffiliations === undefined ? (
+                      <Spinner />
+                    ) : (
+                      <SelectField
+                        error={errors.user_id}
+                        id='user_id'
+                        formLabel='支払ったユーザー'
+                        register={register('user_id')}
+                        mt={5}
+                        options={[
+                          { value: '', label: '選択してください' },
+                          ...paymentGroupPaymentAffiliations.map(
+                            (paymentGroupPaymentAffiliation) => ({
+                              value: paymentGroupPaymentAffiliation.user.id,
+                              label: paymentGroupPaymentAffiliation.user.name,
+                            })
+                          ),
+                        ]}
+                        defaultValue={expense.user.id}
+                      />
+                    )}
+                    <InputField
+                      error={errors.paid_on}
+                      id='paid_on'
+                      formLabel='支払日'
+                      type='date'
+                      register={register('paid_on')}
+                      defaultValue={expense.paid_on}
                       mt={5}
-                      options={[
-                        { value: '', label: '選択してください' },
-                        ...paymentGroupPaymentAffiliations.map(
-                          (paymentGroupPaymentAffiliation) => ({
-                            value: paymentGroupPaymentAffiliation.user.id,
-                            label: paymentGroupPaymentAffiliation.user.name,
-                          })
-                        ),
-                      ]}
-                      defaultValue={expense.user.id}
                     />
-                  )}
-                  <InputField
-                    error={errors.paid_on}
-                    id='paid_on'
-                    formLabel='支払日'
-                    type='date'
-                    register={register('paid_on')}
-                    defaultValue={expense.paid_on}
-                    mt={5}
-                  />
-                  <InputField
-                    error={errors.description}
-                    id='description'
-                    formLabel='説明'
-                    register={register('description')}
-                    defaultValue={expense.description}
-                    placeholder='食費'
-                    mt={5}
-                  />
-                  <NumberInputField
-                    error={errors.amount_of_money}
-                    id='amount_of_money'
-                    formLabel='金額'
-                    register={register('amount_of_money', {
-                      valueAsNumber: true,
-                    })}
-                    placeholder='金額'
-                    defaultValue={expense.amount_of_money}
-                    min={1}
-                    mt={5}
-                  />
-                  <OutlineButton
-                    colorScheme='cyan'
-                    type='submit'
-                    isLoading={isSubmitting}
-                    mt={5}
-                  >
-                    更新
-                  </OutlineButton>
-                </>
-              )}
-            </Form>
+                    <InputField
+                      error={errors.description}
+                      id='description'
+                      formLabel='説明'
+                      register={register('description')}
+                      defaultValue={expense.description}
+                      placeholder='食費'
+                      mt={5}
+                    />
+                    <NumberInputField
+                      error={errors.amount_of_money}
+                      id='amount_of_money'
+                      formLabel='金額'
+                      register={register('amount_of_money', {
+                        valueAsNumber: true,
+                      })}
+                      placeholder='金額'
+                      defaultValue={expense.amount_of_money}
+                      min={1}
+                      mt={5}
+                    />
+                    <OutlineButton
+                      colorScheme='cyan'
+                      type='submit'
+                      isLoading={isSubmitting}
+                      mt={5}
+                    >
+                      更新
+                    </OutlineButton>
+                  </>
+                )}
+              </Form>
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>

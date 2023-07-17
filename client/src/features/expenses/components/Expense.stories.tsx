@@ -5,12 +5,17 @@ import {
   getExpenseHandler,
   updateExpenseHandler,
 } from 'src/test/server/handlers/expense';
+import { getPaymentGroupPaymentAffiliationsHandler } from 'src/test/server/handlers/paymentGroup';
 
 export default {
   component: Expense,
   parameters: {
     msw: {
-      handlers: [getExpenseHandler(), updateExpenseHandler()],
+      handlers: [
+        getExpenseHandler(),
+        updateExpenseHandler(),
+        getPaymentGroupPaymentAffiliationsHandler(),
+      ],
     },
   },
 } as ComponentMeta<typeof Expense>;

@@ -3,6 +3,7 @@ import { BASE_PATH } from 'src/openapi-generator/base';
 import {
   bulkInsertExpensesResponse,
   getExpenseResponse,
+  updateExpenseResponse,
 } from 'src/__fixtures__/expense';
 
 export const bulkInsertExpensesHandler = () =>
@@ -16,4 +17,10 @@ export const getExpenseHandler = () =>
   rest.get(
     `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/expenses/:expense_id`,
     (req, res, ctx) => res(ctx.status(200), ctx.json(getExpenseResponse))
+  );
+
+export const updateExpenseHandler = () =>
+  rest.put(
+    `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/expenses/:expense_id`,
+    (req, res, ctx) => res(ctx.status(200), ctx.json(updateExpenseResponse))
   );

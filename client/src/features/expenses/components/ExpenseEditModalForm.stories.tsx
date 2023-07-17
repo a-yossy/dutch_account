@@ -1,27 +1,27 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Expense } from 'src/features/expenses/components/Expense';
+import { ExpenseEditModalForm } from 'src/features/expenses/components/ExpenseEditModalForm';
+import { getPaymentGroupPaymentAffiliationsHandler } from 'src/test/server/handlers/paymentGroup';
 import {
   getExpenseHandler,
   updateExpenseHandler,
 } from 'src/test/server/handlers/expense';
-import { getPaymentGroupPaymentAffiliationsHandler } from 'src/test/server/handlers/paymentGroup';
 
 export default {
-  component: Expense,
+  component: ExpenseEditModalForm,
   parameters: {
     msw: {
       handlers: [
-        getExpenseHandler(),
-        updateExpenseHandler(),
         getPaymentGroupPaymentAffiliationsHandler(),
+        updateExpenseHandler(),
+        getExpenseHandler(),
       ],
     },
   },
-} as ComponentMeta<typeof Expense>;
+} as ComponentMeta<typeof ExpenseEditModalForm>;
 
-const Template: ComponentStory<typeof Expense> = (args) => (
-  <Expense {...args} />
+const Template: ComponentStory<typeof ExpenseEditModalForm> = (args) => (
+  <ExpenseEditModalForm {...args} />
 );
 
 export const Default = Template.bind({});

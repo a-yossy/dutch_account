@@ -10,7 +10,7 @@ import {
 import { UseFormReset } from 'react-hook-form';
 import { mutate } from 'swr';
 
-export const useBulkInsertExpenseWithDebtRecords = (
+export const useBulkInsertExpenses = (
   managementGroupId: string,
   paymentGroupId: string,
   setExpenses: Dispatch<SetStateAction<Expense[]>>,
@@ -18,7 +18,7 @@ export const useBulkInsertExpenseWithDebtRecords = (
   append: () => void
 ) => {
   const toast = useToast();
-  const bulkInsertExpenseWithDebtRecords = useCallback(
+  const bulkInsertExpenses = useCallback(
     async (
       params: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest
     ) => {
@@ -50,5 +50,5 @@ export const useBulkInsertExpenseWithDebtRecords = (
     [append, managementGroupId, paymentGroupId, reset, setExpenses, toast]
   );
 
-  return bulkInsertExpenseWithDebtRecords;
+  return bulkInsertExpenses;
 };

@@ -48,3 +48,19 @@ export const getExpenseResponse: Expense = {
   paid_on: '2021-01-01',
   is_paid: false,
 };
+
+export const updateExpenseResponse: Expense = {
+  id: '1',
+  user: {
+    id: '1',
+    name: '太郎',
+  },
+  payment_group: {
+    id: '1',
+    name: 'group1',
+  },
+  amount_of_money: 1000,
+  description: '食費',
+  paid_on: '2021-01-01',
+  is_paid: false,
+};

@@ -27,7 +27,7 @@ import {
   NumberInputField,
   SelectField,
 } from 'src/components/parts';
-import { useBulkInsertExpenseWithDebtRecords } from 'src/features/expenses/api/bulkInsertExpenseWithDebtRecords';
+import { useBulkInsertExpenses } from 'src/features/expenses/api/bulkInsertExpenses';
 import { BulkInsertExpenseWithDebtRecordsSchema } from 'src/features/expenses/formSchemas/bulkInsertExpensesSchema';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -67,7 +67,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
     append({ user_id: '', paid_on: '', description: '', amount_of_money: 0 });
   }, [append]);
 
-  const bulkInsertExpenseWithDebtRecords = useBulkInsertExpenseWithDebtRecords(
+  const bulkInsertExpenses = useBulkInsertExpenses(
     managementGroupId,
     paymentGroupId,
     setExpenses,
@@ -111,7 +111,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
               <ModalBody>
                 <Box
                   as='form'
-                  onSubmit={handleSubmit(bulkInsertExpenseWithDebtRecords)}
+                  onSubmit={handleSubmit(bulkInsertExpenses)}
                   width={350}
                   mx='auto'
                 >

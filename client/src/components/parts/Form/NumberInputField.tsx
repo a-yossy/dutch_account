@@ -12,13 +12,18 @@ import {
   NumberInputField as NextNumberInputField,
 } from '@chakra-ui/react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import { OmitStrict } from 'src/types/omitStrict';
 
-type NumberInputFieldProps = FieldWrapperPassThroughProps & {
+type NumberInputFieldProps = OmitStrict<
+  FieldWrapperPassThroughProps,
+  'defaultValue'
+> & {
   min?: NumberInputProps['min'];
   max?: NumberInputProps['max'];
   precision?: NumberInputProps['precision'];
   step?: NumberInputProps['step'];
   register: UseFormRegisterReturn;
+  defaultValue?: NumberInputProps['defaultValue'];
 };
 
 export const NumberInputField: FC<NumberInputFieldProps> = ({
@@ -30,10 +35,17 @@ export const NumberInputField: FC<NumberInputFieldProps> = ({
   max,
   precision,
   step,
+  defaultValue,
   ...props
 }) => (
   <FieldWrapper error={error} id={id} formLabel={formLabel} {...props}>
-    <NumberInput min={min} max={max} step={step} precision={precision}>
+    <NumberInput
+      min={min}
+      max={max}
+      step={step}
+      precision={precision}
+      defaultValue={defaultValue}
+    >
       <NextNumberInputField id={id} {...register} />
       <NumberInputStepper>
         <NumberIncrementStepper />

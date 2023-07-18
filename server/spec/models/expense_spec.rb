@@ -104,7 +104,7 @@ RSpec.describe Expense, type: :model do
       end
 
       it 'does not destroy the expense' do
-        expect { described_class.first.destroy }.not_to change(described_class, :count).and not_to change(DebtRecord, :count)
+        expect { described_class.first.destroy }.to not_change(described_class, :count).and not_change(DebtRecord, :count)
       end
     end
 

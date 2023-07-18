@@ -10,7 +10,9 @@ class DebtRecord < ApplicationRecord
   validate :check_lending_user_and_borrowing_user_are_different, if: %i[lending_user borrowing_user]
   validate :check_borrowing_user_belongs_to_payment_group, if: %i[borrowing_user expense]
   validate :check_lending_user_is_same_as_expense_user, if: %i[lending_user expense]
-  validate :check_payment_is_completed, on: :update
+  validate :check_payment_is_completed_when_updating, on: :update
+
+  before_destroy :check_payment_is_completed_when_destroying, prepend: true
 
   scope :unpaid, -> { where(is_paid: false) }
 
@@ -34,7 +36,14 @@ class DebtRecord < ApplicationRecord
     errors.add(:lending_user, 'は支払ったユーザーと同じユーザーにしてください')
   end
 
-  def check_payment_is_completed
+  def check_payment_is_completed_when_updating
     errors.add(:base, '返済が完了しているため更新できません') if is_paid_was
+  end
+
+  def check_payment_is_completed_when_destroying
+    return unless is_paid
+
+    errors.add(:base, '返済が完了しているため削除できません')
+    throw :abort
   end
 end

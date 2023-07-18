@@ -91,6 +91,23 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - expense
+      summary: 費用を削除
+      description: 費用を削除する
+      operationId: deleteExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseId
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses/bulk_insert:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"

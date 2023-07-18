@@ -13,7 +13,6 @@ import {
   Checkbox,
   HStack,
   Stack,
-  Center,
 } from '@chakra-ui/react';
 import { OutlineButton } from 'src/components/elements';
 import {
@@ -84,11 +83,9 @@ export const PaymentRelationCreateModalForm: FC<
 
   return (
     <>
-      <Center>
-        <OutlineButton onClick={onOpen} colorScheme='teal'>
-          支払グループ作成
-        </OutlineButton>
-      </Center>
+      <OutlineButton onClick={onOpen} colorScheme='teal'>
+        支払グループ作成
+      </OutlineButton>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

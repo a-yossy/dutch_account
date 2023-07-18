@@ -1,4 +1,11 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Center,
+} from '@chakra-ui/react';
 import { FC } from 'react';
 import { ManagementGroup, PaymentGroup } from 'src/openapi-generator';
 import { PaymentGroupExpensesList } from 'src/features/payment_groups/components/PaymentGroupExpensesList';
@@ -27,10 +34,12 @@ export const PaymentGroupTab: FC<PaymentGroupTabProps> = ({
         />
       </TabPanel>
       <TabPanel>
-        <ExpensesCreateModalForm
-          managementGroupId={managementGroupId}
-          paymentGroupId={paymentGroupId}
-        />
+        <Center>
+          <ExpensesCreateModalForm
+            managementGroupId={managementGroupId}
+            paymentGroupId={paymentGroupId}
+          />
+        </Center>
         <PaymentGroupExpensesList
           managementGroupId={managementGroupId}
           paymentGroupId={paymentGroupId}

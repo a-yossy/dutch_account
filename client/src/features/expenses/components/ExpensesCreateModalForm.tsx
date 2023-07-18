@@ -7,7 +7,6 @@ import {
   PaymentGroup,
 } from 'src/openapi-generator';
 import {
-  Center,
   Modal,
   useDisclosure,
   ModalOverlay,
@@ -83,24 +82,22 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
 
   return (
     <>
-      <Center>
-        <HStack>
-          <OutlineButton
-            onClick={() => {
-              setExpenses([]);
-              onOpen();
-            }}
-            colorScheme='teal'
-          >
-            費用作成
+      <HStack>
+        <OutlineButton
+          onClick={() => {
+            setExpenses([]);
+            onOpen();
+          }}
+          colorScheme='teal'
+        >
+          費用作成
+        </OutlineButton>
+        {expenses.length !== 0 && (
+          <OutlineButton onClick={onOpen} colorScheme='yellow'>
+            作成費用確認
           </OutlineButton>
-          {expenses.length !== 0 && (
-            <OutlineButton onClick={onOpen} colorScheme='yellow'>
-              作成費用確認
-            </OutlineButton>
-          )}
-        </HStack>
-      </Center>
+        )}
+      </HStack>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

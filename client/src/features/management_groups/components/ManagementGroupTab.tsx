@@ -1,5 +1,12 @@
 import { FC } from 'react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Center,
+} from '@chakra-ui/react';
 import { ManagementGroup } from 'src/openapi-generator';
 import { ManagementGroupUsersList } from 'src/features/management_groups/components/ManagementGroupUsersList';
 import { ManagementGroupPaymentGroupsList } from 'src/features/management_groups/components/ManagementGroupPaymentGroupsList';
@@ -22,7 +29,11 @@ export const ManagementGroupTab: FC<ManagementGroupTabProps> = ({
         <ManagementGroupUsersList managementGroupId={managementGroupId} />
       </TabPanel>
       <TabPanel>
-        <PaymentRelationCreateModalForm managementGroupId={managementGroupId} />
+        <Center>
+          <PaymentRelationCreateModalForm
+            managementGroupId={managementGroupId}
+          />
+        </Center>
         <ManagementGroupPaymentGroupsList
           managementGroupId={managementGroupId}
         />

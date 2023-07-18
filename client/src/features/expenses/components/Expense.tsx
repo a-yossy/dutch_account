@@ -6,9 +6,10 @@ import {
 } from 'src/openapi-generator';
 import { useGetExpense } from 'src/features/expenses/api/getExpense';
 import { CenterTitle, NoDecorationLink } from 'src/components/elements';
-import { Spinner, Box } from '@chakra-ui/react';
+import { Spinner, Box, Center, HStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { ExpenseEditModalForm } from 'src/features/expenses/components/ExpenseEditModalForm';
+import { ExpenseDeleteDialog } from './ExpenseDeleteDialog';
 
 type ExpenseProps = {
   managementGroupId: ManagementGroup['id'];
@@ -33,11 +34,20 @@ export const Expense: FC<ExpenseProps> = ({
 
   return (
     <>
-      <ExpenseEditModalForm
-        managementGroupId={managementGroupId}
-        paymentGroupId={paymentGroupId}
-        expenseId={expenseId}
-      />
+      <Center mt={5}>
+        <HStack>
+          <ExpenseEditModalForm
+            managementGroupId={managementGroupId}
+            paymentGroupId={paymentGroupId}
+            expenseId={expenseId}
+          />
+          <ExpenseDeleteDialog
+            managementGroupId={managementGroupId}
+            paymentGroupId={paymentGroupId}
+            expenseId={expenseId}
+          />
+        </HStack>
+      </Center>
       <div>
         {expense === undefined && <Spinner />}
         {expense !== undefined && (

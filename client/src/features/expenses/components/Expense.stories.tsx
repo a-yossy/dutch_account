@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Expense } from 'src/features/expenses/components/Expense';
 import {
+  deleteExpenseHandler,
   getExpenseHandler,
   updateExpenseHandler,
 } from 'src/test/server/handlers/expense';
@@ -15,6 +16,7 @@ export default {
         getExpenseHandler(),
         updateExpenseHandler(),
         getPaymentGroupPaymentAffiliationsHandler(),
+        deleteExpenseHandler(),
       ],
     },
   },

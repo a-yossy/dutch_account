@@ -12,6 +12,8 @@ class DebtRecord < ApplicationRecord
   validate :check_lending_user_is_same_as_expense_user, if: %i[lending_user expense]
   validate :check_payment_is_completed_when_updating, on: :update
 
+  before_destroy :check_payment_is_completed_when_destroying, prepend: true
+
   scope :unpaid, -> { where(is_paid: false) }
 
   private
@@ -36,5 +38,12 @@ class DebtRecord < ApplicationRecord
 
   def check_payment_is_completed_when_updating
     errors.add(:base, '返済が完了しているため更新できません') if is_paid_was
+  end
+
+  def check_payment_is_completed_when_destroying
+    return unless is_paid
+
+    errors.add(:base, '返済が完了しているため削除できません')
+    throw :abort
   end
 end

@@ -151,4 +151,52 @@ RSpec.describe DebtRecord, type: :model do
       end
     end
   end
+
+  describe '#check_payment_is_completed_when_destroying' do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let(:management_group) { create(:management_group) }
+    let(:payment_group) { create(:payment_group, management_group:) }
+
+    before do
+      create(:management_affiliation, user:, management_group:)
+      create(:management_affiliation, user: other_user, management_group:)
+      create(:payment_affiliation, user:, payment_group:)
+      create(:payment_affiliation, user: other_user, payment_group:)
+      ExpenseWithDebtRecordsCreator.new(
+        expenses_params: [
+          { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+        ],
+        payment_group:
+      ).call!
+    end
+
+    context 'when the payment is completed' do
+      before do
+        Expense.first.debt_records.update(is_paid: true)
+      end
+
+      it 'includes an error' do
+        debt_record = Expense.first.debt_records.first
+        debt_record.destroy
+        expect(debt_record.errors[:base]).to include '返済が完了しているため削除できません'
+      end
+
+      it 'does not destroy the debt record' do
+        expect { Expense.first.debt_records.first.destroy }.not_to change(described_class, :count)
+      end
+    end
+
+    context 'when the payment is not completed' do
+      it 'does not include an error' do
+        debt_record = Expense.first.debt_records.first
+        debt_record.destroy
+        expect(debt_record.errors[:base]).to be_empty
+      end
+
+      it 'destroys the debt record' do
+        expect { Expense.first.debt_records.first.destroy }.to change(described_class, :count).by(-1)
+      end
+    end
+  end
 end

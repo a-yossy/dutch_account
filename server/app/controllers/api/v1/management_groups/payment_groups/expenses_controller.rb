@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Api::V1::ManagementGroups::PaymentGroups::ApplicationController
-  before_action :set_expense, only: %i[show update]
+  before_action :set_expense, only: %i[show update destroy]
 
   def index
     render json: ExpenseResource.new(@payment_group.expenses.preload(:debt_records).eager_load(%w[user
@@ -24,6 +24,13 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Api::V1::Ma
     expense = ExpenseWithDebtRecordsUpdator.new(expense_params:, expense: @expense, payment_group: @payment_group).call!.expense
     render json: ExpenseResource.new(expense).serialize
   rescue ActiveRecord::RecordInvalid => e
+    render_bad_request_error(e)
+  end
+
+  def destroy
+    @expense.destroy!
+    render status: :no_content
+  rescue ActiveRecord::RecordNotDestroyed => e
     render_bad_request_error(e)
   end
 

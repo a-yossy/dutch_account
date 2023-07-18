@@ -275,10 +275,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
       context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
           subject
-          expect do
-            expense = Expense.find_by(user: other_user)
-            DebtRecord.find_by!(lending_user: other_user, borrowing_user: other_user2, expense:)
-          end.not_to raise_error
           assert_response_schema_confirm(404)
         end
       end
@@ -289,10 +285,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
         context 'when the payment_group related to the management_group does not exist' do
           it 'returns not_found response' do
             subject
-            expect do
-              expense = Expense.find_by(user: other_user)
-              DebtRecord.find_by!(lending_user: other_user, borrowing_user: other_user2, expense:)
-            end.not_to raise_error
             assert_response_schema_confirm(404)
           end
         end
@@ -305,10 +297,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           context 'when the expense related to the payment_group does not exist' do
             it 'returns not_found response' do
               subject
-              expect do
-                expense = Expense.find_by(user: other_user)
-                DebtRecord.find_by!(lending_user: other_user, borrowing_user: other_user2, expense:)
-              end.not_to raise_error
               assert_response_schema_confirm(404)
             end
           end
@@ -334,10 +322,6 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
               it 'returns bad_request response' do
                 subject
-                expect do
-                  expense = Expense.find_by(user:)
-                  DebtRecord.find_by!(lending_user: user, borrowing_user: user2, expense:)
-                end.not_to raise_error
                 assert_response_schema_confirm(400)
               end
             end
@@ -346,11 +330,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
               let(:params) { { user_id: user2.id.to_s, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today } }
 
               it 'returns success response' do
-                subject
-                expect do
-                  expense = Expense.find_by(user: user2)
-                  DebtRecord.find_by!(lending_user: user2, borrowing_user: user, expense:)
-                end.not_to raise_error
+                expect { subject }.to change { Expense.find(expense.id).user_id }.from(user.id).to(user2.id)
                 assert_response_schema_confirm(200)
               end
             end
@@ -364,10 +344,118 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
       it 'returns unauthorized response' do
         subject
-        expect do
-          expense = Expense.find_by(user: other_user)
-          DebtRecord.find_by!(lending_user: other_user, borrowing_user: other_user2, expense:)
-        end.not_to raise_error
+        assert_response_schema_confirm(401)
+      end
+    end
+  end
+
+  describe '#destroy' do
+    subject { delete api_v1_management_group_payment_group_expense_path(management_group, payment_group, expense), headers: auth_tokens }
+
+    let(:management_group) { create(:management_group) }
+    let(:payment_group) { create(:payment_group) }
+    let(:other_payment_group) { create(:payment_group, management_group:) }
+    let(:other_user) { create(:user) }
+    let(:other_user2) { create(:user) }
+    let(:expense) do
+      ExpenseWithDebtRecordsCreator.new(
+        expenses_params: [
+          { user_id: other_user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+        ],
+        payment_group: other_payment_group
+      ).call!.expenses.first
+    end
+    let(:params) { {} }
+
+    before do
+      create(:management_affiliation, user: other_user, management_group:)
+      create(:management_affiliation, user: other_user2, management_group:)
+      create(:payment_affiliation, user: other_user, payment_group: other_payment_group)
+      create(:payment_affiliation, user: other_user2, payment_group: other_payment_group)
+    end
+
+    context 'when the user logs in' do
+      let(:user) { create(:user) }
+      let(:auth_tokens) { log_in(user) }
+
+      context 'when the management_group related to the user does not exist' do
+        it 'returns not_found response' do
+          expense
+          expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
+          assert_response_schema_confirm(404)
+        end
+      end
+
+      context 'when the management_group related to the user exists' do
+        before { create(:management_affiliation, user:, management_group:) }
+
+        context 'when the payment_group related to the management_group does not exist' do
+          it 'returns not_found response' do
+            expense
+            expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
+            assert_response_schema_confirm(404)
+          end
+        end
+
+        context 'when the payment_group related to the management_group exists' do
+          before { create(:payment_affiliation, user:, payment_group:) }
+
+          let(:payment_group) { create(:payment_group, management_group:) }
+
+          context 'when the expense related to the payment_group does not exist' do
+            it 'reuturns not_found response' do
+              expense
+              expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
+              assert_response_schema_confirm(404)
+            end
+          end
+
+          context 'when the expense related to the payment_group exists' do
+            let(:user2) { create(:user) }
+            let(:expense) do
+              ExpenseWithDebtRecordsCreator.new(
+                expenses_params: [
+                  { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+                ],
+                payment_group:
+              ).call!.expenses.first
+            end
+
+            before do
+              create(:management_affiliation, user: user2, management_group:)
+              create(:payment_affiliation, user: user2, payment_group:)
+            end
+
+            context 'when payment of the debt records of the expense is completed' do
+              before do
+                expense.debt_records.update(is_paid: true)
+              end
+
+              it 'returns bad_request response' do
+                expense
+                expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
+                assert_response_schema_confirm(400)
+              end
+            end
+
+            context 'when payment of the debt records of the expense is not completed' do
+              it 'returns no_content response' do
+                expense
+                expect { subject }.to change(Expense, :count).by(-1).and change(DebtRecord, :count).by(-1)
+                assert_response_schema_confirm(204)
+              end
+            end
+          end
+        end
+      end
+    end
+
+    context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
+      it 'returns unauthorized response' do
+        expense
+        expect { subject }.to not_change(Expense, :count).and not_change(DebtRecord, :count)
         assert_response_schema_confirm(401)
       end
     end

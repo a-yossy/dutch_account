@@ -7,7 +7,6 @@ import {
 } from 'src/openapi-generator';
 import { useUpdateExpense } from 'src/features/expenses/api/updateExpense';
 import {
-  Center,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -59,11 +58,9 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
 
   return (
     <>
-      <Center mt={5}>
-        <OutlineButton colorScheme='green' onClick={onOpen}>
-          編集
-        </OutlineButton>
-      </Center>
+      <OutlineButton colorScheme='green' onClick={onOpen}>
+        編集
+      </OutlineButton>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

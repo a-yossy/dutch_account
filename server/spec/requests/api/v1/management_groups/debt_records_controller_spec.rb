@@ -1,0 +1,55 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe Api::V1::ManagementGroups::DebtRecordsController, type: :request do
+  describe '#mark_as_paid' do
+    subject { put mark_as_paid_api_v1_management_group_debt_records_path(management_group), headers: auth_tokens }
+
+    let(:management_group) { create(:management_group) }
+
+    context 'when the user logs in' do
+      let(:user) { create(:user) }
+      let(:auth_tokens) { log_in(user) }
+
+      context 'when the management_group related to the user does not exist' do
+        it 'returns not_found response' do
+          subject
+          assert_response_schema_confirm(404)
+        end
+      end
+
+      context 'when the management_group related to the user exists' do
+        let(:other_user) { create(:user) }
+        let(:payment_group) { create(:payment_group, management_group:) }
+
+        before do
+          create(:management_affiliation, user:, management_group:)
+          create(:management_affiliation, user: other_user, management_group:)
+          create(:payment_affiliation, payment_group:, user:)
+          create(:payment_affiliation, payment_group:, user: other_user)
+          ExpenseWithDebtRecordsCreator.new(
+            expenses_params: [
+              { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
+            ],
+            payment_group:
+          ).call!
+        end
+
+        it 'returns no_content response' do
+          expect { subject }.to change { DebtRecord.first.is_paid }.from(false).to(true)
+          assert_response_schema_confirm(204)
+        end
+      end
+    end
+
+    context 'when the user does not log in' do
+      let(:auth_tokens) { nil }
+
+      it 'returns unauthorized response' do
+        subject
+        assert_response_schema_confirm(401)
+      end
+    end
+  end
+end

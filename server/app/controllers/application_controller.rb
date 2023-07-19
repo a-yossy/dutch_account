@@ -26,4 +26,10 @@ class ApplicationController < ActionController::API
       messages: error.message.split(', ')
     }, status: :bad_request
   end
+
+  def render_unprocessable_entity_error(error)
+    render json: {
+      messages: error.message.split(', ')
+    }, status: :unprocessable_entity
+  end
 end

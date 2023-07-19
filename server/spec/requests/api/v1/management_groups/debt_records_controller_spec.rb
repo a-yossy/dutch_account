@@ -14,7 +14,7 @@ RSpec.describe Api::V1::ManagementGroups::DebtRecordsController, type: :request 
 
       context 'when the management_group related to the user does not exist' do
         it 'returns not_found response' do
-          subject
+          expect { subject }.not_to change(management_group.debt_records.where(is_paid: true), :count)
           assert_response_schema_confirm(404)
         end
       end
@@ -36,9 +36,22 @@ RSpec.describe Api::V1::ManagementGroups::DebtRecordsController, type: :request 
           ).call!
         end
 
-        it 'returns no_content response' do
-          expect { subject }.to change { DebtRecord.first.is_paid }.from(false).to(true)
-          assert_response_schema_confirm(204)
+        context 'when the unpaid debt record does not exist' do
+          before do
+            DebtRecordsPaymentCompleter.new(management_group).call!
+          end
+
+          it 'returns unprocessable_entity response' do
+            expect { subject }.not_to change(management_group.debt_records.where(is_paid: true), :count)
+            assert_response_schema_confirm(422)
+          end
+        end
+
+        context 'when the unpaid debt record exists' do
+          it 'returns no_content response' do
+            expect { subject }.to change { management_group.debt_records.where(is_paid: true).count }.from(0).to(1)
+            assert_response_schema_confirm(204)
+          end
         end
       end
     end
@@ -47,7 +60,7 @@ RSpec.describe Api::V1::ManagementGroups::DebtRecordsController, type: :request 
       let(:auth_tokens) { nil }
 
       it 'returns unauthorized response' do
-        subject
+        expect { subject }.not_to change(management_group.debt_records.where(is_paid: true), :count)
         assert_response_schema_confirm(401)
       end
     end

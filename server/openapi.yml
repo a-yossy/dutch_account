@@ -7,6 +7,7 @@ servers:
   - url: http://localhost:8000/api/v1
     description: 開発環境
 tags:
+  - name: debtRecord
   - name: expense
   - name: managementGroup
   - name: paymentGroup
@@ -19,6 +20,26 @@ security:
     uid: []
     client: []
 paths:
+  /management_groups/{management_group_id}/debt_records/mark_as_paid:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    put:
+      tags:
+        - debtRecord
+      summary: 管理グループに紐づく全ての借金履歴を返済済みに更新
+      description: 管理グループに紐づく全ての借金履歴を返済済みに更新する
+      operationId: markAsPaidToDebtRecordsByManagementGroupId
+      responses:
+        204:
+          $ref: "#/components/responses/NoContent"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        422:
+          $ref: "#/components/responses/UnprocessableEntity"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/expenses:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"

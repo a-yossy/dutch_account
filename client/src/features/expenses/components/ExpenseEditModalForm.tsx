@@ -54,6 +54,13 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const handleSubmit = (
+    params: UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest
+  ) => {
+    void updateExpense(params);
+    onClose();
+  };
+
   if (expenseError?.response?.status === 404) return <>費用が見つかりません</>;
 
   return (
@@ -74,7 +81,7 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
                 UpdateExpenseByManagementGroupIdAndPaymentGroupIdAndExpenseIdRequest,
                 typeof UpdateExpenseSchema
               >
-                onSubmit={updateExpense}
+                onSubmit={handleSubmit}
                 mx='auto'
                 schema={UpdateExpenseSchema}
                 width={350}

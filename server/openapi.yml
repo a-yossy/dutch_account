@@ -28,7 +28,7 @@ paths:
         - debtRecord
       summary: 管理グループに紐づく全ての借金履歴を返済済みに更新
       description: 管理グループに紐づく全ての借金履歴を返済済みに更新する
-      operationId: markAsPaidToDebtRecordsByManagementGroupId
+      operationId: markDebtRecordsAsPaidByManagementGroupId
       responses:
         204:
           $ref: "#/components/responses/NoContent"

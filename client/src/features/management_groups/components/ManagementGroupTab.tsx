@@ -11,6 +11,7 @@ import { ManagementGroup } from 'src/openapi-generator';
 import { ManagementGroupUsersList } from 'src/features/management_groups/components/ManagementGroupUsersList';
 import { ManagementGroupPaymentGroupsList } from 'src/features/management_groups/components/ManagementGroupPaymentGroupsList';
 import { PaymentRelationCreateModalForm } from 'src/features/payment_relations/components/PaymentRelationCreateModalForm';
+import { MarkDebtRecordsAsPaidDialog } from 'src/features/debt_records/components/MarkDebtRecordsAsPaidDialog';
 
 type ManagementGroupTabProps = {
   managementGroupId: ManagementGroup['id'];
@@ -26,6 +27,9 @@ export const ManagementGroupTab: FC<ManagementGroupTabProps> = ({
     </TabList>
     <TabPanels>
       <TabPanel>
+        <Center>
+          <MarkDebtRecordsAsPaidDialog managementGroupId={managementGroupId} />
+        </Center>
         <ManagementGroupUsersList managementGroupId={managementGroupId} />
       </TabPanel>
       <TabPanel>

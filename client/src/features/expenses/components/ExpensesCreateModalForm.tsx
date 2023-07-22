@@ -48,7 +48,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
 
   const {
     control,
-    handleSubmit,
+    handleSubmit: reactHookFormHandleSubmit,
     register,
     reset,
     formState: { errors, isSubmitting, isSubmitted },
@@ -73,6 +73,13 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
     reset,
     handleAddClick
   );
+
+  const handleSubmit = (
+    params: BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest
+  ) => {
+    void bulkInsertExpenses(params);
+    onClose();
+  };
 
   useEffect(() => {
     handleAddClick();
@@ -108,7 +115,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
               <ModalBody>
                 <Box
                   as='form'
-                  onSubmit={handleSubmit(bulkInsertExpenses)}
+                  onSubmit={reactHookFormHandleSubmit(handleSubmit)}
                   width={350}
                   mx='auto'
                 >

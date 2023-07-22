@@ -1,6 +1,6 @@
 import { FC, useRef } from 'react';
-import { ManagementGroup, PaymentGroup, Expense } from 'src/openapi-generator';
-import { useDeleteExpense } from 'src/features/expenses/api/deleteExpense';
+import { ManagementGroup } from 'src/openapi-generator';
+import { useMarkDebtRecordsAsPaid } from 'src/features/debt_records/api/markDebtRecordsAsPaid';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -12,36 +12,26 @@ import {
 } from '@chakra-ui/react';
 import { OutlineButton } from 'src/components/elements';
 
-type ExpenseDeleteDialogProps = {
+type MarkDebtRecordsAsPaidDialogProps = {
   managementGroupId: ManagementGroup['id'];
-  paymentGroupId: PaymentGroup['id'];
-  expenseId: Expense['id'];
 };
 
-export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
-  managementGroupId,
-  paymentGroupId,
-  expenseId,
-}) => {
-  const deleteExpense = useDeleteExpense(
-    managementGroupId,
-    paymentGroupId,
-    expenseId
-  );
-
+export const MarkDebtRecordsAsPaidDialog: FC<
+  MarkDebtRecordsAsPaidDialogProps
+> = ({ managementGroupId }) => {
+  const markDebtRecordsAsPaid = useMarkDebtRecordsAsPaid(managementGroupId);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const cancelRef = useRef(null);
 
   const handleClick = () => {
-    void deleteExpense();
+    void markDebtRecordsAsPaid();
     onClose();
   };
 
   return (
     <>
-      <OutlineButton onClick={onOpen} colorScheme='red'>
-        削除
+      <OutlineButton colorScheme='green' onClick={onOpen}>
+        支払完了
       </OutlineButton>
       <AlertDialog
         isOpen={isOpen}
@@ -50,14 +40,14 @@ export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader>費用削除</AlertDialogHeader>
-            <AlertDialogBody>本当に削除しますか？</AlertDialogBody>
+            <AlertDialogHeader>支払完了</AlertDialogHeader>
+            <AlertDialogBody>本当に支払完了にしますか？</AlertDialogBody>
             <AlertDialogFooter>
               <OutlineButton onClick={onClose} ref={cancelRef}>
                 キャンセル
               </OutlineButton>
-              <OutlineButton colorScheme='red' onClick={handleClick} ml={3}>
-                削除
+              <OutlineButton colorScheme='green' onClick={handleClick} ml={3}>
+                完了
               </OutlineButton>
             </AlertDialogFooter>
           </AlertDialogContent>

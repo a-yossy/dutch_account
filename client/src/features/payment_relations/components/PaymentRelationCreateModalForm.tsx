@@ -44,7 +44,7 @@ export const PaymentRelationCreateModalForm: FC<
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     control,
-    handleSubmit,
+    handleSubmit: reactHookFormHandleSubmit,
     register,
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm<BulkInsertPaymentRelationByManagementGroupIdRequest>({
@@ -81,6 +81,13 @@ export const PaymentRelationCreateModalForm: FC<
     }
   };
 
+  const handleSubmit = (
+    params: BulkInsertPaymentRelationByManagementGroupIdRequest
+  ) => {
+    void bulkInsertPaymentRelation(params);
+    onClose();
+  };
+
   return (
     <>
       <OutlineButton onClick={onOpen} colorScheme='teal'>
@@ -94,7 +101,7 @@ export const PaymentRelationCreateModalForm: FC<
           <ModalBody>
             <Box
               as='form'
-              onSubmit={handleSubmit(bulkInsertPaymentRelation)}
+              onSubmit={reactHookFormHandleSubmit(handleSubmit)}
               width={350}
               mx='auto'
             >

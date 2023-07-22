@@ -33,6 +33,11 @@ export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
 
   const cancelRef = useRef(null);
 
+  const handleClick = () => {
+    void deleteExpense();
+    onClose();
+  };
+
   return (
     <>
       <OutlineButton onClick={onOpen} colorScheme='red'>
@@ -51,7 +56,7 @@ export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
               <OutlineButton onClick={onClose} ref={cancelRef}>
                 キャンセル
               </OutlineButton>
-              <OutlineButton colorScheme='red' onClick={deleteExpense} ml={3}>
+              <OutlineButton colorScheme='red' onClick={handleClick} ml={3}>
                 削除
               </OutlineButton>
             </AlertDialogFooter>

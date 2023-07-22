@@ -7,6 +7,7 @@ import {
   getManagementGroupPaymentGroupsHandler,
 } from 'src/test/server/handlers/paymentGroup';
 import { getManagementGroupTotalBorrowingAndLendingsHandler } from 'src/test/server/handlers/totalBorrowingAndLending';
+import { markDebtRecordsAsPaidHandler } from 'src/test/server/handlers/debtRecord';
 
 export default {
   component: ManagementGroupTab,
@@ -17,6 +18,7 @@ export default {
         getManagementGroupPaymentGroupsHandler(),
         bulkInsertPaymentRelationHandler(),
         getManagementGroupTotalBorrowingAndLendingsHandler(),
+        markDebtRecordsAsPaidHandler(),
       ],
     },
   },

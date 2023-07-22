@@ -35,9 +35,9 @@ export const DebtRecordApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        markAsPaidToDebtRecordsByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        markDebtRecordsAsPaidByManagementGroupId: async (managementGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('markAsPaidToDebtRecordsByManagementGroupId', 'managementGroupId', managementGroupId)
+            assertParamExists('markDebtRecordsAsPaidByManagementGroupId', 'managementGroupId', managementGroupId)
             const localVarPath = `/management_groups/{management_group_id}/debt_records/mark_as_paid`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -88,8 +88,8 @@ export const DebtRecordApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async markAsPaidToDebtRecordsByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.markAsPaidToDebtRecordsByManagementGroupId(managementGroupId, options);
+        async markDebtRecordsAsPaidByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.markDebtRecordsAsPaidByManagementGroupId(managementGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -109,8 +109,8 @@ export const DebtRecordApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        markAsPaidToDebtRecordsByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.markAsPaidToDebtRecordsByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
+        markDebtRecordsAsPaidByManagementGroupId(managementGroupId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.markDebtRecordsAsPaidByManagementGroupId(managementGroupId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -130,7 +130,7 @@ export class DebtRecordApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof DebtRecordApi
      */
-    public markAsPaidToDebtRecordsByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
-        return DebtRecordApiFp(this.configuration).markAsPaidToDebtRecordsByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
+    public markDebtRecordsAsPaidByManagementGroupId(managementGroupId: string, options?: AxiosRequestConfig) {
+        return DebtRecordApiFp(this.configuration).markDebtRecordsAsPaidByManagementGroupId(managementGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 }

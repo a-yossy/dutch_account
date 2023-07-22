@@ -30,8 +30,10 @@ class Api::V1::ManagementGroups::PaymentGroups::ExpensesController < Api::V1::Ma
   def destroy
     @expense.destroy!
     render status: :no_content
-  rescue ActiveRecord::RecordNotDestroyed => e
-    render_bad_request_error(e)
+  rescue ActiveRecord::RecordNotDestroyed
+    render json: {
+      messages: @expense.errors.full_messages
+    }, status: :bad_request
   end
 
   private

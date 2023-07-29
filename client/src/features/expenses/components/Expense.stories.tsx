@@ -1,11 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Expense } from 'src/features/expenses/components/Expense';
-import {
-  deleteExpenseHandler,
-  getExpenseHandler,
-  updateExpenseHandler,
-} from 'src/test/server/handlers/expense';
+import { getExpenseHandler } from 'src/test/server/handlers/expense';
 import { getPaymentGroupPaymentAffiliationsHandler } from 'src/test/server/handlers/paymentGroup';
 
 export default {
@@ -14,9 +10,7 @@ export default {
     msw: {
       handlers: [
         getExpenseHandler(),
-        updateExpenseHandler(),
         getPaymentGroupPaymentAffiliationsHandler(),
-        deleteExpenseHandler(),
       ],
     },
   },

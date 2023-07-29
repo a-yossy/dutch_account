@@ -1,13 +1,16 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ExpenseDeleteDialog } from 'src/features/expenses/components/ExpenseDeleteDialog';
-import { deleteExpenseHandler } from 'src/test/server/handlers/expense';
+import {
+  deleteExpenseHandler,
+  getExpenseHandler,
+} from 'src/test/server/handlers/expense';
 
 export default {
   component: ExpenseDeleteDialog,
   parameters: {
     msw: {
-      handlers: [deleteExpenseHandler()],
+      handlers: [deleteExpenseHandler(), getExpenseHandler()],
     },
   },
 } as ComponentMeta<typeof ExpenseDeleteDialog>;

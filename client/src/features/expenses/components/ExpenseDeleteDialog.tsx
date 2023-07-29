@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { OutlineButton } from 'src/components/elements';
+import { useGetExpense } from 'src/features/expenses/api/getExpense';
 
 type ExpenseDeleteDialogProps = {
   managementGroupId: ManagementGroup['id'];
@@ -23,6 +24,12 @@ export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
   paymentGroupId,
   expenseId,
 }) => {
+  const { expense, error } = useGetExpense(
+    managementGroupId,
+    paymentGroupId,
+    expenseId
+  );
+
   const deleteExpense = useDeleteExpense(
     managementGroupId,
     paymentGroupId,
@@ -38,9 +45,18 @@ export const ExpenseDeleteDialog: FC<ExpenseDeleteDialogProps> = ({
     onClose();
   };
 
+  if (error?.response?.status === 404) {
+    return <>費用が見つかりません</>;
+  }
+
   return (
     <>
-      <OutlineButton onClick={onOpen} colorScheme='red'>
+      <OutlineButton
+        onClick={onOpen}
+        colorScheme='red'
+        isDisabled={expense?.is_paid}
+        isLoading={expense === undefined}
+      >
         削除
       </OutlineButton>
       <AlertDialog

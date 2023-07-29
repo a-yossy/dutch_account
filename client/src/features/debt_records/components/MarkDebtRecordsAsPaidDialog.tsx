@@ -11,6 +11,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { OutlineButton } from 'src/components/elements';
+import { useGetManagementGroupTotalBorrowingAndLendings } from 'src/features/management_groups/api/getManagementGroupTotalBorrowingAndLendings';
 
 type MarkDebtRecordsAsPaidDialogProps = {
   managementGroupId: ManagementGroup['id'];
@@ -19,6 +20,8 @@ type MarkDebtRecordsAsPaidDialogProps = {
 export const MarkDebtRecordsAsPaidDialog: FC<
   MarkDebtRecordsAsPaidDialogProps
 > = ({ managementGroupId }) => {
+  const { managementGroupTotalBorrowingAndLendings, error } =
+    useGetManagementGroupTotalBorrowingAndLendings(managementGroupId);
   const markDebtRecordsAsPaid = useMarkDebtRecordsAsPaid(managementGroupId);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
@@ -28,9 +31,23 @@ export const MarkDebtRecordsAsPaidDialog: FC<
     onClose();
   };
 
+  if (error?.response?.status === 404) {
+    return <>総貸借が見つかりません</>;
+  }
+
   return (
     <>
-      <OutlineButton colorScheme='green' onClick={onOpen}>
+      <OutlineButton
+        colorScheme='green'
+        onClick={onOpen}
+        isLoading={managementGroupTotalBorrowingAndLendings === undefined}
+        isDisabled={
+          managementGroupTotalBorrowingAndLendings?.filter(
+            (managementGroupTotalBorrowingAndLending) =>
+              managementGroupTotalBorrowingAndLending.amount_of_money !== 0
+          ).length === 0
+        }
+      >
         支払完了
       </OutlineButton>
       <AlertDialog

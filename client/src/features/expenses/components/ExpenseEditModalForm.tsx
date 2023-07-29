@@ -65,7 +65,12 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
 
   return (
     <>
-      <OutlineButton colorScheme='green' onClick={onOpen}>
+      <OutlineButton
+        colorScheme='green'
+        onClick={onOpen}
+        isDisabled={expense?.is_paid}
+        isLoading={expense === undefined}
+      >
         編集
       </OutlineButton>
       <Modal isOpen={isOpen} onClose={onClose}>

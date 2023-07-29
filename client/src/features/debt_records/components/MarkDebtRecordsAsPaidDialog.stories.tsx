@@ -2,12 +2,16 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { MarkDebtRecordsAsPaidDialog } from 'src/features/debt_records/components/MarkDebtRecordsAsPaidDialog';
 import { markDebtRecordsAsPaidHandler } from 'src/test/server/handlers/debtRecord';
+import { getManagementGroupTotalBorrowingAndLendingsHandler } from 'src/test/server/handlers/totalBorrowingAndLending';
 
 export default {
   component: MarkDebtRecordsAsPaidDialog,
   parameters: {
     msw: {
-      handlers: [markDebtRecordsAsPaidHandler()],
+      handlers: [
+        markDebtRecordsAsPaidHandler(),
+        getManagementGroupTotalBorrowingAndLendingsHandler(),
+      ],
     },
   },
 } as ComponentMeta<typeof MarkDebtRecordsAsPaidDialog>;

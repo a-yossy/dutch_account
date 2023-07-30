@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { OutlineButton } from 'src/components/elements';
 import { useDeletePaymentGroup } from 'src/features/payment_groups/api/deletePaymentGroup';
-import { useGetPaymentGroupExpenses } from '../api/getPaymentGroupExpenses';
+import { useGetPaymentGroupExpenses } from 'src/features/payment_groups/api/getPaymentGroupExpenses';
 
 type PaymentGroupDeleteDialogProps = {
   managementGroupId: ManagementGroup['id'];

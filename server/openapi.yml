@@ -297,10 +297,12 @@ paths:
         - paymentGroup
       summary: 管理グループに紐づく支払グループを削除
       description: 管理グループに紐づく支払グループを削除する
-      operationId: deletePaymentGroupByPaymentGroupId
+      operationId: deletePaymentGroupByManagementGroupIdAndPaymentGroupId
       responses:
         204:
           $ref: "#/components/responses/NoContent"
+        400:
+          $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:

@@ -42,11 +42,11 @@ export const PaymentGroupApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePaymentGroupByPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deletePaymentGroupByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('deletePaymentGroupByPaymentGroupId', 'managementGroupId', managementGroupId)
+            assertParamExists('deletePaymentGroupByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
             // verify required parameter 'paymentGroupId' is not null or undefined
-            assertParamExists('deletePaymentGroupByPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            assertParamExists('deletePaymentGroupByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
             const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}`
                 .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
                 .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
@@ -287,8 +287,8 @@ export const PaymentGroupApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deletePaymentGroupByPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePaymentGroupByPaymentGroupId(managementGroupId, paymentGroupId, options);
+        async deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -357,8 +357,8 @@ export const PaymentGroupApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deletePaymentGroupByPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deletePaymentGroupByPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
+        deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(axios, basePath));
         },
         /**
          * 支払グループに所属する全てのユーザーを取得する
@@ -423,8 +423,8 @@ export class PaymentGroupApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentGroupApi
      */
-    public deletePaymentGroupByPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
-        return PaymentGroupApiFp(this.configuration).deletePaymentGroupByPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
+    public deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, options?: AxiosRequestConfig) {
+        return PaymentGroupApiFp(this.configuration).deletePaymentGroupByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

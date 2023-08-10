@@ -243,7 +243,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
 
   describe '#update' do
     subject do
-      put api_v1_management_group_payment_group_expense_path(management_group, payment_group, expense), headers: auth_tokens, params:
+      patch api_v1_management_group_payment_group_expense_path(management_group, payment_group, expense), headers: auth_tokens, params:
     end
 
     let(:management_group) { create(:management_group) }

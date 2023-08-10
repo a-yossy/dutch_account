@@ -23,7 +23,7 @@ paths:
   /management_groups/{management_group_id}/debt_records/mark_as_paid:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
-    put:
+    patch:
       tags:
         - debtRecord
       summary: 管理グループに紐づく全ての借金履歴を返済済みに更新
@@ -89,7 +89,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    put:
+    patch:
       tags:
         - expense
       summary: 費用を更新
@@ -269,7 +269,7 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    put:
+    patch:
       tags:
         - paymentGroup
       summary: 管理グループに紐づく支払グループを更新
@@ -372,7 +372,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
       - $ref: "#/components/parameters/PaymentGroupId"
-    put:
+    patch:
       tags:
         - paymentAffiliation
       summary: 複数のユーザーの支払グループへの所属情報を更新

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ManagementGroups::DebtRecordsController, type: :request do
   describe '#mark_as_paid' do
-    subject { put mark_as_paid_api_v1_management_group_debt_records_path(management_group), headers: auth_tokens }
+    subject { patch mark_as_paid_api_v1_management_group_debt_records_path(management_group), headers: auth_tokens }
 
     let(:management_group) { create(:management_group) }
 

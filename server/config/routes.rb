@@ -25,7 +25,7 @@ Rails.application.routes.draw do
             end
           end
           resources :debt_records, only: %i[] do
-            put 'mark_as_paid', on: :collection
+            patch 'mark_as_paid', on: :collection
           end
         end
         scope module: :management_groups do

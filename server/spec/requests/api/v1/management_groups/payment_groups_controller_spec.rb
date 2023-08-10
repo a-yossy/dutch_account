@@ -97,6 +97,80 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
     end
   end
 
+  describe '#update' do
+    subject { patch api_v1_management_group_payment_group_path(management_group, payment_group), params:, headers: auth_tokens }
+
+    let(:management_group) { create(:management_group) }
+    let!(:payment_group) { create(:payment_group) }
+
+    context 'when the user logs in' do
+      let(:user) { create(:user) }
+      let(:auth_tokens) { log_in(user) }
+      let(:params) { { name: 'new_payment_group' } }
+
+      context 'when the management_group related to the user does not exist' do
+        it 'returns not_found response' do
+          expect do
+            subject
+            payment_group.reload
+          end.to not_change(payment_group, :name)
+          assert_response_schema_confirm(404)
+        end
+      end
+
+      context 'when the management_group related to the user exists' do
+        before do
+          create(:management_affiliation, user:, management_group:)
+        end
+
+        context 'when the payment_group related to the management_group does not exist' do
+          it 'returns not_found response' do
+            expect do
+              subject
+              payment_group.reload
+            end.to not_change(payment_group, :name)
+            assert_response_schema_confirm(404)
+          end
+        end
+
+        context 'when the payment_group related to the management_group exists' do
+          let!(:payment_group) { create(:payment_group, management_group:, name: 'old_payment_group') }
+          let(:other_user) { create(:user) }
+
+          before do
+            create(:management_affiliation, user: other_user, management_group:)
+            create(:payment_affiliation, user:, payment_group:)
+            create(:payment_affiliation, user: other_user, payment_group:)
+          end
+
+          context 'when the same name of the payment_group exists' do
+            before do
+              create(:payment_group, management_group:, name: 'new_payment_group')
+            end
+
+            it 'returns bad_request response' do
+              expect do
+                subject
+                payment_group.reload
+              end.to not_change(payment_group, :name)
+              assert_response_schema_confirm(400)
+            end
+          end
+
+          context 'when the same name of the payment_group does not exist' do
+            it 'returns success response' do
+              expect do
+                subject
+                payment_group.reload
+              end.to change(payment_group, :name).from('old_payment_group').to('new_payment_group')
+              assert_response_schema_confirm(200)
+            end
+          end
+        end
+      end
+    end
+  end
+
   describe '#destroy' do
     subject { delete api_v1_management_group_payment_group_path(management_group, payment_group), headers: auth_tokens }
 

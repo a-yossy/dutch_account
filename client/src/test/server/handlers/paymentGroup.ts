@@ -34,3 +34,9 @@ export const getPaymentGroupExpensesHandler = () =>
     (req, res, ctx) =>
       res(ctx.status(200), ctx.json(getPaymentGroupExpensesResponse))
   );
+
+export const deletePaymentGroupHandler = () =>
+  rest.delete(
+    `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id`,
+    (req, res, ctx) => res(ctx.status(204))
+  );

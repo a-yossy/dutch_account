@@ -16,9 +16,9 @@ import {
   PaymentGroup,
   UpdatePaymentGroupByManagementGroupIdAndPaymentGroupIdRequest,
 } from 'src/openapi-generator';
-import { useGetPaymentGroup } from '../api/getPaymentGroup';
-import { useUpdatePaymentGroup } from '../api/updatePaymentGroup';
-import { UpdatePaymentGroupSchema } from '../formSchemas/updatePaymentGroupSchema';
+import { useGetPaymentGroup } from 'src/features/payment_groups/api/getPaymentGroup';
+import { useUpdatePaymentGroup } from 'src/features/payment_groups/api/updatePaymentGroup';
+import { UpdatePaymentGroupSchema } from 'src/features/payment_groups/formSchemas/updatePaymentGroupSchema';
 
 type PaymentGroupEditModalProps = {
   managementGroupId: ManagementGroup['id'];

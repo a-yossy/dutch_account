@@ -274,7 +274,7 @@ paths:
         - paymentGroup
       summary: 管理グループに紐づく支払グループを更新
       description: 管理グループに紐づく支払グループを更新する
-      operationId: updatePaymentGroupByPaymentGroupId
+      operationId: updatePaymentGroupByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentGroupBody"
       responses:

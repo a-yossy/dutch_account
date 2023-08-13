@@ -1,13 +1,19 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { PaymentGroupDeleteDialog } from 'src/features/payment_groups/components/PaymentGroupDeleteDialog';
-import { deletePaymentGroupHandler } from 'src/test/server/handlers/paymentGroup';
+import {
+  deletePaymentGroupHandler,
+  getNoPaymentGroupExpensesHandler,
+} from 'src/test/server/handlers/paymentGroup';
 
 export default {
   component: PaymentGroupDeleteDialog,
   parameters: {
     msw: {
-      handlers: [deletePaymentGroupHandler()],
+      handlers: [
+        deletePaymentGroupHandler(),
+        getNoPaymentGroupExpensesHandler(),
+      ],
     },
   },
 } as ComponentMeta<typeof PaymentGroupDeleteDialog>;

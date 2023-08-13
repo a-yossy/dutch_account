@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center, HStack, Spinner } from '@chakra-ui/react';
 import { useGetPaymentGroup } from 'src/features/payment_groups/api/getPaymentGroup';
 import NotFoundErrorPage from 'src/pages/404';
 import { CenterTitle } from 'src/components/elements';
@@ -7,6 +7,7 @@ import { PaymentGroupTab } from 'src/features/payment_groups/components/PaymentG
 import { useGetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
 import { PaymentGroupDeleteDialog } from '../components/PaymentGroupDeleteDialog';
+import { PaymentGroupEditModal } from '../components/PaymentGroupEditModal';
 
 type PaymentGroupProps = {
   paymentGroupId: string;
@@ -34,10 +35,16 @@ export const PaymentGroup: FC<PaymentGroupProps> = ({ paymentGroupId }) => {
     <>
       <CenterTitle>支払グループ：{paymentGroup.name}</CenterTitle>
       <Center mt={5}>
-        <PaymentGroupDeleteDialog
-          managementGroupId={currentManagementGroup.data.id}
-          paymentGroupId={paymentGroup.id}
-        />
+        <HStack>
+          <PaymentGroupEditModal
+            managementGroupId={currentManagementGroup.data.id}
+            paymentGroupId={paymentGroup.id}
+          />
+          <PaymentGroupDeleteDialog
+            managementGroupId={currentManagementGroup.data.id}
+            paymentGroupId={paymentGroup.id}
+          />
+        </HStack>
       </Center>
       <PaymentGroupTab
         managementGroupId={currentManagementGroup.data.id}

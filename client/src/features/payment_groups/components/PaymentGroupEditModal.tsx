@@ -87,7 +87,7 @@ export const PaymentGroupEditModal: FC<PaymentGroupEditModalProps> = ({
                     />
                     <OutlineButton
                       type='submit'
-                      colorScheme='cyan'
+                      colorScheme='green'
                       isLoading={isSubmitting}
                       mt={5}
                     >

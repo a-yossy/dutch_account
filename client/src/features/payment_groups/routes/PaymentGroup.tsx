@@ -6,8 +6,8 @@ import { CenterTitle } from 'src/components/elements';
 import { PaymentGroupTab } from 'src/features/payment_groups/components/PaymentGroupTab';
 import { useGetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
-import { PaymentGroupDeleteDialog } from '../components/PaymentGroupDeleteDialog';
-import { PaymentGroupEditModal } from '../components/PaymentGroupEditModal';
+import { PaymentGroupDeleteDialog } from 'src/features/payment_groups/components/PaymentGroupDeleteDialog';
+import { PaymentGroupEditModal } from 'src/features/payment_groups/components/PaymentGroupEditModal';
 
 type PaymentGroupProps = {
   paymentGroupId: string;

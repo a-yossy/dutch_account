@@ -148,7 +148,7 @@ export const ExpenseEditModalForm: FC<ExpenseEditModalFormProps> = ({
                       mt={5}
                     />
                     <OutlineButton
-                      colorScheme='cyan'
+                      colorScheme='green'
                       type='submit'
                       isLoading={isSubmitting}
                       mt={5}

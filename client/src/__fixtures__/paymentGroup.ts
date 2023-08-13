@@ -23,6 +23,11 @@ export const getPaymentGroupPaymentAffiliationsResponse: PaymentAffiliation[] =
     },
   ];
 
+export const getPaymentGroupResponse: PaymentGroup = {
+  id: '1',
+  name: '兄弟',
+};
+
 export const getManagementGroupPaymentGroupsResponse: PaymentGroup[] = [
   {
     id: '1',
@@ -49,10 +54,14 @@ export const getPaymentGroupExpensesResponse: Expense[] = [
       id: '1',
       name: '太郎',
     },
-    payment_group_id: '1',
+    payment_group: {
+      id: '1',
+      name: '兄弟1',
+    },
     amount_of_money: 1000,
     description: '食費',
     paid_on: '2021-01-01',
+    is_paid: false,
   },
   {
     id: '2',
@@ -60,9 +69,18 @@ export const getPaymentGroupExpensesResponse: Expense[] = [
       id: '2',
       name: '次郎',
     },
-    payment_group_id: '1',
+    payment_group: {
+      id: '1',
+      name: '兄弟2',
+    },
     amount_of_money: 2000,
     description: '水道代',
     paid_on: '2021-01-02',
+    is_paid: false,
   },
 ];
+
+export const updatePaymentGroupResponse: PaymentGroup = {
+  id: '1',
+  name: '兄弟',
+};

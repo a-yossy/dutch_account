@@ -31,5 +31,5 @@ model/response-error.ts
 model/sign-up-request.ts
 model/total-borrowing-and-lending.ts
 model/update-expense-by-management-group-id-and-payment-group-id-and-expense-id-request.ts
-model/update-payment-group-by-payment-group-id-request.ts
+model/update-payment-group-by-management-group-id-and-payment-group-id-request.ts
 model/user.ts

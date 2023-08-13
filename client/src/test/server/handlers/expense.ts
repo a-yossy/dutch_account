@@ -20,7 +20,7 @@ export const getExpenseHandler = () =>
   );
 
 export const updateExpenseHandler = () =>
-  rest.put(
+  rest.patch(
     `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/expenses/:expense_id`,
     (req, res, ctx) => res(ctx.status(200), ctx.json(updateExpenseResponse))
   );

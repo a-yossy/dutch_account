@@ -12,7 +12,7 @@ class ExpenseWithDebtRecordsCreator
     check_exist_at_least_one_expense!
 
     ActiveRecord::Base.transaction do
-      @expenses = Expense.create!(@expenses_params.map { |expense_params| expense_params.merge(payment_group: @payment_group) })
+      @expenses = @payment_group.expenses.create!(@expenses_params)
 
       expenses.each do |expense|
         @payment_group.payment_affiliations.each do |payment_affiliation|

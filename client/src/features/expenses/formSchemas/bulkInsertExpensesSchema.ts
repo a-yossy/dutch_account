@@ -28,7 +28,7 @@ const ExpenseSchema: z.ZodType<
     ),
 });
 
-export const BulkInsertExpenseWithDebtRecordsSchema: z.ZodType<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest> =
+export const BulkInsertExpensesSchema: z.ZodType<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest> =
   z.object({
     expenses: ExpenseSchema.array().nonempty({
       message: '費用情報を入力してください',

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module ExpenseWithDebtRecords
+module ExpensesWithDebtRecords
   class MustHaveAtLeastOneExpenseError < StandardError; end
 end

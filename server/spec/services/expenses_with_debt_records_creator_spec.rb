@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ExpenseWithDebtRecordsCreator do
+RSpec.describe ExpensesWithDebtRecordsCreator do
   describe '#call!' do
     let(:user1) { create(:user) }
     let(:user2) { create(:user) }
@@ -64,7 +64,7 @@ RSpec.describe ExpenseWithDebtRecordsCreator do
           expense_with_debt_records_creator.call!
         end.to not_change(Expense, :count)
           .and not_change(DebtRecord, :count)
-          .and raise_error ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError
+          .and raise_error ExpensesWithDebtRecords::MustHaveAtLeastOneExpenseError
       end
     end
   end

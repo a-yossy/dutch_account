@@ -14,7 +14,7 @@ RSpec.describe DebtRecordsPaymentCompleter do
       create(:management_affiliation, user: other_user, management_group:)
       create(:payment_affiliation, payment_group:, user:)
       create(:payment_affiliation, payment_group:, user: other_user)
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],

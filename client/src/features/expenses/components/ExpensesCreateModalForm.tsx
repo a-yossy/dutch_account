@@ -27,7 +27,7 @@ import {
   SelectField,
 } from 'src/components/parts';
 import { useBulkInsertExpenses } from 'src/features/expenses/api/bulkInsertExpenses';
-import { BulkInsertExpenseWithDebtRecordsSchema } from 'src/features/expenses/formSchemas/bulkInsertExpensesSchema';
+import { BulkInsertExpensesSchema } from 'src/features/expenses/formSchemas/bulkInsertExpensesSchema';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import dayjs from 'dayjs';
@@ -53,7 +53,7 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
     reset,
     formState: { errors, isSubmitting, isSubmitted },
   } = useForm<BulkInsertExpensesByManagementGroupIdAndPaymentGroupIdRequest>({
-    resolver: zodResolver(BulkInsertExpenseWithDebtRecordsSchema),
+    resolver: zodResolver(BulkInsertExpensesSchema),
   });
   const { fields, append, remove } = useFieldArray({
     control,

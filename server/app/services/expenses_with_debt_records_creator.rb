@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExpenseWithDebtRecordsCreator
+class ExpensesWithDebtRecordsCreator
   attr_reader :expenses
 
   def initialize(expenses_params:, payment_group:)
@@ -36,7 +36,7 @@ class ExpenseWithDebtRecordsCreator
   def check_exist_at_least_one_expense!
     return if @expenses_params.size >= 1
 
-    raise ExpenseWithDebtRecords::MustHaveAtLeastOneExpenseError,
+    raise ExpensesWithDebtRecords::MustHaveAtLeastOneExpenseError,
           "#{Expense.human_attribute_name('expense')}は1つ以上入力してください"
   end
 end

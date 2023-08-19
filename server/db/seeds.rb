@@ -22,7 +22,7 @@ end
 end
 
 User.find_by(email: 'email@example.com').payment_groups.each_with_index do |payment_group, i|
-  ExpenseWithDebtRecordsCreator.new(
+  ExpensesWithDebtRecordsCreator.new(
     expenses_params: [{
       user_id: User.find_by(email: 'email@example.com').id.to_s,
       amount_of_money: 1000 * (i + 1),

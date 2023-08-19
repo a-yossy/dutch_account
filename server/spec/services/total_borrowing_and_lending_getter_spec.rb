@@ -35,7 +35,7 @@ RSpec.describe TotalBorrowingAndLendingGetter do
 
     context 'when management group has expenses without unpaid' do
       before do
-        ExpenseWithDebtRecordsCreator.new(
+        ExpensesWithDebtRecordsCreator.new(
           expenses_params: [
             { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today },
             { user_id: user2.id, amount_of_money: 2000, description: '水道代', paid_on: Time.zone.yesterday },
@@ -63,7 +63,7 @@ RSpec.describe TotalBorrowingAndLendingGetter do
 
     context 'when management group has expenses with unpaid' do
       before do
-        ExpenseWithDebtRecordsCreator.new(
+        ExpensesWithDebtRecordsCreator.new(
           expenses_params: [
             { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today },
             { user_id: user2.id, amount_of_money: 2000, description: '水道代', paid_on: Time.zone.yesterday },

@@ -123,7 +123,7 @@ RSpec.describe DebtRecord, type: :model do
       create(:management_affiliation, user: other_user, management_group:)
       create(:payment_affiliation, user:, payment_group:)
       create(:payment_affiliation, user: other_user, payment_group:)
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],
@@ -163,7 +163,7 @@ RSpec.describe DebtRecord, type: :model do
       create(:management_affiliation, user: other_user, management_group:)
       create(:payment_affiliation, user:, payment_group:)
       create(:payment_affiliation, user: other_user, payment_group:)
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],

@@ -20,7 +20,7 @@ RSpec.describe ExpenseWithDebtRecordsUpdator do
       create(:payment_affiliation, user: user1, payment_group:, ratio: 0.5)
       create(:payment_affiliation, user: user2, payment_group:, ratio: 0.3)
       create(:payment_affiliation, user: user3, payment_group:, ratio: 0.2)
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: user1.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],

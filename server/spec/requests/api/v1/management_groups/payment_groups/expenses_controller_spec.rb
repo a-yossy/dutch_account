@@ -35,7 +35,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
             create(:payment_affiliation, user:, payment_group:)
             create(:management_affiliation, user: other_user, management_group:)
             create(:payment_affiliation, user: other_user, payment_group:)
-            ExpenseWithDebtRecordsCreator.new(
+            ExpensesWithDebtRecordsCreator.new(
               expenses_params: [
                 { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
               ],
@@ -73,7 +73,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
     let(:other_user) { create(:user) }
     let(:other_user2) { create(:user) }
     let(:expense) do
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: other_user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],
@@ -126,7 +126,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           context 'when the expense related to the payment_group exists' do
             let(:user2) { create(:user) }
             let(:expense) do
-              ExpenseWithDebtRecordsCreator.new(
+              ExpensesWithDebtRecordsCreator.new(
                 expenses_params: [
                   { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
                 ],
@@ -252,7 +252,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
     let(:other_user) { create(:user) }
     let(:other_user2) { create(:user) }
     let(:expense) do
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: other_user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],
@@ -304,7 +304,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           context 'when the expense related to the payment_group exists' do
             let(:user2) { create(:user) }
             let(:expense) do
-              ExpenseWithDebtRecordsCreator.new(
+              ExpensesWithDebtRecordsCreator.new(
                 expenses_params: [
                   { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
                 ],
@@ -358,7 +358,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
     let(:other_user) { create(:user) }
     let(:other_user2) { create(:user) }
     let(:expense) do
-      ExpenseWithDebtRecordsCreator.new(
+      ExpensesWithDebtRecordsCreator.new(
         expenses_params: [
           { user_id: other_user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
         ],
@@ -413,7 +413,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroups::ExpensesController, typ
           context 'when the expense related to the payment_group exists' do
             let(:user2) { create(:user) }
             let(:expense) do
-              ExpenseWithDebtRecordsCreator.new(
+              ExpensesWithDebtRecordsCreator.new(
                 expenses_params: [
                   { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
                 ],

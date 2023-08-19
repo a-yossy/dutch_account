@@ -210,7 +210,7 @@ RSpec.describe Api::V1::ManagementGroups::PaymentGroupsController, type: :reques
 
           context 'when the payment_group has expenses' do
             before do
-              ExpenseWithDebtRecordsCreator.new(
+              ExpensesWithDebtRecordsCreator.new(
                 expenses_params: [
                   { user_id: user.id, amount_of_money: 1000, description: '食費', paid_on: Time.zone.today }
                 ],

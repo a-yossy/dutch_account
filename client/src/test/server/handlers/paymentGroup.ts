@@ -6,7 +6,6 @@ import {
   getPaymentGroupResponse,
   getPaymentGroupPaymentAffiliationsResponse,
   getPaymentGroupExpensesResponse,
-  updatePaymentGroupResponse,
 } from 'src/__fixtures__/paymentGroup';
 
 export const getPaymentGroupPaymentAffiliationsHandler = () =>
@@ -53,11 +52,4 @@ export const deletePaymentGroupHandler = () =>
   rest.delete(
     `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id`,
     (req, res, ctx) => res(ctx.status(204))
-  );
-
-export const updatePaymentGroupHandler = () =>
-  rest.patch(
-    `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id`,
-    (req, res, ctx) =>
-      res(ctx.status(200), ctx.json(updatePaymentGroupResponse))
   );

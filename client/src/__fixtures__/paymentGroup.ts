@@ -79,8 +79,3 @@ export const getPaymentGroupExpensesResponse: Expense[] = [
     is_paid: false,
   },
 ];
-
-export const updatePaymentGroupResponse: PaymentGroup = {
-  id: '1',
-  name: '兄弟',
-};

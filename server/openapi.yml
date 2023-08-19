@@ -269,29 +269,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-    patch:
-      tags:
-        - paymentGroup
-      summary: 管理グループに紐づく支払グループを更新
-      description: 管理グループに紐づく支払グループを更新する
-      operationId: updatePaymentGroupByManagementGroupIdAndPaymentGroupId
-      requestBody:
-        $ref: "#/components/requestBodies/PaymentGroupBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PaymentGroup"
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - paymentGroup
@@ -862,19 +839,6 @@ components:
                       description: 支払日
                       example: 2020-01-01
                 minItems: 1
-    PaymentGroupBody:
-      description: リクエスト用の支払グループ
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - name
-            properties:
-              name:
-                type: string
-                description: 支払グループ名
-                example: 兄弟
     PaymentAffiliationsBody:
       description: リクエスト用の支払グループの所属情報の配列
       content:

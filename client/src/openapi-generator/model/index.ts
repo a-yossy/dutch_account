@@ -13,5 +13,4 @@ export * from './response-error';
 export * from './sign-up-request';
 export * from './total-borrowing-and-lending';
 export * from './update-expense-by-management-group-id-and-payment-group-id-and-expense-id-request';
-export * from './update-payment-group-by-management-group-id-and-payment-group-id-request';
 export * from './user';

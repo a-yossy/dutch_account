@@ -347,45 +347,6 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations/bulk_update:
-    parameters:
-      - $ref: "#/components/parameters/ManagementGroupId"
-      - $ref: "#/components/parameters/PaymentGroupId"
-    patch:
-      tags:
-        - paymentAffiliation
-      summary: 複数のユーザーの支払グループへの所属情報を更新
-      description: 複数のユーザーの支払グループへの所属情報を更新する
-      operationId: updatePaymentAffiliationsByManagementGroupIdAndPaymentGroupId
-      requestBody:
-        $ref: "#/components/requestBodies/PaymentAffiliationsBody"
-      responses:
-        200:
-          description: 更新が成功した時のレスポンス
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PaymentAffiliation"
-                minItems: 2
-                example:
-                  - user:
-                      id: 1
-                      name: 太郎
-                    ratio: 0.5
-                  - user:
-                      id: 2
-                      name: 次郎
-                    ratio: 0.5
-        400:
-          $ref: "#/components/responses/BadRequest"
-        401:
-          $ref: "#/components/responses/Unauthorized"
-        404:
-          $ref: "#/components/responses/NotFound"
-        500:
-          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/total_borrowing_and_lendings:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -839,33 +800,6 @@ components:
                       description: 支払日
                       example: 2020-01-01
                 minItems: 1
-    PaymentAffiliationsBody:
-      description: リクエスト用の支払グループの所属情報の配列
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              type: object
-              required:
-                - user_id
-                - ratio
-              properties:
-                user_id:
-                  type: string
-                  description: ユーザーID
-                  example: 1
-                ratio:
-                  type: number
-                  format: float
-                  description: 支払割合
-                  example: 0.4
-            minItems: 2
-            example:
-              - user_id: 1
-                ratio: 0.5
-              - user_id: 2
-                ratio: 0.5
     PaymentRelationBody:
       description: リクエスト用の支払グループと支払グループの所属情報の配列
       content:

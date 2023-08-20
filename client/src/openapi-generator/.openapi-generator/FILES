@@ -5,7 +5,6 @@ api.ts
 api/debt-record-api.ts
 api/expense-api.ts
 api/management-group-api.ts
-api/payment-affiliation-api.ts
 api/payment-group-api.ts
 api/payment-relation-api.ts
 api/total-borrowing-and-lending-api.ts

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module PaymentRelation
-  class Creator < PaymentRelation::Base
+  class Creator < Base
     def call!
       super
       ActiveRecord::Base.transaction do

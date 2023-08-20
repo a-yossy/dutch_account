@@ -11,7 +11,6 @@ tags:
   - name: expense
   - name: managementGroup
   - name: paymentGroup
-  - name: paymentAffiliation
   - name: paymentRelation
   - name: totalBorrowingAndLending
   - name: user
@@ -312,6 +311,32 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
+  /management_groups/{management_group_id}/payment_relations/bulk_update:
+    parameters:
+      - $ref: "#/components/parameters/ManagementGroupId"
+    patch:
+      tags:
+        - paymentRelation
+      summary: 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+      description: 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+      operationId: bulkUpdatePaymentRelationByManagementGroupId
+      requestBody:
+        $ref: "#/components/requestBodies/PaymentRelationBody"
+      responses:
+        200:
+          description: 更新が成功した時のレスポンス
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRelation"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+        500:
+          $ref: "#/components/responses/InternalServerError"
   /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_affiliations:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
@@ -364,7 +389,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/totalBorrowingAndLending"
+                  $ref: "#/components/schemas/TotalBorrowingAndLending"
                 minItems: 2
                 example:
                   - user_id: 1
@@ -714,7 +739,7 @@ components:
           type: string
           description: 管理グループ名
           example: 家族
-    totalBorrowingAndLending:
+    TotalBorrowingAndLending:
       description: 総貸借
       type: object
       required:

@@ -2,7 +2,7 @@
 
 class Api::V1::ManagementGroups::PaymentRelationsController < Api::V1::ManagementGroups::ApplicationController
   def bulk_insert
-    payment_relation = PaymentRelationCreator.new(
+    payment_relation = PaymentRelation::Creator.new(
       management_group: @management_group,
       group_params: payment_relation_params[:group],
       affiliations_params: payment_relation_params[:affiliations]

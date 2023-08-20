@@ -4,8 +4,7 @@ module PaymentRelation
   class Base
     attr_reader :group, :affiliations
 
-    def initialize(management_group:, group_params:, affiliations_params:)
-      @management_group = management_group
+    def initialize(group_params:, affiliations_params:)
       @group_params = group_params
       @affiliations_params = affiliations_params
     end

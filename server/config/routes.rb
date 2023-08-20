@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         scope module: :management_groups do
           resources :payment_relations, only: %i[] do
             post 'bulk_insert', on: :collection
+            patch 'bulk_update', on: :collection
           end
         end
       end

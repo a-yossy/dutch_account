@@ -14,6 +14,8 @@ class Api::V1::ManagementGroups::PaymentRelationsController < Api::V1::Managemen
     render_bad_request_error(e)
   end
 
+  def bulk_update; end
+
   private
 
   def payment_relation_params

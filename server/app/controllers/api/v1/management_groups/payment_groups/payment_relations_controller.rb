@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class Api::V1::ManagementGroups::PaymentRelationsController < Api::V1::ManagementGroups::ApplicationController
-  def bulk_insert
-    payment_relation = PaymentRelation::Creator.new(
-      management_group: @management_group,
+class Api::V1::ManagementGroups::PaymentGroups::PaymentRelationsController < Api::V1::ManagementGroups::PaymentGroups::ApplicationController
+  def bulk_update
+    payment_relation = PaymentRelation::Updator.new(
       group_params: payment_relation_params[:group],
-      affiliations_params: payment_relation_params[:affiliations]
+      affiliations_params: payment_relation_params[:affiliations],
+      payment_group: @payment_group
     ).call!
-    render json: PaymentRelationResource.new(payment_relation).serialize, status: :created
+    render json: PaymentRelationResource.new(payment_relation).serialize
   rescue PaymentRelation::GroupMustHaveAtLeastTwoUsersError,
          PaymentRelation::RatioTotalNotEqualsOneError,
          ActiveRecord::RecordInvalid => e

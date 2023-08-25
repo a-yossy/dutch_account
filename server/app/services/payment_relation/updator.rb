@@ -14,7 +14,7 @@ module PaymentRelation
         @group = @payment_group
 
         if @payment_group.expenses.present?
-          @affiliations = @payment_group.payment_affiliations
+          @affiliations = @payment_group.payment_affiliations.eager_load([:user])
         else
           @payment_group.payment_affiliations.each(&:destroy!)
           @affiliations = @payment_group.payment_affiliations.create!(@affiliations_params)

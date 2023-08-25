@@ -311,15 +311,16 @@ paths:
           $ref: "#/components/responses/NotFound"
         500:
           $ref: "#/components/responses/InternalServerError"
-  /management_groups/{management_group_id}/payment_relations/bulk_update:
+  /management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_relations/bulk_update:
     parameters:
       - $ref: "#/components/parameters/ManagementGroupId"
+      - $ref: "#/components/parameters/PaymentGroupId"
     patch:
       tags:
         - paymentRelation
-      summary: 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-      description: 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-      operationId: bulkUpdatePaymentRelationByManagementGroupId
+      summary: 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+      description: 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+      operationId: bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId
       requestBody:
         $ref: "#/components/requestBodies/PaymentRelationBody"
       responses:

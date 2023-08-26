@@ -8,7 +8,7 @@ RSpec.describe PaymentRelation::Base do
     let(:user2) { create(:user, name: 'user_2') }
     let(:management_group) { create(:management_group) }
     let(:payment_relation_base) do
-      described_class.new(management_group:, group_params: { name: '兄弟' }, affiliations_params:)
+      described_class.new(group_params: { name: '兄弟' }, affiliations_params:)
     end
 
     before do

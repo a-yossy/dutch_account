@@ -2,6 +2,11 @@
 
 module PaymentRelation
   class Creator < Base
+    def initialize(group_params:, affiliations_params:, management_group:)
+      super(group_params:, affiliations_params:)
+      @management_group = management_group
+    end
+
     def call!
       super
       ActiveRecord::Base.transaction do

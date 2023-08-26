@@ -80,18 +80,22 @@ export const PaymentRelationApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * @summary 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
          * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {BulkInsertPaymentRelationByManagementGroupIdRequest} [bulkInsertPaymentRelationByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkUpdatePaymentRelationByManagementGroupId: async (managementGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId: async (managementGroupId: string, paymentGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'managementGroupId' is not null or undefined
-            assertParamExists('bulkUpdatePaymentRelationByManagementGroupId', 'managementGroupId', managementGroupId)
-            const localVarPath = `/management_groups/{management_group_id}/payment_relations/bulk_update`
-                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)));
+            assertParamExists('bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId', 'managementGroupId', managementGroupId)
+            // verify required parameter 'paymentGroupId' is not null or undefined
+            assertParamExists('bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId', 'paymentGroupId', paymentGroupId)
+            const localVarPath = `/management_groups/{management_group_id}/payment_groups/{payment_group_id}/payment_relations/bulk_update`
+                .replace(`{${"management_group_id"}}`, encodeURIComponent(String(managementGroupId)))
+                .replace(`{${"payment_group_id"}}`, encodeURIComponent(String(paymentGroupId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -149,15 +153,16 @@ export const PaymentRelationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * @summary 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
          * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {BulkInsertPaymentRelationByManagementGroupIdRequest} [bulkInsertPaymentRelationByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bulkUpdatePaymentRelationByManagementGroupId(managementGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentRelation>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkUpdatePaymentRelationByManagementGroupId(managementGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options);
+        async bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentRelation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -182,15 +187,16 @@ export const PaymentRelationApiFactory = function (configuration?: Configuration
             return localVarFp.bulkInsertPaymentRelationByManagementGroupId(managementGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-         * @summary 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+         * @summary 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
          * @param {string} managementGroupId 管理グループID
+         * @param {string} paymentGroupId 支払グループID
          * @param {BulkInsertPaymentRelationByManagementGroupIdRequest} [bulkInsertPaymentRelationByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkUpdatePaymentRelationByManagementGroupId(managementGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: any): AxiosPromise<PaymentRelation> {
-            return localVarFp.bulkUpdatePaymentRelationByManagementGroupId(managementGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options).then((request) => request(axios, basePath));
+        bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: any): AxiosPromise<PaymentRelation> {
+            return localVarFp.bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -216,15 +222,16 @@ export class PaymentRelationApi extends BaseAPI {
     }
 
     /**
-     * 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
-     * @summary 管理グループに紐づく支払グループを更新し複数のユーザーを所属させる
+     * 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
+     * @summary 支払グループに紐づく支払グループを更新し複数のユーザーを所属させる
      * @param {string} managementGroupId 管理グループID
+     * @param {string} paymentGroupId 支払グループID
      * @param {BulkInsertPaymentRelationByManagementGroupIdRequest} [bulkInsertPaymentRelationByManagementGroupIdRequest] リクエスト用の支払グループと支払グループの所属情報の配列
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentRelationApi
      */
-    public bulkUpdatePaymentRelationByManagementGroupId(managementGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: AxiosRequestConfig) {
-        return PaymentRelationApiFp(this.configuration).bulkUpdatePaymentRelationByManagementGroupId(managementGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
+    public bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId: string, paymentGroupId: string, bulkInsertPaymentRelationByManagementGroupIdRequest?: BulkInsertPaymentRelationByManagementGroupIdRequest, options?: AxiosRequestConfig) {
+        return PaymentRelationApiFp(this.configuration).bulkUpdatePaymentRelationByManagementGroupIdAndPaymentGroupId(managementGroupId, paymentGroupId, bulkInsertPaymentRelationByManagementGroupIdRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -22,6 +22,9 @@ Rails.application.routes.draw do
               resources :expenses, only: %i[index show update destroy] do
                 post 'bulk_insert', on: :collection
               end
+              resources :payment_relations, only: %i[] do
+                patch 'bulk_update', on: :collection
+              end
             end
           end
           resources :debt_records, only: %i[] do

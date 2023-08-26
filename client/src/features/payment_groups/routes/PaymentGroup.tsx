@@ -7,6 +7,7 @@ import { PaymentGroupTab } from 'src/features/payment_groups/components/PaymentG
 import { useGetCurrentManagementGroup } from 'src/recoil/currentManagementGroupState';
 import { useGetCurrentUser } from 'src/recoil/currentUserState';
 import { PaymentGroupDeleteDialog } from 'src/features/payment_groups/components/PaymentGroupDeleteDialog';
+import { PaymentRelationEditModalForm } from 'src/features/payment_relations/components/PaymentRelationEditModalForm';
 
 type PaymentGroupProps = {
   paymentGroupId: string;
@@ -35,6 +36,10 @@ export const PaymentGroup: FC<PaymentGroupProps> = ({ paymentGroupId }) => {
       <CenterTitle>支払グループ：{paymentGroup.name}</CenterTitle>
       <Center mt={5}>
         <HStack>
+          <PaymentRelationEditModalForm
+            managementGroupId={currentManagementGroup.data.id}
+            paymentGroupId={paymentGroup.id}
+          />
           <PaymentGroupDeleteDialog
             managementGroupId={currentManagementGroup.data.id}
             paymentGroupId={paymentGroup.id}

@@ -2,6 +2,7 @@ import { rest } from 'msw';
 import { BASE_PATH } from 'src/openapi-generator/base';
 import {
   bulkInsertPaymentRelationResponse,
+  bulkUpdatePaymentRelationResponse,
   getManagementGroupPaymentGroupsResponse,
   getPaymentGroupResponse,
   getPaymentGroupPaymentAffiliationsResponse,
@@ -33,6 +34,13 @@ export const bulkInsertPaymentRelationHandler = () =>
     `${BASE_PATH}/management_groups/:management_group_id/payment_relations/bulk_insert`,
     (req, res, ctx) =>
       res(ctx.status(201), ctx.json(bulkInsertPaymentRelationResponse))
+  );
+
+export const bulkUpdatePaymentRelationHandler = () =>
+  rest.patch(
+    `${BASE_PATH}/management_groups/:management_group_id/payment_groups/:payment_group_id/payment_relations/bulk_update`,
+    (req, res, ctx) =>
+      res(ctx.status(200), ctx.json(bulkUpdatePaymentRelationResponse))
   );
 
 export const getPaymentGroupExpensesHandler = () =>

@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe PaymentRelation::Updator do
   describe '#call!' do
-    let(:user1) { create(:user, name: 'user_1') }
-    let(:user2) { create(:user, name: 'user_2') }
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
     let(:management_group) { create(:management_group) }
     let(:payment_group) { create(:payment_group, name: '姉妹', management_group:) }
     let(:payment_relation_updator) do
@@ -19,7 +19,7 @@ RSpec.describe PaymentRelation::Updator do
       create(:payment_affiliation, user: user2, payment_group:, ratio: 0.5)
     end
 
-    context 'with valid arguments' do
+    context 'when payment_group does not have expenses with valid arguments' do
       let(:affiliations_params) { [{ user_id: user2.id.to_s, ratio: 0.7 }, { user_id: user1.id.to_s, ratio: 0.3 }] }
 
       it 'updates payment_group and payment_affiliations' do
@@ -38,7 +38,7 @@ RSpec.describe PaymentRelation::Updator do
       end
     end
 
-    context 'when payment_group has expenses' do
+    context 'when payment_group has expenses with valid arguments' do
       let(:affiliations_params) { [{ user_id: user2.id.to_s, ratio: 0.7 }, { user_id: user1.id.to_s, ratio: 0.3 }] }
 
       before do

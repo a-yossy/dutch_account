@@ -10,18 +10,27 @@ export const CurrentUser: FC = () => {
   const cookies = getAuthCookies();
 
   useEffect(() => {
+    let ignore = false;
     const setCurrentUser = async () => {
       try {
         const res = await new UserApi().getCurrentUser({
           headers: cookies,
         });
-        setUser({ state: 'log_in', data: res.data });
+        if (!ignore) {
+          setUser({ state: 'log_in', data: res.data });
+        }
       } catch {
-        setUser({ state: 'log_out' });
-        setCurrentManagementGroup({ state: 'not_existence' });
+        if (!ignore) {
+          setUser({ state: 'log_out' });
+          setCurrentManagementGroup({ state: 'not_existence' });
+        }
       }
     };
     void setCurrentUser();
+
+    return () => {
+      ignore = true;
+    };
     // typeof cookies === object が原因で無限レンダリングが起こるため依存配列のESLintを無効化
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUser, cookies.uid, cookies.client, cookies['access-token']]);

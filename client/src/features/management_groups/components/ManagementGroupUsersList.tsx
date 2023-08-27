@@ -23,16 +23,20 @@ export const ManagementGroupUsersList: FC<ManagementGroupUsersListProps> = ({
   >({});
 
   useEffect(() => {
-    if (managementGroupTotalBorrowingAndLendings === undefined) return;
+    if (managementGroupTotalBorrowingAndLendings !== undefined) {
+      setTotalBorrowingAndLendings(
+        managementGroupTotalBorrowingAndLendings.reduce(
+          (acc, { user_id, amount_of_money }) => {
+            acc[user_id] = amount_of_money;
 
-    const amounts: Record<string, number> = {};
-    managementGroupTotalBorrowingAndLendings.forEach(
-      ({ user_id, amount_of_money }) => {
-        amounts[user_id] = amount_of_money;
-      }
-    );
+            return acc;
+          },
+          {} as Record<string, number>
+        )
+      );
+    }
 
-    setTotalBorrowingAndLendings(amounts);
+    return () => setTotalBorrowingAndLendings({});
   }, [managementGroupTotalBorrowingAndLendings]);
 
   if (managementGroupUsersError?.response?.status === 404)

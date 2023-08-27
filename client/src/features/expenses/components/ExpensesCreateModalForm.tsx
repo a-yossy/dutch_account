@@ -84,8 +84,8 @@ export const ExpensesCreateModalForm: FC<ExpensesCreateModalFormProps> = ({
   useEffect(() => {
     handleAddClick();
 
-    return () => remove(0);
-  }, [handleAddClick, remove]);
+    return () => reset();
+  }, [handleAddClick, reset]);
 
   return (
     <>

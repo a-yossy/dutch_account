@@ -109,11 +109,14 @@ export const PaymentRelationEditModalForm: FC<
   useEffect(() => {
     if (paymentGroupPaymentAffiliations !== undefined) {
       setSelectedUsers(
-        paymentGroupPaymentAffiliations.reduce((acc, cur) => {
-          acc[cur.user.id] = cur.user.name;
+        paymentGroupPaymentAffiliations.reduce(
+          (acc, { user: { id, name } }) => {
+            acc[id] = name;
 
-          return acc;
-        }, {} as Record<string, string>)
+            return acc;
+          },
+          {} as Record<string, string>
+        )
       );
 
       reset({
@@ -123,6 +126,11 @@ export const PaymentRelationEditModalForm: FC<
         })),
       });
     }
+
+    return () => {
+      setSelectedUsers({});
+      reset();
+    };
   }, [append, paymentGroupPaymentAffiliations, reset]);
 
   if (

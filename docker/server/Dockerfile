@@ -9,7 +9,7 @@ RUN bundle install
 COPY ./docker/server/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 8000
+EXPOSE 3010
 
 # Configure the main process to run when running the image
 CMD ["rails", "server", "-b", "0.0.0.0"]

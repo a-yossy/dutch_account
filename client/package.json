@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "PORT=3011 next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest",
@@ -14,7 +14,7 @@
     "generate-client": "rm -rf src/openapi-generator &&  openapi-generator-cli generate -g typescript-axios -i ../server/openapi.yml -o ./src/openapi-generator -c ./openapiConfig.yml",
     "postinstall": "npx typesync",
     "prepare": "cd .. && husky install client/.husky",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 3012",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
